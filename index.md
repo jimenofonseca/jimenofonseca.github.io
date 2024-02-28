@@ -16,5 +16,5 @@ Head of BIM - Axpo Grid <br />
 Co-Founder - City Energy Analyst <br />
 Dozent - ETH Zürich <br />
 
-[LinkedIN](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
+[Linkedin](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
 [Github](https://github.com/jimenofonseca){: .btn .btn-blue }
