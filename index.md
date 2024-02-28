@@ -11,10 +11,10 @@ In addition to my role at Axpo Grid, I am also a lecturer in innovation leadersh
 
 On this website, you will find more information about projects, courses, and publications. A warm welcome!
 
-Dr. Jimeno Fonseca
-Head of BIM - Axpo Grid
-Co-Founder - City Energy Analyst
-Dozent - ETH Zürich
+Dr. Jimeno Fonseca <br />
+Head of BIM - Axpo Grid <br />
+Co-Founder - City Energy Analyst <br />
+Dozent - ETH Zürich <br />
 
 [LinkedIN](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
 [Github](https://github.com/jimenofonseca){: .btn .btn-blue }
