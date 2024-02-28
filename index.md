@@ -12,3 +12,5 @@ Dr. Jimeno Fonseca
 Head of BIM - Axpo Grid
 Co-Founder - City Energy Analyst
 Dozent - ETH Zürich
+
+[LinkedIN](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
