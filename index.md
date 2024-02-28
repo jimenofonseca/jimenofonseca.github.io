@@ -13,10 +13,10 @@ In addition to my role at Axpo Grid, I am also a lecturer in innovation leadersh
 On this website, you will find more information about projects, courses, and publications. A warm welcome!
 
 Dr. Jimeno Fonseca <br />
-Head of BIM - [Axpo Grid](https://www.citzenergzanalyst.com/) <br />
+Head of BIM - [Axpo Grid]([https://www.citzenergzanalyst.com/](https://www.axpo.com/ch/en/business/grid-services/digital-solutions-grid/building-information-modeling.html)) <br />
 Dozent - [ETH Zürich](https://ethz.ch/de.html) <br />
 Co-Founder - [Superurbana LLC](https://www.superurbana.com/) <br />
-Co-Inventor - [City Energy Analyst](https://www.cityenergzanalyst.com/) <br />
+Co-Inventor - [City Energy Analyst](https://www.cityenergyanalyst.com/) <br />
 
 [Linkedin](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
 [Github](https://github.com/jimenofonseca){: .btn .btn-blue }
