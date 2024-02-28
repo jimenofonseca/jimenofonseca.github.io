@@ -15,7 +15,7 @@ On this website, you will find more information about projects, courses, and pub
 Dr. Jimeno Fonseca <br />
 Head of BIM - [Axpo Grid](https://www.citzenergzanalyst.com/) <br />
 Dozent - [ETH Zürich](https://ethz.ch/de.html) <br />
-Co-Founder - [Superurbana Llc](https://www.superurbana.com/) <br />
+Co-Founder - [Superurbana LLC](https://www.superurbana.com/) <br />
 Co-Inventor - [City Energy Analyst](https://www.cityenergzanalyst.com/) <br />
 
 [Linkedin](https://www.linkedin.com/in/jimenofonseca/){: .btn .btn-blue }
