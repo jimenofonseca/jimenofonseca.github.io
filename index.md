@@ -1,6 +1,7 @@
 ---
 title: Home
 layout: home
+nav_order: 1
 ---
 I am a passionate and driven leader working where management meets Information Technology. As Head of BIM at Axpo Grid, I lead the adoption of digital methods for construction and operation of power systems in one of the biggest grid operators of Switzerland. I am also co-founder and core developer of the City Energy Analyst (CEA), a fascinating energy engineering software used to optimize urban energy systems in over 20 countries. My mission is to leverage digital technologies to create solutions that add a strong value to companies.
 

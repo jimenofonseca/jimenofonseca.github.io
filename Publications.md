@@ -1,6 +1,7 @@
 ---
 title: Publications
 layout: home
+nav_order: 1
 ---
 ## Appearances
 - Eureca-Pro Conference Responsible Production and Consumption. Panelist. Digital Technologies for the Energy Transition. Spain (10.2022).VIDEO
