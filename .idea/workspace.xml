@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3493803d-b5aa-4d9b-abf3-e1d5b5e8c3ca" name="Changes" comment="" />
+    <list default="true" id="3493803d-b5aa-4d9b-abf3-e1d5b5e8c3ca" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects.md" beforeDir="false" afterPath="$PROJECT_DIR$/Projects.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,11 +81,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709060556809</updated>
-      <workItem from="1709060560000" duration="8687000" />
+      <workItem from="1709060560000" duration="9880000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/jimenofonseca_github_io$main.coverage" NAME="main Coverage Results" MODIFIED="1709331044742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
