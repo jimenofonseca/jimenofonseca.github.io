@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Auto-bump i18n.js cache version when i18n.js is staged for commit.
+# Increments  /i18n.js?v=N  →  /i18n.js?v=N+1  across every HTML file that
+# references it, and re-stages those HTML files so they ship in the same
+# commit. Prevents stale translations being served from the browser cache.
+#
+# Skip with: git commit --no-verify
+
+set -e
+
+# Repo root, so the hook works regardless of where git invokes it from
+cd "$(git rev-parse --show-toplevel)"
+
+# Only act if i18n.js itself is in the staged changes
+if ! git diff --cached --name-only | grep -qx 'i18n.js'; then
+  exit 0
+fi
+
+# Detect current version from index.html (the canonical reference)
+CURRENT=$(grep -ohE 'i18n\.js\?v=[0-9]+' index.html 2>/dev/null | head -n1 | grep -oE '[0-9]+$')
+
+if [ -z "$CURRENT" ]; then
+  echo "pre-commit: could not find i18n.js?v=N in index.html — skipping bump."
+  exit 0
+fi
+
+NEXT=$((CURRENT + 1))
+echo "pre-commit: i18n.js changed → bumping cache  ?v=$CURRENT  →  ?v=$NEXT"
+
+# Bump in all top-level + subpage index.html files (use perl for portability
+# between macOS BSD sed and GNU sed).
+for f in index.html */index.html; do
+  [ -f "$f" ] || continue
+  if grep -q "i18n\.js?v=$CURRENT" "$f"; then
+    perl -i -pe "s|i18n\.js\?v=$CURRENT|i18n.js?v=$NEXT|g" "$f"
+    git add "$f"
+    echo "  · bumped  $f"
+  fi
+done
+
+exit 0

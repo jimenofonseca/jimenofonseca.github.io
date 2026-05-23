@@ -416,3 +416,5 @@ function toggleLang() {
     applyLang(lang);
   }
 })();
+
+// hook smoke-test (will be cleaned up)
