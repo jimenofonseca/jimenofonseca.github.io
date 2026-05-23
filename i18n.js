@@ -215,6 +215,9 @@ function applyLang(lang) {
 
   localStorage.setItem('lang', lang);
   window.__lang = lang;
+
+  // Reveal body once translations have been applied (prevents flash of English content)
+  document.documentElement.classList.add('lang-ready');
 }
 
 function toggleLang() {
