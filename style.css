@@ -275,6 +275,25 @@ footer {
 .footer-links a { font-size: 13px; color: var(--gray-500); transition: color 0.15s; }
 .footer-links a:hover { color: var(--black); }
 
+/* ── LANGUAGE TOGGLE ───────────────────────────────────── */
+.lang-toggle {
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 14px;
+  font-size: 14px; font-weight: 400; font-family: var(--font);
+  color: var(--black); background: none; border: none;
+  cursor: pointer;
+}
+.lang-opt { opacity: 0.35; transition: opacity 0.15s; }
+.lang-opt.active { opacity: 1; font-weight: 600; }
+.lang-sep { opacity: 0.25; }
+
+.mobile-lang {
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--gray-200);
+  margin-top: 4px;
+}
+.mobile-lang .lang-toggle { padding: 10px 0; }
+
 /* ── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nav-links { display: none; }
