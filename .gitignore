@@ -16,3 +16,8 @@ vendor/
 
 # Project-local launch config (per-machine, not for deployment)
 .claude/
+
+# Node + private content
+node_modules/
+private-src/
+.staticrypt.json
