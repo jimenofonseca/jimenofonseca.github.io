@@ -173,10 +173,10 @@ var TRANSLATIONS = {
     'pub.stat.pubs':      'Publications',
     'pub.stat.cites':     'Citations',
     'pub.stat.h':         'h-index',
-    'pub.p1':             'With over 60 scientific publications, 2,000 citations, and an h-index of 20, my work has focused on advancing urban energy systems through tools like the City Energy Analyst (CEA) and innovative methods for modeling energy use at the district scale.',
+    'pub.p1':             'With over 80 publications, 2,000 citations, and an h-index of 20, my work has focused on advancing urban energy systems through tools like the City Energy Analyst (CEA) and innovative methods for modeling energy use at the district scale.',
     'pub.p2':             'I\'ve worked to integrate spatial, behavioral, and systems-level insights into urban energy planning, helping cities transition toward more sustainable and efficient futures. Through collaborations with institutions such as ETH Zürich and EPFL, my work continues to support data-driven strategies for shaping the cities of tomorrow.',
     'pub.card.h3':        'Google Scholar — Jimeno Fonseca',
-    'pub.card.p':         'Publications on urban energy modeling, BIM, digital twins, deep learning, and more. View full profile with all citations and metrics.',
+    'pub.card.p':         'Publications on data analysis, information technology, energy systems and more. View full profile with all citations and metrics.',
     'pub.cta':            'Get Access',
   },
 
@@ -354,10 +354,10 @@ var TRANSLATIONS = {
     'pub.stat.pubs':      'Publikationen',
     'pub.stat.cites':     'Zitierungen',
     'pub.stat.h':         'h-Index',
-    'pub.p1':             'Mit über 60 wissenschaftlichen Publikationen, 2.000 Zitierungen und einem h-Index von 20 konzentriert sich meine Arbeit darauf, urbane Energiesysteme durch Werkzeuge wie den City Energy Analyst (CEA) und innovative Methoden zur Modellierung des Energieverbrauchs auf Quartierebene voranzubringen.',
+    'pub.p1':             'Mit über 80 Publikationen, 2.000 Zitierungen und einem h-Index von 20 konzentriert sich meine Arbeit darauf, Energiesysteme durch Werkzeuge wie den City Energy Analyst (CEA) und innovative Methoden zur Modellierung des Energieverbrauchs auf Quartierebene voranzubringen.',
     'pub.p2':             'Ich habe daran gearbeitet, räumliche, verhaltensbezogene und systemische Erkenntnisse in die urbane Energieplanung zu integrieren und Städten zu helfen, sich in Richtung nachhaltigerer und effizienterer Zukünfte zu entwickeln. Durch Kooperationen mit Institutionen wie der ETH Zürich und der EPFL unterstützt meine Arbeit weiterhin datengestützte Strategien zur Gestaltung der Städte von morgen.',
     'pub.card.h3':        'Google Scholar — Jimeno Fonseca',
-    'pub.card.p':         'Publikationen zu urbaner Energiemodellierung, BIM, digitalen Zwillingen, Deep Learning und mehr. Vollständiges Profil mit allen Zitierungen und Kennzahlen anzeigen.',
+    'pub.card.p':         'Publikationen zu Daten, Informationstechnologie, Energiesysteme und mehr. Vollständiges Profil mit allen Zitierungen und Kennzahlen anzeigen.',
     'pub.cta':            'Zugang erhalten',
   }
 };
