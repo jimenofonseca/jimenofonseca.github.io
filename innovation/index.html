@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){var l=localStorage.getItem("lang");if(l==="de")document.documentElement.dataset.lang=l;})();</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){
+    var l=localStorage.getItem("lang");
+    if(l==="de")document.documentElement.dataset.lang=l;
+    var t=localStorage.getItem("theme");
+    if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
+  })();</script>
   <style>html[data-lang="de"]:not(.lang-ready) body{visibility:hidden}</style>
   <title data-i18n="innov.title">Innovation Leadership | Drive Innovation Today — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="innov.desc" content="Explore Jimeno Fonseca's insights on innovation leadership, digital transformation, and creating impactful minimum viable products in technology and energy sectors." />
-  <meta property="og:title" content="Innovation Leadership | Drive Innovation Today — Jimeno Fonseca" />
-  <meta property="og:description" content="Explore Jimeno Fonseca's insights on innovation leadership, digital transformation, and creating impactful minimum viable products in technology and energy sectors." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
-  <header>
-    <nav role="navigation" aria-label="Main navigation">
-      <div class="nav-logo"><a href="/">Jimeno Fonseca</a></div>
-      <ul class="nav-links" role="list">
-        <li class="nav-item" id="dd-initiatives">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')" data-i18n="nav.initiatives">Initiatives</button>
-          <ul class="dropdown" id="menu-initiatives" role="list">
-            <li><a href="/superurbana/" data-i18n="nav.company">Company</a></li>
-            <li><a href="/cea/" data-i18n="nav.product">Product</a></li>
-            <li><a href="/innovation/" data-i18n="nav.training">Training</a></li>
-            <li><a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a></li>
-            <li><a href="/open-source/" data-i18n="nav.openSource">Open Source</a></li>
-          </ul>
-        </li>
-        <li class="nav-item" id="dd-media">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')" data-i18n="nav.media">Media</button>
-          <ul class="dropdown" id="menu-media" role="list">
-            <li><a href="/appearances/" data-i18n="nav.appearances">Appearances</a></li>
-            <li><a href="/publications/" data-i18n="nav.publications">Publications</a></li>
-            <li><a href="/#news" data-i18n="nav.news">News</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
-            <span class="lang-opt active" data-lang="en">EN</span>
-            <span class="lang-sep">|</span>
-            <span class="lang-opt" data-lang="de">DE</span>
-          </button>
-        </li>
-      </ul>
-      <button class="hamburger" aria-label="Open menu" data-i18n-aria="nav.hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
-    </nav>
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-      <div class="mobile-section-label" data-i18n="nav.initiatives">Initiatives</div>
-      <a href="/superurbana/" data-i18n="nav.company">Company</a>
-      <a href="/cea/" data-i18n="nav.product">Product</a>
-      <a href="/innovation/" data-i18n="nav.training">Training</a>
-      <a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a>
-      <a href="/open-source/" data-i18n="nav.openSource">Open Source</a>
-      <div class="mobile-section-label" data-i18n="nav.media">Media</div>
-      <a href="/appearances/" data-i18n="nav.appearances">Appearances</a>
-      <a href="/publications/" data-i18n="nav.publications">Publications</a>
-      <a href="/#news" data-i18n="nav.news">News</a>
-      <div class="mobile-lang">
-        <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-sep">|</span>
-          <span class="lang-opt" data-lang="de">DE</span>
-        </button>
+
+  <div class="mobile-bar">
+    <div class="brand-mini"><a href="/">Jimeno Fonseca</a></div>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()" data-i18n="v2.menu.open">Menu</button>
+  </div>
+
+  <div class="shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <a href="/">
+          <span class="name">Jimeno Fonseca</span>
+          <span class="role" data-i18n="v2.role">Digital Engineering — Axpo Grid</span>
+        </a>
       </div>
-    </nav>
-  </header>
 
-  <main id="page" tabindex="-1">
-    <section class="page-hero no-aside">
-      <div class="page-content">
-        <h2 data-i18n-html="innov.h2">
-          <span>Innovation Leadership</span>
-          How to build Minimum Viable Products?
-        </h2>
-        <p data-i18n="innov.p1">
-          What a fantastic topic it is to bring new technology to life. Even more exhilarating is when it
-          is actually brought and put to good use inside a company. As part of the Master in Energy and
-          Technology of the ETH Zürich, I taught the art of defining new technology and digital service
-          requirements with an industrial partner — Implenia AG in Switzerland — to later build a Minimum
-          Viable Product in no time.
-        </p>
-        <p data-i18n="innov.p2">
-          The result: one out of five teams working on brilliant ideas made it to the next stage, becoming
-          part of the industrial partner and developing the MVP into a new digital service. The teaching
-          season lasted between 2023 and 2024.
-        </p>
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.initiatives">Initiatives</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/superurbana/"><span class="num">01</span><span data-i18n="nav.company">Company</span><span class="arrow">→</span></a></li>
+          <li><a href="/cea/"><span class="num">02</span><span data-i18n="nav.product">Product</span><span class="arrow">→</span></a></li>
+          <li><a href="/innovation/" aria-current="page"><span class="num">03</span><span data-i18n="nav.training">Training</span><span class="arrow">→</span></a></li>
+          <li><a href="/digital-transformation/"><span class="num">04</span><span data-i18n="nav.transformation">Transformation</span><span class="arrow">→</span></a></li>
+          <li><a href="/open-source/"><span class="num">05</span><span data-i18n="nav.openSource">Open Source</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
 
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.media">Media</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/appearances/"><span class="num">06</span><span data-i18n="nav.appearances">Appearances</span><span class="arrow">→</span></a></li>
+          <li><a href="/publications/"><span class="num">07</span><span data-i18n="nav.publications">Publications</span><span class="arrow">→</span></a></li>
+          <li><a href="/#recently"><span class="num">08</span><span data-i18n="nav.news">News</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-controls">
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.theme.label">Theme</span>
+          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
+            <span class="opt active" data-theme-opt="light">LIGHT</span>
+            <span class="sep">/</span>
+            <span class="opt" data-theme-opt="dark">DARK</span>
+          </button>
+        </div>
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.lang.label">Language</span>
+          <button class="toggle lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+            <span class="opt lang-opt active" data-lang="en">EN</span>
+            <span class="sep">/</span>
+            <span class="opt lang-opt" data-lang="de">DE</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content" id="page" tabindex="-1">
+
+      <section class="page-intro">
+        <p class="page-eyebrow">
+          <a href="/" data-i18n="nav.initiatives">Initiatives</a>
+          <span class="crumb">/</span>
+          <span class="index">03</span>
+        </p>
+        <h1 class="page-title" data-i18n="v2.innov.title">Innovation Leadership</h1>
+        <p class="page-lede" data-i18n="v2.innov.lede">Teaching engineers how to build Minimum Viable Products with industry partners at ETH Zürich.</p>
+      </section>
+
+      <section class="page-media">
         <div class="video-wrap">
           <iframe
             src="https://www.youtube.com/embed/IvbhVPLS2fM"
@@ -99,21 +97,64 @@
             loading="lazy"
           ></iframe>
         </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.innov.caption.kind">Talk</span>
+          <span class="sep">·</span>
+          <span class="text" data-i18n="v2.innov.caption.text">On building Minimum Viable Products</span>
+        </p>
+      </section>
 
-        <a class="btn-primary" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener" data-i18n="btn.moreInfo">More Info</a>
+
+      <div class="page-body-row">
+      <section class="page-body">
+        <p data-i18n="innov.p1">
+          What a fantastic topic it is to bring new technology to life. Even more exhilarating is when it is actually brought and put to good use inside a company. As part of the Master in Energy and Technology of the ETH Zürich, I taught the art of defining new technology and digital service requirements with an industrial partner — Implenia AG in Switzerland — to later build a Minimum Viable Product in no time.
+        </p>
+        <p data-i18n="innov.p2">
+          The result: one out of five teams working on brilliant ideas made it to the next stage, becoming part of the industrial partner and developing the MVP into a new digital service. The teaching season lasted between 2023 and 2024.
+        </p>
+      </section>
+
+        <aside class="stats-aside" aria-label="At a glance">
+          <div class="stats-label" data-i18n="v2.stats.cohort">Cohort</div>
+          <div class="stats-list">
+            <div class="stat"><span class="stat-num">2</span><span class="stat-lbl" data-i18n="v2.stat.years">Years</span></div>
+            <div class="stat"><span class="stat-num">5</span><span class="stat-lbl" data-i18n="v2.stat.mvps">MVPs Built</span></div>
+            <div class="stat"><span class="stat-num">1</span><span class="stat-lbl" data-i18n="v2.stat.partner">Industry Partner</span></div>
+            <div class="stat"><span class="stat-num">40</span><span class="stat-lbl" data-i18n="v2.stat.students">Students Mentored</span></div>
+          </div>
+        </aside>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <p class="footer-copy">2012–2025 © Jimeno Fonseca</p>
-    <ul class="footer-links" role="list">
-      <li><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://github.com/jimenofonseca" target="_blank" rel="noopener">Github</a></li>
-      <li><a href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ&hl=en" target="_blank" rel="noopener">Google</a></li>
-    </ul>
-  </footer>
-  <script src="/nav.js"></script>
-  <script src="/i18n.js?v=3"></script>
+      <section class="page-actions">
+        <a class="cta-link" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener">
+          <span data-i18n="btn.moreInfo">More Info</span>
+          <span class="arrow">↗</span>
+        </a>
+      </section>
+
+
+      <nav class="page-nav" aria-label="Adjacent pages">
+        <a href="/cea/" class="prev">
+          <span class="label">← <span data-i18n="v2.prev">Previous</span></span>
+          <span class="title"><span data-i18n="nav.product">Product</span></span>
+        </a>
+        <a href="/digital-transformation/" class="next">
+          <span class="label"><span data-i18n="v2.next">Next</span> →</span>
+          <span class="title"><span data-i18n="nav.transformation">Transformation</span></span>
+        </a>
+      </nav>
+
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2012 – 2025 Jimeno Fonseca</span>
+      <span>Zürich, CH</span>
+    </footer>
+
+  </div>
+
+  <script src="/app.js"></script>
+  <script src="/i18n.js?v=5"></script>
 </body>
 </html>

@@ -3,133 +3,212 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){var l=localStorage.getItem("lang");if(l==="de")document.documentElement.dataset.lang=l;})();</script>
+  <script>(function(){
+    var l=localStorage.getItem("lang");
+    if(l==="de")document.documentElement.dataset.lang=l;
+    var t=localStorage.getItem("theme");
+    if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
+  })();</script>
   <style>html[data-lang="de"]:not(.lang-ready) body{visibility:hidden}</style>
   <title data-i18n="home.title">Jimeno Fonseca | Explore Digital Engineering for Energy Systems</title>
   <meta name="description" data-i18n-content="home.desc" content="Jimeno Fonseca leads innovation in digital engineering for energy systems; explore projects, training, and open-source tools in the energy sector." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jimenofonseca.github.io/" />
-  <meta property="og:title" content="Jimeno Fonseca | Explore Digital Engineering for Energy Systems" />
-  <meta property="og:description" content="Jimeno Fonseca leads innovation in digital engineering for energy systems; explore projects, training, and open-source tools in the energy sector." />
-  <meta property="og:site_name" content="Jimeno Fonseca" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Jimeno Fonseca | Explore Digital Engineering for Energy Systems" />
-  <meta name="twitter:description" content="Jimeno Fonseca leads innovation in digital engineering for energy systems; explore projects, training, and open-source tools in the energy sector." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
 
-  <header>
-    <nav role="navigation" aria-label="Main navigation">
-      <div class="nav-logo"><a href="/">Jimeno Fonseca</a></div>
-      <ul class="nav-links" role="list">
-        <li class="nav-item" id="dd-initiatives">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')" data-i18n="nav.initiatives">Initiatives</button>
-          <ul class="dropdown" id="menu-initiatives" role="list">
-            <li><a href="/superurbana/" data-i18n="nav.company">Company</a></li>
-            <li><a href="/cea/" data-i18n="nav.product">Product</a></li>
-            <li><a href="/innovation/" data-i18n="nav.training">Training</a></li>
-            <li><a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a></li>
-            <li><a href="/open-source/" data-i18n="nav.openSource">Open Source</a></li>
-          </ul>
-        </li>
-        <li class="nav-item" id="dd-media">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')" data-i18n="nav.media">Media</button>
-          <ul class="dropdown" id="menu-media" role="list">
-            <li><a href="/appearances/" data-i18n="nav.appearances">Appearances</a></li>
-            <li><a href="/publications/" data-i18n="nav.publications">Publications</a></li>
-            <li><a href="/#news" data-i18n="nav.news">News</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
-            <span class="lang-opt active" data-lang="en">EN</span>
-            <span class="lang-sep">|</span>
-            <span class="lang-opt" data-lang="de">DE</span>
+  <!-- Mobile bar -->
+  <div class="mobile-bar">
+    <div class="brand-mini"><a href="/">Jimeno Fonseca</a></div>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()" data-i18n="v2.menu.open">Menu</button>
+  </div>
+
+  <div class="shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <a href="/">
+          <span class="name">Jimeno Fonseca</span>
+          <span class="role" data-i18n="v2.role">Digital Engineering — Axpo Grid</span>
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.initiatives">Initiatives</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/superurbana/"><span class="num">01</span><span data-i18n="nav.company">Company</span><span class="arrow">→</span></a></li>
+          <li><a href="/cea/"><span class="num">02</span><span data-i18n="nav.product">Product</span><span class="arrow">→</span></a></li>
+          <li><a href="/innovation/"><span class="num">03</span><span data-i18n="nav.training">Training</span><span class="arrow">→</span></a></li>
+          <li><a href="/digital-transformation/"><span class="num">04</span><span data-i18n="nav.transformation">Transformation</span><span class="arrow">→</span></a></li>
+          <li><a href="/open-source/"><span class="num">05</span><span data-i18n="nav.openSource">Open Source</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.media">Media</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/appearances/"><span class="num">06</span><span data-i18n="nav.appearances">Appearances</span><span class="arrow">→</span></a></li>
+          <li><a href="/publications/"><span class="num">07</span><span data-i18n="nav.publications">Publications</span><span class="arrow">→</span></a></li>
+          <li><a href="#recently"><span class="num">08</span><span data-i18n="nav.news">News</span><span class="arrow">↓</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-controls">
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.theme.label">Theme</span>
+          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
+            <span class="opt active" data-theme-opt="light">LIGHT</span>
+            <span class="sep">/</span>
+            <span class="opt" data-theme-opt="dark">DARK</span>
           </button>
-        </li>
-      </ul>
-      <button class="hamburger" aria-label="Open menu" data-i18n-aria="nav.hamburger" id="hamburger-btn" onclick="toggleMobileMenu()">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-      <div class="mobile-section-label" data-i18n="nav.initiatives">Initiatives</div>
-      <a href="/superurbana/" data-i18n="nav.company">Company</a>
-      <a href="/cea/" data-i18n="nav.product">Product</a>
-      <a href="/innovation/" data-i18n="nav.training">Training</a>
-      <a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a>
-      <a href="/open-source/" data-i18n="nav.openSource">Open Source</a>
-      <div class="mobile-section-label" data-i18n="nav.media">Media</div>
-      <a href="/appearances/" data-i18n="nav.appearances">Appearances</a>
-      <a href="/publications/" data-i18n="nav.publications">Publications</a>
-      <a href="/#news" data-i18n="nav.news">News</a>
-      <div class="mobile-lang">
-        <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-sep">|</span>
-          <span class="lang-opt" data-lang="de">DE</span>
-        </button>
+        </div>
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.lang.label">Language</span>
+          <button class="toggle lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+            <span class="opt lang-opt active" data-lang="en">EN</span>
+            <span class="sep">/</span>
+            <span class="opt lang-opt" data-lang="de">DE</span>
+          </button>
+        </div>
       </div>
-    </nav>
-  </header>
+    </aside>
 
-  <main id="page" tabindex="-1">
-    <section class="hero" aria-label="Introduction">
-      <div class="hero-text">
-        <h1 data-i18n="hero.h1">Manager, Founder, and Educator driving Digital Innovation in&nbsp;the Energy Sector</h1>
-        <p data-i18n="hero.p">
-          I am Jimeno, department head of Digital Engineering at Axpo Grid in Switzerland.
-          There, I lead the adoption of digital technologies for construction and operation
-          of power systems. I am also co-founder of the open-source simulation software
-          City Energy Analyst (CEA) and the construction office Superurbana GmbH. I hold a
-          PhD in urban energy systems from the ETH Zürich, and I am a certified Agile
-          Manager. I am active member of CIGRE and past-contributor to the IPCC report on
-          Climate Change. I used to build software until I found making high-performance
-          teams my passion and bringing digital technologies to the energy sector my mission.
-        </p>
-        <a class="btn-primary" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener" data-i18n="hero.cta">Let's Talk!</a>
-      </div>
-      <div class="hero-image">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/684d87e261644d6e02fe2575/1749911534147-HTWGJNYZH9T8EDAMW7VG/DSC07846.JPG"
-          alt="Jimeno Fonseca with glasses, a beard, and dark hair smiling with arms crossed, wearing a black shirt and a watch, standing against a plain white background."
-          loading="eager"
-        />
-      </div>
-    </section>
+    <!-- Main content -->
+    <main class="content" id="page" tabindex="-1">
 
-    <hr />
+      <!-- Hero -->
+      <section class="hero" aria-label="Introduction">
+        <div class="hero-text">
+          <h1 data-i18n="hero.h1">Manager, Founder, and Educator driving Digital Innovation in the Energy Sector</h1>
+          <p class="lede" data-i18n="hero.p">
+            I am Jimeno, department head of Digital Engineering at Axpo Grid in Switzerland. There, I lead the adoption of digital technologies for construction and operation of power systems. I am also co-founder of the open-source simulation software City Energy Analyst (CEA) and the construction office Superurbana GmbH. I hold a PhD in urban energy systems from the ETH Zürich, and I am a certified Agile Manager. I am active member of CIGRE and past-contributor to the IPCC report on Climate Change. I used to build software until I found making high-performance teams my passion and bringing digital technologies to the energy sector my mission.
+          </p>
+        </div>
+        <figure class="hero-figure">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/684d87e261644d6e02fe2575/1749911534147-HTWGJNYZH9T8EDAMW7VG/DSC07846.JPG"
+            alt="Jimeno Fonseca, portrait."
+            loading="eager"
+          />
+          <figcaption>
+            <span>Jimeno Fonseca</span>
+            <span class="cap-where">Zürich, CH</span>
+          </figcaption>
+        </figure>
+      </section>
 
-    <section id="news" aria-label="Latest News">
-      <h2 data-i18n="news.h2">Latest News</h2>
-      <div class="news-grid">
-        <div class="linkedin-post"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7401656899252953088?collapsed=1" allowfullscreen title="LinkedIn post 1" loading="lazy"></iframe></div>
-        <div class="linkedin-post"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7341393949074292741?collapsed=1" allowfullscreen title="LinkedIn post 2" loading="lazy"></iframe></div>
-        <div class="linkedin-post"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7295807635696566274?collapsed=1" allowfullscreen title="LinkedIn post 3" loading="lazy"></iframe></div>
-        <div class="linkedin-post"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7246534728516796416?collapsed=1" allowfullscreen title="LinkedIn post 4" loading="lazy"></iframe></div>
-        <div class="linkedin-post"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7352066709169577987?collapsed=1" allowfullscreen title="LinkedIn post 5" loading="lazy"></iframe></div>
-      </div>
-      <div class="news-more">
-        <a class="btn-outline" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener" data-i18n="news.more">More News</a>
-      </div>
-    </section>
-  </main>
+      <!-- Now -->
+      <section class="now">
+        <p class="eyebrow"><span class="index">01</span><span data-i18n="v2.eyebrow.now">Now</span></p>
+        <div class="bio">
+          <p data-i18n="v2.now">Currently leading the Digital Engineering department at Axpo Grid in Switzerland, advancing the adoption of digital technologies for the construction and operation of power systems.</p>
+        </div>
+      </section>
 
-  <footer>
-    <p class="footer-copy">2012–2025 © Jimeno Fonseca</p>
-    <ul class="footer-links" role="list">
-      <li><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://github.com/jimenofonseca" target="_blank" rel="noopener">Github</a></li>
-      <li><a href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ&hl=en" target="_blank" rel="noopener">Google</a></li>
-    </ul>
-  </footer>
+      <!-- Selected Work -->
+      <section class="work">
+        <p class="eyebrow"><span class="index">02</span><span data-i18n="v2.eyebrow.work">Selected Work</span></p>
+        <div class="work-list">
 
-  <script src="/nav.js"></script>
-  <script src="/i18n.js?v=3"></script>
+          <a class="work-row" href="/superurbana/">
+            <span class="work-num">01</span>
+            <div>
+              <span class="work-title" data-i18n="nav.company">Company</span>
+              <span class="work-desc" data-i18n="v2.work.company.desc">Energy efficiency consultancy, made in Switzerland</span>
+            </div>
+            <span class="work-meta"><span data-i18n="v2.work.company.year">2018 – 25</span><span class="work-arrow">→</span></span>
+          </a>
+
+          <a class="work-row" href="/cea/">
+            <span class="work-num">02</span>
+            <div>
+              <span class="work-title" data-i18n="nav.product">Product</span>
+              <span class="work-desc" data-i18n="v2.work.product.desc">Open-source urban energy simulation used in 25+ countries</span>
+            </div>
+            <span class="work-meta"><span data-i18n="v2.work.product.year">2013 – 24</span><span class="work-arrow">→</span></span>
+          </a>
+
+          <a class="work-row" href="/innovation/">
+            <span class="work-num">03</span>
+            <div>
+              <span class="work-title" data-i18n="nav.training">Training</span>
+              <span class="work-desc" data-i18n="v2.work.training.desc">Teaching minimum viable products at ETH Zürich</span>
+            </div>
+            <span class="work-meta"><span data-i18n="v2.work.training.year">2023 – 24</span><span class="work-arrow">→</span></span>
+          </a>
+
+          <a class="work-row" href="/digital-transformation/">
+            <span class="work-num">04</span>
+            <div>
+              <span class="work-title" data-i18n="nav.transformation">Transformation</span>
+              <span class="work-desc" data-i18n="v2.work.transformation.desc">Integrating BIM and digital twins at Axpo</span>
+            </div>
+            <span class="work-meta"><span data-i18n="v2.work.transformation.year">2022 –</span><span class="work-arrow">→</span></span>
+          </a>
+
+          <a class="work-row" href="/open-source/">
+            <span class="work-num">05</span>
+            <div>
+              <span class="work-title" data-i18n="nav.openSource">Open Source</span>
+              <span class="work-desc" data-i18n="v2.work.openSource.desc">Contributing to replicable, transparent science</span>
+            </div>
+            <span class="work-meta"><span data-i18n="v2.work.openSource.year">2014 –</span><span class="work-arrow">→</span></span>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- Recently -->
+      <section id="recently" class="recently">
+        <p class="eyebrow"><span class="index">03</span><span data-i18n="v2.eyebrow.recently">Recently</span></p>
+        <div class="feed-grid">
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7454514110022651904?collapsed=1" allowfullscreen title="LinkedIn post 1" loading="lazy"></iframe></div>
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7401656899252953088?collapsed=1" allowfullscreen title="LinkedIn post 2" loading="lazy"></iframe></div>
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7378766294403190785?collapsed=1" allowfullscreen title="LinkedIn post 3" loading="lazy"></iframe></div>
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7352066709169577987?collapsed=1" allowfullscreen title="LinkedIn post 4" loading="lazy"></iframe></div>
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7341393949074292741?collapsed=1" allowfullscreen title="LinkedIn post 5" loading="lazy"></iframe></div>
+          <div class="feed-item"><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7295807635696566274?collapsed=1" allowfullscreen title="LinkedIn post 6" loading="lazy"></iframe></div>
+        </div>
+        <p class="feed-more"><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener"><span data-i18n="v2.recently.more">More updates on LinkedIn</span> ↗</a></p>
+      </section>
+
+      <!-- Connect -->
+      <section class="connect">
+        <p class="eyebrow"><span class="index">04</span><span data-i18n="v2.eyebrow.connect">Connect</span></p>
+        <ul class="contact-list" role="list">
+          <li>
+            <span class="ckey">01</span>
+            <a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener" data-i18n="v2.contact.linkedin">LinkedIn</a>
+            <span class="ext">↗</span>
+          </li>
+          <li>
+            <span class="ckey">02</span>
+            <a href="https://github.com/jimenofonseca" target="_blank" rel="noopener" data-i18n="v2.contact.github">GitHub</a>
+            <span class="ext">↗</span>
+          </li>
+          <li>
+            <span class="ckey">03</span>
+            <a href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ&hl=en" target="_blank" rel="noopener" data-i18n="v2.contact.scholar">Google Scholar</a>
+            <span class="ext">↗</span>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© 2012 – 2025 Jimeno Fonseca</span>
+      <span>Zürich, CH</span>
+    </footer>
+
+  </div>
+
+  <script src="/app.js"></script>
+  <script src="/i18n.js?v=5"></script>
 </body>
 </html>
