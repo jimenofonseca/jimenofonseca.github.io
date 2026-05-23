@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Open Source Code | Explore Open Source Coding Opportunities — Jimeno Fonseca</title>
-  <meta name="description" content="Discover Jimeno Fonseca's open source code for scientific reproducibility, accessible for developers and researchers seeking transparent, reusable projects." />
+  <title data-i18n="os.title">Open Source Code | Explore Open Source Coding Opportunities — Jimeno Fonseca</title>
+  <meta name="description" data-i18n-content="os.desc" content="Discover Jimeno Fonseca's open source code for scientific reproducibility, accessible for developers and researchers seeking transparent, reusable projects." />
   <meta property="og:title" content="Open Source Code | Explore Open Source Coding Opportunities — Jimeno Fonseca" />
   <meta property="og:description" content="Discover Jimeno Fonseca's open source code for scientific reproducibility, accessible for developers and researchers seeking transparent, reusable projects." />
   <meta property="og:type" content="website" />
@@ -28,61 +28,80 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#page">Skip to Content</a>
+  <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
   <header>
     <nav role="navigation" aria-label="Main navigation">
       <div class="nav-logo"><a href="/">Jimeno Fonseca</a></div>
       <ul class="nav-links" role="list">
         <li class="nav-item" id="dd-initiatives">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')">Initiatives</button>
+          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')" data-i18n="nav.initiatives">Initiatives</button>
           <ul class="dropdown" id="menu-initiatives" role="list">
-            <li><a href="/superurbana/">Company</a></li>
-            <li><a href="/cea/">Product</a></li>
-            <li><a href="/innovation/">Training</a></li>
-            <li><a href="/digital-transformation/">Transformation</a></li>
-            <li><a href="/open-source/">Open Source</a></li>
+            <li><a href="/superurbana/" data-i18n="nav.company">Company</a></li>
+            <li><a href="/cea/" data-i18n="nav.product">Product</a></li>
+            <li><a href="/innovation/" data-i18n="nav.training">Training</a></li>
+            <li><a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a></li>
+            <li><a href="/open-source/" data-i18n="nav.openSource">Open Source</a></li>
           </ul>
         </li>
         <li class="nav-item" id="dd-media">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')">Media</button>
+          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')" data-i18n="nav.media">Media</button>
           <ul class="dropdown" id="menu-media" role="list">
-            <li><a href="/appearances/">Appearances</a></li>
-            <li><a href="/publications/">Publications</a></li>
-            <li><a href="/#news">News</a></li>
+            <li><a href="/appearances/" data-i18n="nav.appearances">Appearances</a></li>
+            <li><a href="/publications/" data-i18n="nav.publications">Publications</a></li>
+            <li><a href="/#news" data-i18n="nav.news">News</a></li>
           </ul>
         </li>
+        <li>
+          <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+            <span class="lang-opt active" data-lang="en">EN</span>
+            <span class="lang-sep">|</span>
+            <span class="lang-opt" data-lang="de">DE</span>
+          </button>
+        </li>
       </ul>
-      <button class="hamburger" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Open menu" data-i18n-aria="nav.hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
     </nav>
     <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-      <div class="mobile-section-label">Initiatives</div>
-      <a href="/superurbana/">Company</a><a href="/cea/">Product</a><a href="/innovation/">Training</a>
-      <a href="/digital-transformation/">Transformation</a><a href="/open-source/">Open Source</a>
-      <div class="mobile-section-label">Media</div>
-      <a href="/appearances/">Appearances</a><a href="/publications/">Publications</a><a href="/#news">News</a>
+      <div class="mobile-section-label" data-i18n="nav.initiatives">Initiatives</div>
+      <a href="/superurbana/" data-i18n="nav.company">Company</a>
+      <a href="/cea/" data-i18n="nav.product">Product</a>
+      <a href="/innovation/" data-i18n="nav.training">Training</a>
+      <a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a>
+      <a href="/open-source/" data-i18n="nav.openSource">Open Source</a>
+      <div class="mobile-section-label" data-i18n="nav.media">Media</div>
+      <a href="/appearances/" data-i18n="nav.appearances">Appearances</a>
+      <a href="/publications/" data-i18n="nav.publications">Publications</a>
+      <a href="/#news" data-i18n="nav.news">News</a>
+      <div class="mobile-lang">
+        <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+          <span class="lang-opt active" data-lang="en">EN</span>
+          <span class="lang-sep">|</span>
+          <span class="lang-opt" data-lang="de">DE</span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main id="page" tabindex="-1">
     <section class="page-hero no-aside">
       <div class="page-content">
-        <h2>
+        <h2 data-i18n-html="os.h2">
           <span>Open-Source</span>
           Contributing to replicable science
         </h2>
-        <p>
+        <p data-i18n="os.p1">
           I'm a firm believer that science and engineering advance fastest when models, data, and methods
           are open and reproducible. Across more than a decade of research at ETH Zürich and the
           ETH-Singapore Centre, and through my own ventures, I've built and contributed to open-source
           tools that are now used in 25+ countries and have shaped international policy — including
           contributions to the IPCC 6th Assessment Report on Climate Change.
         </p>
-        <p>
+        <p data-i18n-html="os.p2">
           My flagship project, <a class="inline-link" href="https://github.com/architecture-building-systems/CityEnergyAnalyst" target="_blank" rel="noopener">City Energy Analyst</a>
           (CEA), co-founded at ETH Zürich, has become a global standard for urban building energy modelling —
           used by researchers, city planners, and engineers worldwide to design low-carbon cities.
         </p>
-        <p>
+        <p data-i18n="os.p3">
           Beyond CEA, my GitHub hosts a collection of tools spanning climate forecasting, IoT, and personal
           finance — built out of curiosity, scientific rigour, and a conviction that useful tools should be
           freely available.
@@ -93,12 +112,12 @@
             <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/>
           </svg>
           <div class="github-card-text">
-            <h3>jimenofonseca — GitHub</h3>
-            <p>Advocate of open and transparent computational models and data analysis techniques. View all public repositories, sorted by stars.</p>
+            <h3 data-i18n="os.card.h3">jimenofonseca — GitHub</h3>
+            <p data-i18n="os.card.p">Advocate of open and transparent computational models and data analysis techniques. View all public repositories, sorted by stars.</p>
           </div>
         </a>
 
-        <a class="btn-primary" href="https://github.com/jimenofonseca?tab=repositories&q=&type=public&language=&sort=stargazers" target="_blank" rel="noopener">Get the Code</a>
+        <a class="btn-primary" href="https://github.com/jimenofonseca?tab=repositories&q=&type=public&language=&sort=stargazers" target="_blank" rel="noopener" data-i18n="os.cta">Get the Code</a>
       </div>
     </section>
   </main>
@@ -112,5 +131,6 @@
     </ul>
   </footer>
   <script src="/nav.js"></script>
+  <script src="/i18n.js"></script>
 </body>
 </html>

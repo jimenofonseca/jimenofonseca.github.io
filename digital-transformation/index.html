@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Transformation | Drive Innovation Now — Jimeno Fonseca</title>
-  <meta name="description" content="Explore Jimeno Fonseca's expertise in digital transformation, integrating BIM and digital twins to enhance infrastructure planning and market competitiveness." />
+  <title data-i18n="transf.title">Digital Transformation | Drive Innovation Now — Jimeno Fonseca</title>
+  <meta name="description" data-i18n-content="transf.desc" content="Explore Jimeno Fonseca's expertise in digital transformation, integrating BIM and digital twins to enhance infrastructure planning and market competitiveness." />
   <meta property="og:title" content="Digital Transformation | Drive Innovation Now — Jimeno Fonseca" />
   <meta property="og:description" content="Explore Jimeno Fonseca's expertise in digital transformation, integrating BIM and digital twins to enhance infrastructure planning and market competitiveness." />
   <meta property="og:type" content="website" />
@@ -14,49 +14,68 @@
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <a class="skip-link" href="#page">Skip to Content</a>
+  <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
   <header>
     <nav role="navigation" aria-label="Main navigation">
       <div class="nav-logo"><a href="/">Jimeno Fonseca</a></div>
       <ul class="nav-links" role="list">
         <li class="nav-item" id="dd-initiatives">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')">Initiatives</button>
+          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-initiatives" onclick="toggleDropdown('dd-initiatives')" data-i18n="nav.initiatives">Initiatives</button>
           <ul class="dropdown" id="menu-initiatives" role="list">
-            <li><a href="/superurbana/">Company</a></li>
-            <li><a href="/cea/">Product</a></li>
-            <li><a href="/innovation/">Training</a></li>
-            <li><a href="/digital-transformation/">Transformation</a></li>
-            <li><a href="/open-source/">Open Source</a></li>
+            <li><a href="/superurbana/" data-i18n="nav.company">Company</a></li>
+            <li><a href="/cea/" data-i18n="nav.product">Product</a></li>
+            <li><a href="/innovation/" data-i18n="nav.training">Training</a></li>
+            <li><a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a></li>
+            <li><a href="/open-source/" data-i18n="nav.openSource">Open Source</a></li>
           </ul>
         </li>
         <li class="nav-item" id="dd-media">
-          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')">Media</button>
+          <button aria-haspopup="true" aria-expanded="false" aria-controls="menu-media" onclick="toggleDropdown('dd-media')" data-i18n="nav.media">Media</button>
           <ul class="dropdown" id="menu-media" role="list">
-            <li><a href="/appearances/">Appearances</a></li>
-            <li><a href="/publications/">Publications</a></li>
-            <li><a href="/#news">News</a></li>
+            <li><a href="/appearances/" data-i18n="nav.appearances">Appearances</a></li>
+            <li><a href="/publications/" data-i18n="nav.publications">Publications</a></li>
+            <li><a href="/#news" data-i18n="nav.news">News</a></li>
           </ul>
         </li>
+        <li>
+          <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+            <span class="lang-opt active" data-lang="en">EN</span>
+            <span class="lang-sep">|</span>
+            <span class="lang-opt" data-lang="de">DE</span>
+          </button>
+        </li>
       </ul>
-      <button class="hamburger" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Open menu" data-i18n-aria="nav.hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
     </nav>
     <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-      <div class="mobile-section-label">Initiatives</div>
-      <a href="/superurbana/">Company</a><a href="/cea/">Product</a><a href="/innovation/">Training</a>
-      <a href="/digital-transformation/">Transformation</a><a href="/open-source/">Open Source</a>
-      <div class="mobile-section-label">Media</div>
-      <a href="/appearances/">Appearances</a><a href="/publications/">Publications</a><a href="/#news">News</a>
+      <div class="mobile-section-label" data-i18n="nav.initiatives">Initiatives</div>
+      <a href="/superurbana/" data-i18n="nav.company">Company</a>
+      <a href="/cea/" data-i18n="nav.product">Product</a>
+      <a href="/innovation/" data-i18n="nav.training">Training</a>
+      <a href="/digital-transformation/" data-i18n="nav.transformation">Transformation</a>
+      <a href="/open-source/" data-i18n="nav.openSource">Open Source</a>
+      <div class="mobile-section-label" data-i18n="nav.media">Media</div>
+      <a href="/appearances/" data-i18n="nav.appearances">Appearances</a>
+      <a href="/publications/" data-i18n="nav.publications">Publications</a>
+      <a href="/#news" data-i18n="nav.news">News</a>
+      <div class="mobile-lang">
+        <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+          <span class="lang-opt active" data-lang="en">EN</span>
+          <span class="lang-sep">|</span>
+          <span class="lang-opt" data-lang="de">DE</span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main id="page" tabindex="-1">
     <section class="page-hero no-aside">
       <div class="page-content">
-        <h2>
+        <h2 data-i18n-html="transf.h2">
           <span>Digital Transformation</span>
           Integrating BIM and Digital Twins in Axpo
         </h2>
-        <p>
+        <p data-i18n="transf.p">
           The BIM (Building Information Modeling) method - is changing completely the way one can plan and build
           pretty much any infrastructure. It is a standard being implemented in more than 40 countries and in
           Switzerland it is a must to maintain high levels of quality and efficiency. It became a crucial topic
@@ -77,7 +96,7 @@
           ></iframe>
         </div>
 
-        <a class="btn-primary" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener">More Info</a>
+        <a class="btn-primary" href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener" data-i18n="btn.moreInfo">More Info</a>
       </div>
     </section>
   </main>
@@ -91,5 +110,6 @@
     </ul>
   </footer>
   <script src="/nav.js"></script>
+  <script src="/i18n.js"></script>
 </body>
 </html>
