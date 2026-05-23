@@ -81,6 +81,14 @@ var TRANSLATIONS = {
     'v2.stat.langs':      'Languages',
     'v2.stat.i10':        'i10-index',
 
+    // Hero blocks for media-less subpages
+    'v2.os.repos.label':  'Featured Repos',
+    'v2.os.repo.cea.desc':      'Open-source urban building energy modelling for low-carbon cities',
+    'v2.os.repo.deg.desc':      'Physics-based forecast of building energy in the USA — cited by IPCC 6th Assessment Report',
+    'v2.os.repo.finebank.desc': 'Personal finance toolkit with live FX rates and OCR for bank statements',
+    'v2.pub.featured.label':    'Most Cited · 2016',
+    'v2.pub.featured.cites':    'citations',
+
     'v2.superurbana.title':       'Superurbana',
     'v2.superurbana.lede':        'Energy efficiency consultancy and CEA training, made in Switzerland.',
     'v2.superurbana.caption.kind':'Promo',
@@ -253,6 +261,14 @@ var TRANSLATIONS = {
     'v2.stat.institutions':'Institutionen',
     'v2.stat.langs':      'Sprachen',
     'v2.stat.i10':        'i10-Index',
+
+    // Hero-Blöcke für medienlose Unterseiten
+    'v2.os.repos.label':  'Ausgewählte Repos',
+    'v2.os.repo.cea.desc':      'Open-Source-Modellierung urbaner Gebäudeenergie für CO₂-arme Städte',
+    'v2.os.repo.deg.desc':      'Physikbasierte Prognose des Gebäudeenergieverbrauchs in den USA — zitiert im 6. IPCC-Sachstandsbericht',
+    'v2.os.repo.finebank.desc': 'Werkzeug für persönliche Finanzen mit Live-Wechselkursen und OCR für Kontoauszüge',
+    'v2.pub.featured.label':    'Meistzitiert · 2016',
+    'v2.pub.featured.cites':    'Zitierungen',
 
     'v2.superurbana.title':       'Superurbana',
     'v2.superurbana.lede':        'Beratung für Energieeffizienz und CEA-Schulungen, Made in Switzerland.',
