@@ -1,5 +1,53 @@
 # jimenofonseca.github.io
 
+## ⚙ Maintenance — keep this file alive
+
+This file is the project's memory. It should *grow* as the site grows.
+Future Claude sessions reading this should treat it as both reference AND
+something to improve when warranted.
+
+**When to propose an update:**
+
+1. **End of any session** that introduced a new pattern, file, workflow,
+   refinement, or non-obvious gotcha → before wrapping up, ask the user:
+   *"Should I capture anything from this session into CLAUDE.md?"* and
+   propose specific additions.
+
+2. **Mid-session, on explicit user request** — phrases like *"remember
+   this"*, *"add this to CLAUDE.md"*, *"checkpoint what we just learned"*,
+   *"save that lesson"* should immediately trigger an edit + commit.
+
+3. **Periodic review** when the user says *"review CLAUDE.md"* or
+   *"audit project memory"* — re-read the whole file, flag stale sections,
+   outdated cache versions, removed files still referenced, redundancies,
+   and propose a cleanup pass.
+
+**What belongs HERE vs. in the skill:**
+
+- ✅ **Here (project-specific)**: file structure of THIS site, current
+  cache version, the password convention for THIS encryption, the actual
+  number of LinkedIn embeds, gear list contents, etc.
+- ↗️ **In `~/.claude/skills/static-site-workflow/SKILL.md` (generalizable)**:
+  the *pattern* of cache-busting via pre-commit hook, the *pattern* of
+  StatiCrypt soft-protection, the *pattern* of dev-then-prod swaps.
+  Anything that would apply to a hypothetical second static site.
+
+If a lesson is useful in both places, capture it in both — project-specific
+detail here, generalized lesson in the skill.
+
+**Hygiene rules:**
+
+- Always show diffs before committing CLAUDE.md updates; small surgical
+  edits beat sweeping rewrites.
+- Keep this file under ~500 lines. If it grows past that, factor sections
+  into `docs/*.md` and leave this file as an index pointing to them.
+- Commit CLAUDE.md changes alongside the work that motivated them, not as
+  isolated "documentation" commits — they're easier to find later that way.
+
+---
+
+
+
 Personal website of Jimeno Fonseca, served on GitHub Pages at
 `https://jimenofonseca.com` (CNAME → `jimenofonseca.github.io`).
 Pure static HTML/CSS/JS — no build step, no framework.
