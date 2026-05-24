@@ -195,6 +195,39 @@ python3 -m http.server 8080
 When previewing private pages locally, you'll see the StatiCrypt gate —
 enter the password to view content.
 
+## ⚠ EN/DE parity — non-negotiable
+
+**Every change to an English `i18n.js` key MUST update the German equivalent
+in the same edit and the same commit.** Never defer "I'll do German later" —
+that's how stale translations accumulate and German-speaking visitors see
+contradictory content.
+
+This matters more than it sounds because the site auto-detects browser
+language: a visitor with `navigator.language` starting with `de-` lands
+straight on the German version and may never see your English update.
+
+### How to keep parity
+
+1. When editing `i18n.js`, find both occurrences of the key:
+   ```bash
+   grep -n "'your.key.name'" i18n.js
+   ```
+   You'll get two line numbers — one in the `en:` block (top half of the
+   file), one in the `de:` block (bottom half).
+2. Edit **both** in the same session, before the commit.
+3. If you don't speak German well enough for a phrase, write a literal
+   translation and leave a `// FIXME(de)` comment so the parity exists and
+   the polish can come later — but never ship EN-only.
+
+### What the tooling enforces vs. what it doesn't
+
+- ✅ The pre-commit hook bumps `i18n.js?v=N` so the new content actually
+  reaches browsers.
+- ❌ The hook does **not** verify EN/DE parity. That's a human discipline.
+
+If you're proposing copy changes (a single key or a batch), always end with
+the German equivalent diff alongside the English one — no exceptions.
+
 ## i18n key conventions
 
 Keys are namespaced. When adding a new key:
