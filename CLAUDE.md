@@ -266,8 +266,42 @@ For HTML elements:
 
 ## Push authentication
 
-Pushes use a fine-grained personal access token over HTTPS (not stored in
-git config). Run pushes via:
-`git push https://USERNAME:TOKEN@github.com/jimenofonseca/jimenofonseca.github.io.git main`
+**Always push with `git push origin main`** — nothing fancier.
 
-(Token should be kept out of any committed file. Set as env var for convenience.)
+The PAT is already stored in **macOS Keychain** via the `osxkeychain`
+credential helper (set up by GitHub Desktop). Plain `git push origin main`
+finds it automatically and works seamlessly.
+
+### ⚠ Do NOT use the URL-with-embedded-token form
+
+```bash
+# ❌ DON'T do this:
+git push https://USERNAME:TOKEN@github.com/...  main
+
+# ✅ DO this:
+git push origin main
+```
+
+Why it matters: pushing to an explicit URL **does not update the local
+`refs/remotes/origin/main` reference** even though the commits do reach
+github.com. The result is that local tools (GitHub Desktop, `git status`,
+`git log origin/main..main`) all think there are unpushed commits — and
+the user has to "push" manually from GitHub Desktop just to update the
+tracking ref. The actual upload is a no-op; the tracking-ref sync is
+what they perceive as "the push working".
+
+Symptom to watch for: user says *"your commits are landing but I have to
+push manually from GitHub Desktop"*. That's this bug. Switch to
+`git push origin main` and the tracking ref updates atomically.
+
+### Verify credentials still work
+
+```bash
+git push origin main --dry-run
+# → "Everything up-to-date" (good)
+# → auth prompt or error (PAT expired / keychain entry stale)
+```
+
+If the keychain entry ever stops working, regenerate the PAT at
+github.com/settings/tokens and run `git push origin main` once
+interactively to refresh the keychain entry.
