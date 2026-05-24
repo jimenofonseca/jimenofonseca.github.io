@@ -21,3 +21,6 @@ vendor/
 node_modules/
 private-src/
 .staticrypt.json
+
+# Photography originals (kept on local machine only — too big for git)
+assets/photography/_originals/
