@@ -970,8 +970,10 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
     padding: 24px var(--edge) 32px;
     transform: translateY(-100%);
     transition: transform 0.25s ease;
+    overflow-y: auto;
   }
   .sidebar.open { transform: translateY(0); }
+  .sidebar-controls { margin-top: 24px; }
 
   .mobile-bar {
     display: flex;
