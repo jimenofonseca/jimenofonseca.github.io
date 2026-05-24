@@ -838,6 +838,37 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   .repo-grid { grid-template-columns: 1fr; }
 }
 
+/* ── Citations bar chart (Publications hero) ────────────── */
+.citations-chart { margin: 0; }
+.citations-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--fg);
+}
+.citations-chart .chart-baseline {
+  stroke: var(--hairline);
+  stroke-width: 1;
+}
+.citations-chart rect {
+  fill: var(--fg);
+  transition: opacity 0.15s ease;
+}
+.citations-chart rect:hover { opacity: 0.55; }
+.citations-chart .chart-labels {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.citations-chart .chart-labels span.peak { color: var(--fg); font-weight: 500; }
+
 /* ── Featured paper card (Publications hero) ────────────── */
 .paper-card {
   display: block;

@@ -70,6 +70,7 @@ var TRANSLATIONS = {
     // Stat labels (subpages)
     'v2.stat.yearsActive':'Years Active',
     'v2.stat.companies':  'Companies Trained',
+    'v2.stat.clients':    'Satisfied Clients',
     'v2.stat.years':      'Years',
     'v2.stat.mvps':       'MVPs Built',
     'v2.stat.partner':    'Industry Partner',
@@ -91,6 +92,8 @@ var TRANSLATIONS = {
     'v2.os.repo.finebank.desc': 'Personal finance toolkit with live FX rates and OCR for bank statements',
     'v2.pub.featured.label':    'Most Cited · 2016',
     'v2.pub.featured.cites':    'citations',
+    'v2.pub.chart.label':       'Citations per year',
+    'v2.pub.chart.note':        '2,541 total · source: Google Scholar',
 
     'v2.superurbana.title':       'Superurbana',
     'v2.superurbana.lede':        'From energy consultancy to asset management — a Swiss firm with a decade of urban energy practice.',
@@ -255,6 +258,7 @@ var TRANSLATIONS = {
     // Stat-Labels (Unterseiten)
     'v2.stat.yearsActive':'Aktive Jahre',
     'v2.stat.companies':  'Geschulte Unternehmen',
+    'v2.stat.clients':    'Zufriedene Kunden',
     'v2.stat.years':      'Jahre',
     'v2.stat.mvps':       'Entwickelte MVPs',
     'v2.stat.partner':    'Industriepartner',
@@ -276,6 +280,8 @@ var TRANSLATIONS = {
     'v2.os.repo.finebank.desc': 'Werkzeug für persönliche Finanzen mit Live-Wechselkursen und OCR für Kontoauszüge',
     'v2.pub.featured.label':    'Meistzitiert · 2016',
     'v2.pub.featured.cites':    'Zitierungen',
+    'v2.pub.chart.label':       'Zitierungen pro Jahr',
+    'v2.pub.chart.note':        '2.541 gesamt · Quelle: Google Scholar',
 
     'v2.superurbana.title':       'Superurbana',
     'v2.superurbana.lede':        'Von der Energieberatung zum Asset Management — ein Schweizer Unternehmen mit einem Jahrzehnt urbaner Energiepraxis.',
