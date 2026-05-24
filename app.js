@@ -41,4 +41,61 @@ function toggleSidebar() {
     var num = a.querySelector('.num');
     if (num) num.style.color = 'var(--fg)';
   });
+
+  // ── Photo gallery lightbox ─────────────────────────────
+  var figures = Array.prototype.slice.call(document.querySelectorAll('.photo-grid figure'));
+  if (figures.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML =
+      '<button class="lightbox-close" aria-label="Close">CLOSE ×</button>' +
+      '<button class="lightbox-nav prev" aria-label="Previous">←</button>' +
+      '<img alt="" />' +
+      '<button class="lightbox-nav next" aria-label="Next">→</button>' +
+      '<div class="lightbox-caption"></div>';
+    document.body.appendChild(lb);
+
+    var lbImg = lb.querySelector('img');
+    var lbCap = lb.querySelector('.lightbox-caption');
+    var index = -1;
+
+    function openAt(i) {
+      index = i;
+      var fig = figures[i];
+      var img = fig.querySelector('img');
+      var full = fig.getAttribute('data-full') || img.src;
+      var cap = fig.querySelector('figcaption');
+      lbImg.src = full;
+      lbImg.alt = img.alt || '';
+      lbCap.textContent = cap ? cap.textContent : '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      index = -1;
+    }
+    function step(delta) {
+      openAt((index + delta + figures.length) % figures.length);
+    }
+
+    figures.forEach(function(fig, i) {
+      fig.addEventListener('click', function() { openAt(i); });
+    });
+    lb.querySelector('.lightbox-close').addEventListener('click', close);
+    lb.querySelector('.lightbox-nav.prev').addEventListener('click', function(e) {
+      e.stopPropagation(); step(-1);
+    });
+    lb.querySelector('.lightbox-nav.next').addEventListener('click', function(e) {
+      e.stopPropagation(); step(1);
+    });
+    lb.addEventListener('click', function(e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+    });
+  }
 })();
