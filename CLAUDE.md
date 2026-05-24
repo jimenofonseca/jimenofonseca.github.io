@@ -294,6 +294,21 @@ Symptom to watch for: user says *"your commits are landing but I have to
 push manually from GitHub Desktop"*. That's this bug. Switch to
 `git push origin main` and the tracking ref updates atomically.
 
+### Large pushes (photo batches, etc.)
+
+Pushing 20+ MB in one go can fail with `fatal: the remote end hung up
+unexpectedly` because git's default HTTP post buffer (1 MB) is too small.
+The fix is a one-time setting per clone:
+
+```bash
+git config http.postBuffer 524288000   # 500 MB
+```
+
+Already set for this repo. If you ever re-clone, run it once. Symptom:
+push exits with the "hung up" error, but `git log origin/main..main` shows
+the commit is still unpushed. After the buffer fix, the same `git push
+origin main` succeeds.
+
 ### Verify credentials still work
 
 ```bash
