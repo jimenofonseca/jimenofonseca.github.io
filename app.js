@@ -208,3 +208,94 @@ function toggleSidebar() {
     true // capture phase: get clicks before anything else
   );
 })();
+
+
+// ─────────────────────────────────────────────────────────
+// app-reel.js — Hero portrait reel (auto-rotating).
+// - Cross-fades through .reel-slide elements every N ms.
+// - Pauses on hover/focus.
+// - Caption right side ("ZÜRICH, CH" by default) swaps with
+//   each slide via data-cap-where on each .reel-slide.
+// - Dots indicate position; clicking jumps to that slide.
+// - Respects prefers-reduced-motion (no rotation).
+// ─────────────────────────────────────────────────────────
+
+(function () {
+  var reel = document.querySelector('.hero-figure.reel');
+  if (!reel) return;
+
+  var slides = Array.prototype.slice.call(reel.querySelectorAll('.reel-slide'));
+  if (slides.length < 2) return;
+
+  var dotsHolder = reel.querySelector('.reel-dots');
+  var capWhere = reel.querySelector('figcaption .cap-where');
+  var INTERVAL_MS = 5000;        // time on each slide (visible)
+  var FADE_MS = 900;              // cross-fade duration (matches CSS)
+  var reduceMotion =
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Build dots
+  if (dotsHolder) {
+    slides.forEach(function (_, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Show portrait ' + (i + 1) + ' of ' + slides.length);
+      b.addEventListener('click', function () {
+        if (i === activeIdx) return;
+        go(i);
+        // Reset the timer when user jumps manually
+        restartTimer();
+      });
+      dotsHolder.appendChild(b);
+    });
+  }
+  var dots = dotsHolder ? Array.prototype.slice.call(dotsHolder.querySelectorAll('button')) : [];
+
+  var activeIdx = 0;
+  function setActive(i) {
+    slides.forEach(function (s, n) { s.classList.toggle('active', n === i); });
+    dots.forEach(function (d, n) { d.classList.toggle('active', n === i); });
+    activeIdx = i;
+  }
+
+  function swapCaption(toText) {
+    if (!capWhere || !toText) return;
+    capWhere.classList.add('swapping');
+    setTimeout(function () {
+      capWhere.textContent = toText;
+      capWhere.classList.remove('swapping');
+    }, 400); // matches CSS .cap-where transition
+  }
+
+  function go(i) {
+    if (i === activeIdx) return;
+    setActive(i);
+    var newCap = slides[i].getAttribute('data-cap-where');
+    if (newCap) swapCaption(newCap);
+  }
+
+  // Initialise: first slide active
+  setActive(0);
+
+  if (reduceMotion) return; // no auto-rotation
+
+  var timer = null;
+  function tick() { go((activeIdx + 1) % slides.length); }
+  function startTimer() { stopTimer(); timer = setInterval(tick, INTERVAL_MS); }
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+  function restartTimer() { stopTimer(); startTimer(); }
+
+  // Pause when the user hovers or focuses inside the reel area
+  reel.addEventListener('mouseenter', stopTimer);
+  reel.addEventListener('mouseleave', startTimer);
+  reel.addEventListener('focusin', stopTimer);
+  reel.addEventListener('focusout', startTimer);
+
+  // Pause when the tab is hidden (saves CPU + avoids drift)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stopTimer(); else startTimer();
+  });
+
+  startTimer();
+})();

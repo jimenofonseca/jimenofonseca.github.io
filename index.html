@@ -111,17 +111,27 @@
           <p class="lede" data-i18n="hero.p">
             I am Jimeno, department head of Digital Engineering at Axpo Grid in Switzerland. There, I lead the adoption of digital technologies for construction and operation of power networks. I am also co-founder of the open-source simulation software City Energy Analyst (CEA) and the construction office Superurbana GmbH. I hold a PhD in urban energy systems from the ETH Zürich, and I am a certified Agile Manager. I am active member of CIGRE and past-contributor to the IPCC report on Climate Change. I used to build software until I found making high-performance teams my passion and bringing digital technologies to the energy sector my mission.
           </p>
+          <p class="lede" data-i18n="hero.p2" style="margin-top: 20px;">
+            Off the clock, I spent years tinkering with microcontrollers and home IoT experiments. These days I have boiled it all down to two long-term loves: music and photography.
+          </p>
         </div>
-        <figure class="hero-figure">
-          <img
-            src="/assets/portrait.jpg"
-            alt="Jimeno Fonseca, portrait."
-            loading="eager"
-          />
+        <figure class="hero-figure reel">
+          <div class="reel-stage">
+            <div class="reel-slide active" data-cap-where="Zürich, CH">
+              <img src="/assets/portrait.jpg" alt="Jimeno Fonseca, portrait." loading="eager" />
+            </div>
+            <div class="reel-slide" data-cap-where="Music">
+              <img src="/assets/portrait_music.jpg" alt="Jimeno with music." loading="eager" />
+            </div>
+            <div class="reel-slide" data-cap-where="Photography">
+              <img src="/assets/portrait_photography.jpg" alt="Jimeno with photography." loading="eager" />
+            </div>
+          </div>
           <figcaption>
             <span>Jimeno Fonseca</span>
             <span class="cap-where">Zürich, CH</span>
           </figcaption>
+          <div class="reel-dots" aria-label="Portrait selector"></div>
         </figure>
       </section>
 
@@ -233,6 +243,6 @@
   </div>
 
   <script src="/app.js"></script>
-  <script src="/i18n.js?v=12"></script>
+  <script src="/i18n.js?v=13"></script>
 </body>
 </html>

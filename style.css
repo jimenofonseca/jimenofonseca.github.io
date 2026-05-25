@@ -1194,3 +1194,101 @@ html.hyper-arrive main.content {
     animation: none !important;
   }
 }
+/* ─────────────────────────────────────────────────────────
+   style-reel.css — Hero portrait "reel" test layer.
+   The .hero-figure becomes a stage holding multiple <picture>
+   slides cross-fading on a timer. Caption swaps with the slide.
+   ───────────────────────────────────────────────────────── */
+
+/* The reel container takes the same dimensions as a single
+   portrait would, by reserving the 3:4 aspect ratio on the
+   wrapper instead of the <img>. */
+.hero-figure.reel {
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+.hero-figure.reel .reel-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--hover); /* shows briefly while images load */
+}
+.hero-figure.reel .reel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity;
+}
+.hero-figure.reel .reel-slide.active { opacity: 1; }
+
+.hero-figure.reel .reel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(0);
+  transition: filter 0.3s ease;
+}
+html[data-theme="dark"] .hero-figure.reel .reel-slide img {
+  filter: grayscale(0.15) brightness(0.92);
+}
+
+/* Caption stays where it was, but the right side ("ZÜRICH, CH")
+   gets swapped with each slide via JS — same fade pacing. */
+.hero-figure.reel figcaption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.hero-figure.reel figcaption .cap-where {
+  color: var(--muted);
+  transition: opacity 0.4s ease;
+}
+.hero-figure.reel figcaption .cap-where.swapping { opacity: 0; }
+
+/* Subtle dot indicators below the figure — small, mono,
+   one per slide; the active one fills in. */
+.hero-figure.reel .reel-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.hero-figure.reel .reel-dots button {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--faint);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.hero-figure.reel .reel-dots button:hover {
+  border-color: var(--muted);
+  transform: scale(1.2);
+}
+.hero-figure.reel .reel-dots button.active {
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+/* Pause the auto-rotation visually when user hovers — JS handles the
+   actual pause; this just gives a small visual cue (cursor changes
+   on dots already; no extra needed here). */
+
+/* Respect reduced motion: no rotation, just show the first slide
+   statically. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-figure.reel .reel-slide { transition: none; }
+  .hero-figure.reel .reel-dots { display: none; }
+}

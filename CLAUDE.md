@@ -249,6 +249,38 @@ For HTML elements:
 - `data-i18n-content="key"` → sets `content` attribute (for `<meta>` tags)
 - `data-i18n-aria="key"` → sets `aria-label`
 
+## Home page hero reel
+
+The hero portrait on the home page is a **3-slide auto-rotating reel**:
+`portrait.jpg` → `portrait_music.jpg` → `portrait_photography.jpg` →
+loop. Cross-fades over 0.9s every 5s. The right side of the caption
+swaps with each slide (Zürich, CH → Music → Photography). Three small
+dots below the caption indicate position and let visitors jump
+manually. Pauses on hover, on focus, and when the tab is hidden.
+
+### Adding or changing portraits
+
+1. Drop new JPG into `assets/` (3:4 portrait, ~900×1200, under 200 KB,
+   web-optimised). Use `sips -c` to crop + `sips -Z 1200` to resize.
+2. Add a `<div class="reel-slide" data-cap-where="LABEL">` to the
+   `.reel-stage` in `index.html`, with the new `<img src>`. Order
+   matters — slides cycle top-to-bottom in DOM order.
+3. The dot count adjusts automatically from the slide count (built in
+   JS).
+
+### Knobs
+
+- **Slide duration**: `INTERVAL_MS = 5000` in `app.js` (search for the
+  "app-reel.js" comment block).
+- **Cross-fade**: `transition: opacity 0.9s` on `.hero-figure.reel
+  .reel-slide` in `style.css`.
+- **Caption labels**: `data-cap-where` attribute on each `.reel-slide`.
+
+### A11y
+
+Respects `prefers-reduced-motion: reduce` — when set, no rotation, no
+dots, just the first slide static.
+
 ## Page transition (hyperjump)
 
 Every internal navigation triggers a **Star Wars-style hyperspace jump**:
