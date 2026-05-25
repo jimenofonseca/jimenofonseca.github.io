@@ -19,7 +19,7 @@ var TRANSLATIONS = {
     'home.title':         'Jimeno Fonseca | Explore Digital Engineering for Energy Systems',
     'home.desc':          'Jimeno Fonseca leads innovation in digital engineering for energy systems; explore projects, training, and open-source tools in the energy sector.',
     'hero.h1':            'Manager, Founder, and Educator driving Digital Innovation in the Energy Sector',
-    'hero.p':             'I used to build software. Now I build the high-performance teams that bring digital technologies to the energy sector. Today I lead Digital Engineering at Axpo Grid in Switzerland, where my team adopts new tools for the construction and operation of power systems. I am also co-founder of City Energy Analyst — an open-source urban energy simulation platform — and Superurbana GmbH, a tech startup that pivoted into an asset management office. PhD from ETH Zürich, certified Agile Manager, active member of CIGRE, and past contributor to the IPCC 6th Assessment Report on Climate Change.',
+    'hero.p':             'I used to build software. Now I build the high-performance teams that bring digital technologies to the energy sector. Today I lead Digital Engineering at Axpo Grid in Switzerland, where my team adopts new tools for the construction and operation of power networks. I am also co-founder of City Energy Analyst — an open-source urban energy simulation platform — and Superurbana GmbH, a tech startup that pivoted into an asset management office. PhD from ETH Zürich, certified Agile Manager, active member of CIGRE, and past contributor to the IPCC 6th Assessment Report on Climate Change.',
     'hero.cta':           'Let’s Talk!',
     'news.h2':            'Latest News',
     'news.more':          'More News',
@@ -30,7 +30,7 @@ var TRANSLATIONS = {
     'v2.eyebrow.work':    'Selected Work',
     'v2.eyebrow.recently':'Recently',
     'v2.eyebrow.connect': 'Connect',
-    'v2.now':             'Currently leading the Digital Engineering department at Axpo Grid in Switzerland, advancing the adoption of digital technologies for the construction and operation of power systems.',
+    'v2.now':             'Currently leading the Digital Engineering department at Axpo Grid in Switzerland, advancing the adoption of digital technologies for the construction and operation of power networks.',
     'v2.work.company.desc':       'Energy efficiency consultancy, made in Switzerland',
     'v2.work.product.desc':       'Open-source urban energy simulation used in 25+ countries',
     'v2.work.training.desc':      'Teaching how to build Minimum Viable Products at ETH Zürich',
@@ -106,7 +106,7 @@ var TRANSLATIONS = {
     'v2.innov.caption.text':      'On building Minimum Viable Products',
 
     'v2.transf.title':            'Digital Transformation',
-    'v2.transf.lede':             'Bringing BIM and digital twins to power systems engineering at Axpo Grid.',
+    'v2.transf.lede':             'Bringing BIM and digital twins to power networks engineering at Axpo Grid.',
     'v2.transf.caption.kind':     'Talk',
     'v2.transf.caption.text':     'On integrating BIM and digital twins at Axpo',
 
@@ -207,7 +207,7 @@ var TRANSLATIONS = {
     'home.title':         'Jimeno Fonseca | Digitales Engineering für Energiesysteme entdecken',
     'home.desc':          'Jimeno Fonseca treibt Innovation im digitalen Engineering für Energiesysteme voran – entdecken Sie Projekte, Schulungen und Open-Source-Tools im Energiesektor.',
     'hero.h1':            'Manager, Gründer und Bildner, der digitale Innovation im Energiesektor vorantreibt',
-    'hero.p':             'Früher habe ich Software entwickelt. Heute baue ich die leistungsstarken Teams, die digitale Technologien in den Energiesektor bringen. Aktuell leite ich Digital Engineering bei Axpo Grid in der Schweiz, wo mein Team neue Werkzeuge für Bau und Betrieb von Energiesystemen einführt. Ich bin Mitgründer von City Energy Analyst — einer Open-Source-Plattform für urbane Energiesimulation — und von Superurbana GmbH, einem Tech-Start-up, das sich zu einem Asset-Management-Büro entwickelt hat. Doktortitel der ETH Zürich, zertifizierter Agile Manager, aktives Mitglied von CIGRE und ehemaliger Mitwirkender am 6. IPCC-Sachstandsbericht zum Klimawandel.',
+    'hero.p':             'Früher habe ich Software entwickelt. Heute baue ich die leistungsstarken Teams, die digitale Technologien in den Energiesektor bringen. Aktuell leite ich Digital Engineering bei Axpo Grid in der Schweiz, wo mein Team neue Werkzeuge für Bau und Betrieb von Stromnetzen einführt. Ich bin Mitgründer von City Energy Analyst — einer Open-Source-Plattform für urbane Energiesimulation — und von Superurbana GmbH, einem Tech-Start-up, das sich zu einem Asset-Management-Büro entwickelt hat. Doktortitel der ETH Zürich, zertifizierter Agile Manager, aktives Mitglied von CIGRE und ehemaliger Mitwirkender am 6. IPCC-Sachstandsbericht zum Klimawandel.',
     'hero.cta':           'Kontakt aufnehmen!',
     'news.h2':            'Aktuelle Neuigkeiten',
     'news.more':          'Mehr Neuigkeiten',
@@ -218,7 +218,7 @@ var TRANSLATIONS = {
     'v2.eyebrow.work':    'Ausgewählte Arbeit',
     'v2.eyebrow.recently':'Zuletzt',
     'v2.eyebrow.connect': 'Kontakt',
-    'v2.now':             'Derzeit leite ich die Abteilung Digital Engineering bei Axpo Grid in der Schweiz und treibe die Einführung digitaler Technologien für den Bau und Betrieb von Energiesystemen voran.',
+    'v2.now':             'Derzeit leite ich die Abteilung Digital Engineering bei Axpo Grid in der Schweiz und treibe die Einführung digitaler Technologien für den Bau und Betrieb von Stromnetzen voran.',
     'v2.work.company.desc':       'Beratung für Energieeffizienz, Made in Switzerland',
     'v2.work.product.desc':       'Open-Source-Simulation urbaner Energie, eingesetzt in über 25 Ländern',
     'v2.work.training.desc':      'Lehre zum Aufbau von Minimum Viable Products an der ETH Zürich',
@@ -294,7 +294,7 @@ var TRANSLATIONS = {
     'v2.innov.caption.text':      'Über den Aufbau von Minimum Viable Products',
 
     'v2.transf.title':            'Digitale Transformation',
-    'v2.transf.lede':             'BIM und digitale Zwillinge ins Power Systems Engineering bei Axpo Grid bringen.',
+    'v2.transf.lede':             'BIM und digitale Zwillinge ins Power Networks Engineering bei Axpo Grid bringen.',
     'v2.transf.caption.kind':     'Vortrag',
     'v2.transf.caption.text':     'Über die Integration von BIM und digitalen Zwillingen bei Axpo',
 
