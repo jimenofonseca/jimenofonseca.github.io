@@ -24,3 +24,7 @@ private-src/
 
 # Photography originals (kept on local machine only — too big for git)
 assets/photography/_originals/
+
+# macOS metadata — never useful in repo
+.DS_Store
+**/.DS_Store

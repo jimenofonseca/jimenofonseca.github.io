@@ -99,3 +99,101 @@ function toggleSidebar() {
     });
   }
 })();
+
+
+// ─────────────────────────────────────────────────────────
+// app-morph.js — Hyperspace jump page transition.
+//
+// Intercepts internal nav link clicks, injects an overlay
+// with ~120 stretching star streaks + a white flash, lets
+// the animation play, then navigates. On the new page,
+// flags <html> with .hyper-arrive so CSS plays the
+// "deceleration" effect on arrival.
+// ─────────────────────────────────────────────────────────
+
+(function () {
+  var reduceMotion =
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Arrival side: the inline <head> script already added .hyper-arrive
+  // before paint. We just clean up the flag + remove the class after decel. ──
+  if (sessionStorage.getItem('hyperjump-arriving') === '1') {
+    sessionStorage.removeItem('hyperjump-arriving');
+    if (!reduceMotion) {
+      // Ensure class is present (in case inline script wasn't included)
+      document.documentElement.classList.add('hyper-arrive');
+      // Remove after the decel finishes (matches CSS 0.95s + small buffer)
+      setTimeout(function () {
+        document.documentElement.classList.remove('hyper-arrive');
+      }, 1200);
+    }
+  }
+
+  // ── Departure side: intercept link clicks ─────────────
+  if (reduceMotion) return;
+
+  function isInternalNav(a) {
+    if (!a || a.tagName !== 'A') return false;
+    if (a.target === '_blank') return false;
+    if (a.hasAttribute('download')) return false;
+    var href = a.getAttribute('href');
+    if (!href) return false;
+    if (href.startsWith('#')) return false;       // same-page anchor
+    if (href.startsWith('mailto:')) return false;
+    if (href.startsWith('tel:')) return false;
+    // External? Only same-origin counts as internal.
+    try {
+      var url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin) return false;
+    } catch (e) { return false; }
+    return true;
+  }
+
+  function buildStarfield() {
+    var overlay = document.createElement('div');
+    overlay.className = 'hyperjump';
+    var STAR_COUNT = 120;
+    for (var i = 0; i < STAR_COUNT; i++) {
+      var s = document.createElement('span');
+      s.className = 'star';
+      // Coordinates are now % of the overlay (not the viewport),
+      // so streaks stay contained inside the main content frame.
+      s.style.top = (Math.random() * 100) + '%';
+      // Starting horizontal position skewed toward the left half of the overlay
+      s.style.left = (Math.random() * 35 - 5) + '%';
+      // Stagger when each star starts streaking (the chaotic-but-coherent feel)
+      var delay = Math.random() * 0.35;
+      s.style.animationDelay = delay + 's';
+      var dur = 0.7 + Math.random() * 0.25;
+      s.style.animationDuration = dur + 's';
+      overlay.appendChild(s);
+    }
+    return [overlay];
+  }
+
+  document.addEventListener(
+    'click',
+    function (e) {
+      // Find the closest <a>
+      var a = e.target.closest && e.target.closest('a');
+      if (!isInternalNav(a)) return;
+      // Cmd/Ctrl/middle-click → let the browser do its thing (new tab, etc.)
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+
+      e.preventDefault();
+      var href = a.href;
+
+      // Inject the overlay + flash
+      var nodes = buildStarfield();
+      nodes.forEach(function (n) { document.body.appendChild(n); });
+
+      // Flag so the new page knows to play the arrival decel
+      sessionStorage.setItem('hyperjump-arriving', '1');
+
+      // Navigate at the peak of the white flash — gives streaks time to fully extend
+      setTimeout(function () { window.location.href = href; }, 1150);
+    },
+    true // capture phase: get clicks before anything else
+  );
+})();

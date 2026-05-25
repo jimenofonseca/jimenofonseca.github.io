@@ -1041,3 +1041,158 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   .hero { grid-template-columns: 1fr; gap: 40px; }
   .hero-figure { max-width: 320px; }
 }
+/* ─────────────────────────────────────────────────────────
+   style-morph.css — Hyperspace jump page transition.
+   The actual animation is driven by app-morph.js, which
+   injects an overlay with stretching star streaks before
+   navigating. This file styles the overlay + the arrival
+   "deceleration" effect on the new page.
+
+   Theme-aware: colors invert with the active theme so each
+   theme gets maximum contrast (dark theme = black bg + white
+   streaks; light theme = white bg + black streaks).
+   ───────────────────────────────────────────────────────── */
+
+/* ── Theme-aware color tokens for the hyperjump ───────── */
+:root {
+  /* Default = light theme: pure-white bg, pure-black streaks */
+  --hyperjump-bg:   #ffffff;
+  --hyperjump-star: #000000;
+}
+html[data-theme="dark"] {
+  /* Dark theme: pure-black bg, pure-white streaks */
+  --hyperjump-bg:   #000000;
+  --hyperjump-star: #ffffff;
+}
+
+/* ── The outgoing jump overlay (added by JS) ──────────── */
+/* Confined to the main content frame on desktop (sidebar stays
+   anchored and visible). On mobile the sidebar is hidden, so the
+   overlay covers the whole viewport. */
+.hyperjump {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: var(--sidebar-w, 240px);
+  right: 0;
+  background: var(--hyperjump-bg);
+  z-index: 99999;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  animation: hyperjump-bg 1.2s cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
+}
+@media (max-width: 900px) {
+  .hyperjump { left: 0; }
+}
+
+@keyframes hyperjump-bg {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* Each star: a small white dot that stretches into a long streak
+   and races off the right edge. JS generates ~120 of these with
+   random top/left/duration/delay for the chaotic-but-coherent feel. */
+.hyperjump .star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--hyperjump-star);
+  border-radius: 50%;
+  transform-origin: left center;
+  will-change: transform, opacity;
+  opacity: 0;
+  animation: streak 1.1s cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
+}
+
+@keyframes streak {
+  /* translateX values are relative to the OVERLAY width (parent), not
+     the viewport — so 100% = overlay width. Stars stay contained. */
+  0% {
+    opacity: 0;
+    transform: translateX(0) scaleX(1);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(50%) scaleX(60);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(180%) scaleX(300);
+  }
+}
+
+/* White flash removed — it was making the transition feel like a
+   camera flash going off mid-scene. The streaks + black overlay
+   carry the climax; the arrival on the new page handles emergence. */
+
+/* ── Arrival (decel) on the new page ──────────────────── */
+/* Set by an inline <head> script BEFORE paint, so the CSS below
+   takes effect on the very first frame — no snap-then-jiggle. */
+
+/* Hold the page in the hyperjump bg color for the first beat so
+   content emerges from a uniform field (black in dark theme, white
+   in light theme) — no flash of the body's normal bg. */
+html.hyper-arrive,
+html.hyper-arrive body {
+  background: var(--hyperjump-bg) !important;
+  animation: hyper-bg-fade 1.0s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.35s;
+}
+@keyframes hyper-bg-fade {
+  from { background-color: var(--hyperjump-bg); }
+  to   { background-color: var(--bg); }
+}
+
+html.hyper-arrive main.content {
+  animation: hyper-decel 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* First-frame state */
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(12px);
+}
+
+/* Sidebar gets its own background during arrival so the black body
+   doesn't bleed through it. var(--bg) matches the normal page color,
+   so this is visually identical to the non-arrival state. */
+html.hyper-arrive .sidebar {
+  background: var(--bg);
+}
+/* Footer too — same reason. */
+html.hyper-arrive .site-footer {
+  background: var(--bg);
+}
+
+@keyframes hyper-decel {
+  /* Just two keyframes — single smooth ease, no mid-bounce.
+     Dropped the brightness pump that made it feel like a flash. */
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Sidebar is the persistent anchor — no animation, no fade, no
+   opacity change. It's fully visible from the very first frame
+   of the new page, while only the main content does the decel. */
+
+/* Respect prefers-reduced-motion — skip the jump entirely */
+@media (prefers-reduced-motion: reduce) {
+  .hyperjump, .hyperjump-flash { display: none !important; }
+  html.hyper-arrive main.content,
+  html.hyper-arrive .sidebar {
+    animation: none !important;
+  }
+}
