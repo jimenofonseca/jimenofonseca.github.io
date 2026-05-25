@@ -153,6 +153,17 @@ function toggleSidebar() {
   function buildStarfield() {
     var overlay = document.createElement('div');
     overlay.className = 'hyperjump';
+
+    // Pin the overlay to the actual content element's left edge,
+    // not just the CSS variable. Belt-and-braces — if anything causes
+    // --sidebar-w to resolve unexpectedly, this still keeps the sidebar
+    // uncovered. On mobile (sidebar hidden), content.left is 0 anyway.
+    var content = document.querySelector('main.content');
+    if (content) {
+      var rect = content.getBoundingClientRect();
+      overlay.style.left = Math.max(0, rect.left) + 'px';
+    }
+
     var STAR_COUNT = 120;
     for (var i = 0; i < STAR_COUNT; i++) {
       var s = document.createElement('span');

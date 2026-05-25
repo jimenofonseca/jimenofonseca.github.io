@@ -1134,59 +1134,57 @@ html[data-theme="dark"] {
 
 /* ── Arrival (decel) on the new page ──────────────────── */
 /* Set by an inline <head> script BEFORE paint, so the CSS below
-   takes effect on the very first frame — no snap-then-jiggle. */
+   takes effect on the very first frame — no snap-then-jiggle.
 
-/* Hold the page in the hyperjump bg color for the first beat so
-   content emerges from a uniform field (black in dark theme, white
-   in light theme) — no flash of the body's normal bg. */
-html.hyper-arrive,
-html.hyper-arrive body {
-  background: var(--hyperjump-bg) !important;
-  animation: hyper-bg-fade 1.0s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 0.35s;
+   Architecture: body's background is NEVER changed (avoids the
+   sidebar/footer flicker bug). Instead, we paint an opaque arrival
+   overlay via body::before — positioned identically to the outgoing
+   .hyperjump overlay so it covers ONLY the content frame, never the
+   sidebar. The overlay fades from opaque to transparent while the
+   content underneath decelerates (scale/blur only). */
+
+html.hyper-arrive body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: var(--sidebar-w, 240px);
+  right: 0;
+  background: var(--hyperjump-bg);
+  z-index: 50;
+  pointer-events: none;
+  animation: arrival-overlay-fade 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-@keyframes hyper-bg-fade {
-  from { background-color: var(--hyperjump-bg); }
-  to   { background-color: var(--bg); }
+@media (max-width: 900px) {
+  html.hyper-arrive body::before { left: 0; }
+}
+@keyframes arrival-overlay-fade {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
+/* Content beneath the overlay decelerates — scale + blur ONLY.
+   No opacity animation (the overlay handles the reveal).
+   This way the sidebar and body backgrounds are never touched. */
 html.hyper-arrive main.content {
   animation: hyper-decel 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
-  /* First-frame state */
-  opacity: 0;
   transform: scale(1.08);
   filter: blur(12px);
 }
 
-/* Sidebar gets its own background during arrival so the black body
-   doesn't bleed through it. var(--bg) matches the normal page color,
-   so this is visually identical to the non-arrival state. */
-html.hyper-arrive .sidebar {
-  background: var(--bg);
-}
-/* Footer too — same reason. */
-html.hyper-arrive .site-footer {
-  background: var(--bg);
-}
-
 @keyframes hyper-decel {
-  /* Just two keyframes — single smooth ease, no mid-bounce.
-     Dropped the brightness pump that made it feel like a flash. */
   from {
-    opacity: 0;
     transform: scale(1.08);
     filter: blur(12px);
   }
   to {
-    opacity: 1;
     transform: scale(1);
     filter: blur(0);
   }
 }
 
-/* Sidebar is the persistent anchor — no animation, no fade, no
-   opacity change. It's fully visible from the very first frame
-   of the new page, while only the main content does the decel. */
+/* Sidebar is the persistent anchor — no animation, no bg change,
+   no opacity change. Fully visible from the first frame. */
 
 /* Respect prefers-reduced-motion — skip the jump entirely */
 @media (prefers-reduced-motion: reduce) {
