@@ -60,7 +60,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── superurbana/  cea/  innovation/   # Initiatives (01-05)
 ├── digital-transformation/  open-source/
 ├── appearances/  publications/       # Media (06-07)
-├── music/  photography/              # Personal (09-10) — ENCRYPTED via StatiCrypt
+├── music/  photography/              # Personal (09-10) — public, no password
 ├── private-src/                      # GITIGNORED — plaintext sources for music + photography
 │   ├── music.html
 │   └── photography.html
@@ -97,7 +97,7 @@ clone, run `git config core.hooksPath .githooks` once.
 
 1. **Initiatives** (01–05): Company · Product · Training · Transformation · Open Source
 2. **Media** (06–08): Appearances · Publications · News (anchor to home `#recently`)
-3. **Personal** (09–10): Music · Photography — *both encrypted*
+3. **Personal** (09–10): Music · Photography — *public, no password*
 4. **Connect** (11–13): LinkedIn · GitHub · Google Scholar — all external
 
 ## Workflows
@@ -119,34 +119,19 @@ No cache-bust needed for HTML/CSS — only the `i18n.js?v=N` query string is
 versioned. Browser caches HTML/CSS via the GitHub Pages cache-control headers
 (usually re-fetched within minutes).
 
-### Working on private pages (Music, Photography)
+### Working on Music and Photography pages
 
-These pages use **StatiCrypt** for soft password protection.
-Plaintext lives in `private-src/` (gitignored). Encrypted output goes to
-`music/index.html` and `photography/index.html` (committed, public, served).
+Both pages are now **public plain HTML** — no password, no StatiCrypt.
+Edit `music/index.html` and `photography/index.html` directly and commit.
 
-```
-# 1. Edit plaintext source
-nano private-src/music.html
+- **Music**: embeds a YouTube iframe (`BzljIozglH0`). Local video files are
+  gitignored (`assets/music/` — all content now on YouTube).
+- **Photography**: gallery sourced from `assets/photography/`. Edit via
+  `build-gallery.py` (see "Updating the photo gallery" below).
 
-# 2. Re-encrypt with the real password
-./encrypt.sh "yourpassword"
-# or  STATICRYPT_PASSWORD=xxx ./encrypt.sh
-# or  ./encrypt.sh  (prompts)
-
-# 3. Commit + push
-git add music/index.html photography/index.html
-git commit -m "..."
-git push
-```
-
-**Important**: `changeme` is the placeholder password used in early commits.
-Always replace with the real shared password before sharing the URL.
-
-**What protection means here**: StatiCrypt encrypts only the page body; any
-asset URL (e.g. `/assets/photography/foo.jpg`) is still publicly fetchable.
-Suitable for "don't want it indexed / casual visitors stay out". Not for
-actual secrets — for that, host elsewhere (Cloudflare Pages with Access).
+`private-src/music.html` and `private-src/photography.html` are kept as
+convenient editing drafts (gitignored), but the committed files in
+`music/` and `photography/` are the authoritative sources.
 
 ### Updating the photo gallery
 

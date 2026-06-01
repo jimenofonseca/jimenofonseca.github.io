@@ -25,11 +25,8 @@ private-src/
 # Photography originals (kept on local machine only — too big for git)
 assets/photography/_originals/
 
-# Music originals (raw clips before compression — too big for git)
-assets/music/_originals/
-
-# Source-of-truth video clip (replaced after ffmpeg pass with music.mp4)
-assets/music/My Movie.mp4
+# Music assets (video now hosted on YouTube — local files not needed in repo)
+assets/music/
 
 # macOS metadata — never useful in repo
 .DS_Store
