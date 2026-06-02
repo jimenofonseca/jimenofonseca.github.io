@@ -15,14 +15,13 @@ Workflow
 3. The script generates:
      assets/photography/<name>.jpg          ← web-size (max 1600px long side)
      assets/photography/thumb/<name>.jpg    ← square 600×600 thumbnail
-   and replaces the <figure> blocks inside private-src/photography.html
+   and replaces the <figure> blocks inside photography/index.html
    between the markers:
      <!-- GALLERY-START -->
      <!-- GALLERY-END -->
 
-4. Re-encrypt and push:
-     ./encrypt.sh "yourpassword"
-     git add assets/photography/ private-src/photography.html photography/
+4. Commit and push:
+     git add assets/photography/ photography/
      git commit -m "Update photo gallery"
      git push
 
@@ -39,7 +38,7 @@ ROOT = Path(__file__).resolve().parent
 ORIG = ROOT / "assets" / "photography" / "_originals"
 FULL = ROOT / "assets" / "photography"
 THUMB = ROOT / "assets" / "photography" / "thumb"
-HTML = ROOT / "private-src" / "photography.html"
+HTML = ROOT / "photography" / "index.html"
 
 ORIG.mkdir(parents=True, exist_ok=True)
 THUMB.mkdir(parents=True, exist_ok=True)
@@ -119,7 +118,6 @@ HTML.write_text(html)
 
 print(f"\n✓ {len(originals)} photo(s) optimised + grid markup updated.")
 print("\nNext steps:")
-print('  ./encrypt.sh "yourpassword"')
-print("  git add assets/photography/ private-src/photography.html photography/")
+print("  git add assets/photography/ photography/")
 print('  git commit -m "Update photo gallery"')
 print("  git push")
