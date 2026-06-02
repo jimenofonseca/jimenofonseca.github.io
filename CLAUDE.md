@@ -25,12 +25,12 @@ something to improve when warranted.
 **What belongs HERE vs. in the skill:**
 
 - ✅ **Here (project-specific)**: file structure of THIS site, current
-  cache version, the password convention for THIS encryption, the actual
-  number of LinkedIn embeds, gear list contents, etc.
+  cache version, the actual number of LinkedIn embeds, gear list contents,
+  etc.
 - ↗️ **In `~/.claude/skills/static-site-workflow/SKILL.md` (generalizable)**:
   the *pattern* of cache-busting via pre-commit hook, the *pattern* of
-  StatiCrypt soft-protection, the *pattern* of dev-then-prod swaps.
-  Anything that would apply to a hypothetical second static site.
+  dev-then-prod swaps. Anything that would apply to a hypothetical second
+  static site.
 
 If a lesson is useful in both places, capture it in both — project-specific
 detail here, generalized lesson in the skill.
@@ -60,8 +60,8 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── superurbana/  cea/  innovation/   # Initiatives (01-05)
 ├── digital-transformation/  open-source/
 ├── appearances/  publications/       # Media (06-07)
-├── music/  photography/              # Personal (09-10) — public, no password
-├── private-src/                      # GITIGNORED — plaintext sources for music + photography
+├── music/  photography/              # Personal (09-10) — public plain HTML
+├── private-src/                      # GITIGNORED — optional local editing drafts
 │   ├── music.html
 │   └── photography.html
 ├── assets/
@@ -74,9 +74,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── style.css                         # All site styles
 ├── app.js                            # Theme toggle, mobile sidebar, lightbox
 ├── i18n.js                           # EN/DE translations + lang switcher
-├── encrypt.sh                        # StatiCrypt wrapper for private pages
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
-├── package.json                      # Pins staticrypt as a dev dependency
 └── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
 ```
 
@@ -121,16 +119,17 @@ versioned. Browser caches HTML/CSS via the GitHub Pages cache-control headers
 
 ### Working on Music and Photography pages
 
-Both pages are now **public plain HTML** — no password, no StatiCrypt.
-Edit `music/index.html` and `photography/index.html` directly and commit.
+Both pages are **public plain HTML** — the whole site is public, with no
+password or client-side encryption anywhere. Edit `music/index.html` and
+`photography/index.html` directly and commit.
 
 - **Music**: embeds a YouTube iframe (`BzljIozglH0`). Local video files are
   gitignored (`assets/music/` — all content now on YouTube).
 - **Photography**: gallery sourced from `assets/photography/`. Edit via
   `build-gallery.py` (see "Updating the photo gallery" below).
 
-`private-src/music.html` and `private-src/photography.html` are kept as
-convenient editing drafts (gitignored), but the committed files in
+`private-src/music.html` and `private-src/photography.html` may be kept as
+convenient local editing drafts (gitignored), but the committed files in
 `music/` and `photography/` are the authoritative sources.
 
 ### Updating the photo gallery
@@ -141,12 +140,11 @@ open assets/photography/_originals/
 
 # 2. Generate web-size fulls + 600×600 thumbnails AND auto-inject <figure>
 #    blocks between <!-- GALLERY-START --> / <!-- GALLERY-END --> markers
-#    in private-src/photography.html:
+#    in photography/index.html:
 python3 build-gallery.py
 
-# 3. Re-encrypt and push
-./encrypt.sh "yourpassword"
-git add assets/photography/ private-src/photography.html photography/
+# 3. Commit and push
+git add assets/photography/ photography/
 git commit -m "Update photo gallery"
 git push
 ```
@@ -177,8 +175,8 @@ python3 -m http.server 8080
 # → http://localhost:8080/
 ```
 
-When previewing private pages locally, you'll see the StatiCrypt gate —
-enter the password to view content.
+Every page is public plain HTML, so the local preview shows the live
+content directly — no password gate.
 
 ## ⚠ EN/DE parity — non-negotiable
 
