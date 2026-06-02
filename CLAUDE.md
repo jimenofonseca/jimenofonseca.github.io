@@ -60,10 +60,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── superurbana/  cea/  innovation/   # Initiatives (01-05)
 ├── digital-transformation/  open-source/
 ├── appearances/  publications/       # Media (06-07)
-├── music/  photography/              # Personal (09-10) — ENCRYPTED via StatiCrypt
-├── private-src/                      # GITIGNORED — plaintext sources for music + photography
-│   ├── music.html
-│   └── photography.html
+├── music/  photography/              # Personal (09-10) — public
 ├── assets/
 │   ├── portrait.jpg                  # Hero portrait (home page)
 │   ├── photography/                  # Web-size gallery photos (gitignored: _originals/)
@@ -74,9 +71,9 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── style.css                         # All site styles
 ├── app.js                            # Theme toggle, mobile sidebar, lightbox
 ├── i18n.js                           # EN/DE translations + lang switcher
-├── encrypt.sh                        # StatiCrypt wrapper for private pages
+├── encrypt.sh                        # LEGACY — StatiCrypt wrapper, no longer used
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
-├── package.json                      # Pins staticrypt as a dev dependency
+├── package.json                      # Pins staticrypt as a dev dependency (legacy)
 └── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
 ```
 
@@ -97,7 +94,7 @@ clone, run `git config core.hooksPath .githooks` once.
 
 1. **Initiatives** (01–05): Company · Product · Training · Transformation · Open Source
 2. **Media** (06–08): Appearances · Publications · News (anchor to home `#recently`)
-3. **Personal** (09–10): Music · Photography — *both encrypted*
+3. **Personal** (09–10): Music · Photography — *public*
 4. **Connect** (11–13): LinkedIn · GitHub · Google Scholar — all external
 
 ## Workflows
@@ -119,34 +116,15 @@ No cache-bust needed for HTML/CSS — only the `i18n.js?v=N` query string is
 versioned. Browser caches HTML/CSS via the GitHub Pages cache-control headers
 (usually re-fetched within minutes).
 
-### Working on private pages (Music, Photography)
+### Music and Photography pages (public)
 
-These pages use **StatiCrypt** for soft password protection.
-Plaintext lives in `private-src/` (gitignored). Encrypted output goes to
-`music/index.html` and `photography/index.html` (committed, public, served).
+**Policy (2026-06-02): these pages are public.** No more StatiCrypt
+encryption, no password gate. Edit `music/index.html` and
+`photography/index.html` directly like any other public page.
 
-```
-# 1. Edit plaintext source
-nano private-src/music.html
-
-# 2. Re-encrypt with the real password
-./encrypt.sh "yourpassword"
-# or  STATICRYPT_PASSWORD=xxx ./encrypt.sh
-# or  ./encrypt.sh  (prompts)
-
-# 3. Commit + push
-git add music/index.html photography/index.html
-git commit -m "..."
-git push
-```
-
-**Important**: `changeme` is the placeholder password used in early commits.
-Always replace with the real shared password before sharing the URL.
-
-**What protection means here**: StatiCrypt encrypts only the page body; any
-asset URL (e.g. `/assets/photography/foo.jpg`) is still publicly fetchable.
-Suitable for "don't want it indexed / casual visitors stay out". Not for
-actual secrets — for that, host elsewhere (Cloudflare Pages with Access).
+Legacy tooling (`encrypt.sh`, `private-src/`, the `staticrypt` npm dep) is
+retained in the repo for history but is not used. Safe to delete in a
+future cleanup if nothing else references it.
 
 ### Updating the photo gallery
 
@@ -156,12 +134,11 @@ open assets/photography/_originals/
 
 # 2. Generate web-size fulls + 600×600 thumbnails AND auto-inject <figure>
 #    blocks between <!-- GALLERY-START --> / <!-- GALLERY-END --> markers
-#    in private-src/photography.html:
+#    in photography/index.html:
 python3 build-gallery.py
 
-# 3. Re-encrypt and push
-./encrypt.sh "yourpassword"
-git add assets/photography/ private-src/photography.html photography/
+# 3. Commit and push
+git add assets/photography/ photography/index.html
 git commit -m "Update photo gallery"
 git push
 ```
@@ -192,8 +169,7 @@ python3 -m http.server 8080
 # → http://localhost:8080/
 ```
 
-When previewing private pages locally, you'll see the StatiCrypt gate —
-enter the password to view content.
+All pages are public — no password gate to navigate locally.
 
 ## ⚠ EN/DE parity — non-negotiable
 
@@ -263,6 +239,29 @@ For HTML elements:
   `https://jimenofonseca.com` (custom domain via `CNAME`).
 - **Photos in `_originals/` never go to GitHub**: gitignored. If switching
   machines, manually copy `_originals/` over.
+
+## Analytics
+
+**Google Analytics property**: `G-9455BKPKZZ` (gtag.js).
+
+The snippet is inlined verbatim immediately after `<head>` on every public
+page. There is no shared include — each HTML file carries its own copy. When
+adding a new page, paste the same snippet into its `<head>`:
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9455BKPKZZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9455BKPKZZ');
+</script>
+```
+
+Rule: **exactly one** GA tag per page. Before adding, grep the file for
+`G-9455BKPKZZ` to be sure it's not already there. If the property ID ever
+rotates, find-and-replace across all HTML.
 
 ## Push authentication
 
