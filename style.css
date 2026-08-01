@@ -78,10 +78,10 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   align-self: start;
   height: 100vh;
-  padding: 48px 24px 32px var(--edge);
+  padding: 40px 24px 28px var(--edge);
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 26px;
   overflow-y: auto;
 }
 
@@ -119,7 +119,7 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 24px 1fr auto;
   align-items: baseline;
   gap: 10px;
-  padding: 7px 0;
+  padding: 5.5px 0;
   font-size: 14px;
   color: var(--fg);
   transition: color 0.15s ease;
@@ -151,6 +151,14 @@ a { color: inherit; text-decoration: none; }
   gap: 14px;
   padding-top: 24px;
   border-top: 1px solid var(--hairline);
+  /* Pinned to the bottom of the sidebar: on short viewports the nav
+     scrolls behind these, so the theme and language toggles are always
+     reachable. Without this the language switch drops below the fold on
+     any laptop under ~930px tall. */
+  position: sticky;
+  bottom: 0;
+  background: var(--bg);
+  padding-bottom: 4px;
 }
 .control-row {
   display: flex;
@@ -1227,4 +1235,52 @@ html.hyper-arrive main.content {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   About / How I Lead — operating principles
+   Reuses the numbered-index motif of the Selected Work list.
+   ───────────────────────────────────────────────────────── */
+.bio-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+.principle-list { display: flex; flex-direction: column; }
+.principle {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid var(--hairline);
+}
+.principle:first-child { border-top: none; padding-top: 0; }
+.principle-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  padding-top: 5px;
+}
+.principle-text { max-width: var(--prose-w); }
+.principle-text h2 {
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.principle-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--muted);
+}
+.principle-text p + p { margin-top: 14px; }
+@media (max-width: 640px) {
+  .principle { grid-template-columns: 24px 1fr; gap: 14px; }
 }
