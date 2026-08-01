@@ -125,9 +125,6 @@ var TRANSLATIONS = {
     'v2.pub.lede':                'Research that turned into tools industry actually uses — and a contribution to the IPCC 6th Assessment Report.',
 
     // ── About / How I Lead ───────────────────────
-    'nav.about':                  'About',
-    'about.title':                'How I Lead | Jimeno Fonseca',
-    'about.desc':                 'How Jimeno Fonseca leads: building digital capabilities that align with the balance sheet, solve actual downstream pain, and outlive the hype cycle. Eight operating principles, a copy-ready bio, and three quantified enterprise outcomes.',
     'v2.about.title':             'How I Lead',
     'v2.about.bio.label':         'Short bio',
     'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he built the department bringing BIM and digital twins to the construction and operation of power networks — including the first substation in the DACH region built without a single paper plan. He created City Energy Analyst, an open-source urban energy simulation platform now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until 2025. He holds a PhD from ETH Zürich, is a certified Agile Practitioner and an active member of CIGRE, and contributed to the IPCC 6th Assessment Report on Climate Change.',
@@ -139,15 +136,16 @@ var TRANSLATIONS = {
     'v2.about.proof3.label':      'Global reach',
     'about.proof3':               'Scaled software capabilities from local academic prototypes to active commercial deployment across 75+ countries.',
     'v2.about.outcomes.label':    'Key enterprise outcomes',
+    'v2.about.casestudy':         'See case study',
     'v2.about.outcome.label':     'Outcome',
     'v2.about.impact.label':      'Impact',
-    'v2.about.out1.title':        'Axpo Grid — from OPEX to revenue-generating value',
+    'v2.about.out1.title':        'Digital Transformation at Axpo Grid — from OPEX to revenue-generating value',
     'about.out1.outcome':         'Engineered and delivered the DACH region\'s first electrical substation built entirely without paper plans, and pioneered Axpo\'s first Digital Twin as a Service offering.',
     'about.out1.impact':          'Transitioned internal engineering capabilities into market-facing products, launching CHF 1.5m in net-new digital services, while reducing downstream construction errors and accelerating project delivery by embedding BIM and digital twins into daily operations.',
-    'v2.about.out2.title':        'City Energy Analyst and Superurbana GmbH — scaled and commercialised IP',
+    'v2.about.out2.title':        'Cloud Solution for City Energy Analyst and Superurbana GmbH — scaled and commercialised IP',
     'about.out2.outcome':         'Scaled an open-source urban energy simulation platform into a global standard used in over 75 countries.',
     'about.out2.impact':          'Co-founded and commercialised the underlying IP through Superurbana GmbH, sustaining the technology lifecycle and its ecosystem through 2025.',
-    'v2.about.out3.title':        'IPCC 6th Assessment Report — global scientific authority',
+    'v2.about.out3.title':        'Big Data for the IPCC 6th Assessment Report — global scientific authority',
     'about.out3.outcome':         'Delivered data-driven (HBLM-USA) and physics-based (DEG-USA) forecasting models quantifying the uncertain effects of climate change on energy consumption, backed by 80+ publications and 2,500+ citations.',
     'about.out3.impact':          'Built both models with deep neural networks and Bayesian statistics to analyse energy consumption across one million buildings spanning the entire United States. Transparent and highly scalable, they supplied data that informed the 2021 IPCC 6th Assessment Report.',
     'v2.about.principles.label':  'Operating principles',
@@ -176,7 +174,6 @@ var TRANSLATIONS = {
     'v2.about.p8.title':          'Aim to be first — and know when not to',
     'v2.about.p8.sum':            'Recognise when to invent and when to be a fast follower, to optimise time to market and budget.',
     'about.p8':                   'Being first is hard enough that without the intention you fall short of everything. That mindset is why we lead our field at Axpo, and why City Energy Analyst became a worldwide success rather than another research prototype. But it is not a universal rule, and I would distrust anyone who claimed it was. An organisation that can be an excellent fast follower — with no regulatory or economic pressure forcing its hand — should follow rather than reinvent. I do not work in those organisations; I need constraints more than goals to produce something of real quality. If I did, I would choose the fast follower strategy myself, and never more so than now, when data and AI have cut time to market for most digital technology by an order of magnitude.',
-    'about.cta':                  'See the work behind this',
 
 
     // ── Superurbana ──────────────────────────────
@@ -384,9 +381,6 @@ var TRANSLATIONS = {
     'v2.pub.lede':                'Forschung, aus der Werkzeuge wurden, die die Industrie tatsächlich nutzt — und ein Beitrag zum 6. IPCC-Sachstandsbericht.',
 
     // ── About / How I Lead ───────────────────────
-    'nav.about':                  'Über mich',
-    'about.title':                'Wie ich führe | Jimeno Fonseca',
-    'about.desc':                 'Wie Jimeno Fonseca führt: digitale Fähigkeiten aufbauen, die zur Bilanz passen, echte Probleme der Anwender lösen und den Hype-Zyklus überdauern. Acht Arbeitsprinzipien, eine Kurzbiografie zum Übernehmen und drei quantifizierte Ergebnisse im Unternehmen.',
     'v2.about.title':             'Wie ich führe',
     'v2.about.bio.label':         'Kurzbiografie',
     'about.bio':                  'Jimeno Fonseca leitet Digital Engineering bei Axpo Grid in der Schweiz, wo er die Abteilung aufgebaut hat, die BIM und digitale Zwillinge in den Bau und Betrieb von Stromnetzen bringt — darunter das erste Unterwerk der DACH-Region, das ohne einen einzigen Papierplan gebaut wurde. Er hat City Energy Analyst entwickelt, eine Open-Source-Plattform für urbane Energiesimulation, die heute in über 75 Ländern eingesetzt wird, und Superurbana GmbH mitgegründet, die diese Arbeit bis 2025 kommerzialisiert hat. Er ist promoviert an der ETH Zürich, zertifizierter Agile Practitioner, aktives Mitglied von CIGRE und hat zum 6. IPCC-Sachstandsbericht zum Klimawandel beigetragen.',
@@ -398,15 +392,16 @@ var TRANSLATIONS = {
     'v2.about.proof3.label':      'Globale Reichweite',
     'about.proof3':               'Software von lokalen akademischen Prototypen zu aktivem kommerziellem Einsatz in über 75 Ländern skaliert.',
     'v2.about.outcomes.label':    'Wichtige Ergebnisse im Unternehmen',
+    'v2.about.casestudy':         'Fallstudie ansehen',
     'v2.about.outcome.label':     'Ergebnis',
     'v2.about.impact.label':      'Wirkung',
-    'v2.about.out1.title':        'Axpo Grid — von OPEX zu wertschöpfender Leistung',
+    'v2.about.out1.title':        'Digitale Transformation bei Axpo Grid — von OPEX zu wertschöpfender Leistung',
     'about.out1.outcome':         'Das erste Unterwerk der DACH-Region entwickelt und realisiert, das vollständig ohne Papierpläne gebaut wurde, und Axpos erstes Angebot "Digital Twin as a Service" aufgebaut.',
     'about.out1.impact':          'Interne Engineering-Fähigkeiten in marktfähige Produkte überführt und CHF 1,5 Mio. an neuen digitalen Dienstleistungen gestartet — bei gleichzeitig weniger Baufehlern und schnellerer Projektabwicklung, weil BIM und digitale Zwillinge im Tagesgeschäft verankert wurden.',
-    'v2.about.out2.title':        'City Energy Analyst und Superurbana GmbH — IP skaliert und kommerzialisiert',
+    'v2.about.out2.title':        'Cloud-Lösung für City Energy Analyst und Superurbana GmbH — IP skaliert und kommerzialisiert',
     'about.out2.outcome':         'Eine Open-Source-Plattform für urbane Energiesimulation zu einem globalen Standard skaliert, der in über 75 Ländern eingesetzt wird.',
     'about.out2.impact':          'Das zugrunde liegende geistige Eigentum über die mitgegründete Superurbana GmbH kommerzialisiert und den Lebenszyklus der Technologie samt Ökosystem bis 2025 getragen.',
-    'v2.about.out3.title':        '6. IPCC-Sachstandsbericht — wissenschaftliche Autorität',
+    'v2.about.out3.title':        'Big Data für den 6. IPCC-Sachstandsbericht — wissenschaftliche Autorität',
     'about.out3.outcome':         'Datengetriebene (HBLM-USA) und physikbasierte (DEG-USA) Prognosemodelle geliefert, die die unsicheren Auswirkungen des Klimawandels auf den Energieverbrauch quantifizieren — gestützt auf 80+ Publikationen und 2 500+ Zitationen.',
     'about.out3.impact':          'Beide Modelle mit tiefen neuronalen Netzen und Bayesscher Statistik gebaut, um den Energieverbrauch von einer Million Gebäuden in den gesamten USA zu analysieren. Transparent und hoch skalierbar, lieferten sie Daten, die in den 6. IPCC-Sachstandsbericht 2021 eingeflossen sind.',
     'v2.about.principles.label':  'Arbeitsprinzipien',
@@ -435,7 +430,6 @@ var TRANSLATIONS = {
     'v2.about.p8.title':          'Der Erste sein wollen — und wissen, wann nicht',
     'v2.about.p8.sum':            'Erkennen, wann man erfinden und wann man Fast Follower sein sollte, um Time-to-Market und Budget zu optimieren.',
     'about.p8':                   'Der Erste zu sein ist schwer genug, dass man ohne diesen Anspruch überall zu kurz kommt. Diese Haltung ist der Grund, warum wir bei Axpo in unserem Feld führen und warum City Energy Analyst weltweit erfolgreich wurde, statt ein weiterer Forschungsprototyp zu bleiben. Es ist aber keine allgemeingültige Regel, und ich würde jedem misstrauen, der das behauptet. Eine Organisation, die ein exzellenter Fast Follower sein kann — ohne regulatorischen oder wirtschaftlichen Druck —, sollte folgen statt neu erfinden. Ich arbeite nicht in solchen Organisationen; ich brauche Beschränkungen mehr als Ziele, um etwas von wirklicher Qualität hervorzubringen. Wäre es anders, würde ich die Fast-Follower-Strategie selbst wählen — heute mehr denn je, da Daten und KI die Time-to-Market für die meisten digitalen Technologien um eine Grössenordnung verkürzt haben.',
-    'about.cta':                  'Die Arbeit dahinter ansehen',
 
 
     // ── Superurbana ──────────────────────────────

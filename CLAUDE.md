@@ -56,11 +56,12 @@ Pure static HTML/CSS/JS — no build step, no framework.
 
 ```
 .
-├── index.html                        # Home
+├── index.html                        # Home — "How I Lead": hero, proof of
+│                                     #   scale, enterprise outcomes, 8 operating
+│                                     #   principles, LinkedIn feed
 ├── superurbana/  cea/  innovation/   # Initiatives (01-05)
 ├── digital-transformation/  open-source/
 ├── appearances/  publications/       # Media (06-07)
-├── about/                            # How I Lead (00) — bio + operating principles
 ├── music/  photography/              # Personal (09-10) — public plain HTML
 ├── private-src/                      # GITIGNORED — optional local editing drafts
 │   ├── music.html
@@ -97,9 +98,6 @@ clone, run `git config core.hooksPath .githooks` once.
 
 ## Sidebar navigation order
 
-0. **About** (00): How I Lead — deliberately not 01, which would renumber
-   Initiatives and break their correspondence with the home page's
-   Selected Work list
 1. **Initiatives** (01–05): Company · Product · Training · Transformation · Open Source
 2. **Media** (06–08): Appearances · Publications · News (anchor to home `#recently`)
 3. **Personal** (09–10): Music · Photography — *public, no password*
@@ -310,6 +308,27 @@ places. Change all of them together, EN **and** DE:
 | `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
 | `index.html` JSON-LD | `"jobTitle"` and `"description"` |
 | `index.html` og/twitter | `og:description`, `twitter:description` |
+
+## Home page
+
+The home page *is* the About / "How I Lead" page — there is no separate
+`/about/`. Sections, in order:
+
+1. Hero — `hero.h1` + `hero.p`, portrait right, Short Bio beside it
+   (the third-person copy-ready bio, for recruiters and event organisers)
+2. **01 Proof of scale** — org footprint, budget oversight, global reach
+3. **02 Key enterprise outcomes** — three, each Outcome / Impact plus a
+   "See case study →" link. Those links currently point at
+   `/digital-transformation/`, `/cea/` and `/open-source/` as placeholders
+   until the dedicated case-study pages exist.
+4. **03 Operating principles** — eight, each with a one-line summary
+5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
+   sidebar's News item points at
+
+Retired when this replaced the old home page: the **Selected Work** list
+(five quantified initiative rows), the **Now** section (it restated the
+hero almost verbatim) and the **Connect** section (it duplicated the
+sidebar's links 11–13).
 
 ## Home page hero portrait
 
