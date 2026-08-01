@@ -1292,8 +1292,16 @@ html.hyper-arrive main.content {
   border-left: 2px solid var(--accent);
 }
 /* Proof of scale */
-.proof-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.proof-item { border-top: 1px solid var(--hairline); padding-top: 16px; }
+.proof-list { display: flex; flex-direction: column; }
+.proof-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-top: 1px solid var(--hairline);
+}
+.proof-item:first-child { border-top: none; padding-top: 0; }
 .proof-label {
   display: block;
   font-family: var(--font-mono);
@@ -1302,9 +1310,14 @@ html.hyper-arrive main.content {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 10px;
 }
-.proof-item p { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
+.proof-item p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: var(--prose-w);
+}
 /* Key enterprise outcomes */
 .outcome-list { display: flex; flex-direction: column; }
 .outcome {
@@ -1337,7 +1350,7 @@ html.hyper-arrive main.content {
 }
 .principle-text .principle-sum + p { margin-top: 0; }
 @media (max-width: 860px) {
-  .proof-list { grid-template-columns: 1fr; gap: 20px; }
+  .proof-item { grid-template-columns: 1fr; gap: 6px; }
   .outcome-row { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (max-width: 640px) {
