@@ -59,8 +59,6 @@ var TRANSLATIONS = {
     'nav.photography':    'Photography',
     'v2.prev':            'Previous',
     'v2.next':            'Next',
-    'v2.cea.title':       'City Energy Analyst',
-    'v2.cea.lede':        'Urban Performance at your Fingertips — open-source modelling for low-carbon cities.',
     'v2.cea.caption.kind':'Demo',
     'v2.cea.caption.text':'A short tour of the City Energy Analyst platform',
     'v2.stats.impact':    'Impact',
@@ -109,13 +107,9 @@ var TRANSLATIONS = {
     'v2.innov.caption.kind':      'Talk',
     'v2.innov.caption.text':      'On building Minimum Viable Products',
 
-    'v2.transf.title':            'Digital Transformation',
-    'v2.transf.lede':             'Bringing BIM and digital twins to power networks engineering at Axpo Grid.',
     'v2.transf.caption.kind':     'Talk',
     'v2.transf.caption.text':     'On integrating BIM and digital twins at Axpo',
 
-    'v2.os.title':                'Open Source',
-    'v2.os.lede':                 'Contributing to replicable science through transparent, open computational tools.',
 
     'v2.app.title':               'Appearances',
     'v2.app.lede':                'Conversations I have been part of, on urban energy systems and the digital transformation of the power sector.',
@@ -124,6 +118,31 @@ var TRANSLATIONS = {
 
     'v2.pub.title':               'Publications',
     'v2.pub.lede':                'Research that turned into tools industry actually uses — and a contribution to the IPCC 6th Assessment Report.',
+
+    // ── Case studies ─────────────────────────────
+    'v2.cs.challenge':            'The business challenge',
+    'v2.cs.strategy':             'The strategy',
+    'v2.cs.outcome':              'Execution and outcome',
+    'v2.transf.title':            'Digital Transformation at Axpo Grid',
+    'v2.transf.lede':             'Delivered the DACH region\'s first paperless substation, and turned digital engineering from an OPEX liability into protected core value.',
+    'transf.desc':                'How Jimeno Fonseca built a Digital Engineering department at Axpo Grid, delivered the DACH region\'s first paperless high-voltage substation, and moved digital engineering from an OPEX cost line into protected business value.',
+    'transf.cs1':                 'Building Information Modelling is reshaping how infrastructure gets planned and built — standard in more than 40 countries, and in Switzerland a baseline expectation on any serious project. But in the utility sector capital is traditionally invested in physical assets, and digital engineering reads to finance as operational overhead with unclear return. The task was to introduce BIM and digital twins not as a research experiment, but as a critical, margin-improving service for the construction and operation of power networks.',
+    'transf.cs2':                 'We ran it as expectation management and process transformation rather than as a software architecture problem. New technological services were introduced at a deliberately low margin until their value was visible, and the department worked from the immediate downstream pain of the construction teams rather than from the preferences of whoever held the budget.',
+    'transf.cs3':                 'I built the vision and strategy to bring BIM and digital twins into a team of 400 stakeholders — asset managers, engineers, procurement and sales officers. In three years we repositioned in the market: first in the DACH region to build a high-voltage substation with 3D information models alone, no paper plans and no printing. A new department was launched, a team built overseas, and CHF 1.5m of net-new digital services brought to market, including Axpo\'s first Digital Twin as a Service offering. Proving the capability on the ground is what moved digital engineering from an abstract IT budget line into protected, indispensable business value.',
+    'v2.cea.title':               'Cloud Solution for City Energy Analyst and Superurbana GmbH',
+    'v2.cea.lede':                'Scaled an open-source urban simulation platform to 75+ countries and commercialised the core IP.',
+    'cea.desc':                   'How City Energy Analyst grew from a doctoral research prototype at ETH Zürich into an open-source platform used in 75+ countries, and how Superurbana GmbH commercialised the underlying IP and sustained it through 2025.',
+    'cea.cs1':                    'Most academic research prototypes fail because they are built for the launch, not for the maintenance. What began as a few lines of Python during my doctoral studies at ETH Zürich in 2013 had to avoid the graveyard of orphan code: it had to survive the hype cycle, reach global adoption, and sustain itself financially.',
+    'cea.cs2':                    'We aimed to be first, with a ruthless focus on the long-term lifecycle of the product. Knowing that maintenance is where most innovation programmes die, the architecture and the community around the open-source platform were designed for sustainability from the start. And to solve the right problem we looked past the initial research sponsors to the urban planners and engineers downstream who would actually use the tool.',
+    'cea.cs3':                    'CEA grew from a personal research instrument into an open-source project with 40+ contributors across multiple countries, and is today used in over 75 countries by more than a thousand engineers, researchers and city planners. I led its evolution through ETH Zürich and the ETH-Singapore Centre, then brought it into practice through Superurbana GmbH, which I co-founded to secure its maintenance and continued development — underpinning commercial consultancy and CEA training across Europe and the Middle East until 2025. CEA is now in the hands of the next generation of PhD researchers at ETH Zürich.',
+    'v2.os.title':                'Big Data for the IPCC 6th Assessment Report',
+    'v2.os.lede':                 'Two forecasting models quantifying how climate change moves energy demand — data that informed the 2021 IPCC 6th Assessment Report.',
+    'os.desc':                    'Jimeno Fonseca\'s HBLM-USA and DEG-USA forecasting models analysed energy consumption across one million buildings in the United States and supplied data that informed the 2021 IPCC 6th Assessment Report on Climate Change.',
+    'os.cs1':                     'Climate policy needs numbers it can defend. Quantifying how a changing climate will move building energy demand across an entire country means modelling at a scale, and a level of transparency, that proprietary tools rarely offer — and a policy body cannot cite what it cannot inspect.',
+    'os.cs2':                     'Science and engineering advance fastest when models, data and methods are open and reproducible. Both models were therefore built to be transparent and highly scalable, and released openly, so the method could be examined rather than taken on trust.',
+    'os.cs3':                     'I delivered two complementary forecasting models: HBLM-USA, data-driven, and DEG-USA, physics-based, built with deep neural networks and Bayesian statistics to analyse energy consumption across one million buildings spanning the entire United States. They supplied data that directly informed the 2021 IPCC 6th Assessment Report on Climate Change, backed by 80+ publications and 2,500+ citations from more than a decade of research at ETH Zürich and the ETH-Singapore Centre.',
+    'v2.stat.buildings':          'Buildings modelled',
+    'v2.stat.models':             'Forecasting models',
 
     // ── About / How I Lead ───────────────────────
     'v2.about.title':             'How I Lead',
@@ -186,15 +205,11 @@ var TRANSLATIONS = {
 
     // ── CEA ──────────────────────────────────────
     'cea.title':          'City Energy Analyst | Enhance Urban Energy Planning — Jimeno Fonseca',
-    'cea.desc':           'Discover City Energy Analyst, an open-source tool for urban energy system analysis, used worldwide for sustainable city performance and digital transformation.',
     'cea.h2':             '<span>City Energy Analyst</span>Urban Performance at your Fingertips',
     'cea.stat.countries': 'Countries',
     'cea.stat.users':     'Users',
     'cea.stat.contrib':   'Contributors',
     'cea.stat.founded':   'Founded',
-    'cea.p1':             'What began as a few lines of Python during my doctoral studies at ETH Zürich in 2013 has grown into a global standard for open-source urban energy analysis. City Energy Analyst (CEA) is today used in over 75 countries by more than a thousand engineers, researchers, and city planners — a reach that still surprises me, for a tool born in an academic lab.',
-    'cea.p2':             'Over nearly a decade I grew CEA from a personal research instrument into an open-source project with 40+ contributors across multiple countries. I led its evolution through my academic career at ETH Zürich and the ETH-Singapore Centre, and later brought it into real-world practice through Superurbana, where it underpinned commercial consultancy and CEA training across Europe and the Middle East.',
-    'cea.p3':             'CEA is now in the hands of the next generation of PhD researchers at ETH Zürich — a fitting home for a tool that has always been driven by rigorous science and a commitment to open, transparent computation.',
 
     // ── Innovation (Training) ────────────────────
     'innov.title':        'Innovation Leadership | Drive Innovation Today — Jimeno Fonseca',
@@ -205,16 +220,11 @@ var TRANSLATIONS = {
 
     // ── Digital Transformation ───────────────────
     'transf.title':       'Digital Transformation | Drive Innovation Now — Jimeno Fonseca',
-    'transf.desc':        'Explore Jimeno Fonseca\'s expertise in digital transformation, integrating BIM and digital twins to enhance infrastructure planning and market competitiveness.',
     'transf.h2':          '<span>Digital Transformation</span>Integrating BIM and Digital Twins in Axpo',
-    'transf.p1':          'Building Information Modeling (BIM) is reshaping how infrastructure gets planned and built. It is now standard in more than 40 countries, and in Switzerland it is a baseline expectation for quality and efficiency on any serious project.',
-    'transf.p2':          'At Axpo Grid, I built the vision and strategy to bring BIM and digital twins into our team of 400 stakeholders — asset managers, engineers, procurement and sales officers. In three years we repositioned ourselves in the market: first in the DACH region to build a high-voltage substation with 3D information models alone (no paper plans, no printing), with a new department launched, a team built overseas, and new commercial services on offer.',
 
     // ── Open Source ──────────────────────────────
     'os.title':           'Open Source Code | Explore Open Source Coding Opportunities — Jimeno Fonseca',
-    'os.desc':            'Discover Jimeno Fonseca\'s open source code for scientific reproducibility, accessible for developers and researchers seeking transparent, reusable projects.',
     'os.h2':              '<span>Open-Source</span>Contributing to replicable science',
-    'os.p1':              'I believe science and engineering advance fastest when models, data, and methods are open and reproducible. Across more than a decade of research at ETH Zürich and the ETH-Singapore Centre, and through my own ventures, I have built and contributed to open-source tools that are now used in 75+ countries and have shaped international policy — including contributions to the IPCC 6th Assessment Report on Climate Change.',
     'os.p2':              'Three threads run through the catalog. <strong>Urban energy science</strong> — <a class="inline-link" href="https://github.com/architecture-building-systems/CityEnergyAnalyst" target="_blank" rel="noopener">City Energy Analyst</a> (CEA), the flagship, alongside smaller libraries like EnthalpyGradients for building thermodynamics. <strong>Climate forecasting at policy scale</strong> — DEG-USA and HBLM-USA, the two IPCC-cited models for U.S. building energy.',
     'os.p3':              '<strong>Hardware and small experiments</strong> — WoW-SG is a beginner-friendly weather station on wheels exploring microcontrollers and sensors. BSTS-SG and causalimpact are Bayesian time-series and causal-inference toolkits. FineBank is a personal finance app with OCR for bank statements. Different domains, same conviction: useful tools should be free.',
     'os.card.h3':         'jimenofonseca — GitHub',
@@ -316,8 +326,6 @@ var TRANSLATIONS = {
     'nav.photography':    'Fotografie',
     'v2.prev':            'Vorherige',
     'v2.next':            'Nächste',
-    'v2.cea.title':       'City Energy Analyst',
-    'v2.cea.lede':        'Urbane Performance auf Knopfdruck — Open-Source-Modellierung für CO₂-arme Städte.',
     'v2.cea.caption.kind':'Demo',
     'v2.cea.caption.text':'Ein kurzer Überblick zur City-Energy-Analyst-Plattform',
     'v2.stats.impact':    'Wirkung',
@@ -366,13 +374,9 @@ var TRANSLATIONS = {
     'v2.innov.caption.kind':      'Vortrag',
     'v2.innov.caption.text':      'Über den Aufbau von Minimum Viable Products',
 
-    'v2.transf.title':            'Digitale Transformation',
-    'v2.transf.lede':             'BIM und digitale Zwillinge ins Power Networks Engineering bei Axpo Grid bringen.',
     'v2.transf.caption.kind':     'Vortrag',
     'v2.transf.caption.text':     'Über die Integration von BIM und digitalen Zwillingen bei Axpo',
 
-    'v2.os.title':                'Open Source',
-    'v2.os.lede':                 'Beitrag zur reproduzierbaren Wissenschaft durch transparente, offene Werkzeuge.',
 
     'v2.app.title':               'Auftritte',
     'v2.app.lede':                'Gespräche, an denen ich beteiligt war — über urbane Energiesysteme und die digitale Transformation des Energiesektors.',
@@ -381,6 +385,31 @@ var TRANSLATIONS = {
 
     'v2.pub.title':               'Publikationen',
     'v2.pub.lede':                'Forschung, aus der Werkzeuge wurden, die die Industrie tatsächlich nutzt — und ein Beitrag zum 6. IPCC-Sachstandsbericht.',
+
+    // ── Case studies ─────────────────────────────
+    'v2.cs.challenge':            'Die geschäftliche Herausforderung',
+    'v2.cs.strategy':             'Die Strategie',
+    'v2.cs.outcome':              'Umsetzung und Ergebnis',
+    'v2.transf.title':            'Digitale Transformation bei Axpo Grid',
+    'v2.transf.lede':             'Das erste papierlose Unterwerk der DACH-Region realisiert und Digital Engineering von einer OPEX-Belastung zu geschütztem Kernwert gemacht.',
+    'transf.desc':                'Wie Jimeno Fonseca bei Axpo Grid eine Abteilung für Digital Engineering aufgebaut, das erste papierlose Hochspannungs-Unterwerk der DACH-Region realisiert und Digital Engineering von einer OPEX-Kostenposition zu geschütztem Geschäftswert gemacht hat.',
+    'transf.cs1':                 'Building Information Modelling verändert, wie Infrastruktur geplant und gebaut wird — in über 40 Ländern Standard und in der Schweiz eine Grundvoraussetzung für jedes ernsthafte Projekt. In der Versorgungswirtschaft wird Kapital aber traditionell in physische Anlagen investiert, und Digital Engineering liest sich für die Finanzseite als Gemeinkosten mit unklarer Rendite. Die Aufgabe war, BIM und digitale Zwillinge nicht als Forschungsexperiment einzuführen, sondern als kritische, margenverbessernde Dienstleistung für den Bau und Betrieb von Stromnetzen.',
+    'transf.cs2':                 'Wir haben das als Erwartungsmanagement und Prozesstransformation geführt, nicht als Frage der Softwarearchitektur. Neue technologische Dienstleistungen wurden bewusst mit geringer Marge eingeführt, bis ihr Wert sichtbar war, und die Abteilung arbeitete vom unmittelbaren Schmerz der Bauteams her, nicht von den Vorlieben derjenigen, die das Budget hielten.',
+    'transf.cs3':                 'Ich habe die Vision und Strategie entwickelt, um BIM und digitale Zwillinge in ein Team von 400 Stakeholdern zu bringen — Asset Manager, Ingenieure, Beschaffungs- und Vertriebsmitarbeitende. In drei Jahren haben wir uns am Markt neu positioniert: als Erste in der DACH-Region ein Hochspannungs-Unterwerk allein mit 3D-Informationsmodellen realisiert, ohne Pläne und ohne Drucken. Eine neue Abteilung wurde aufgebaut, ein Team im Ausland etabliert und CHF 1,5 Mio. an neuen digitalen Dienstleistungen an den Markt gebracht, darunter Axpos erstes Angebot "Digital Twin as a Service". Der Beweis in der Praxis hat Digital Engineering von einer abstrakten IT-Budgetzeile zu geschütztem, unverzichtbarem Geschäftswert gemacht.',
+    'v2.cea.title':               'Cloud-Lösung für City Energy Analyst und Superurbana GmbH',
+    'v2.cea.lede':                'Eine Open-Source-Plattform für urbane Simulation auf über 75 Länder skaliert und das zugrunde liegende IP kommerzialisiert.',
+    'cea.desc':                   'Wie City Energy Analyst von einem Forschungsprototyp der Promotion an der ETH Zürich zu einer Open-Source-Plattform wurde, die in über 75 Ländern eingesetzt wird, und wie Superurbana GmbH das zugrunde liegende IP kommerzialisiert und bis 2025 getragen hat.',
+    'cea.cs1':                    'Die meisten akademischen Forschungsprototypen scheitern, weil sie für die Einführung gebaut werden und nicht für die Wartung. Was 2013 als ein paar Zeilen Python während meiner Promotion an der ETH Zürich begann, musste dem Friedhof des verwaisten Codes entgehen: Es musste den Hype-Zyklus überstehen, weltweit Verbreitung finden und sich finanziell selbst tragen.',
+    'cea.cs2':                    'Wir wollten die Ersten sein, mit kompromisslosem Blick auf den langen Lebenszyklus des Produkts. Weil Wartung der Ort ist, an dem die meisten Innovationsprogramme sterben, waren Architektur und Community der Open-Source-Plattform von Beginn an auf Nachhaltigkeit angelegt. Und um das richtige Problem zu lösen, haben wir über die anfänglichen Forschungssponsoren hinaus auf die Stadtplaner und Ingenieure geschaut, die das Werkzeug tatsächlich nutzen würden.',
+    'cea.cs3':                    'CEA wuchs von einem persönlichen Forschungsinstrument zu einem Open-Source-Projekt mit über 40 Mitwirkenden in mehreren Ländern und wird heute in über 75 Ländern von mehr als tausend Ingenieuren, Forschenden und Stadtplanern genutzt. Ich habe seine Entwicklung an der ETH Zürich und am ETH-Singapore Centre begleitet und es dann über die von mir mitgegründete Superurbana GmbH in die Praxis gebracht, um Wartung und Weiterentwicklung zu sichern — als Grundlage für Beratung und CEA-Schulungen in Europa und im Nahen Osten bis 2025. Heute liegt CEA in den Händen der nächsten Generation von Promovierenden an der ETH Zürich.',
+    'v2.os.title':                'Big Data für den 6. IPCC-Sachstandsbericht',
+    'v2.os.lede':                 'Zwei Prognosemodelle, die quantifizieren, wie der Klimawandel den Energiebedarf verschiebt — Daten, die in den 6. IPCC-Sachstandsbericht 2021 eingeflossen sind.',
+    'os.desc':                    'Die Prognosemodelle HBLM-USA und DEG-USA von Jimeno Fonseca haben den Energieverbrauch von einer Million Gebäuden in den USA analysiert und Daten geliefert, die in den 6. IPCC-Sachstandsbericht zum Klimawandel 2021 eingeflossen sind.',
+    'os.cs1':                     'Klimapolitik braucht Zahlen, die sie verteidigen kann. Zu quantifizieren, wie ein sich wandelndes Klima den Energiebedarf von Gebäuden über ein ganzes Land hinweg verschiebt, verlangt eine Modellierung in einem Massstab und einer Transparenz, die proprietäre Werkzeuge selten bieten — und ein politisches Gremium kann nicht zitieren, was es nicht prüfen kann.',
+    'os.cs2':                     'Wissenschaft und Technik schreiten am schnellsten voran, wenn Modelle, Daten und Methoden offen und reproduzierbar sind. Beide Modelle wurden deshalb transparent und hoch skalierbar gebaut und offen veröffentlicht, damit die Methode geprüft und nicht auf Treu und Glauben hingenommen werden muss.',
+    'os.cs3':                     'Ich habe zwei komplementäre Prognosemodelle geliefert: HBLM-USA, datengetrieben, und DEG-USA, physikbasiert, gebaut mit tiefen neuronalen Netzen und Bayesscher Statistik, um den Energieverbrauch von einer Million Gebäuden in den gesamten USA zu analysieren. Sie lieferten Daten, die direkt in den 6. IPCC-Sachstandsbericht zum Klimawandel 2021 eingeflossen sind — gestützt auf 80+ Publikationen und 2 500+ Zitationen aus über einem Jahrzehnt Forschung an der ETH Zürich und am ETH-Singapore Centre.',
+    'v2.stat.buildings':          'Gebäude modelliert',
+    'v2.stat.models':             'Prognosemodelle',
 
     // ── About / How I Lead ───────────────────────
     'v2.about.title':             'Wie ich führe',
@@ -443,15 +472,11 @@ var TRANSLATIONS = {
 
     // ── CEA ──────────────────────────────────────
     'cea.title':          'City Energy Analyst | Urbane Energieplanung verbessern — Jimeno Fonseca',
-    'cea.desc':           'Entdecken Sie City Energy Analyst, ein Open-Source-Tool zur Analyse urbaner Energiesysteme, weltweit eingesetzt für nachhaltige Stadtperformance und digitale Transformation.',
     'cea.h2':             '<span>City Energy Analyst</span>Urbane Performance auf Knopfdruck',
     'cea.stat.countries': 'Länder',
     'cea.stat.users':     'Nutzer',
     'cea.stat.contrib':   'Mitwirkende',
     'cea.stat.founded':   'Gegründet',
-    'cea.p1':             'Was 2013 als ein paar Zeilen Python während meiner Promotion an der ETH Zürich begann, ist zu einem globalen Standard für Open-Source-Analyse urbaner Energiesysteme geworden. City Energy Analyst (CEA) wird heute in über 75 Ländern von mehr als tausend Ingenieuren, Forschenden und Stadtplanern genutzt — eine Reichweite, die mich noch immer überrascht, für ein Werkzeug aus einem akademischen Labor.',
-    'cea.p2':             'Über fast ein Jahrzehnt habe ich CEA von einem persönlichen Forschungsinstrument zu einem Open-Source-Projekt mit über 40 Mitwirkenden aus mehreren Ländern entwickelt. Ich habe seine Entwicklung während meiner akademischen Laufbahn an der ETH Zürich und am ETH-Singapore Centre vorangetrieben und es später durch Superurbana in die reale Praxis gebracht, wo es kommerzielle Beratung und CEA-Schulungen in Europa und im Nahen Osten getragen hat.',
-    'cea.p3':             'CEA befindet sich nun in den Händen der nächsten Generation von Doktorierenden an der ETH Zürich — ein passendes Zuhause für ein Werkzeug, das schon immer von strenger Wissenschaft und einem Engagement für offene, transparente Berechnung angetrieben wurde.',
 
     // ── Innovation (Training) ────────────────────
     'innov.title':        'Innovationsführerschaft | Innovation heute vorantreiben — Jimeno Fonseca',
@@ -462,16 +487,11 @@ var TRANSLATIONS = {
 
     // ── Digital Transformation ───────────────────
     'transf.title':       'Digitale Transformation | Innovation jetzt vorantreiben — Jimeno Fonseca',
-    'transf.desc':        'Entdecken Sie Jimeno Fonsecas Expertise in digitaler Transformation und der Integration von BIM und digitalen Zwillingen zur Verbesserung der Infrastrukturplanung und Marktwettbewerbsfähigkeit.',
     'transf.h2':          '<span>Digitale Transformation</span>Integration von BIM und Digitalen Zwillingen bei Axpo',
-    'transf.p1':          'Building Information Modeling (BIM) verändert grundlegend, wie Infrastruktur geplant und gebaut wird. Es ist heute Standard in mehr als 40 Ländern und in der Schweiz eine Grundvoraussetzung für Qualität und Effizienz in jedem ernsthaften Projekt.',
-    'transf.p2':          'Bei Axpo Grid habe ich eine Vision und Strategie entwickelt, um BIM und digitale Zwillinge in unser Team von 400 Stakeholdern zu bringen — Asset Managern, Ingenieuren, Beschaffungs- und Vertriebsmitarbeitern. In drei Jahren haben wir uns am Markt neu positioniert und als Erste in der DACH-Region ein Hochspannungs-Unterwerk allein mit 3D-Informationsmodellen realisiert (keine Pläne, kein Drucken). Eine komplett neue Abteilung wurde aufgebaut, ein Team im Ausland etabliert und neue kommerzielle Dienstleistungen geschaffen.',
 
     // ── Open Source ──────────────────────────────
     'os.title':           'Open-Source-Code | Möglichkeiten in Open-Source-Entwicklung entdecken — Jimeno Fonseca',
-    'os.desc':            'Entdecken Sie Jimeno Fonsecas Open-Source-Code für wissenschaftliche Reproduzierbarkeit, zugänglich für Entwickler und Forschende, die transparente, wiederverwendbare Projekte suchen.',
     'os.h2':              '<span>Open-Source</span>Beitrag zur reproduzierbaren Wissenschaft',
-    'os.p1':              'Ich glaube, dass Wissenschaft und Technik am schnellsten voranschreiten, wenn Modelle, Daten und Methoden offen und reproduzierbar sind. In über einem Jahrzehnt Forschung an der ETH Zürich und am ETH-Singapore Centre sowie durch meine eigenen Unternehmungen habe ich Open-Source-Werkzeuge entwickelt und mitgestaltet, die heute in über 75 Ländern verwendet werden und internationale Politik mitgeprägt haben — einschliesslich Beiträgen zum 6. IPCC-Sachstandsbericht zum Klimawandel.',
     'os.p2':              'Drei Themen durchziehen den Katalog. <strong>Urbane Energiewissenschaft</strong> — <a class="inline-link" href="https://github.com/architecture-building-systems/CityEnergyAnalyst" target="_blank" rel="noopener">City Energy Analyst</a> (CEA), das Flaggschiff, ergänzt durch kleinere Bibliotheken wie EnthalpyGradients für die Gebäudethermodynamik. <strong>Klimaprognose auf politischer Ebene</strong> — DEG-USA und HBLM-USA, die beiden vom IPCC zitierten Modelle für den Gebäudeenergieverbrauch in den USA.',
     'os.p3':              '<strong>Hardware und kleine Experimente</strong> — WoW-SG ist eine anfängerfreundliche Wetterstation auf Rädern, die Mikrocontroller und Sensoren erkundet. BSTS-SG und causalimpact sind Werkzeuge für Bayes\'sche Zeitreihen- und Kausalanalyse. FineBank ist eine App zur persönlichen Finanzverwaltung mit OCR für Kontoauszüge. Verschiedene Domänen, dieselbe Überzeugung: Nützliche Werkzeuge sollten frei verfügbar sein.',
     'os.card.h3':         'jimenofonseca — GitHub',

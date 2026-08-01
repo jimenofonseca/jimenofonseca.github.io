@@ -112,6 +112,28 @@ foot of the case-study pages, which is the only thing keeping them from
 being fully orphaned. `nav.company` and `nav.training` survive for those
 pagers only.
 
+## ⚠ Case studies must mirror the home page
+
+Each case-study page opens its body with an **Outcome / Impact** pair that
+reuses the *same* `about.outN.outcome` and `about.outN.impact` keys the
+home page's Key enterprise outcomes render. They are not copies:
+
+| Page | Home outcome | Keys |
+|---|---|---|
+| `/digital-transformation/` | 01 | `about.out1.outcome` · `about.out1.impact` |
+| `/cea/` | 02 | `about.out2.outcome` · `about.out2.impact` |
+| `/open-source/` | 03 | `about.out3.outcome` · `about.out3.impact` |
+
+Editing one of those keys updates the home page and the case study
+together, which is the point — a headhunter who reads the summary on the
+home page and then opens the case study must not find two different
+claims. **Never fork these into page-specific keys.**
+
+Below the summary each page runs the same three blocks, labelled from
+shared keys `v2.cs.challenge`, `v2.cs.strategy`, `v2.cs.outcome`, with
+page-specific bodies `<ns>.cs1` / `.cs2` / `.cs3` where `<ns>` is
+`transf`, `cea` or `os`.
+
 ## Workflows
 
 ### Updating translations (`i18n.js`)
