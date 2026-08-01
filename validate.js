@@ -107,13 +107,28 @@ for (const page of pages) {
 const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const ld = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 if (ld.length === 0) fail('json-ld', 'index.html has no application/ld+json block');
+let persons = 0;
 for (const [, body] of ld) {
   try {
     const d = JSON.parse(body);
     if (!d['@type']) fail('json-ld', 'block parsed but has no @type');
+    if (d['@type'] === 'Person') {
+      persons++;
+      // The entity anchor must agree with the page's own canonical, or
+      // Google is handed two different URLs for the same person.
+      const canonical = (home.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+      if (canonical && d.url && d.url.replace(/\/$/, '') !== canonical.replace(/\/$/, '')) {
+        fail('json-ld', `Person.url (${d.url}) disagrees with the canonical (${canonical})`);
+      }
+    }
   } catch (e) {
     fail('json-ld', `does not parse — ${e.message}`);
   }
+}
+if (persons > 1) {
+  fail('json-ld', `index.html has ${persons} Person blocks — there must be exactly one.\n      ` +
+                  'Two Person entities on a page hand search engines conflicting claims\n      ' +
+                  'about the same person and undermine the Knowledge Panel.');
 }
 
 // ── 6. Cache version consistency ──────────────────────────────────────

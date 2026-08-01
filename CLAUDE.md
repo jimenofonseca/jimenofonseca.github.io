@@ -60,6 +60,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── superurbana/  cea/  innovation/   # Initiatives (01-05)
 ├── digital-transformation/  open-source/
 ├── appearances/  publications/       # Media (06-07)
+├── about/                            # How I Lead (00) — bio + operating principles
 ├── music/  photography/              # Personal (09-10) — public plain HTML
 ├── private-src/                      # GITIGNORED — optional local editing drafts
 │   ├── music.html
@@ -96,6 +97,9 @@ clone, run `git config core.hooksPath .githooks` once.
 
 ## Sidebar navigation order
 
+0. **About** (00): How I Lead — deliberately not 01, which would renumber
+   Initiatives and break their correspondence with the home page's
+   Selected Work list
 1. **Initiatives** (01–05): Company · Product · Training · Transformation · Open Source
 2. **Media** (06–08): Appearances · Publications · News (anchor to home `#recently`)
 3. **Personal** (09–10): Music · Photography — *public, no password*
@@ -210,9 +214,10 @@ straight on the German version and may never see your English update.
 - ✅ The pre-commit hook bumps `i18n.js?v=N` so the new content actually
   reaches browsers.
 - ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
-  exists, that HTML fallbacks match their `en:` values, that the JSON-LD
-  parses, and that all 10 pages agree on the cache version. CI runs it on
-  every push and PR — run it locally before committing.
+  exists, that HTML fallbacks match their `en:` values, that there is
+  exactly one `Person` JSON-LD block whose `url` matches the canonical, and
+  that all 11 pages agree on the cache version. CI runs it on every push and
+  PR — run it locally before committing.
 - ❌ Nothing verifies that the German is *good*, only that it exists.
   That's still a human job.
 
@@ -273,10 +278,15 @@ Two rules that are easy to get wrong:
   the parity burden. The flip side: when a matching `i18n.js` key changes,
   the `og:`/`twitter:` copy does **not** follow. Edit it by hand in the same
   pass.
-- **`Person` JSON-LD lives on `index.html` only.** It's the entity anchor;
-  duplicating it sitewide risks conflicting entity data. `sameAs` holds
-  exactly the three sidebar links (LinkedIn, GitHub, Google Scholar) — don't
-  add ORCID or Wikidata unless confirmed.
+- **`Person` JSON-LD lives on `index.html` only, and there must be exactly
+  ONE block.** It's the entity anchor; a second Person block on the same
+  page hands Google conflicting claims about the same person and undermines
+  the Knowledge Panel. This has happened once — a hand-edit added a second
+  block at the top of `<head>` while the original sat further down. Its
+  `url` must also match the page's `<link rel="canonical">` exactly
+  (no `www.`, keep the trailing slash). `validate.js` now enforces both.
+  `sameAs` holds Wikidata (`Q140798347`) plus the three sidebar links
+  (LinkedIn, GitHub, Google Scholar).
 
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
