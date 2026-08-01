@@ -66,6 +66,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 │   └── photography.html
 ├── assets/
 │   ├── portrait.jpg                  # Hero portrait (home page)
+│   ├── og-image.jpg                  # 1200×630 social share card (all pages)
 │   ├── photography/                  # Web-size gallery photos (gitignored: _originals/)
 │   │   ├── *.jpg                     # ~1600px max, ~500KB
 │   │   ├── thumb/*.jpg               # 600×600 square crops
@@ -75,6 +76,8 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── app.js                            # Theme toggle, mobile sidebar, lightbox
 ├── i18n.js                           # EN/DE translations + lang switcher
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
+├── appendix-og-image.py              # Regenerates assets/og-image.jpg
+├── validate.js                       # Site checks — run before committing; CI runs it too
 └── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
 ```
 
@@ -206,7 +209,12 @@ straight on the German version and may never see your English update.
 
 - ✅ The pre-commit hook bumps `i18n.js?v=N` so the new content actually
   reaches browsers.
-- ❌ The hook does **not** verify EN/DE parity. That's a human discipline.
+- ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
+  exists, that HTML fallbacks match their `en:` values, that the JSON-LD
+  parses, and that all 10 pages agree on the cache version. CI runs it on
+  every push and PR — run it locally before committing.
+- ❌ Nothing verifies that the German is *good*, only that it exists.
+  That's still a human job.
 
 If you're proposing copy changes (a single key or a batch), always end with
 the German equivalent diff alongside the English one — no exceptions.
@@ -231,6 +239,67 @@ For HTML elements:
 - `data-i18n-html="key"` → sets `innerHTML` (for content with inline markup like `<span>` or `<a>`)
 - `data-i18n-content="key"` → sets `content` attribute (for `<meta>` tags)
 - `data-i18n-aria="key"` → sets `aria-label`
+
+## ⚠ HTML fallbacks must match the `en:` values
+
+Every `data-i18n` element carries hardcoded fallback text, and every
+`data-i18n-content` a hardcoded `content` attribute. **Crawlers index that
+fallback, not the JS-rendered text** — Google never runs `applyLang()`.
+
+So when you change an `en:` value in `i18n.js`, change the fallback in the
+HTML too, in the same commit. If you don't, the site silently serves two
+different versions: the current copy to visitors, superseded copy to search
+engines and to LinkedIn's scraper. This actually happened — the publications
+page advertised "an h-index of 20" to Googlebot long after the visible text
+had moved on.
+
+`node validate.js` catches this: for every `data-i18n="k"` it checks that the
+element's text equals `en[k]` whitespace-normalised, and likewise for
+`data-i18n-content="k"` and its `content` attribute. `data-i18n-html` keys
+are checked for existence only — the inline markup isn't compared, so verify
+those by hand.
+
+## Social meta & structured data
+
+All 10 pages carry `<link rel="canonical">`, Open Graph (`og:type`,
+`og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`,
+`og:image` + width/height/alt) and Twitter card tags. Share cards point at
+`https://jimenofonseca.com/assets/og-image.jpg` (1200×630).
+
+Two rules that are easy to get wrong:
+
+- **These tags are deliberately static — never wire them to `data-i18n`.**
+  Scrapers don't execute JS, so an i18n attribute buys nothing and doubles
+  the parity burden. The flip side: when a matching `i18n.js` key changes,
+  the `og:`/`twitter:` copy does **not** follow. Edit it by hand in the same
+  pass.
+- **`Person` JSON-LD lives on `index.html` only.** It's the entity anchor;
+  duplicating it sitewide risks conflicting entity data. `sameAs` holds
+  exactly the three sidebar links (LinkedIn, GitHub, Google Scholar) — don't
+  add ORCID or Wikidata unless confirmed.
+
+Regenerate the share card with `python3 appendix-og-image.py` (needs
+`pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
+matches site typography). **The card carries no job title on purpose** —
+LinkedIn caches OG images hard, so a title on it would go stale.
+
+After changing meta or the card: force a re-scrape at
+<https://www.linkedin.com/post-inspector/> and validate the schema at
+<https://search.google.com/test/rich-results>.
+
+### When the job title changes
+
+The current title (`Head of Digital Engineering`) is spread across six
+places. Change all of them together, EN **and** DE:
+
+| Location | Contains |
+|---|---|
+| `i18n.js` → `v2.role` | sidebar role line, all 10 pages |
+| `i18n.js` → `v2.now` | "…the Digital Engineering department at Axpo Grid…" |
+| `i18n.js` → `hero.proof` | "Today I lead Digital Engineering at Axpo Grid…" |
+| `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
+| `index.html` JSON-LD | `"jobTitle"` and `"description"` |
+| `index.html` og/twitter | `og:description`, `twitter:description` |
 
 ## Home page hero reel
 
