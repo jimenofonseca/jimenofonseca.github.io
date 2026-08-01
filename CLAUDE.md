@@ -59,9 +59,10 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── index.html                        # Home — "How I Lead": hero, proof of
 │                                     #   scale, enterprise outcomes, 8 operating
 │                                     #   principles, LinkedIn feed
-├── superurbana/  cea/  innovation/   # Initiatives (01-05)
-├── digital-transformation/  open-source/
-├── appearances/  publications/       # Media (06-07)
+├── digital-transformation/  cea/     # Case Studies (01-03)
+├── open-source/
+├── superurbana/  innovation/         # published, not in the sidebar
+├── appearances/  publications/       # Media (04-05)
 ├── music/  photography/              # Personal (09-10) — public plain HTML
 ├── private-src/                      # GITIGNORED — optional local editing drafts
 │   ├── music.html
@@ -98,10 +99,18 @@ clone, run `git config core.hooksPath .githooks` once.
 
 ## Sidebar navigation order
 
-1. **Initiatives** (01–05): Company · Product · Training · Transformation · Open Source
-2. **Media** (06–08): Appearances · Publications · News (anchor to home `#recently`)
-3. **Personal** (09–10): Music · Photography — *public, no password*
-4. **Connect** (11–13): LinkedIn · GitHub · Google Scholar — all external
+1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
+   · Cloud Solution (`/cea/`) · Big Data for IPCC (`/open-source/`) — these
+   three match the home page's Key enterprise outcomes 01–03 exactly
+2. **Media** (04–06): Appearances · Publications · News (anchor to home `#recently`)
+3. **Personal** (07–08): Music · Photography — *public, no password*
+4. **Connect** (09–11): LinkedIn · GitHub · Google Scholar — all external
+
+`/superurbana/` and `/innovation/` are no longer in the sidebar. They are
+still published and still reachable through the prev/next pagers at the
+foot of the case-study pages, which is the only thing keeping them from
+being fully orphaned. `nav.company` and `nav.training` survive for those
+pagers only.
 
 ## Workflows
 
