@@ -129,10 +129,37 @@ together, which is the point — a headhunter who reads the summary on the
 home page and then opens the case study must not find two different
 claims. **Never fork these into page-specific keys.**
 
-Below the summary each page runs the same three blocks, labelled from
-shared keys `v2.cs.challenge`, `v2.cs.strategy`, `v2.cs.outcome`, with
-page-specific bodies `<ns>.cs1` / `.cs2` / `.cs3` where `<ns>` is
-`transf`, `cea` or `os`.
+### Case study page shape
+
+Every case study runs the same flow:
+
+```
+page-intro   eyebrow · H1 · lede · full-width stat band
+01 WHY       The Problem     <ns>.cs1
+02 HOW       The Execution   <ns>.cs2 + <ns>.cs3
+03 WHAT      The Result      about.outN.outcome + about.outN.impact
+page-media   the talk video — LAST, before the pager
+page-nav     closed loop 01 → 02 → 03 → 01
+```
+
+`<ns>` is `transf`, `cea` or `os`. Section titles come from the shared
+keys `v2.cs.challenge` / `v2.cs.strategy` / `v2.cs.outcome`, and the
+Why/How/What rail labels from `v2.cs.why` / `.how` / `.what`.
+
+**Chapters must not repeat each other.** The Execution chapter says *how*
+the work was done — approach, sequence, what was stood up. It must not
+restate the numbers or first-of claims that belong to The Result. This is
+easy to get wrong: all three pages once carried their own outcome twice
+(Axpo's DACH-first substation in both, CEA's 75 countries in both, the
+IPCC contribution in both). A quick check before shipping copy:
+
+```bash
+node -e "…compare <ns>.cs2 + <ns>.cs3 against about.outN.* for shared claims…"
+```
+
+The video sits at the end deliberately: it is a talk *about* the work, so
+it corroborates a claim the reader has already met, and being below the
+fold means its lazy-loaded iframe usually never loads at all.
 
 ## Workflows
 
