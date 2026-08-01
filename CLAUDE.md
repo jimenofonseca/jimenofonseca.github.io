@@ -77,6 +77,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── i18n.js                           # EN/DE translations + lang switcher
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
 ├── appendix-og-image.py              # Regenerates assets/og-image.jpg
+├── validate.js                       # Site checks — run before committing; CI runs it too
 └── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
 ```
 
@@ -208,7 +209,12 @@ straight on the German version and may never see your English update.
 
 - ✅ The pre-commit hook bumps `i18n.js?v=N` so the new content actually
   reaches browsers.
-- ❌ The hook does **not** verify EN/DE parity. That's a human discipline.
+- ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
+  exists, that HTML fallbacks match their `en:` values, that the JSON-LD
+  parses, and that all 10 pages agree on the cache version. CI runs it on
+  every push and PR — run it locally before committing.
+- ❌ Nothing verifies that the German is *good*, only that it exists.
+  That's still a human job.
 
 If you're proposing copy changes (a single key or a batch), always end with
 the German equivalent diff alongside the English one — no exceptions.
@@ -247,12 +253,11 @@ engines and to LinkedIn's scraper. This actually happened — the publications
 page advertised "an h-index of 20" to Googlebot long after the visible text
 had moved on.
 
-To audit: for every `data-i18n="k"` in `index.html` and `*/index.html`, the
-element's text must equal `en[k]` whitespace-normalised; same for
-`data-i18n-content="k"` and its `content` attribute. Easiest is to run
-`i18n.js` through node's `vm` module with `document` and `localStorage`
-stubbed, read `TRANSLATIONS.en`, and diff it against the HTML. Skip
-`data-i18n-html` keys unless you verify the inline markup survives.
+`node validate.js` catches this: for every `data-i18n="k"` it checks that the
+element's text equals `en[k]` whitespace-normalised, and likewise for
+`data-i18n-content="k"` and its `content` attribute. `data-i18n-html` keys
+are checked for existence only — the inline markup isn't compared, so verify
+those by hand.
 
 ## Social meta & structured data
 
