@@ -1281,16 +1281,6 @@ html.hyper-arrive main.content {
   color: var(--muted);
 }
 .principle-text p + p { margin-top: 14px; }
-/* Positioning claim under the lede */
-.page-claim {
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.5;
-  max-width: var(--prose-w);
-  margin-top: 20px;
-  padding-left: 16px;
-  border-left: 2px solid var(--accent);
-}
 /* Proof of scale */
 .proof-list { display: flex; flex-direction: column; }
 .proof-item {
