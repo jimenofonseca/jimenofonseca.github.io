@@ -191,6 +191,7 @@ var TRANSLATIONS = {
 
     // ── Music ─────────────────────────────────────
     'v2.music.lede':         'A long-time hobby, mostly off-camera. Occasionally a clip slips out.',
+    'v2.music.caption.kind': 'Clip',
     'v2.music.p1':           'Music has been a thread through most of my life — from picking up instruments as a teenager to noodling around at home now. I mostly play for myself; once in a while I record something worth keeping. The clip above is one of those.',
     'v2.music.cta':          'Back to home',
 
@@ -394,6 +395,7 @@ var TRANSLATIONS = {
 
     // ── Musik ─────────────────────────────────────
     'v2.music.lede':         'Ein langjähriges Hobby, grösstenteils abseits der Kamera. Ab und zu entweicht ein Clip.',
+    'v2.music.caption.kind': 'Clip',
     'v2.music.p1':           'Musik begleitet mich schon den grössten Teil meines Lebens — angefangen damit, als Teenager Instrumente aufzugreifen, bis hin zum heutigen Noodeln zu Hause. Ich spiele hauptsächlich für mich selbst; ab und zu nehme ich etwas auf, das es wert ist, aufbewahrt zu werden. Der Clip oben ist eines dieser Stücke.',
     'v2.music.cta':          'Zur Startseite',
 
