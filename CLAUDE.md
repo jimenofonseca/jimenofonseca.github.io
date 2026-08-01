@@ -301,37 +301,27 @@ places. Change all of them together, EN **and** DE:
 | `index.html` JSON-LD | `"jobTitle"` and `"description"` |
 | `index.html` og/twitter | `og:description`, `twitter:description` |
 
-## Home page hero reel
+## Home page hero portrait
 
-The hero portrait on the home page is a **3-slide auto-rotating reel**:
-`portrait.jpg` → `portrait_music.jpg` → `portrait_photography.jpg` →
-loop. Cross-fades over 0.9s every 5s. The right side of the caption
-swaps with each slide (Zürich, CH → Music → Photography). Three small
-dots below the caption indicate position and let visitors jump
-manually. Pauses on hover, on focus, and when the tab is hidden.
+A single static portrait (`assets/portrait.jpg`, 3:4) with a one-line
+caption holding just the name. No rotation, no dots, no JS.
 
-### Adding or changing portraits
+It used to be a 3-slide auto-rotating reel cycling
+`portrait.jpg` → `portrait_music.jpg` → `portrait_photography.jpg`, with
+the caption's right side swapping to match. That was removed — along with
+its JS block in `app.js` and CSS layer in `style.css` — so `.hero-figure`
+is now plain markup styled entirely by the base rules near the top of
+`style.css`.
 
-1. Drop new JPG into `assets/` (3:4 portrait, ~900×1200, under 200 KB,
-   web-optimised). Use `sips -c` to crop + `sips -Z 1200` to resize.
-2. Add a `<div class="reel-slide" data-cap-where="LABEL">` to the
-   `.reel-stage` in `index.html`, with the new `<img src>`. Order
-   matters — slides cycle top-to-bottom in DOM order.
-3. The dot count adjusts automatically from the slide count (built in
-   JS).
+`assets/portrait_music.jpg` and `assets/portrait_photography.jpg` are
+still in the repo but referenced nowhere. Delete them if the reel is not
+coming back.
 
-### Knobs
+### Changing the portrait
 
-- **Slide duration**: `INTERVAL_MS = 5000` in `app.js` (search for the
-  "app-reel.js" comment block).
-- **Cross-fade**: `transition: opacity 0.9s` on `.hero-figure.reel
-  .reel-slide` in `style.css`.
-- **Caption labels**: `data-cap-where` attribute on each `.reel-slide`.
-
-### A11y
-
-Respects `prefers-reduced-motion: reduce` — when set, no rotation, no
-dots, just the first slide static.
+Drop a replacement into `assets/` (3:4, ~900×1200, under 200 KB) and
+point the `<img src>` in the `.hero-figure` at it. On macOS, `sips -c` to
+crop and `sips -Z 1200` to resize.
 
 ## Page transition (hyperjump)
 
