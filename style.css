@@ -1281,6 +1281,65 @@ html.hyper-arrive main.content {
   color: var(--muted);
 }
 .principle-text p + p { margin-top: 14px; }
+/* Positioning claim under the lede */
+.page-claim {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: var(--prose-w);
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+}
+/* Proof of scale */
+.proof-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.proof-item { border-top: 1px solid var(--hairline); padding-top: 16px; }
+.proof-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.proof-item p { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
+/* Key enterprise outcomes */
+.outcome-list { display: flex; flex-direction: column; }
+.outcome {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid var(--hairline);
+}
+.outcome:first-child { border-top: none; padding-top: 0; }
+.outcome-num {
+  font-family: var(--font-mono); font-size: 11px; color: var(--accent);
+  font-variant-numeric: tabular-nums; padding-top: 4px;
+}
+.outcome-text { max-width: var(--prose-w); }
+.outcome-text h3 { font-size: 17px; font-weight: 500; line-height: 1.35; margin-bottom: 14px; }
+.outcome-row { display: grid; grid-template-columns: 76px 1fr; gap: 14px; margin-top: 10px; }
+.outcome-key {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); padding-top: 4px;
+}
+.outcome-row span:last-child { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
+/* One-line summary under each principle heading */
+.principle-sum {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--fg);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.principle-text .principle-sum + p { margin-top: 0; }
+@media (max-width: 860px) {
+  .proof-list { grid-template-columns: 1fr; gap: 20px; }
+  .outcome-row { grid-template-columns: 1fr; gap: 4px; }
+}
 @media (max-width: 640px) {
-  .principle { grid-template-columns: 24px 1fr; gap: 14px; }
+  .principle, .outcome { grid-template-columns: 24px 1fr; gap: 14px; }
 }
