@@ -1,0 +1,29 @@
+/* ─────────────────────────────────────────────────────────
+   PROTOTYPE B — "accent + serif body"
+   Everything in A, plus the plan's typography recommendation:
+   sans headlines (Inter Tight) over a warm serif body
+   (Source Serif 4). Loaded from Google Fonts here for speed of
+   prototyping — ship self-hosted WOFF2 if this wins.
+   ───────────────────────────────────────────────────────── */
+@import url('/proto/style-accent.css');
+
+:root {
+  --font-serif: 'Source Serif 4', Charter, Georgia, 'Times New Roman', serif;
+}
+
+/* Body prose moves to serif. Headlines, labels, nav and all
+   mono/uppercase elements stay exactly as they were. */
+.hero p.lede,
+.bio p,
+.page-body p,
+.page-lede,
+.work-row .work-desc {
+  font-family: var(--font-serif);
+}
+
+/* Serif runs smaller at the same optical size — compensate */
+.hero p.lede    { font-size: 18px;   line-height: 1.68; }
+.bio p          { font-size: 17.5px; line-height: 1.7; }
+.page-body p    { font-size: 17.5px; line-height: 1.72; }
+.page-lede      { font-size: 20px;   line-height: 1.5; }
+.work-row .work-desc { font-size: 15px; }
