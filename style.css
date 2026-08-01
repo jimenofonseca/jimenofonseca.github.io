@@ -1241,6 +1241,14 @@ html.hyper-arrive main.content {
    About / How I Lead — operating principles
    Reuses the numbered-index motif of the Selected Work list.
    ───────────────────────────────────────────────────────── */
+.hero-bio { margin-top: 36px; }
+.hero-bio p {
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--fg);
+  max-width: var(--prose-w);
+}
 .bio-label {
   font-family: var(--font-mono);
   font-size: 10.5px;
