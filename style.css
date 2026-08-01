@@ -10,6 +10,7 @@
   --faint:     #a3a3a3;
   --hairline:  #e7e5e4;
   --hover:     #f5f5f4;
+  --accent:    #0b4fa8;  /* same blue as the OG share card — see appendix-og-image.py */
 
   --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -29,6 +30,7 @@ html[data-theme="dark"] {
   --faint:    #57534e;
   --hairline: #1f1f1f;
   --hover:    #161616;
+  --accent:   #6aa5f0;  /* lightened for contrast on the dark background */
 }
 
 html { scroll-behavior: smooth; }
@@ -1192,4 +1194,37 @@ html.hyper-arrive main.content {
   html.hyper-arrive .sidebar {
     animation: none !important;
   }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Accent
+   One colour, used sparingly: the numbered index motif, the
+   impact numbers, and interactive states. Everything else
+   stays greyscale — the restraint is the point.
+   Token lives in :root / html[data-theme="dark"] at the top.
+   ───────────────────────────────────────────────────────── */
+
+/* The 01–13 numbered index motif — the site's signature detail */
+.eyebrow .index,
+.work-row .work-num,
+.nav-list a:hover .num { color: var(--accent); }
+
+/* Proof points */
+.page-stats .stat-num,
+.stats-aside .stat-num { color: var(--accent); }
+
+/* Interactive states */
+.nav-list a:hover,
+.work-row:hover .work-title,
+.work-row:hover .work-arrow,
+.crumb a:hover,
+.cta-link:hover { color: var(--accent); }
+
+/* Real link affordance in prose */
+.page-body a,
+.bio a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
