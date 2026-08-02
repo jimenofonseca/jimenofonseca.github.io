@@ -99,6 +99,12 @@ clone, run `git config core.hooksPath .githooks` once.
 
 ## Sidebar navigation order
 
+0. **How I Lead** (unnumbered): Short bio · Proof of scale · Key outcomes ·
+   Operating principles — anchors into the home page, so `#bio` on the home
+   page itself and `/#bio` from every subpage. Deliberately unnumbered:
+   numbering them would either restart the counter mid-sidebar or renumber
+   Case Studies, and Case Studies 01–03 must keep matching the home page's
+   outcomes 01–03.
 1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
    · Cloud Solution (`/cea/`) · Big Data for IPCC (`/open-source/`) — these
    three match the home page's Key enterprise outcomes 01–03 exactly
