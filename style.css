@@ -1465,3 +1465,35 @@ html.hyper-arrive main.content {
   .cs-rail-num { font-size: 22px; }
   .cs-content h2 { font-size: 22px; }
 }
+
+/* ─────────────────────────────────────────────────────────
+   Home page contents strip
+   Sits under the hero and jumps to the numbered sections.
+   Deliberately here and not in the sidebar: four more sidebar
+   rows cost ~264px and push the Connect group below the fold
+   on every laptop. Page sections belong to the page.
+   ───────────────────────────────────────────────────────── */
+.page-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.page-toc a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+.page-toc a:hover { color: var(--fg); }
+.page-toc .toc-num { color: var(--accent); font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .page-toc { gap: 12px 20px; }
+}
