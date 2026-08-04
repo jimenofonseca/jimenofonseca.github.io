@@ -30,7 +30,9 @@ const pages = ['index.html'].concat(
     .filter(d => d.isDirectory() && !d.name.startsWith('.') && !d.name.startsWith('_'))
     .map(d => path.join(d.name, 'index.html'))
     .filter(p => fs.existsSync(path.join(ROOT, p)))
-).sort();
+).sort()
+  // Redirect stubs carry no content of their own — no i18n, no cache version.
+  .filter(p => !/<meta http-equiv="refresh"/i.test(fs.readFileSync(path.join(ROOT, p), 'utf8')));
 
 // ── 1. Load i18n.js ───────────────────────────────────────────────────
 // It ends in an IIFE that touches document/localStorage, so stub them.

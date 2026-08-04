@@ -100,9 +100,26 @@ red X on every push. Deleted.
 `node validate.js`.
 
 **Do not add a `.nojekyll` file.** Pages still runs Jekyll on the branch,
-and it is Jekyll's underscore rule that keeps `_old/` — including the
-retired `superurbana/` and `innovation/` pages — out of the published
-site. Adding `.nojekyll` would republish them.
+and it is Jekyll's underscore rule that keeps `_old/` out of the published
+site. `_old/` is not a couple of retired pages — it is the **entire former
+Jekyll site**: `_config.yml`, `_includes/`, `Gemfile`, a second `CNAME`,
+`Projects.md`, `Publications.md`, plus the retired `superurbana/` and
+`innovation/` pages. Adding `.nojekyll` would publish all of it verbatim
+at `/_old/...`, including a stray CNAME and the old site's config.
+
+Jekyll running over the site is not a problem to solve — it has processed
+every one of the 72 successful `pages-build-deployment` runs, and the
+underscore exclusion is load-bearing.
+
+### Old URLs
+
+`/projects/` is a redirect stub to `/`. The former Jekyll site had a
+Projects page (`_old/Projects.md` → `/Projects.html`), and that URL is
+still published where we cannot edit it — the Portfolio link on Jimeno's
+LinkedIn profile points at `www.jimenofonseca.com/projects`. The stub
+keeps that link alive. `validate.js` skips any page containing a
+`<meta http-equiv="refresh">`, since redirect stubs carry no i18n or cache
+version of their own.
 
 ## Design system (Swiss / minimalist)
 
