@@ -87,6 +87,23 @@ Pure static HTML/CSS/JS — no build step, no framework.
 `core.hooksPath` is configured to `.githooks` (versioned hooks). On a fresh
 clone, run `git config core.hooksPath .githooks` once.
 
+### How the site actually deploys
+
+GitHub Pages serves this repo **from the branch** (Settings → Pages →
+"Deploy from a branch"). There is no deploy workflow and there should not
+be one — a `pages.yml` running `bundle exec jekyll build` used to sit here
+and failed all 71 of its runs, because the repo stopped being a Jekyll
+site and has no `Gemfile`. It never deployed anything; it only produced a
+red X on every push. Deleted.
+
+`.github/workflows/ci.yml` is the only workflow, and it just runs
+`node validate.js`.
+
+**Do not add a `.nojekyll` file.** Pages still runs Jekyll on the branch,
+and it is Jekyll's underscore rule that keeps `_old/` — including the
+retired `superurbana/` and `innovation/` pages — out of the published
+site. Adding `.nojekyll` would republish them.
+
 ## Design system (Swiss / minimalist)
 
 - **Typography**: Inter Tight (sans) + IBM Plex Mono (labels, numbers)
