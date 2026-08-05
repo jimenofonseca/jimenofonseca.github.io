@@ -152,7 +152,7 @@ var TRANSLATIONS = {
     // ── About / How I Lead ───────────────────────
     'v2.about.title':             'How I Lead',
     'v2.about.bio.label':         'Short bio',
-    'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he built the department bringing BIM and digital twins to the construction and operation of power networks — including the first substation in the DACH region built without a single paper plan. He created City Energy Analyst, an open-source urban energy simulation platform now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until 2025. He holds a PhD from ETH Zürich, is a certified Agile Practitioner and an active member of CIGRE, and contributed data to the IPCC 6th Assessment Report on Climate Change.',
+    'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he built the department bringing BIM and digital twins to the construction and operation of power networks — including the first substation in the DACH region built without a single paper plan. He created City Energy Analyst, an open-source urban energy simulation platform now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until 2025. He holds a PhD from ETH Zürich, is a certified Agile Practitioner and an active member of CIGRE, and contributed data to the IPCC 6th Assessment Report on Climate Change. Off the clock, he plays music and takes photographs.',
     'v2.about.proof.label':       'Proof of scale',
     'v2.about.proof1.label':      'Organisational footprint',
     'about.proof1':               'Built and scaled the Digital Engineering department at Axpo Grid from zero to 25 cross-functional engineers and product managers.',
@@ -260,7 +260,7 @@ var TRANSLATIONS = {
     // ── Music ─────────────────────────────────────
     'v2.music.lede':         'A long-time hobby, mostly off-camera. Occasionally a clip slips out.',
     'v2.music.caption.kind': 'Clip',
-    'v2.music.p1':           'Music has been a thread through most of my life — from picking up instruments as a teenager to noodling around at home now. I mostly play for myself; once in a while I record something worth keeping. The clip above is one of those.',
+    'v2.music.p1':           'Music has been a thread through most of my life — from picking up instruments as a teenager to still playing now. Once in a while I record something worth keeping. The clip above is one of those.',
     'v2.music.cta':          'Back to home',
 
     // ── Photography ───────────────────────────────
@@ -424,7 +424,7 @@ var TRANSLATIONS = {
     // ── About / How I Lead ───────────────────────
     'v2.about.title':             'Wie ich führe',
     'v2.about.bio.label':         'Kurzbiografie',
-    'about.bio':                  'Jimeno Fonseca leitet Digital Engineering bei Axpo Grid in der Schweiz, wo er die Abteilung aufgebaut hat, die BIM und digitale Zwillinge in den Bau und Betrieb von Stromnetzen bringt — darunter das erste Unterwerk der DACH-Region, das ohne einen einzigen Papierplan gebaut wurde. Er hat City Energy Analyst entwickelt, eine Open-Source-Plattform für urbane Energiesimulation, die heute in über 75 Ländern eingesetzt wird, und Superurbana GmbH mitgegründet, die diese Arbeit bis 2025 kommerzialisiert hat. Er ist promoviert an der ETH Zürich, zertifizierter Agile Practitioner, aktives Mitglied von CIGRE und hat Daten zum 6. IPCC-Sachstandsbericht zum Klimawandel beigesteuert.',
+    'about.bio':                  'Jimeno Fonseca leitet Digital Engineering bei Axpo Grid in der Schweiz, wo er die Abteilung aufgebaut hat, die BIM und digitale Zwillinge in den Bau und Betrieb von Stromnetzen bringt — darunter das erste Unterwerk der DACH-Region, das ohne einen einzigen Papierplan gebaut wurde. Er hat City Energy Analyst entwickelt, eine Open-Source-Plattform für urbane Energiesimulation, die heute in über 75 Ländern eingesetzt wird, und Superurbana GmbH mitgegründet, die diese Arbeit bis 2025 kommerzialisiert hat. Er ist promoviert an der ETH Zürich, zertifizierter Agile Practitioner, aktives Mitglied von CIGRE und hat Daten zum 6. IPCC-Sachstandsbericht zum Klimawandel beigesteuert. Ausserhalb der Arbeit spielt er Musik und fotografiert.',
     'v2.about.proof.label':       'Belege für Grösse und Führung',
     'v2.about.proof1.label':      'Organisatorischer Fussabdruck',
     'about.proof1':               'Die Abteilung Digital Engineering bei Axpo Grid von null auf 25 bereichsübergreifende Ingenieure und Produktmanager aufgebaut.',
@@ -532,7 +532,7 @@ var TRANSLATIONS = {
     // ── Musik ─────────────────────────────────────
     'v2.music.lede':         'Ein langjähriges Hobby, grösstenteils abseits der Kamera. Ab und zu entweicht ein Clip.',
     'v2.music.caption.kind': 'Clip',
-    'v2.music.p1':           'Musik begleitet mich schon den grössten Teil meines Lebens — angefangen damit, als Teenager Instrumente aufzugreifen, bis hin zum heutigen Noodeln zu Hause. Ich spiele hauptsächlich für mich selbst; ab und zu nehme ich etwas auf, das es wert ist, aufbewahrt zu werden. Der Clip oben ist eines dieser Stücke.',
+    'v2.music.p1':           'Musik begleitet mich schon den grössten Teil meines Lebens — angefangen damit, als Teenager Instrumente aufzugreifen, bis hin zum Spielen heute. Ab und zu nehme ich etwas auf, das es wert ist, aufbewahrt zu werden. Der Clip oben ist eines dieser Stücke.',
     'v2.music.cta':          'Zur Startseite',
 
     // ── Fotografie ────────────────────────────────
