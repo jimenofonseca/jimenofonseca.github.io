@@ -63,8 +63,8 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── principles/                       # The 8 principles in full — the long
 │                                     #   bodies the home page links out to
 ├── digital-transformation/  cea/     # Case Studies (01-03)
-├── open-source/
-├── superurbana/  innovation/         # published, not in the sidebar
+├── ipcc/                             # was /open-source/ (stub left behind)
+├── projects/  open-source/           # redirect stubs only — see "Old URLs"
 ├── appearances/  publications/       # Media (04-05)
 ├── music/  photography/              # Personal (09-10) — public plain HTML
 ├── private-src/                      # GITIGNORED — optional local editing drafts
@@ -116,13 +116,25 @@ underscore exclusion is load-bearing.
 
 ### Old URLs
 
-`/projects/` is a redirect stub to `/`. The former Jekyll site had a
-Projects page (`_old/Projects.md` → `/Projects.html`), and that URL is
-still published where we cannot edit it — the Portfolio link on Jimeno's
-LinkedIn profile points at `www.jimenofonseca.com/projects`. The stub
-keeps that link alive. `validate.js` skips any page containing a
-`<meta http-equiv="refresh">`, since redirect stubs carry no i18n or cache
-version of their own.
+Two redirect stubs, both meta-refresh + canonical + `noindex, follow` +
+a JS `location.replace`:
+
+| Stub | → | Why |
+|---|---|---|
+| `/projects/` | `/` | The former Jekyll site published a Projects page (`_old/Projects.md` → `/Projects.html`). Nothing has served it since the rebuild, so it 404s for anyone still linking to it. |
+| `/open-source/` | `/ipcc/` | Case study 03 lived there while it was framed around the open-source platform. Reframed around the IPCC contribution and moved. |
+
+⚠ **An earlier version of this file stated that the Portfolio link on
+Jimeno's LinkedIn profile points at `www.jimenofonseca.com/projects`.
+That was never verified** — it came from a third-party analysis, not from
+anything checkable in this repo, and no tooling here can see LinkedIn.
+What *is* verified is that `/projects` was a real URL on the old site and
+404'd after the rebuild, which justifies the stub on its own. If you want
+the LinkedIn claim settled, check the profile's Contact info → Website
+field by hand.
+
+`validate.js` skips any page containing a `<meta http-equiv="refresh">`,
+since redirect stubs carry no i18n or cache version of their own.
 
 ## Design system (Swiss / minimalist)
 
@@ -145,17 +157,19 @@ version of their own.
    mid-sidebar or renumber Case Studies, and Case Studies 01–03 must keep
    matching the home page's outcomes 01–03.
 1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
-   · Cloud Solution (`/cea/`) · Insights for IPCC (`/open-source/`) — these
+   · Cloud Solution (`/cea/`) · Insights for IPCC (`/ipcc/`) — these
    three match the home page's Key enterprise outcomes 01–03 exactly
 2. **Media** (04–06): Appearances · Publications · News (anchor to home `#recently`)
 3. **Personal** (07–08): Music · Photography — *public, no password*
 4. **Connect** (09–11): LinkedIn · GitHub · Google Scholar — all external
 
-`/superurbana/` and `/innovation/` are no longer in the sidebar. They are
-still published and still reachable through the prev/next pagers at the
-foot of the case-study pages, which is the only thing keeping them from
-being fully orphaned. `nav.company` and `nav.training` survive for those
-pagers only.
+`/superurbana/` and `/innovation/` are **fully retired**. They live in
+`_old/retired-pages/`, which Jekyll's underscore rule keeps out of the
+published site, and no live page links to them any more — the case-study
+pagers now form a closed loop across the three case studies. Their i18n
+keys (`nav.company`, `nav.training`, `superurbana.*`, `innov.*`,
+`v2.superurbana.*`, `v2.innov.*`) were deleted with the rest of the
+orphans; git history has them if the pages ever come back.
 
 ## ⚠ Case studies must mirror the home page
 
@@ -167,7 +181,7 @@ home page's Key enterprise outcomes render. They are not copies:
 |---|---|---|
 | `/digital-transformation/` | 01 | `about.out1.outcome` · `about.out1.impact` |
 | `/cea/` | 02 | `about.out2.outcome` · `about.out2.impact` |
-| `/open-source/` | 03 | `about.out3.outcome` · `about.out3.impact` |
+| `/ipcc/` | 03 | `about.out3.outcome` · `about.out3.impact` |
 
 Editing one of those keys updates the home page and the case study
 together, which is the point — a headhunter who reads the summary on the
@@ -187,7 +201,7 @@ page-media   the talk video — LAST, before the pager
 page-nav     closed loop 01 → 02 → 03 → 01
 ```
 
-`<ns>` is `transf`, `cea` or `os`. Section titles come from the shared
+`<ns>` is `transf`, `cea` or `ipcc`. Section titles come from the shared
 keys `v2.cs.challenge` / `v2.cs.strategy` / `v2.cs.outcome`, and the
 Why/How/What rail labels from `v2.cs.why` / `.how` / `.what`.
 
@@ -400,14 +414,17 @@ After changing meta or the card: force a re-scrape at
 
 ### When the job title changes
 
-The current title (`Head of Digital Engineering`) is spread across six
-places. Change all of them together, EN **and** DE:
+The current title (`Head of Digital Engineering`) is spread across four
+places. Change all of them together, EN **and** DE.
+
+This table used to list six, including `hero.proof` and `v2.now` — both of
+which had become orphans rendering on no page, so following the old list
+meant editing two dead keys and believing the job was done. Re-derive the
+list rather than trusting it if the home page changes shape again.
 
 | Location | Contains |
 |---|---|
 | `i18n.js` → `v2.role` | sidebar role line, all 9 pages |
-| `i18n.js` → `v2.now` | "…the Digital Engineering department at Axpo Grid…" |
-| `i18n.js` → `hero.proof` | "Today I lead Digital Engineering at Axpo Grid…" |
 | `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
 | `index.html` JSON-LD | `"jobTitle"` and `"description"` |
 | `index.html` og/twitter | `og:description`, `twitter:description` |
@@ -422,7 +439,7 @@ The home page *is* the About / "How I Lead" page — there is no separate
 2. **01 Proof of scale** — org footprint, budget oversight, global reach
 3. **02 Key enterprise outcomes** — three, each Outcome / Impact plus a
    "See case study →" link pointing at `/digital-transformation/`, `/cea/`
-   and `/open-source/` respectively.
+   and `/ipcc/` respectively.
 4. **03 Operating principles** — eight, each **title + one-line summary
    only**, then a "Read the principles in full →" link to `/principles/`
 5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
