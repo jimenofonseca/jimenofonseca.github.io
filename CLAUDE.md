@@ -58,7 +58,10 @@ Pure static HTML/CSS/JS — no build step, no framework.
 .
 ├── index.html                        # Home — "How I Lead": hero, proof of
 │                                     #   scale, enterprise outcomes, 8 operating
-│                                     #   principles, LinkedIn feed
+│                                     #   principles (titles + summaries only),
+│                                     #   LinkedIn feed
+├── principles/                       # The 8 principles in full — the long
+│                                     #   bodies the home page links out to
 ├── digital-transformation/  cea/     # Case Studies (01-03)
 ├── open-source/
 ├── superurbana/  innovation/         # published, not in the sidebar
@@ -134,13 +137,15 @@ version of their own.
 ## Sidebar navigation order
 
 0. **How I Lead** (unnumbered): Short bio · Proof of scale · Key outcomes ·
-   Operating principles — anchors into the home page, so `#bio` on the home
-   page itself and `/#bio` from every subpage. Deliberately unnumbered:
-   numbering them would either restart the counter mid-sidebar or renumber
-   Case Studies, and Case Studies 01–03 must keep matching the home page's
-   outcomes 01–03.
+   Operating principles. The first three are anchors into the home page, so
+   `#bio` on the home page itself and `/#bio` from every subpage.
+   **Operating principles is the exception** — it is a real page link
+   (`/principles/`, `→` not `↓`) on every page including the home page.
+   Deliberately unnumbered: numbering them would either restart the counter
+   mid-sidebar or renumber Case Studies, and Case Studies 01–03 must keep
+   matching the home page's outcomes 01–03.
 1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
-   · Cloud Solution (`/cea/`) · Big Data for IPCC (`/open-source/`) — these
+   · Cloud Solution (`/cea/`) · Insights for IPCC (`/open-source/`) — these
    three match the home page's Key enterprise outcomes 01–03 exactly
 2. **Media** (04–06): Appearances · Publications · News (anchor to home `#recently`)
 3. **Personal** (07–08): Music · Photography — *public, no password*
@@ -312,7 +317,7 @@ straight on the German version and may never see your English update.
 - ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
   exists, that HTML fallbacks match their `en:` values, that there is
   exactly one `Person` JSON-LD block whose `url` matches the canonical, and
-  that all 11 pages agree on the cache version. CI runs it on every push and
+  that all 9 validated pages agree on the cache version. CI runs it on every push and
   PR — run it locally before committing.
 - ❌ Nothing verifies that the German is *good*, only that it exists.
   That's still a human job.
@@ -362,7 +367,7 @@ those by hand.
 
 ## Social meta & structured data
 
-All 10 pages carry `<link rel="canonical">`, Open Graph (`og:type`,
+All 9 content pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 `og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`,
 `og:image` + width/height/alt) and Twitter card tags. Share cards point at
 `https://jimenofonseca.com/assets/og-image.jpg` (1200×630).
@@ -400,7 +405,7 @@ places. Change all of them together, EN **and** DE:
 
 | Location | Contains |
 |---|---|
-| `i18n.js` → `v2.role` | sidebar role line, all 10 pages |
+| `i18n.js` → `v2.role` | sidebar role line, all 9 pages |
 | `i18n.js` → `v2.now` | "…the Digital Engineering department at Axpo Grid…" |
 | `i18n.js` → `hero.proof` | "Today I lead Digital Engineering at Axpo Grid…" |
 | `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
@@ -416,10 +421,10 @@ The home page *is* the About / "How I Lead" page — there is no separate
    (the third-person copy-ready bio, for recruiters and event organisers)
 2. **01 Proof of scale** — org footprint, budget oversight, global reach
 3. **02 Key enterprise outcomes** — three, each Outcome / Impact plus a
-   "See case study →" link. Those links currently point at
-   `/digital-transformation/`, `/cea/` and `/open-source/` as placeholders
-   until the dedicated case-study pages exist.
-4. **03 Operating principles** — eight, each with a one-line summary
+   "See case study →" link pointing at `/digital-transformation/`, `/cea/`
+   and `/open-source/` respectively.
+4. **03 Operating principles** — eight, each **title + one-line summary
+   only**, then a "Read the principles in full →" link to `/principles/`
 5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
    sidebar's News item points at
 
@@ -427,6 +432,34 @@ Retired when this replaced the old home page: the **Selected Work** list
 (five quantified initiative rows), the **Now** section (it restated the
 hero almost verbatim) and the **Connect** section (it duplicated the
 sidebar's links 11–13).
+
+## ⚠ The principles live in two places — don't merge them back
+
+The eight operating principles are split across two pages by design:
+
+| | Home page `#principles` | `/principles/` |
+|---|---|---|
+| number + `v2.about.pN.title` | ✅ | ✅ |
+| `v2.about.pN.sum` (one line) | ✅ | ✅ |
+| `about.pN` (the long body) | ❌ | ✅ |
+
+The bodies were 1,089 of the home page's 1,350 words — 81% of everything
+below the hero — so a recruiter hit eight full essays before reaching the
+LinkedIn feed. Trimming them took the home page to ~470 words while still
+showing all eight principles.
+
+Two things to keep true:
+
+- **The keys are shared, not forked.** `v2.about.pN.title` and
+  `v2.about.pN.sum` render on both pages, exactly like the case-study
+  Outcome/Impact keys. Editing one updates both — that is the point. Never
+  fork them into page-specific keys.
+- **`index.html` keeps `id="principles"`** even though nothing in the
+  sidebar points at it any more. Old deep links (`/#principles`) still land
+  on the summary list.
+
+Adding a ninth principle means editing **both** pages: title + summary on
+the home page, title + summary + body on `/principles/`.
 
 ## Home page hero portrait
 
@@ -501,6 +534,20 @@ already wired. Users with that preference get instant page-swap, no jump.
 - **Cache stale after pushing translations**: the pre-commit hook should bump
   `?v=N` automatically. If translations don't show after deploy, hard-refresh
   (Cmd+Shift+R) and check that the version actually bumped in the HTML.
+- **⚠ A rebase skips the pre-commit hook.** The hook only fires on a real
+  `git commit`, so a commit that touches `i18n.js` and is then **rebased,
+  cherry-picked or amended** ships under the *previous* `?v=N` and browsers
+  serve stale translations from cache. `validate.js` will not catch this —
+  every page still agrees on the version, it is just the wrong one. After
+  any rebase, check the version moved:
+
+  ```bash
+  grep -ho "i18n.js?v=[0-9]*" index.html */index.html | sort -u
+  ```
+
+  and bump it by hand across all pages if it did not. This bit us once:
+  `2130478` shipped v=38, the rebased commit on top of it changed `i18n.js`
+  and would have shipped v=38 again.
 - **No-flash-of-English**: an inline head script reads localStorage *before*
   body renders and sets `data-lang="de"` so CSS can hide the body until
   `applyLang()` finishes. Don't remove that pre-script.
