@@ -1293,21 +1293,22 @@ html.hyper-arrive main.content {
 .proof-list { display: flex; flex-direction: column; }
 .proof-item {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 24px;
   align-items: baseline;
   padding: 18px 0;
   border-top: 1px solid var(--hairline);
 }
 .proof-item:first-child { border-top: none; padding-top: 0; }
+/* Same treatment as .outcome-text h3 — these are peer item titles, and the
+   page should not use a different typeface for each section. Mono/uppercase
+   is reserved for labels (eyebrows, number rails), not for content titles. */
 .proof-label {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 17px;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
+  line-height: 1.35;
+  color: var(--fg);
 }
 .proof-item p {
   font-size: 15.5px;
@@ -1332,18 +1333,12 @@ html.hyper-arrive main.content {
 }
 .outcome-text { max-width: var(--prose-w); }
 .outcome-text h3 { font-size: 17px; font-weight: 500; line-height: 1.35; margin-bottom: 14px; }
-.outcome-row { display: grid; grid-template-columns: 76px 1fr; gap: 14px; margin-top: 10px; }
-.outcome-key {
-  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); padding-top: 4px;
-}
-.outcome-row span:last-child { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
+.outcome-body { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
 .outcome-link {
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
   margin-top: 16px;
-  margin-left: 90px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -1366,8 +1361,6 @@ html.hyper-arrive main.content {
 .principle-text .principle-sum + p { margin-top: 0; }
 @media (max-width: 860px) {
   .proof-item { grid-template-columns: 1fr; gap: 6px; }
-  .outcome-row { grid-template-columns: 1fr; gap: 4px; }
-  .outcome-link { margin-left: 0; }
 }
 @media (max-width: 640px) {
   .principle, .outcome { grid-template-columns: 24px 1fr; gap: 14px; }
@@ -1383,7 +1376,6 @@ html.hyper-arrive main.content {
   border-bottom: 1px solid var(--hairline);
   max-width: var(--prose-w);
 }
-.cs-summary .outcome-row:first-child { margin-top: 0; }
 .cs-block { margin-bottom: 32px; max-width: var(--prose-w); }
 .cs-block:last-child { margin-bottom: 0; }
 .cs-label {

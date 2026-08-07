@@ -141,6 +141,14 @@ since redirect stubs carry no i18n or cache version of their own.
 - **Typography**: Inter Tight (sans) + IBM Plex Mono (labels, numbers)
 - **Layout**: Flush-left sticky sidebar (240px) + content column (max 1200px)
 - **Hairlines, not boxes**: borders between rows, no card shadows
+- **Mono is for labels, sans is for content.** IBM Plex Mono uppercase in
+  `--accent` marks things that are *not* prose: section eyebrows, number
+  rails, stat labels, the `See case study →` links. Every item **title** on
+  a page is Inter Tight 17–19px, weight 500, `var(--fg)` — `.proof-label`,
+  `.outcome-text h3` and `.principle-text h2` are deliberately identical.
+  `.proof-label` used to be 10.5px mono uppercase accent, which made
+  section 01 look like a different kind of content from 02 and 03. Don't
+  reintroduce a per-section title treatment.
 - **Theme**: light/dark via `[data-theme]` on `<html>`, persists in localStorage
 - **Language**: EN/DE via `[data-i18n]` attributes + JS swap, persists in localStorage
 - **Auto-detection**: first visit honours `navigator.language` (DE if starts with `de`)
@@ -173,20 +181,35 @@ orphans; git history has them if the pages ever come back.
 
 ## ⚠ Case studies must mirror the home page
 
-Each case-study page opens its body with an **Outcome / Impact** pair that
-reuses the *same* `about.outN.outcome` and `about.outN.impact` keys the
-home page's Key enterprise outcomes render. They are not copies:
+Each case-study page closes with an **Outcome / Impact** pair. The home
+page's Key enterprise outcomes render the **Impact half of the same keys** —
+not a copy, the same string:
 
-| Page | Home outcome | Keys |
-|---|---|---|
-| `/digital-transformation/` | 01 | `about.out1.outcome` · `about.out1.impact` |
-| `/cea/` | 02 | `about.out2.outcome` · `about.out2.impact` |
-| `/ipcc/` | 03 | `about.out3.outcome` · `about.out3.impact` |
+| Page | Home outcome | Case study renders | Home page renders |
+|---|---|---|---|
+| `/digital-transformation/` | 01 | `about.out1.outcome` + `about.out1.impact` | `about.out1.impact` |
+| `/cea/` | 02 | `about.out2.outcome` + `about.out2.impact` | `about.out2.impact` |
+| `/ipcc/` | 03 | `about.out3.outcome` + `about.out3.impact` | `about.out3.impact` |
 
-Editing one of those keys updates the home page and the case study
-together, which is the point — a headhunter who reads the summary on the
-home page and then opens the case study must not find two different
-claims. **Never fork these into page-specific keys.**
+Editing an `.impact` key updates the home page and the case study together,
+which is the point — a headhunter who reads the summary on the home page
+and then opens the case study must not find two different claims.
+**Never fork these into page-specific keys.**
+
+The home page deliberately shows **Impact only, unlabelled**, so all three
+of its sections read the same way: title, one paragraph, optional link. The
+`.outcome` strings are the concrete "what was built" detail and live on the
+case study, which is what the "See case study →" link is for. The labels
+`v2.about.outcome.label` / `v2.about.impact.label` now render on the
+case-study pages only.
+
+⚠ One consequence to know about: outcome 02's `.impact` string carries no
+numbers, so the home page no longer states CEA's "over 75 countries" or
+"30+ enterprise clients" on that row. The 75-countries claim still appears
+in Proof of scale (`about.proof3`). **Do not fix this by adding the numbers
+to `about.out2.impact`** — that key also renders on `/cea/`, directly below
+an Outcome line that already states them, and the no-repetition rule below
+exists precisely to stop that.
 
 ### Case study page shape
 
@@ -437,9 +460,9 @@ The home page *is* the About / "How I Lead" page — there is no separate
 1. Hero — `hero.h1` + `hero.p`, portrait right, Short Bio beside it
    (the third-person copy-ready bio, for recruiters and event organisers)
 2. **01 Proof of scale** — org footprint, budget oversight, global reach
-3. **02 Key enterprise outcomes** — three, each Outcome / Impact plus a
-   "See case study →" link pointing at `/digital-transformation/`, `/cea/`
-   and `/ipcc/` respectively.
+3. **02 Key enterprise outcomes** — three, each **title + the Impact
+   paragraph only, unlabelled**, plus a "See case study →" link pointing at
+   `/digital-transformation/`, `/cea/` and `/ipcc/` respectively.
 4. **03 Operating principles** — eight, each **title + one-line summary
    only**, then a "Read the principles in full →" link to `/principles/`
 5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
