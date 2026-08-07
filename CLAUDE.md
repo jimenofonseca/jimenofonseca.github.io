@@ -77,13 +77,15 @@ Pure static HTML/CSS/JS — no build step, no framework.
 │   │   ├── *.jpg                     # ~1600px max, ~500KB
 │   │   ├── thumb/*.jpg               # 600×600 square crops
 │   │   └── _originals/               # GITIGNORED — full-res master files
-│   └── Superurbana_Promo.mp4
+│                                     #   (large videos are gitignored — see below)
 ├── style.css                         # All site styles
 ├── app.js                            # Theme toggle, mobile sidebar, lightbox
 ├── i18n.js                           # EN/DE translations + lang switcher
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
 ├── appendix-og-image.py              # Regenerates assets/og-image.jpg
 ├── validate.js                       # Site checks — run before committing; CI runs it too
+├── sitemap.xml                       # The 9 content pages; stubs excluded (noindex)
+├── robots.txt                        # Allow all + Sitemap: pointer
 └── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
 ```
 
@@ -268,8 +270,17 @@ Both pages are **public plain HTML** — the whole site is public, with no
 password or client-side encryption anywhere. Edit `music/index.html` and
 `photography/index.html` directly and commit.
 
-- **Music**: embeds a YouTube iframe (`BzljIozglH0`). Local video files are
+- **Music**: embeds a YouTube iframe (`6dDU8wfSiEg`). Local video files are
   gitignored (`assets/music/` — all content now on YouTube).
+
+⚠ **`.gitignore` does not untrack.** Both site videos were committed
+*before* the ignore rules existed, so `assets/music/music.mp4` (42.5 MB)
+and `assets/Superurbana_Promo.mp4` (48 MB) kept shipping — 92 MB published
+on the live domain that no page referenced. They were removed from the
+index with `git rm --cached` (files kept on disk). If you add a large asset
+and later ignore it, check `git ls-files` rather than trusting the ignore
+rule. Note this frees the *published* site, not `.git` (118 MB) — the
+objects stay in history, and rewriting that would break every clone.
 - **Photography**: gallery sourced from `assets/photography/`. Edit via
   `build-gallery.py` (see "Updating the photo gallery" below).
 
@@ -353,9 +364,16 @@ straight on the German version and may never see your English update.
   reaches browsers.
 - ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
   exists, that HTML fallbacks match their `en:` values, that there is
-  exactly one `Person` JSON-LD block whose `url` matches the canonical, and
-  that all 9 validated pages agree on the cache version. CI runs it on every push and
-  PR — run it locally before committing.
+  exactly one `Person` JSON-LD block whose `url` matches the canonical,
+  that all 9 validated pages agree on the cache version, and that
+  `sitemap.xml` lists **exactly** the validated pages — no missing page, no
+  listed redirect stub. CI runs it on every push and PR — run it locally
+  before committing.
+
+  That last check exists because the page list is discovered by directory
+  scan while `sitemap.xml` is hand-written: without it, adding a page
+  silently leaves it out of the sitemap and deleting one leaves a 404 in
+  it. **Add a page → add its `<loc>`**, or CI fails.
 - ❌ Nothing verifies that the German is *good*, only that it exists.
   That's still a human job.
 

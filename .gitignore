@@ -27,6 +27,11 @@ assets/photography/_originals/
 # Music assets (video now hosted on YouTube — local files not needed in repo)
 assets/music/
 
+# Superurbana promo video (48 MB). Only the retired _old/retired-pages/
+# superurbana page ever referenced it, and that page is not published, so
+# the file was a 48 MB download served to nobody. Kept locally, not in git.
+assets/Superurbana_Promo.mp4
+
 # macOS metadata — never useful in repo
 .DS_Store
 **/.DS_Store

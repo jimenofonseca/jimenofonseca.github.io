@@ -151,6 +151,24 @@ const eszett = fs.readFileSync(path.join(ROOT, 'i18n.js'), 'utf8').split('\n')
   .map((l, i) => l.includes('ß') ? i + 1 : 0).filter(Boolean);
 if (eszett.length) fail('orthography', `i18n.js uses ß on line(s) ${eszett.join(', ')} — this site uses Swiss ss`);
 
+// ── 8. sitemap.xml covers exactly the validated pages ─────────────────
+// The page list above is discovered by directory scan, but sitemap.xml is
+// hand-maintained — so adding a page silently leaves it out of the sitemap,
+// and deleting one leaves a 404 in it. This ties the two together.
+const smPath = path.join(ROOT, 'sitemap.xml');
+if (!fs.existsSync(smPath)) {
+  fail('sitemap', 'sitemap.xml is missing');
+} else {
+  const sm = fs.readFileSync(smPath, 'utf8');
+  const listed = new Set(
+    [...sm.matchAll(/<loc>\s*https:\/\/jimenofonseca\.com([^<]*?)\s*<\/loc>/g)].map(m => m[1])
+  );
+  // 'index.html' → '/', 'cea/index.html' → '/cea/'
+  const expected = new Set(pages.map(p => p === 'index.html' ? '/' : `/${path.dirname(p)}/`));
+  for (const u of expected) if (!listed.has(u)) fail('sitemap', `${u} is a validated page but is not in sitemap.xml`);
+  for (const u of listed) if (!expected.has(u)) fail('sitemap', `sitemap.xml lists ${u}, which is not a validated page (redirect stubs must not be listed — they are noindex)`);
+}
+
 // ── Report ────────────────────────────────────────────────────────────
 console.log(`checked ${pages.length} pages, ${enKeys.size} en keys / ${deKeys.size} de keys`);
 if (failures.length) {

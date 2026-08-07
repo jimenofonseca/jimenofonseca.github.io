@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The nine content pages — the same set validate.js checks.
+
+  Deliberately excluded: /projects/ and /open-source/ are redirect stubs
+  carrying <meta name="robots" content="noindex, follow">, so listing them
+  would ask Google to index pages that ask not to be indexed.
+
+  No <lastmod>: on a hand-maintained sitemap the dates go stale immediately
+  and a wrong date is worse than none.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jimenofonseca.com/</loc><priority>1.0</priority></url>
+
+  <url><loc>https://jimenofonseca.com/principles/</loc><priority>0.8</priority></url>
+
+  <url><loc>https://jimenofonseca.com/digital-transformation/</loc><priority>0.8</priority></url>
+  <url><loc>https://jimenofonseca.com/cea/</loc><priority>0.8</priority></url>
+  <url><loc>https://jimenofonseca.com/ipcc/</loc><priority>0.8</priority></url>
+
+  <url><loc>https://jimenofonseca.com/appearances/</loc><priority>0.6</priority></url>
+  <url><loc>https://jimenofonseca.com/publications/</loc><priority>0.6</priority></url>
+
+  <url><loc>https://jimenofonseca.com/music/</loc><priority>0.4</priority></url>
+  <url><loc>https://jimenofonseca.com/photography/</loc><priority>0.4</priority></url>
+</urlset>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# The redirect stubs carry their own noindex, so they are not listed in the
+# sitemap. They are intentionally left crawlable so the redirect is followed
+# and link equity reaches the destination.
+
+Sitemap: https://jimenofonseca.com/sitemap.xml
