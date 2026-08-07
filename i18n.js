@@ -100,8 +100,8 @@ var TRANSLATIONS = {
     'v2.stat.buildings':          'Buildings modelled',
     'v2.stat.models':             'Forecasting models',
 
-    // ── About / How I Lead ───────────────────────
-    'v2.about.title':             'How I Lead',
+    // ── About ───────────────────────────────────
+    'v2.about.title':             'About',
     'v2.about.bio.label':         'Short bio',
     'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he built the department bringing BIM and digital twins to the construction and operation of power networks — including the first substation in the DACH region built without a single paper plan. He created City Energy Analyst, an open-source urban energy simulation platform now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until 2025. He holds a PhD from ETH Zürich, is a certified Agile Practitioner and an active member of CIGRE, and contributed data to the IPCC 6th Assessment Report on Climate Change. Off the clock, he plays music and takes photographs.',
     'v2.about.proof.label':       'Proof of scale',
@@ -305,8 +305,8 @@ var TRANSLATIONS = {
     'v2.stat.buildings':          'Gebäude modelliert',
     'v2.stat.models':             'Prognosemodelle',
 
-    // ── About / How I Lead ───────────────────────
-    'v2.about.title':             'Wie ich führe',
+    // ── About ───────────────────────────────────
+    'v2.about.title':             'Über mich',
     'v2.about.bio.label':         'Kurzbiografie',
     'about.bio':                  'Jimeno Fonseca leitet Digital Engineering bei Axpo Grid in der Schweiz, wo er die Abteilung aufgebaut hat, die BIM und digitale Zwillinge in den Bau und Betrieb von Stromnetzen bringt — darunter das erste Unterwerk der DACH-Region, das ohne einen einzigen Papierplan gebaut wurde. Er hat City Energy Analyst entwickelt, eine Open-Source-Plattform für urbane Energiesimulation, die heute in über 75 Ländern eingesetzt wird, und Superurbana GmbH mitgegründet, die diese Arbeit bis 2025 kommerzialisiert hat. Er ist promoviert an der ETH Zürich, zertifizierter Agile Practitioner, aktives Mitglied von CIGRE und hat Daten zum 6. IPCC-Sachstandsbericht zum Klimawandel beigesteuert. Ausserhalb der Arbeit spielt er Musik und fotografiert.',
     'v2.about.proof.label':       'Belege für Grösse und Führung',

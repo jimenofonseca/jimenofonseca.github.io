@@ -56,7 +56,7 @@ Pure static HTML/CSS/JS — no build step, no framework.
 
 ```
 .
-├── index.html                        # Home — "How I Lead": hero, proof of
+├── index.html                        # Home — the "About" page: hero, proof of
 │                                     #   scale, enterprise outcomes, 8 operating
 │                                     #   principles (titles + summaries only),
 │                                     #   LinkedIn feed
@@ -147,7 +147,7 @@ since redirect stubs carry no i18n or cache version of their own.
   `--accent` marks things that are *not* prose: section eyebrows, number
   rails, stat labels, the `See case study →` links. Every item **title** on
   a page is Inter Tight 17–19px, weight 500, `var(--fg)` — `.proof-label`,
-  `.outcome-text h3` and `.principle-text h2` are deliberately identical.
+  `.outcome-text h2` and `.principle-text h2` are deliberately identical.
   `.proof-label` used to be 10.5px mono uppercase accent, which made
   section 01 look like a different kind of content from 02 and 03. Don't
   reintroduce a per-section title treatment.
@@ -158,7 +158,7 @@ since redirect stubs carry no i18n or cache version of their own.
 
 ## Sidebar navigation order
 
-0. **How I Lead** (unnumbered): Short bio · Proof of scale · Key outcomes ·
+0. **About** (unnumbered): Short bio · Proof of scale · Key outcomes ·
    Operating principles. The first three are anchors into the home page, so
    `#bio` on the home page itself and `/#bio` from every subpage.
    **Operating principles is the exception** — it is a real page link
@@ -472,8 +472,11 @@ list rather than trusting it if the home page changes shape again.
 
 ## Home page
 
-The home page *is* the About / "How I Lead" page — there is no separate
-`/about/`. Sections, in order:
+The home page *is* the About page — **there is no `/about/` URL**, and
+nothing links to one. The sidebar group named "About" is anchors into this
+page (`#bio`, `#proof`, `#outcomes`) plus the `/principles/` link. Worth
+knowing, because a group called "About" invites the assumption that
+`/about/` exists. Sections, in order:
 
 1. Hero — `hero.h1` + `hero.p`, portrait right, Short Bio beside it
    (the third-person copy-ready bio, for recruiters and event organisers)
