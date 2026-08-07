@@ -972,13 +972,24 @@ html.hyper-arrive main.content {
 .crumb a:hover,
 .cta-link:hover { color: var(--accent); }
 
-/* Real link affordance in prose */
-.page-body a {
+/* Real link affordance in prose.
+   .cs-content / .cs-result are the case-study chapter bodies — source links
+   live inline there (model repos, papers, the CEA site), and without this
+   rule they inherit body colour and read as plain text. */
+.page-body a,
+.cs-content a,
+.cs-result a,
+.principle-text a {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  transition: opacity 0.15s ease;
 }
+.page-body a:hover,
+.cs-content a:hover,
+.cs-result a:hover,
+.principle-text a:hover { opacity: 0.7; }
 
 /* ─────────────────────────────────────────────────────────
    About / How I Lead — operating principles

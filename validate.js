@@ -77,6 +77,10 @@ const norm = s => s
   .replace(/&amp;/g, '&')
   .replace(/\s+/g, ' ').trim();
 
+// Inline markup helpers, for data-i18n-html values.
+const strip = s => s.replace(/<[^>]+>/g, '');
+const hrefs = s => [...s.matchAll(/href="([^"]*)"/g)].map(m => m[1]).sort();
+
 for (const page of pages) {
   const src = fs.readFileSync(path.join(ROOT, page), 'utf8');
 
@@ -99,9 +103,39 @@ for (const page of pages) {
     }
   }
 
-  // data-i18n-html / -aria: existence only, markup not compared
-  for (const m of src.matchAll(/\bdata-i18n-(?:html|aria)="([^"]+)"/g)) {
+  // data-i18n-aria: existence only
+  for (const m of src.matchAll(/\bdata-i18n-aria="([^"]+)"/g)) {
     if (!(m[1] in en)) fail('missing-key', `${page} references '${m[1]}', absent from i18n.js`);
+  }
+
+  // data-i18n-html: compare the *text* (tags stripped) against en:, so these
+  // fallbacks get the same staleness protection as plain data-i18n ones.
+  // Without this, the paragraphs carrying the most content — the ones that
+  // needed inline markup — are the only ones nothing checks.
+  for (const m of src.matchAll(/<(\w+)([^>]*\bdata-i18n-html="([^"]+)"[^>]*)>([\s\S]*?)<\/\1>/g)) {
+    const [, , , key, html] = m;
+    if (!(key in en)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
+    if (norm(strip(html)) !== norm(strip(en[key]))) {
+      fail('stale-fallback', `${page} [${key}] (html)\n      html: ${norm(strip(html)).slice(0, 80)}\n      en:   ${norm(strip(en[key])).slice(0, 80)}`);
+    }
+    if (hrefs(html).join('|') !== hrefs(en[key]).join('|')) {
+      fail('stale-fallback', `${page} [${key}] links differ from en:\n      html: ${hrefs(html).join(', ') || '(none)'}\n      en:   ${hrefs(en[key]).join(', ') || '(none)'}`);
+    }
+  }
+}
+
+// Every data-i18n-html key must carry the same links in both languages —
+// a link dropped or mistyped in the German is otherwise invisible.
+const htmlKeys = new Set();
+for (const page of pages) {
+  const src = fs.readFileSync(path.join(ROOT, page), 'utf8');
+  for (const m of src.matchAll(/\bdata-i18n-html="([^"]+)"/g)) htmlKeys.add(m[1]);
+}
+for (const k of htmlKeys) {
+  if (!(k in en) || !(k in de)) continue;
+  const a = hrefs(en[k]), b = hrefs(de[k]);
+  if (a.join('|') !== b.join('|')) {
+    fail('parity', `'${k}' has different links in en: and de:\n      en: ${a.join(', ') || '(none)'}\n      de: ${b.join(', ') || '(none)'}`);
   }
 }
 
