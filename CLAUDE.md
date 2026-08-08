@@ -59,9 +59,8 @@ German tree; its output is committed, exactly like `build-gallery.py`.
 ```
 .
 ├── index.html                        # Home — the "About" page: hero, proof of
-│                                     #   scale, enterprise outcomes, 8 operating
-│                                     #   principles (titles + summaries only),
-│                                     #   LinkedIn feed
+│                                     #   scale, enterprise outcomes, 3 of the
+│                                     #   8 operating principles, LinkedIn feed
 ├── principles/                       # The 8 principles in full — the long
 │                                     #   bodies the home page links out to
 ├── de/                               # GENERATED — the whole site in German.
@@ -533,8 +532,9 @@ knowing, because a group called "About" invites the assumption that
 3. **02 Key enterprise outcomes** — three, each **title + the Impact
    paragraph only, unlabelled**, plus a "See case study →" link pointing at
    `/digital-transformation/`, `/cea/` and `/ipcc/` respectively.
-4. **03 Operating principles** — eight, each **title + one-line summary
-   only**, then a "Read the principles in full →" link to `/principles/`
+4. **03 Operating principles** — a curated **three** (03, 04, 08), each
+   title + one-line summary only, then a "Read the principles in full →"
+   link to `/principles/`, which carries all eight in full
 5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
    sidebar's News item points at
 
@@ -549,14 +549,27 @@ The eight operating principles are split across two pages by design:
 
 | | Home page `#principles` | `/principles/` |
 |---|---|---|
-| number + `v2.about.pN.title` | ✅ | ✅ |
-| `v2.about.pN.sum` (one line) | ✅ | ✅ |
+| number + `v2.about.pN.title` | **3 of 8** (03, 04, 08) | all 8 |
+| `v2.about.pN.sum` (one line) | **3 of 8** | all 8 |
 | `about.pN` (the long body) | ❌ | ✅ |
+
+**The home page shows a curated three, not all eight**: 03 (integration is
+expectation management), 04 (plan to maintain) and 08 (aim to be first —
+and know when not to). Chosen as the three that read as thought leadership
+rather than craft: each is counter-conventional, and together they span
+adoption → lifecycle → strategy. 05 (liability to protected value) was the
+near miss — it is the most board-facing principle, but "from liability to
+protected value" sits a few centimetres from Key outcome 01's "from OPEX to
+revenue-generating value" and reads as a repeat.
+
+**They keep their real numbers (03, 04, 08), not 01–03.** The number is the
+principle's identity across both pages, and the gaps are the honest signal
+that there are more behind the link.
 
 The bodies were 1,089 of the home page's 1,350 words — 81% of everything
 below the hero — so a recruiter hit eight full essays before reaching the
-LinkedIn feed. Trimming them took the home page to ~470 words while still
-showing all eight principles.
+LinkedIn feed. Moving them out, and then cutting the home page list to
+three, took it from 1,350 words to **271**.
 
 Two things to keep true:
 
