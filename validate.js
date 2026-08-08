@@ -25,14 +25,27 @@ const failures = [];
 const fail = (check, msg) => failures.push(`${check}: ${msg}`);
 
 // ── Pages ─────────────────────────────────────────────────────────────
-const pages = ['index.html'].concat(
+// Two language trees: the English pages at the root and their German
+// counterparts under de/. Each is checked against its own language block,
+// so a page whose text drifts from i18n.js fails regardless of language.
+const SKIP = new Set(['assets', 'node_modules', 'private-src']);
+const enPages = ['index.html'].concat(
   fs.readdirSync(ROOT, { withFileTypes: true })
-    .filter(d => d.isDirectory() && !d.name.startsWith('.') && !d.name.startsWith('_'))
+    .filter(d => d.isDirectory() && !d.name.startsWith('.') && !d.name.startsWith('_')
+                 && !SKIP.has(d.name) && d.name !== 'de')
     .map(d => path.join(d.name, 'index.html'))
     .filter(p => fs.existsSync(path.join(ROOT, p)))
 ).sort()
-  // Redirect stubs carry no content of their own — no i18n, no cache version.
+  // Redirect stubs carry no content of their own — no i18n, no canonical pair.
   .filter(p => !/<meta http-equiv="refresh"/i.test(fs.readFileSync(path.join(ROOT, p), 'utf8')));
+
+const dePages = enPages.map(p => path.join('de', p))
+  .filter(p => fs.existsSync(path.join(ROOT, p)));
+
+const pages = enPages.concat(dePages);
+const langOf = p => (p.startsWith('de' + path.sep) || p.startsWith('de/')) ? 'de' : 'en';
+// 'index.html' -> '/'  ·  'cea/index.html' -> '/cea/'  ·  'de/cea/index.html' -> '/de/cea/'
+const urlOf = p => p === 'index.html' ? '/' : '/' + path.dirname(p) + '/';
 
 // ── 1. Load i18n.js ───────────────────────────────────────────────────
 // It ends in an IIFE that touches document/localStorage, so stub them.
@@ -83,29 +96,32 @@ const hrefs = s => [...s.matchAll(/href="([^"]*)"/g)].map(m => m[1]).sort();
 
 for (const page of pages) {
   const src = fs.readFileSync(path.join(ROOT, page), 'utf8');
+  // Check each page against its OWN language, not always English.
+  const L = langOf(page);
+  const t = L === 'de' ? de : en;
 
   // text content: <tag ... data-i18n="key">fallback</tag>, skipping nested markup
   for (const m of src.matchAll(/<(\w+)([^>]*\bdata-i18n="([^"]+)"[^>]*)>([\s\S]*?)<\/\1>/g)) {
     const [, , , key, text] = m;
-    if (!(key in en)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
+    if (!(key in t)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
     if (text.includes('<')) continue;                       // nested markup — skip
-    if (norm(text) !== norm(en[key])) {
-      fail('stale-fallback', `${page} [${key}]\n      html: ${norm(text).slice(0, 80)}\n      en:   ${norm(en[key]).slice(0, 80)}`);
+    if (norm(text) !== norm(t[key])) {
+      fail('stale-fallback', `${page} [${key}]\n      html: ${norm(text).slice(0, 80)}\n      ${L}:   ${norm(t[key]).slice(0, 80)}`);
     }
   }
 
   // content attribute: <meta data-i18n-content="key" content="fallback">
   for (const m of src.matchAll(/<[^>]*\bdata-i18n-content="([^"]+)"[^>]*\bcontent="([^"]*)"/g)) {
     const [, key, text] = m;
-    if (!(key in en)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
-    if (norm(text) !== norm(en[key])) {
-      fail('stale-fallback', `${page} [${key}]\n      html: ${norm(text).slice(0, 80)}\n      en:   ${norm(en[key]).slice(0, 80)}`);
+    if (!(key in t)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
+    if (norm(text) !== norm(t[key])) {
+      fail('stale-fallback', `${page} [${key}]\n      html: ${norm(text).slice(0, 80)}\n      ${L}:   ${norm(t[key]).slice(0, 80)}`);
     }
   }
 
   // data-i18n-aria: existence only
   for (const m of src.matchAll(/\bdata-i18n-aria="([^"]+)"/g)) {
-    if (!(m[1] in en)) fail('missing-key', `${page} references '${m[1]}', absent from i18n.js`);
+    if (!(m[1] in t)) fail('missing-key', `${page} references '${m[1]}', absent from i18n.js`);
   }
 
   // data-i18n-html: compare the *text* (tags stripped) against en:, so these
@@ -114,12 +130,12 @@ for (const page of pages) {
   // needed inline markup — are the only ones nothing checks.
   for (const m of src.matchAll(/<(\w+)([^>]*\bdata-i18n-html="([^"]+)"[^>]*)>([\s\S]*?)<\/\1>/g)) {
     const [, , , key, html] = m;
-    if (!(key in en)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
-    if (norm(strip(html)) !== norm(strip(en[key]))) {
-      fail('stale-fallback', `${page} [${key}] (html)\n      html: ${norm(strip(html)).slice(0, 80)}\n      en:   ${norm(strip(en[key])).slice(0, 80)}`);
+    if (!(key in t)) { fail('missing-key', `${page} references '${key}', absent from i18n.js`); continue; }
+    if (norm(strip(html)) !== norm(strip(t[key]))) {
+      fail('stale-fallback', `${page} [${key}] (html)\n      html: ${norm(strip(html)).slice(0, 80)}\n      ${L}:   ${norm(strip(t[key])).slice(0, 80)}`);
     }
-    if (hrefs(html).join('|') !== hrefs(en[key]).join('|')) {
-      fail('stale-fallback', `${page} [${key}] links differ from en:\n      html: ${hrefs(html).join(', ') || '(none)'}\n      en:   ${hrefs(en[key]).join(', ') || '(none)'}`);
+    if (hrefs(html).join('|') !== hrefs(t[key]).join('|')) {
+      fail('stale-fallback', `${page} [${key}] links differ from ${L}:\n      html: ${hrefs(html).join(', ') || '(none)'}\n      ${L}:   ${hrefs(t[key]).join(', ') || '(none)'}`);
     }
   }
 }
@@ -140,44 +156,65 @@ for (const k of htmlKeys) {
 }
 
 // ── 5. JSON-LD ────────────────────────────────────────────────────────
-const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const ld = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
-if (ld.length === 0) fail('json-ld', 'index.html has no application/ld+json block');
-let persons = 0;
-for (const [, body] of ld) {
-  try {
-    const d = JSON.parse(body);
-    if (!d['@type']) fail('json-ld', 'block parsed but has no @type');
-    if (d['@type'] === 'Person') {
-      persons++;
-      // The entity anchor must agree with the page's own canonical, or
-      // Google is handed two different URLs for the same person.
-      const canonical = (home.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
-      if (canonical && d.url && d.url.replace(/\/$/, '') !== canonical.replace(/\/$/, '')) {
-        fail('json-ld', `Person.url (${d.url}) disagrees with the canonical (${canonical})`);
+// Runs on both home pages. Each must carry exactly one Person block whose
+// url matches that page's own canonical — the German home page is a
+// separate URL, so it needs its own anchor, not the English one.
+for (const homePage of ['index.html', 'de/index.html']) {
+  if (!fs.existsSync(path.join(ROOT, homePage))) continue;
+  const home = fs.readFileSync(path.join(ROOT, homePage), 'utf8');
+  const ld = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  if (ld.length === 0) fail('json-ld', `${homePage} has no application/ld+json block`);
+  let persons = 0;
+  for (const [, body] of ld) {
+    try {
+      const d = JSON.parse(body);
+      if (!d['@type']) fail('json-ld', `${homePage}: block parsed but has no @type`);
+      if (d['@type'] === 'Person') {
+        persons++;
+        const canonical = (home.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+        if (canonical && d.url && d.url.replace(/\/$/, '') !== canonical.replace(/\/$/, '')) {
+          fail('json-ld', `${homePage}: Person.url (${d.url}) disagrees with the canonical (${canonical})`);
+        }
       }
+    } catch (e) {
+      fail('json-ld', `${homePage}: does not parse — ${e.message}`);
     }
-  } catch (e) {
-    fail('json-ld', `does not parse — ${e.message}`);
+  }
+  if (persons > 1) {
+    fail('json-ld', `${homePage} has ${persons} Person blocks — there must be exactly one.\n      ` +
+                    'Two Person entities on a page hand search engines conflicting claims\n      ' +
+                    'about the same person and undermine the Knowledge Panel.');
   }
 }
-if (persons > 1) {
-  fail('json-ld', `index.html has ${persons} Person blocks — there must be exactly one.\n      ` +
-                  'Two Person entities on a page hand search engines conflicting claims\n      ' +
-                  'about the same person and undermine the Knowledge Panel.');
-}
 
-// ── 6. Cache version consistency ──────────────────────────────────────
-const versions = new Map();
+// ── 6. hreflang + canonical, the thing that makes German indexable ─────
+// Each page must point at itself with a self-referential canonical, and
+// name every language version including itself. Google drops the whole
+// annotation set if it is not reciprocal, silently.
+const ORIGIN = 'https://jimenofonseca.com';
 for (const page of pages) {
-  const m = fs.readFileSync(path.join(ROOT, page), 'utf8').match(/i18n\.js\?v=(\d+)/);
-  if (!m) { fail('cache-version', `${page} does not reference i18n.js?v=N`); continue; }
-  if (!versions.has(m[1])) versions.set(m[1], []);
-  versions.get(m[1]).push(page);
-}
-if (versions.size > 1) {
-  const detail = [...versions.entries()].map(([v, ps]) => `v=${v}: ${ps.join(', ')}`).join('\n      ');
-  fail('cache-version', `pages disagree on the i18n.js version — a page pinned to an old\n      version serves stale translations from cache:\n      ${detail}`);
+  const src = fs.readFileSync(path.join(ROOT, page), 'utf8');
+  const url = ORIGIN + urlOf(page);
+  const L = langOf(page);
+
+  const canonical = (src.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+  if (canonical !== url) fail('hreflang', `${page} canonical is ${canonical}, expected ${url}`);
+
+  const declared = Object.fromEntries(
+    [...src.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map(m => [m[1], m[2]]));
+  const enUrl = ORIGIN + urlOf(page.replace(/^de\//, ''));
+  const deUrl = ORIGIN + '/de' + urlOf(page.replace(/^de\//, ''));
+  const want = { en: enUrl, de: deUrl, 'x-default': enUrl };
+  for (const [k, v] of Object.entries(want)) {
+    if (declared[k] !== v) {
+      fail('hreflang', `${page} hreflang="${k}" is ${declared[k] || '(missing)'}, expected ${v}`);
+    }
+  }
+  // the page must be named by its own annotation set (self-referential)
+  if (declared[L] !== url) fail('hreflang', `${page} does not name itself in hreflang="${L}"`);
+
+  const htmlLang = (src.match(/<html lang="([^"]+)"/) || [])[1];
+  if (htmlLang !== L) fail('hreflang', `${page} has <html lang="${htmlLang}">, expected "${L}"`);
 }
 
 // ── 7. Swiss orthography ──────────────────────────────────────────────

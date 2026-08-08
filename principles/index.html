@@ -13,9 +13,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function(){
-    var l=localStorage.getItem("lang");
-    if(!l&&navigator.language&&navigator.language.toLowerCase().indexOf("de")===0)l="de";
-    if(l==="de")document.documentElement.dataset.lang=l;
     var t=localStorage.getItem("theme");
     if(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)t="dark";
     if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
@@ -25,10 +22,12 @@
       document.documentElement.classList.add("hyper-arrive");
     }
   })();</script>
-  <style>html[data-lang="de"]:not(.lang-ready) body{visibility:hidden}</style>
   <title data-i18n="principles.title">Operating principles | How I Build and Lead Engineering Organisations — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="principles.desc" content="Eight principles that shape how I build and lead engineering organisations — from making room for invention, to planning for maintenance from day one, to knowing when to be first and when to follow." />
   <link rel="canonical" href="https://jimenofonseca.com/principles/" />
+  <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/principles/" />
+  <link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/principles/" />
+  <link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/principles/" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Jimeno Fonseca" />
   <meta property="og:locale" content="en" />
@@ -124,11 +123,11 @@
         </div>
         <div class="control-row">
           <span class="control-label" data-i18n="v2.lang.label">Language</span>
-          <button class="toggle lang-toggle" onclick="toggleLang()" aria-label="Switch language">
-            <span class="opt lang-opt active" data-lang="en">EN</span>
+          <div class="toggle lang-toggle">
+            <span class="opt lang-opt active">EN</span>
             <span class="sep">/</span>
-            <span class="opt lang-opt" data-lang="de">DE</span>
-          </button>
+            <a class="opt lang-opt" href="/de/principles/" hreflang="de" lang="de">DE</a>
+          </div>
         </div>
       </div>
     </aside>
@@ -231,7 +230,6 @@
   </div>
 
   <script src="/app.js"></script>
-  <script src="/i18n.js?v=46"></script>
 </body>
 </html>
 

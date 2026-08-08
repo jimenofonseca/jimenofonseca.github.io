@@ -50,7 +50,9 @@ detail here, generalized lesson in the skill.
 
 Personal website of Jimeno Fonseca, served on GitHub Pages at
 `https://jimenofonseca.com` (CNAME → `jimenofonseca.github.io`).
-Pure static HTML/CSS/JS — no build step, no framework.
+Pure static HTML/CSS/JS, no framework. Nothing builds in CI — GitHub Pages
+serves committed files. One local generator, `build-i18n.py`, produces the
+German tree; its output is committed, exactly like `build-gallery.py`.
 
 ## File layout
 
@@ -62,6 +64,8 @@ Pure static HTML/CSS/JS — no build step, no framework.
 │                                     #   LinkedIn feed
 ├── principles/                       # The 8 principles in full — the long
 │                                     #   bodies the home page links out to
+├── de/                               # GENERATED — the whole site in German.
+│                                     #   Never hand-edit; run build-i18n.py
 ├── digital-transformation/  cea/     # Case Studies (01-03)
 ├── ipcc/                             # was /open-source/ (stub left behind)
 ├── projects/  open-source/           # redirect stubs only — see "Old URLs"
@@ -83,14 +87,11 @@ Pure static HTML/CSS/JS — no build step, no framework.
 ├── i18n.js                           # EN/DE translations + lang switcher
 ├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
 ├── appendix-og-image.py              # Regenerates assets/og-image.jpg
+├── build-i18n.py                     # Generates de/ from the EN pages + i18n.js
 ├── validate.js                       # Site checks — run before committing; CI runs it too
-├── sitemap.xml                       # The 9 content pages; stubs excluded (noindex)
-├── robots.txt                        # Allow all + Sitemap: pointer
-└── .githooks/pre-commit              # Auto-bumps i18n.js?v=N when i18n.js is staged
+├── sitemap.xml                       # 9 pages x 2 languages; stubs excluded (noindex)
+└── robots.txt                        # Allow all + Sitemap: pointer
 ```
-
-`core.hooksPath` is configured to `.githooks` (versioned hooks). On a fresh
-clone, run `git config core.hooksPath .githooks` once.
 
 ### How the site actually deploys
 
@@ -250,19 +251,26 @@ fold means its lazy-loaded iframe usually never loads at all.
 ### Updating translations (`i18n.js`)
 
 1. Edit `i18n.js` — both `en:` and `de:` blocks.
-2. `git add i18n.js && git commit -m "..."` — **the pre-commit hook auto-bumps**
-   `?v=N → ?v=N+1` across every HTML file that references `i18n.js`, and stages
-   those HTML files into the same commit. No manual cache-bust needed.
-3. `git push`.
+2. **`python3 build-i18n.py`** — rewrites the English fallbacks from `en:`
+   and regenerates the whole `de/` tree from `de:`.
+3. `node validate.js`, then commit `i18n.js`, the English pages and `de/`
+   together.
 
-If you ever need to bypass the bump: `git commit --no-verify`.
+**Forgetting step 2 fails CI**, by design: `validate.js` compares every
+page's text against its own language block, so an edited `i18n.js` with a
+stale page is caught.
+
+⚠ **`i18n.js` is no longer sent to browsers.** It is build input only. The
+pages ship their text as plain HTML, which is the whole reason German is now
+indexable. There is therefore no `?v=N` cache-busting and no pre-commit hook
+any more — both were deleted, along with the no-flash-of-English hack and
+the `data-lang` pre-paint script, which existed only to hide the swap.
 
 ### Updating page content (HTML / CSS)
 
-Edit the HTML directly (public pages: `index.html`, `*/index.html`).
-No cache-bust needed for HTML/CSS — only the `i18n.js?v=N` query string is
-versioned. Browser caches HTML/CSS via the GitHub Pages cache-control headers
-(usually re-fetched within minutes).
+Edit the **English** page directly (`index.html`, `*/index.html`), then run
+`python3 build-i18n.py` to mirror the change into `de/`. Never hand-edit
+anything under `de/` — the generator overwrites it.
 
 ### Working on Music and Photography pages
 
@@ -334,6 +342,42 @@ python3 -m http.server 8080
 Every page is public plain HTML, so the local preview shows the live
 content directly — no password gate.
 
+## Two language trees — one URL per language
+
+English lives at `/`, `/cea/`, `/ipcc/`… and German at `/de/`, `/de/cea/`,
+`/de/ipcc/`… Every page ships its text as plain HTML in **one** language.
+
+**Why, in one sentence:** Google indexes what is in the HTML, and it does
+not run the language switcher — so while both languages shared one URL,
+every German string on this site was invisible to search, including to the
+German-speaking recruiters the site is aimed at.
+
+How the pieces fit:
+
+| | |
+|---|---|
+| `i18n.js` | the only place copy lives, `en:` + `de:`. **Build input — not served to browsers.** |
+| English pages | hand-authored; `build-i18n.py` refreshes their fallbacks from `en:` |
+| `de/**` | **generated, never hand-edited** |
+| `hreflang` | every page names `en`, `de` and `x-default`, including itself |
+| canonical | self-referential — each page points at its own URL |
+
+Rules that keep it correct:
+
+- **Never hand-edit `de/`.** The generator deletes and rewrites the tree.
+- **A new page needs three things**: the English file, a `build-i18n.py`
+  run, and its two `<loc>` entries in `sitemap.xml`. `validate.js` fails if
+  the sitemap and the page set disagree.
+- **No automatic redirect by browser language.** Each URL serves one
+  language, always; the sidebar switcher links to the counterpart. Google
+  advises against language-sniffing redirects, and a redirect would also
+  contradict the canonical.
+- **`x-default` points at English**, which is the site's primary language.
+
+The `hreflang` set must be reciprocal — if the German page names the
+English one but not vice versa, Google discards the whole annotation
+silently. `validate.js` checks this on all 18 pages.
+
 ## ⚠ EN/DE parity — non-negotiable
 
 **Every change to an English `i18n.js` key MUST update the German equivalent
@@ -360,15 +404,15 @@ straight on the German version and may never see your English update.
 
 ### What the tooling enforces vs. what it doesn't
 
-- ✅ The pre-commit hook bumps `i18n.js?v=N` so the new content actually
-  reaches browsers.
-- ✅ `node validate.js` checks EN/DE parity, that every `data-i18n` key
-  exists, that HTML fallbacks match their `en:` values, that there is
-  exactly one `Person` JSON-LD block whose `url` matches the canonical,
-  that all 9 validated pages agree on the cache version, and that
-  `sitemap.xml` lists **exactly** the validated pages — no missing page, no
-  listed redirect stub. CI runs it on every push and PR — run it locally
-  before committing.
+- ✅ `node validate.js` checks **18 pages** — 9 English plus 9 German — each
+  against its **own** language block, so a page that drifts from `i18n.js`
+  fails whichever language it is in. It also checks EN/DE key parity, that
+  every `data-i18n` key exists, that each home page carries exactly one
+  `Person` JSON-LD block whose `url` matches that page's canonical, that
+  every page has a self-referential canonical and a complete reciprocal
+  `hreflang` set (`en` / `de` / `x-default`) with a matching `<html lang>`,
+  and that `sitemap.xml` lists **exactly** the validated pages. CI runs it
+  on every push and PR — run it locally before committing.
 
   That last check exists because the page list is discovered by directory
   scan while `sitemap.xml` is hand-written: without it, adding a page
@@ -592,23 +636,15 @@ already wired. Users with that preference get instant page-swap, no jump.
 
 ## Common gotchas
 
-- **Cache stale after pushing translations**: the pre-commit hook should bump
-  `?v=N` automatically. If translations don't show after deploy, hard-refresh
-  (Cmd+Shift+R) and check that the version actually bumped in the HTML.
-- **⚠ A rebase skips the pre-commit hook.** The hook only fires on a real
-  `git commit`, so a commit that touches `i18n.js` and is then **rebased,
-  cherry-picked or amended** ships under the *previous* `?v=N` and browsers
-  serve stale translations from cache. `validate.js` will not catch this —
-  every page still agrees on the version, it is just the wrong one. After
-  any rebase, check the version moved:
-
-  ```bash
-  grep -ho "i18n.js?v=[0-9]*" index.html */index.html | sort -u
-  ```
-
-  and bump it by hand across all pages if it did not. This bit us once:
-  `2130478` shipped v=38, the rebased commit on top of it changed `i18n.js`
-  and would have shipped v=38 again.
+- **Edited `i18n.js` and forgot `build-i18n.py`** — `validate.js` fails with
+  `stale-fallback`. Run the generator; do not hand-patch the HTML.
+- **Hand-edited something under `de/`** — the next generator run silently
+  discards it. German copy lives in `i18n.js`, nowhere else.
+- **Cache-busting and the pre-commit hook are gone.** They existed because
+  `i18n.js` was fetched at runtime; it is not any more. If you re-introduce
+  a runtime script, note that a rebase does not fire hooks — that bit us
+  once, when `2130478` shipped v=38 and the rebased commit on top would have
+  shipped v=38 again.
 - **No-flash-of-English**: an inline head script reads localStorage *before*
   body renders and sets `data-lang="de"` so CSS can hide the body until
   `applyLang()` finishes. Don't remove that pre-script.
