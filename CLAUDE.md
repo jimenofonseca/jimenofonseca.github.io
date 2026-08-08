@@ -127,14 +127,19 @@ a JS `location.replace`:
 | `/projects/` | `/` | The former Jekyll site published a Projects page (`_old/Projects.md` → `/Projects.html`). Nothing has served it since the rebuild, so it 404s for anyone still linking to it. |
 | `/open-source/` | `/ipcc/` | Case study 03 lived there while it was framed around the open-source platform. Reframed around the IPCC contribution and moved. |
 
-⚠ **An earlier version of this file stated that the Portfolio link on
-Jimeno's LinkedIn profile points at `www.jimenofonseca.com/projects`.
-That was never verified** — it came from a third-party analysis, not from
-anything checkable in this repo, and no tooling here can see LinkedIn.
-What *is* verified is that `/projects` was a real URL on the old site and
-404'd after the rebuild, which justifies the stub on its own. If you want
-the LinkedIn claim settled, check the profile's Contact info → Website
-field by hand.
+⚠ **Settled, and the record was wrong.** An earlier version of this file
+claimed the Portfolio link on Jimeno's LinkedIn profile pointed at
+`www.jimenofonseca.com/projects`, and the `/projects/` stub was committed
+on that basis. Jimeno has since checked the profile: **the website field is
+`jimenofonseca.com`, the bare domain.** The claim was never true — it came
+from a third-party analysis that was taken at face value, and no tooling in
+this repo can see LinkedIn.
+
+The stub stays, on the evidence that actually holds: `/projects` was a real
+URL on the former Jekyll site and has 404'd since the rebuild, so anyone
+with an old bookmark or inbound link still lands somewhere. **Do not
+reintroduce the LinkedIn justification** — it is disproven, not merely
+unverified.
 
 `validate.js` skips any page containing a `<meta http-equiv="refresh">`,
 since redirect stubs carry no i18n or cache version of their own.
