@@ -351,6 +351,10 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
+/* Bands carrying a 5th stat widen to five columns instead of wrapping one
+   lone item onto a second row. Keyed off the content, so adding or removing
+   a stat needs no class on the markup. */
+.page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(5, 1fr); }
 .page-stats .stat {
   padding: 24px 0;
   border-right: 1px solid var(--hairline);
@@ -714,9 +718,17 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 
 @media (max-width: 700px) {
   .page-stats { grid-template-columns: repeat(2, 1fr); }
+  /* Media queries add no specificity, so the five-column :has() rule above
+     would otherwise keep 5 columns on a phone. Repeat its exact selector. */
+  .page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(2, 1fr); }
   .page-stats .stat { border-right: none; border-bottom: 1px solid var(--hairline); }
   .page-stats .stat:nth-child(odd) { border-right: 1px solid var(--hairline); }
-  .page-stats .stat:nth-last-child(-n+2) { border-bottom: none; }
+  /* Drop the bottom border only on the final row. With an even number of
+     stats that is the last two; with an odd number it is the last one only,
+     which then spans both columns rather than sitting alone beside a gap. */
+  .page-stats .stat:last-child { border-bottom: none; }
+  .page-stats .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .page-stats .stat:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; }
 
   .page-nav { grid-template-columns: 1fr; }
   .page-nav .next { text-align: left; align-items: flex-start; }}
