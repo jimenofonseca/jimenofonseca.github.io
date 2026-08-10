@@ -200,6 +200,26 @@
         </div>
       </article>
 
+      <!-- Media sits last, as on the other case studies. The figure removes
+           itself if the file is missing, so the page never shows a broken
+           image. -->
+      <section class="page-media">
+        <div class="video-wrap">
+          <img
+            src="/assets/ipcc-data-example.jpg"
+            alt="Example data output from the HBLM-USA and DEG-USA forecasting models."
+            loading="lazy"
+            decoding="async"
+            onerror="this.closest('.page-media').remove()"
+          />
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.ipcc.caption.kind">Figure</span>
+          <span class="sep">·</span>
+          <span class="text" data-i18n="v2.ipcc.caption.text">Example output from the HBLM-USA and DEG-USA forecasting models</span>
+        </p>
+      </section>
+
       <nav class="page-nav" aria-label="Adjacent case studies">
         <a href="/cea/" class="prev">
           <span class="label">← <span data-i18n="v2.prev">Previous</span></span>
