@@ -652,6 +652,34 @@ Either:
 Or for a single user opt-out: respect `prefers-reduced-motion: reduce` —
 already wired. Users with that preference get instant page-swap, no jump.
 
+## Mobile performance
+
+Measured on an emulated Pixel 5, 4x CPU throttle, third party answering in
+800ms. **FCP went from ~1,100ms to ~330ms** on one change.
+
+- **The Google Fonts stylesheet must stay non-blocking.** A third-party
+  `<link rel="stylesheet">` in the critical path holds up first paint by a
+  full round trip to `fonts.googleapis.com` — nothing renders until it
+  resolves. It is loaded as `media="print" onload="this.media='all'"` with a
+  `preload` warming the request and a `<noscript>` fallback. `display=swap`
+  keeps text readable in the fallback face meanwhile. **Do not "tidy" this
+  back into a plain stylesheet link.**
+- **Only request weights that exist in `style.css`** — currently 300, 400
+  and 500. Weight 600 was requested for years and used nowhere: one whole
+  font file per page load for nothing.
+- **`.feed-item` uses `content-visibility: auto`.** On mobile the six
+  LinkedIn embeds collapse to one column, ~1,900px of third-party content;
+  this skips layout and paint for the off-screen ones. `loading="lazy"`
+  defers the request, `contain-intrinsic-size` keeps the scrollbar honest.
+- The hero portrait carries `width`/`height`, `fetchpriority="high"` and
+  `decoding="async"`. CLS is 0 — `.hero-figure img` also has
+  `aspect-ratio: 3/4`, so the box is reserved before the image lands.
+
+Still open: the six LinkedIn embeds are the largest remaining third-party
+cost for real users (which is what Search Console's field data reports).
+A click-to-load facade, or simply fewer embeds, is the next lever — both
+are content decisions, not tuning.
+
 ## Common gotchas
 
 - **Edited `i18n.js` and forgot `build-i18n.py`** — `validate.js` fails with

@@ -286,6 +286,13 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   border: 1px solid var(--hairline);
   background: var(--bg);
   transition: border-color 0.15s ease;
+  /* On mobile these collapse to one column — six embeds stacked, ~1,900px of
+     third-party content. content-visibility lets the browser skip layout and
+     paint for the ones off screen; contain-intrinsic-size keeps the scrollbar
+     honest so skipping does not cause jumpiness. Pairs with loading="lazy",
+     which defers the network request. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
 }
 .feed-item:hover { border-color: var(--muted); }
 .feed-item iframe { width: 100%; min-height: 320px; border: none; display: block; }

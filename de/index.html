@@ -89,7 +89,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Non-blocking: a third-party stylesheet in the critical path holds up
+       first paint by a full round trip to fonts.googleapis.com. media="print"
+       downloads it without blocking, then onload promotes it. display=swap
+       means text is readable in the fallback face meanwhile. Weight 600 is
+       not used anywhere in style.css, so it is no longer requested. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
@@ -193,7 +200,7 @@
           </div>
         </div>
         <figure class="hero-figure">
-          <img src="/assets/portrait.jpg" alt="Jimeno Fonseca, portrait." loading="eager" />
+          <img src="/assets/portrait.jpg" alt="Jimeno Fonseca, portrait." width="901" height="1202" loading="eager" fetchpriority="high" decoding="async" />
           <figcaption>
             <span>Jimeno Fonseca</span>
           </figcaption>
