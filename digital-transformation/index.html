@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9455BKPKZZ"></script>
+  <!-- Google tag (gtag.js), loaded after the load event.
+       The commands below queue into dataLayer immediately, so the pageview is
+       not lost; gtag.js drains the queue when it arrives. Fetching it in the
+       head cost main-thread time during render and was the source of the
+       171ms forced reflow PageSpeed reported. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-9455BKPKZZ');
+    addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-9455BKPKZZ';
+      s.async = true;
+      document.head.appendChild(s);
+    }, { once: true });
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -227,6 +235,6 @@
 
   </div>
 
-  <script src="/app.js"></script>
+  <script src="/app.js" defer></script>
 </body>
 </html>
