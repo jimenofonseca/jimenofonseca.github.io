@@ -223,7 +223,7 @@ The distinction that governs this:
 
 | Keep | Cut |
 |---|---|
-| `about.proof2` — "an OPEX/CAPEX budget of CHF 8m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
+| `about.proof2` — "a budget of CHF 10m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
 
 The transformation claim is what reads CDIO; the number never was. Magnitude
 is kept the safe way: the impact line ends "a protected, multi-million CHF
