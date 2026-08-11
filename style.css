@@ -358,9 +358,11 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
-/* Bands carrying a 5th stat widen to five columns instead of wrapping one
-   lone item onto a second row. Keyed off the content, so adding or removing
-   a stat needs no class on the markup. */
+/* The band takes its column count from how many stats it holds, so adding or
+   removing one needs no class on the markup: three on /digital-transformation/,
+   four on /cea/, five on /ipcc/. Without this a three-stat band leaves a dead
+   fourth column and a five-stat band wraps one item onto a second row. */
+.page-stats:not(:has(.stat:nth-child(4))) { grid-template-columns: repeat(3, 1fr); }
 .page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(5, 1fr); }
 .page-stats .stat {
   padding: 24px 0;
@@ -737,8 +739,9 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 
 @media (max-width: 700px) {
   .page-stats { grid-template-columns: repeat(2, 1fr); }
-  /* Media queries add no specificity, so the five-column :has() rule above
-     would otherwise keep 5 columns on a phone. Repeat its exact selector. */
+  /* Media queries add no specificity, so the count-based :has() rules above
+     would otherwise survive on a phone. Repeat their exact selectors. */
+  .page-stats:not(:has(.stat:nth-child(4))),
   .page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(2, 1fr); }
   .page-stats .stat { border-right: none; border-bottom: 1px solid var(--hairline); }
   .page-stats .stat:nth-child(odd) { border-right: 1px solid var(--hairline); }

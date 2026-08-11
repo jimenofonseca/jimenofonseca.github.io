@@ -210,6 +210,26 @@ case study, which is what the "See case study →" link is for. The labels
 `v2.about.outcome.label` / `v2.about.impact.label` now render on the
 case-study pages only.
 
+### ⚠ Employer financials are off the site, deliberately
+
+**Never restore Axpo revenue figures.** The impact line for outcome 01 used
+to read "secured CHF 30m in at-risk business and launched CHF 1.5m in
+net-new digital services", and the case-study stat band led with
+"&gt;30 mCHF revenue secured". Both were removed: they are **Axpo's P&L** —
+revenue at risk, new revenue booked — published by an employee on a site
+whose video makes the employer unmistakable.
+
+The distinction that governs this:
+
+| Keep | Cut |
+|---|---|
+| `about.proof2` — "an OPEX/CAPEX budget of CHF 8m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
+
+The transformation claim is what reads CDIO; the number never was. If
+magnitude is ever wanted back, phrase it without disclosure — "a
+multi-million CHF service line", "an eight-figure portfolio" — never a
+figure tied to Axpo's results.
+
 ⚠ One consequence to know about: outcome 02's `.impact` string carries no
 numbers, so the home page no longer states CEA's "over 75 countries" or
 "30+ enterprise clients" on that row. The 75-countries claim still appears
