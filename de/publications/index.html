@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <!-- Google tag (gtag.js), loaded after the load event.
+       The commands below queue into dataLayer immediately, so the pageview is
+       not lost; gtag.js drains the queue when it arrives. Fetching it in the
+       head cost main-thread time during render and was the source of the
+       171ms forced reflow PageSpeed reported. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9455BKPKZZ');
+    addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-9455BKPKZZ';
+      s.async = true;
+      document.head.appendChild(s);
+    }, { once: true });
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){
+    var t=localStorage.getItem("theme");
+    if(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)t="dark";
+    if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
+    // Hyperjump arrival flag — applied before paint so CSS animation
+    // starts on the very first frame (no snap-then-jiggle).
+    if(sessionStorage.getItem("hyperjump-arriving")==="1"){
+      document.documentElement.classList.add("hyper-arrive");
+    }
+  })();</script>
+  <title data-i18n="pub.title">Publikationen | Forschung zu urbaner Energie entdecken — Jimeno Fonseca</title>
+  <meta name="description" data-i18n-content="pub.desc" content="Entdecken Sie Jimeno Fonsecas wissenschaftliche Publikationen zur Modellierung von Quartierenergie, urbanen Energiesystemen und nachhaltiger Stadtplanung. 80+ peer-reviewte Studien, über 2.500 Mal zitiert." />
+  <link rel="canonical" href="https://jimenofonseca.com/de/publications/" />
+  <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/publications/" />
+  <link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/publications/" />
+  <link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/publications/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Jimeno Fonseca" />
+  <meta property="og:locale" content="de_CH" />
+  <meta property="og:url" content="https://jimenofonseca.com/de/publications/" />
+  <meta property="og:title" content="Publikationen | Forschung zu urbaner Energie entdecken — Jimeno Fonseca" />
+  <meta property="og:description" content="Discover Jimeno Fonseca&#x27;s scientific publications on district energy modeling, urban energy systems, and sustainable city planning. 80+ peer-reviewed studies, cited over 2,500 times." />
+  <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jimeno Fonseca — Axpo Grid, Zürich" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Publikationen | Forschung zu urbaner Energie entdecken — Jimeno Fonseca" />
+  <meta name="twitter:description" content="Discover Jimeno Fonseca&#x27;s scientific publications on district energy modeling, urban energy systems, and sustainable city planning. 80+ peer-reviewed studies, cited over 2,500 times." />
+  <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Non-blocking: a third-party stylesheet in the critical path holds up
+       first paint by a full round trip to fonts.googleapis.com. media="print"
+       downloads it without blocking, then onload promotes it. display=swap
+       means text is readable in the fallback face meanwhile. Weight 600 is
+       not used anywhere in style.css, so it is no longer requested. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
+
+  <div class="mobile-bar">
+    <div class="brand-mini"><a href="/de/">Jimeno Fonseca</a></div>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()" data-i18n="v2.menu.open">Menü</button>
+  </div>
+
+  <div class="shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <a href="/de/">
+          <span class="name">Jimeno Fonseca</span>
+          <span class="role" data-i18n="v2.role">Digital Engineering — Axpo Grid</span>
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="v2.about.title">Über mich</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/de/#bio"><span class="num"></span><span data-i18n="nav.bio">Kurzbiografie</span><span class="arrow">↓</span></a></li>
+          <li><a href="/de/#proof"><span class="num"></span><span data-i18n="nav.proof">Belege für Grösse</span><span class="arrow">↓</span></a></li>
+          <li><a href="/de/#outcomes"><span class="num"></span><span data-i18n="nav.outcomes">Wichtige Ergebnisse</span><span class="arrow">↓</span></a></li>
+          <li><a href="/de/principles/"><span class="num"></span><span data-i18n="nav.principles">Arbeitsprinzipien</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.caseStudies">Fallstudien</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/de/digital-transformation/"><span class="num">01</span><span data-i18n="nav.transformation">Digitale Transformation</span><span class="arrow">→</span></a></li>
+          <li><a href="/de/cea/"><span class="num">02</span><span data-i18n="nav.product">Cloud-Lösung</span><span class="arrow">→</span></a></li>
+          <li><a href="/de/ipcc/"><span class="num">03</span><span data-i18n="nav.openSource">Erkenntnisse für den IPCC</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.media">Medien</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/de/appearances/"><span class="num">04</span><span data-i18n="nav.appearances">Auftritte</span><span class="arrow">→</span></a></li>
+          <li><a href="/de/publications/" aria-current="page"><span class="num">05</span><span data-i18n="nav.publications">Publikationen</span><span class="arrow">→</span></a></li>
+          <li><a href="/de/#recently"><span class="num">06</span><span data-i18n="nav.news">Neuigkeiten</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.personal">Persönlich</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/de/music/"><span class="num">07</span><span data-i18n="nav.music">Musik</span><span class="arrow">→</span></a></li>
+          <li><a href="/de/photography/"><span class="num">08</span><span data-i18n="nav.photography">Fotografie</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="v2.eyebrow.connect">Kontakt</div>
+        <ul class="nav-list" role="list">
+          <li><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener"><span class="num">09</span><span data-i18n="v2.contact.linkedin">LinkedIn</span><span class="arrow">↗</span></a></li>
+          <li><a href="https://github.com/jimenofonseca" target="_blank" rel="noopener"><span class="num">10</span><span data-i18n="v2.contact.github">GitHub</span><span class="arrow">↗</span></a></li>
+          <li><a href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ&hl=en" target="_blank" rel="noopener"><span class="num">11</span><span data-i18n="v2.contact.scholar">Google Scholar</span><span class="arrow">↗</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-controls">
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.theme.label">Theme</span>
+          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
+            <span class="opt active" data-theme-opt="light">LIGHT</span>
+            <span class="sep">/</span>
+            <span class="opt" data-theme-opt="dark">DARK</span>
+          </button>
+        </div>
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.lang.label">Sprache</span>
+          <div class="toggle lang-toggle">
+            <a class="opt lang-opt" href="/publications/" hreflang="en" lang="en">EN</a>
+            <span class="sep">/</span>
+            <span class="opt lang-opt active">DE</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content" id="page" tabindex="-1">
+
+      <section class="page-intro">
+        <p class="page-eyebrow">
+          <a href="/de/" data-i18n="nav.media">Medien</a>
+          <span class="crumb">/</span>
+          <span class="index">05</span>
+        </p>
+        <h1 class="page-title" data-i18n="v2.pub.title">Publikationen</h1>
+        <p class="page-lede" data-i18n="v2.pub.lede">Forschung, aus der Werkzeuge wurden, die die Industrie tatsächlich nutzt — und ein Datenbeitrag zum 6. IPCC-Sachstandsbericht.</p>
+      </section>
+
+      <section class="page-media">
+        <figure class="citations-chart">
+          <svg viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="Citations per year, 2015 through 2026, from Google Scholar.">
+            <g>
+              <rect x="10"  y="194" width="40" height="6"   data-year="2015" data-cites="14"  ><title>2015 · 14 citations</title></rect>
+              <rect x="70"  y="187" width="40" height="13"  data-year="2016" data-cites="30"  ><title>2016 · 30 citations</title></rect>
+              <rect x="130" y="167" width="40" height="33"  data-year="2017" data-cites="73"  ><title>2017 · 73 citations</title></rect>
+              <rect x="190" y="158" width="40" height="42"  data-year="2018" data-cites="94"  ><title>2018 · 94 citations</title></rect>
+              <rect x="250" y="128" width="40" height="72"  data-year="2019" data-cites="162" ><title>2019 · 162 citations</title></rect>
+              <rect x="310" y="76"  width="40" height="124" data-year="2020" data-cites="278" ><title>2020 · 278 citations</title></rect>
+              <rect x="370" y="52"  width="40" height="148" data-year="2021" data-cites="330" ><title>2021 · 330 citations</title></rect>
+              <rect x="430" y="41"  width="40" height="159" data-year="2022" data-cites="355" ><title>2022 · 355 citations</title></rect>
+              <rect x="490" y="54"  width="40" height="146" data-year="2023" data-cites="326" ><title>2023 · 326 citations</title></rect>
+              <rect x="550" y="20"  width="40" height="180" data-year="2024" data-cites="402" ><title>2024 · 402 citations</title></rect>
+              <rect x="610" y="46"  width="40" height="154" data-year="2025" data-cites="345" ><title>2025 · 345 citations</title></rect>
+              <rect x="670" y="156" width="40" height="44"  data-year="2026" data-cites="98"  ><title>2026 · 98 citations (year-to-date)</title></rect>
+            </g>
+            <line class="chart-baseline" x1="0" y1="200" x2="720" y2="200" />
+          </svg>
+          <div class="chart-labels" aria-hidden="true">
+            <span>'15</span><span>'16</span><span>'17</span><span>'18</span><span>'19</span><span>'20</span><span>'21</span><span>'22</span><span>'23</span><span class="peak">'24</span><span>'25</span><span>'26</span>
+          </div>
+        </figure>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.pub.chart.label">Zitierungen pro Jahr</span>
+          <span class="sep">·</span>
+          <span class="text" data-i18n="v2.pub.chart.note">2.541 gesamt · Quelle: Google Scholar</span>
+        </p>
+      </section>
+
+      <div class="page-body-row">
+      <section class="page-body">
+        <p data-i18n="pub.p1">Zwei Themen durchziehen die Arbeit. Das erste ist die multiphysikalische Simulation von Energiesystemen auf Gebäude- und Quartiersebene. Das zweite ist datengetriebene Inferenz — maschinelles Lernen und Bayes'sche Statistik — angewandt auf dieselben Systeme. Vieles davon entstand mit Kolleginnen und Kollegen an der ETH Zürich, am ETH-Singapore Future Cities Lab und an der EPFL.</p>
+        <p data-i18n="pub.p2">Neben der begutachteten Forschung versuche ich, diese Arbeit für ein breiteres Publikum verständlich zu machen — für alle, die sich für digitale Abbilder des Energiesektors interessieren und für die offene Frage, wie sich deren Emulation näher an den realen Betrieb bringen lässt. Ingenieure, Planer und alle, die an der Schnittstelle von Physik und Software arbeiten.</p>
+      </section>
+
+        <aside class="stats-aside" aria-label="At a glance">
+          <div class="stats-label" data-i18n="v2.stats.metrics">Kennzahlen</div>
+          <div class="stats-list">
+            <div class="stat"><span class="stat-num">80+</span><span class="stat-lbl" data-i18n="pub.stat.pubs">Publikationen</span></div>
+            <div class="stat"><span class="stat-num">2,541</span><span class="stat-lbl" data-i18n="pub.stat.cites">Zitierungen</span></div>
+            <div class="stat"><span class="stat-num">AR6</span><span class="stat-lbl" data-i18n="pub.stat.h">IPCC-Mitwirkender</span></div>
+            <div class="stat"><span class="stat-num">75+</span><span class="stat-lbl" data-i18n="v2.stat.i10">Länder, die die Tools nutzen</span></div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="page-actions">
+        <a class="cta-link" href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ" target="_blank" rel="noopener">
+          <span data-i18n="pub.cta">Zugang erhalten</span>
+          <span class="arrow">↗</span>
+        </a>
+      </section>
+
+
+      <nav class="page-nav" aria-label="Adjacent pages">
+        <a href="/de/appearances/" class="prev">
+          <span class="label">← <span data-i18n="v2.prev">Vorherige</span></span>
+          <span class="title"><span data-i18n="nav.appearances">Auftritte</span></span>
+        </a>
+        <span></span>
+      </nav>
+
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2012 – 2026 Jimeno Fonseca</span>
+      <span>Zürich, CH</span>
+    </footer>
+
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

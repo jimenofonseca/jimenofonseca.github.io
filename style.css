@@ -245,17 +245,6 @@ section:first-of-type { border-top: none; padding-top: 0; }
   color: var(--muted);
   margin-bottom: 0;
 }
-.hero .meta {
-  display: flex;
-  gap: 24px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-top: 40px;
-}
-.hero .meta strong { color: var(--fg); font-weight: 500; }
 
 /* ── Hero portrait ── */
 .hero-figure {
@@ -285,70 +274,6 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   color: var(--faint);
 }
 
-/* ── Bio paragraph ── */
-.bio p {
-  font-size: 16.5px;
-  line-height: 1.7;
-  color: var(--fg);
-  font-weight: 300;
-  margin-bottom: 18px;
-  max-width: var(--prose-w);
-}
-
-/* ── Initiatives list (typographic, not cards) ── */
-.work-list {
-  display: flex;
-  flex-direction: column;
-}
-.work-row {
-  display: grid;
-  grid-template-columns: 32px 1fr auto;
-  gap: 24px;
-  align-items: baseline;
-  padding: 22px 0;
-  border-top: 1px solid var(--hairline);
-  color: var(--fg);
-  transition: padding-left 0.15s ease;
-}
-.work-row:first-child { border-top: none; }
-.work-row:hover { padding-left: 6px; }
-.work-row:hover .work-arrow { opacity: 1; transform: translateX(2px); }
-
-.work-row .work-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--faint);
-  font-variant-numeric: tabular-nums;
-}
-.work-row .work-title {
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  margin-bottom: 4px;
-  display: block;
-}
-.work-row .work-desc {
-  font-size: 13.5px;
-  color: var(--muted);
-  line-height: 1.5;
-  font-weight: 300;
-}
-.work-row .work-meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--faint);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-.work-arrow {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--faint);
-  opacity: 0;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  margin-left: 8px;
-}
-
 /* ── Recently / News feed ── */
 .feed-grid {
   display: grid;
@@ -356,12 +281,18 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   gap: 16px;
 }
 @media (max-width: 1100px) {
-  .feed-grid { grid-template-columns: repeat(2, 1fr); }
-}
+  .feed-grid { grid-template-columns: repeat(2, 1fr); }}
 .feed-item {
   border: 1px solid var(--hairline);
   background: var(--bg);
   transition: border-color 0.15s ease;
+  /* On mobile these collapse to one column — six embeds stacked, ~1,900px of
+     third-party content. content-visibility lets the browser skip layout and
+     paint for the ones off screen; contain-intrinsic-size keeps the scrollbar
+     honest so skipping does not cause jumpiness. Pairs with loading="lazy",
+     which defers the network request. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
 }
 .feed-item:hover { border-color: var(--muted); }
 .feed-item iframe { width: 100%; min-height: 320px; border: none; display: block; }
@@ -379,36 +310,6 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   gap: 6px;
 }
 .feed-more a:hover { color: var(--muted); border-color: var(--muted); }
-
-/* ── Contact ── */
-.contact-list { list-style: none; display: flex; flex-direction: column; }
-.contact-list li {
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
-  gap: 24px;
-  align-items: baseline;
-  padding: 16px 0;
-  border-top: 1px solid var(--hairline);
-}
-.contact-list li:first-child { border-top: none; }
-.contact-list .ckey {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.contact-list a {
-  font-size: 15.5px;
-  color: var(--fg);
-  transition: color 0.15s ease;
-}
-.contact-list a:hover { color: var(--muted); }
-.contact-list .ext {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--faint);
-}
 
 /* ─────────────────────────────────────────────────────────
    Subpage layout
@@ -457,6 +358,10 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
+/* Bands carrying a 5th stat widen to five columns instead of wrapping one
+   lone item onto a second row. Keyed off the content, so adding or removing
+   a stat needs no class on the markup. */
+.page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(5, 1fr); }
 .page-stats .stat {
   padding: 24px 0;
   border-right: 1px solid var(--hairline);
@@ -548,13 +453,6 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   max-width: var(--prose-w);
 }
 .page-body p:last-of-type { margin-bottom: 0; }
-.page-body .inline-link {
-  color: var(--fg);
-  border-bottom: 1px solid var(--muted);
-  padding-bottom: 1px;
-  transition: border-color 0.15s ease;
-}
-.page-body .inline-link:hover { border-color: var(--fg); }
 
 /* Video / media */
 .page-media {
@@ -569,6 +467,16 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .video-wrap iframe,
 .video-wrap video {
   width: 100%; height: 100%; border: none; display: block;
+}
+/* Same 16/9 box for a still image, so a case study whose media is a figure
+   rather than a talk occupies exactly the same footprint. contain, not
+   cover: a data figure must never be cropped, and the letterboxing falls on
+   the neutral --hover background the box already has. The fixed box also
+   means no layout shift regardless of the figure's own proportions. */
+.video-wrap img {
+  width: 100%; height: 100%; display: block;
+  object-fit: contain;
+  object-position: center;
 }
 .media-caption {
   margin-top: 14px;
@@ -680,11 +588,9 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .photo-grid figure:hover figcaption { opacity: 1; }
 
 @media (max-width: 900px) {
-  .photo-grid { grid-template-columns: repeat(2, 1fr); }
-}
+  .photo-grid { grid-template-columns: repeat(2, 1fr); }}
 @media (max-width: 520px) {
-  .photo-grid { grid-template-columns: 1fr; }
-}
+  .photo-grid { grid-template-columns: 1fr; }}
 
 /* ── Lightbox ───────────────────────────────────────────── */
 .lightbox {
@@ -790,62 +696,7 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 }
 
 @media (max-width: 1100px) {
-  .gear-list { position: static; }
-}
-
-/* ── Repo grid (Open Source hero) ───────────────────────── */
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-}
-.repo-card {
-  background: var(--bg);
-  padding: 26px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: var(--fg);
-  transition: background 0.15s ease;
-  min-height: 200px;
-}
-.repo-card:hover { background: var(--hover); }
-.repo-card .repo-name {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-}
-.repo-card .repo-desc {
-  font-size: 13.5px;
-  color: var(--muted);
-  line-height: 1.55;
-  font-weight: 300;
-  flex: 1;
-}
-.repo-card .repo-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--faint);
-  letter-spacing: 0.04em;
-}
-.repo-card .repo-stars { color: var(--muted); }
-.repo-card .repo-arrow {
-  margin-left: auto;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-.repo-card:hover .repo-arrow { opacity: 1; }
-
-@media (max-width: 900px) {
-  .repo-grid { grid-template-columns: 1fr; }
-}
+  .gear-list { position: static; }}
 
 /* ── Citations bar chart (Publications hero) ────────────── */
 .citations-chart { margin: 0; }
@@ -878,95 +729,26 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 }
 .citations-chart .chart-labels span.peak { color: var(--fg); font-weight: 500; }
 
-/* ── Featured paper card (Publications hero) ────────────── */
-.paper-card {
-  display: block;
-  border-top: 1px solid var(--fg);
-  border-bottom: 1px solid var(--hairline);
-  padding: 28px 0 26px;
-  color: var(--fg);
-  transition: padding-left 0.15s ease;
-}
-.paper-card:hover { padding-left: 6px; }
-.paper-card .paper-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 14px;
-}
-.paper-card .paper-title {
-  font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 400;
-  line-height: 1.28;
-  letter-spacing: -0.015em;
-  text-wrap: balance;
-  margin: 0 0 14px 0;
-}
-.paper-card .paper-authors {
-  font-size: 14px;
-  color: var(--muted);
-  font-style: italic;
-  margin-bottom: 16px;
-}
-.paper-card .paper-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.04em;
-  color: var(--faint);
-}
-.paper-card .paper-meta .journal { color: var(--muted); }
-.paper-card .paper-meta .cites { color: var(--fg); font-weight: 500; }
-.paper-card .paper-meta .paper-arrow {
-  margin-left: auto;
-  font-size: 14px;
-  color: var(--faint);
-  transition: transform 0.15s ease, color 0.15s ease;
-}
-.paper-card:hover .paper-meta .paper-arrow { transform: translateX(3px); color: var(--fg); }
-
-/* External card (GitHub / Scholar style) */
-.ext-card {
-  display: grid;
-  grid-template-columns: 32px 1fr auto;
-  gap: 20px;
-  align-items: center;
-  padding: 24px 0;
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  margin: 32px 0;
-  color: var(--fg);
-  transition: padding-left 0.15s ease;
-}
-.ext-card:hover { padding-left: 6px; }
-.ext-card .ext-icon { color: var(--muted); }
-.ext-card .ext-h3 { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
-.ext-card .ext-p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
-.ext-card .ext-arrow {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--faint);
-}
-
 @media (max-width: 1100px) {
   .page-body-row { grid-template-columns: 1fr; gap: 32px; }
-  .stats-aside { position: static; }
-}
+  .stats-aside { position: static; }}
 
 @media (max-width: 700px) {
   .page-stats { grid-template-columns: repeat(2, 1fr); }
+  /* Media queries add no specificity, so the five-column :has() rule above
+     would otherwise keep 5 columns on a phone. Repeat its exact selector. */
+  .page-stats:has(.stat:nth-child(5)) { grid-template-columns: repeat(2, 1fr); }
   .page-stats .stat { border-right: none; border-bottom: 1px solid var(--hairline); }
   .page-stats .stat:nth-child(odd) { border-right: 1px solid var(--hairline); }
-  .page-stats .stat:nth-last-child(-n+2) { border-bottom: none; }
+  /* Drop the bottom border only on the final row. With an even number of
+     stats that is the last two; with an odd number it is the last one only,
+     which then spans both columns rather than sitting alone beside a gap. */
+  .page-stats .stat:last-child { border-bottom: none; }
+  .page-stats .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .page-stats .stat:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; }
 
   .page-nav { grid-template-columns: 1fr; }
-  .page-nav .next { text-align: left; align-items: flex-start; }
-}
+  .page-nav .next { text-align: left; align-items: flex-start; }}
 
 /* ─────────────────────────────────────────────────────────
    Footer
@@ -1044,12 +826,9 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   }
 
   .feed-grid { grid-template-columns: 1fr; }
-  .work-row { grid-template-columns: 28px 1fr; }
-  .work-row .work-meta { grid-column: 2; padding-top: 6px; }
 
   .hero { grid-template-columns: 1fr; gap: 40px; }
-  .hero-figure { max-width: 320px; }
-}
+  .hero-figure { max-width: 320px; }}
 /* ─────────────────────────────────────────────────────────
    style-morph.css — Hyperspace jump page transition.
    The actual animation is driven by app-morph.js, which
@@ -1092,8 +871,7 @@ html[data-theme="dark"] {
   animation: hyperjump-bg 1.2s cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
 }
 @media (max-width: 900px) {
-  .hyperjump { left: 0; }
-}
+  .hyperjump { left: 0; }}
 
 @keyframes hyperjump-bg {
   0%   { opacity: 0; }
@@ -1165,8 +943,7 @@ html.hyper-arrive body::before {
   animation: arrival-overlay-fade 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @media (max-width: 900px) {
-  html.hyper-arrive body::before { left: 0; }
-}
+  html.hyper-arrive body::before { left: 0; }}
 @keyframes arrival-overlay-fade {
   from { opacity: 1; }
   to   { opacity: 0; }
@@ -1201,8 +978,7 @@ html.hyper-arrive main.content {
   html.hyper-arrive main.content,
   html.hyper-arrive .sidebar {
     animation: none !important;
-  }
-}
+  }}
 
 /* ─────────────────────────────────────────────────────────
    Accent
@@ -1214,7 +990,6 @@ html.hyper-arrive main.content {
 
 /* The 01–13 numbered index motif — the site's signature detail */
 .eyebrow .index,
-.work-row .work-num,
 .nav-list a:hover .num { color: var(--accent); }
 
 /* Proof points */
@@ -1223,19 +998,27 @@ html.hyper-arrive main.content {
 
 /* Interactive states */
 .nav-list a:hover,
-.work-row:hover .work-title,
-.work-row:hover .work-arrow,
 .crumb a:hover,
 .cta-link:hover { color: var(--accent); }
 
-/* Real link affordance in prose */
+/* Real link affordance in prose.
+   .cs-content / .cs-result are the case-study chapter bodies — source links
+   live inline there (model repos, papers, the CEA site), and without this
+   rule they inherit body colour and read as plain text. */
 .page-body a,
-.bio a {
+.cs-content a,
+.cs-result a,
+.principle-text a {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  transition: opacity 0.15s ease;
 }
+.page-body a:hover,
+.cs-content a:hover,
+.cs-result a:hover,
+.principle-text a:hover { opacity: 0.7; }
 
 /* ─────────────────────────────────────────────────────────
    About / How I Lead — operating principles
@@ -1293,21 +1076,22 @@ html.hyper-arrive main.content {
 .proof-list { display: flex; flex-direction: column; }
 .proof-item {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 24px;
   align-items: baseline;
   padding: 18px 0;
   border-top: 1px solid var(--hairline);
 }
 .proof-item:first-child { border-top: none; padding-top: 0; }
+/* Same treatment as .outcome-text h2 — these are peer item titles, and the
+   page should not use a different typeface for each section. Mono/uppercase
+   is reserved for labels (eyebrows, number rails), not for content titles. */
 .proof-label {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 17px;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
+  line-height: 1.35;
+  color: var(--fg);
 }
 .proof-item p {
   font-size: 15.5px;
@@ -1331,19 +1115,13 @@ html.hyper-arrive main.content {
   font-variant-numeric: tabular-nums; padding-top: 4px;
 }
 .outcome-text { max-width: var(--prose-w); }
-.outcome-text h3 { font-size: 17px; font-weight: 500; line-height: 1.35; margin-bottom: 14px; }
-.outcome-row { display: grid; grid-template-columns: 76px 1fr; gap: 14px; margin-top: 10px; }
-.outcome-key {
-  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); padding-top: 4px;
-}
-.outcome-row span:last-child { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
+.outcome-text h2 { font-size: 17px; font-weight: 500; line-height: 1.35; margin-bottom: 14px; }
+.outcome-body { font-size: 15px; line-height: 1.65; font-weight: 300; color: var(--muted); }
 .outcome-link {
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
   margin-top: 16px;
-  margin-left: 90px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -1365,42 +1143,9 @@ html.hyper-arrive main.content {
 }
 .principle-text .principle-sum + p { margin-top: 0; }
 @media (max-width: 860px) {
-  .proof-item { grid-template-columns: 1fr; gap: 6px; }
-  .outcome-row { grid-template-columns: 1fr; gap: 4px; }
-  .outcome-link { margin-left: 0; }
-}
+  .proof-item { grid-template-columns: 1fr; gap: 6px; }}
 @media (max-width: 640px) {
-  .principle, .outcome { grid-template-columns: 24px 1fr; gap: 14px; }
-}
-
-/* ─────────────────────────────────────────────────────────
-   Case study body — Outcome/Impact summary, then
-   Challenge / Strategy / Execution
-   ───────────────────────────────────────────────────────── */
-.cs-summary {
-  padding: 20px 0 24px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--hairline);
-  max-width: var(--prose-w);
-}
-.cs-summary .outcome-row:first-child { margin-top: 0; }
-.cs-block { margin-bottom: 32px; max-width: var(--prose-w); }
-.cs-block:last-child { margin-bottom: 0; }
-.cs-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-.cs-block p:not(.cs-label) {
-  font-size: 16px;
-  line-height: 1.72;
-  font-weight: 300;
-  color: var(--fg);
-}
+  .principle, .outcome { grid-template-columns: 24px 1fr; gap: 14px; }}
 
 /* ─────────────────────────────────────────────────────────
    Case study chapters — PROTOTYPE (index-new.html)
@@ -1463,6 +1208,4 @@ html.hyper-arrive main.content {
   .cs-chapter { grid-template-columns: 1fr; gap: 18px; padding: 40px 0; }
   .cs-rail { position: static; flex-direction: row; align-items: baseline; gap: 12px; }
   .cs-rail-num { font-size: 22px; }
-  .cs-content h2 { font-size: 22px; }
-}
-
+  .cs-content h2 { font-size: 22px; }}

@@ -17,9 +17,12 @@ function toggleSidebar() {
   if (!s) return;
   s.classList.toggle('open');
   var btn = document.getElementById('menu-btn');
+  // Each URL serves one language now, so read it off the document rather
+  // than a global the translation script used to set.
+  var de = document.documentElement.lang === 'de';
   if (btn) btn.textContent = s.classList.contains('open')
-    ? (window.__lang === 'de' ? 'Schliessen' : 'Close')
-    : (window.__lang === 'de' ? 'Menü' : 'Menu');
+    ? (de ? 'Schliessen' : 'Close')
+    : (de ? 'Menü' : 'Menu');
 }
 
 // ── Init ─────────────────────────────────────────────────

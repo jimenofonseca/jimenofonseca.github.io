@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js), loaded after the load event.
+       The commands below queue into dataLayer immediately, so the pageview is
+       not lost; gtag.js drains the queue when it arrives. Fetching it in the
+       head cost main-thread time during render and was the source of the
+       171ms forced reflow PageSpeed reported. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9455BKPKZZ');
+    addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-9455BKPKZZ';
+      s.async = true;
+      document.head.appendChild(s);
+    }, { once: true });
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){
+    var t=localStorage.getItem("theme");
+    if(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)t="dark";
+    if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
+    // Hyperjump arrival flag — applied before paint so CSS animation
+    // starts on the very first frame (no snap-then-jiggle).
+    if(sessionStorage.getItem("hyperjump-arriving")==="1"){
+      document.documentElement.classList.add("hyper-arrive");
+    }
+  })();</script>
+  <title data-i18n="ipcc.title">Insights for the IPCC 6th Assessment Report | Forecasting Climate Impact on Energy Demand — Jimeno Fonseca</title>
+  <meta name="description" data-i18n-content="ipcc.desc" content="Jimeno Fonseca's HBLM-USA and DEG-USA forecasting models analysed energy consumption across half a million buildings in the United States, and contributed data to the IPCC 6th Assessment Report on Climate Change." />
+  <link rel="canonical" href="https://jimenofonseca.com/ipcc/" />
+  <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/ipcc/" />
+  <link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/ipcc/" />
+  <link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/ipcc/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Jimeno Fonseca" />
+  <meta property="og:locale" content="en" />
+  <meta property="og:url" content="https://jimenofonseca.com/ipcc/" />
+  <meta property="og:title" content="Insights for the IPCC 6th Assessment Report" />
+  <meta property="og:description" content="Jimeno Fonseca's HBLM-USA and DEG-USA forecasting models analysed energy consumption across half a million buildings in the United States, and contributed data to the IPCC 6th Assessment Report on Climate Change." />
+  <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jimeno Fonseca — Axpo Grid, Zürich" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Insights for the IPCC 6th Assessment Report" />
+  <meta name="twitter:description" content="Jimeno Fonseca's HBLM-USA and DEG-USA forecasting models analysed energy consumption across half a million buildings in the United States, and contributed data to the IPCC 6th Assessment Report on Climate Change." />
+  <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Non-blocking: a third-party stylesheet in the critical path holds up
+       first paint by a full round trip to fonts.googleapis.com. media="print"
+       downloads it without blocking, then onload promotes it. display=swap
+       means text is readable in the fallback face meanwhile. Weight 600 is
+       not used anywhere in style.css, so it is no longer requested. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
+
+  <div class="mobile-bar">
+    <div class="brand-mini"><a href="/">Jimeno Fonseca</a></div>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()" data-i18n="v2.menu.open">Menu</button>
+  </div>
+
+  <div class="shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <a href="/">
+          <span class="name">Jimeno Fonseca</span>
+          <span class="role" data-i18n="v2.role">Digital Engineering — Axpo Grid</span>
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="v2.about.title">About</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/#bio"><span class="num"></span><span data-i18n="nav.bio">Short bio</span><span class="arrow">↓</span></a></li>
+          <li><a href="/#proof"><span class="num"></span><span data-i18n="nav.proof">Proof of scale</span><span class="arrow">↓</span></a></li>
+          <li><a href="/#outcomes"><span class="num"></span><span data-i18n="nav.outcomes">Key outcomes</span><span class="arrow">↓</span></a></li>
+          <li><a href="/principles/"><span class="num"></span><span data-i18n="nav.principles">Operating principles</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.caseStudies">Case Studies</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/digital-transformation/"><span class="num">01</span><span data-i18n="nav.transformation">Digital Transformation</span><span class="arrow">→</span></a></li>
+          <li><a href="/cea/"><span class="num">02</span><span data-i18n="nav.product">Cloud Solution</span><span class="arrow">→</span></a></li>
+          <li><a href="/ipcc/"><span class="num">03</span><span data-i18n="nav.openSource">Insights for IPCC</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.media">Media</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/appearances/"><span class="num">04</span><span data-i18n="nav.appearances">Appearances</span><span class="arrow">→</span></a></li>
+          <li><a href="/publications/"><span class="num">05</span><span data-i18n="nav.publications">Publications</span><span class="arrow">→</span></a></li>
+          <li><a href="/#recently"><span class="num">06</span><span data-i18n="nav.news">News</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="nav.personal">Personal</div>
+        <ul class="nav-list" role="list">
+          <li><a href="/music/"><span class="num">07</span><span data-i18n="nav.music">Music</span><span class="arrow">→</span></a></li>
+          <li><a href="/photography/"><span class="num">08</span><span data-i18n="nav.photography">Photography</span><span class="arrow">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label" data-i18n="v2.eyebrow.connect">Connect</div>
+        <ul class="nav-list" role="list">
+          <li><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener"><span class="num">09</span><span data-i18n="v2.contact.linkedin">LinkedIn</span><span class="arrow">↗</span></a></li>
+          <li><a href="https://github.com/jimenofonseca" target="_blank" rel="noopener"><span class="num">10</span><span data-i18n="v2.contact.github">GitHub</span><span class="arrow">↗</span></a></li>
+          <li><a href="https://scholar.google.com/citations?user=qWW0IKcAAAAJ&hl=en" target="_blank" rel="noopener"><span class="num">11</span><span data-i18n="v2.contact.scholar">Google Scholar</span><span class="arrow">↗</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-controls">
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.theme.label">Theme</span>
+          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
+            <span class="opt active" data-theme-opt="light">LIGHT</span>
+            <span class="sep">/</span>
+            <span class="opt" data-theme-opt="dark">DARK</span>
+          </button>
+        </div>
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.lang.label">Language</span>
+          <div class="toggle lang-toggle">
+            <span class="opt lang-opt active">EN</span>
+            <span class="sep">/</span>
+            <a class="opt lang-opt" href="/de/ipcc/" hreflang="de" lang="de">DE</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content" id="page" tabindex="-1">
+
+      <section class="page-intro">
+        <p class="page-eyebrow">
+          <a href="/" data-i18n="nav.caseStudies">Case Studies</a>
+          <span class="crumb">/</span>
+          <span class="index">03</span>
+        </p>
+        <h1 class="page-title" data-i18n="v2.ipcc.title">Insights for the IPCC 6th Assessment Report</h1>
+        <p class="page-lede" data-i18n="v2.ipcc.lede">Two forecasting models quantifying how climate change moves energy demand — data contributed to the 2021 IPCC 6th Assessment Report.</p>
+
+        <div class="page-stats">
+          <div class="stat"><span class="stat-num">500K</span><span class="stat-lbl" data-i18n="v2.stat.buildings">Buildings modelled</span></div>
+          <div class="stat"><span class="stat-num">100+</span><span class="stat-lbl" data-i18n="v2.stat.cities">US cities sampled</span></div>
+          <div class="stat"><span class="stat-num">2</span><span class="stat-lbl" data-i18n="v2.stat.models">Forecasting models</span></div>
+          <div class="stat"><span class="stat-num">1000+</span><span class="stat-lbl" data-i18n="v2.stat.stations">Weather stations sampled</span></div>
+          <div class="stat"><span class="stat-num">100+</span><span class="stat-lbl" data-i18n="v2.stat.forecasts">Forecasts to the end of the century</span></div>
+        </div>
+      </section>
+
+      <article class="cs-chapter">
+        <div class="cs-rail">
+          <span class="cs-rail-num">01</span>
+          <span class="cs-rail-kind" data-i18n="v2.cs.why">Why</span>
+        </div>
+        <div class="cs-content">
+          <h2 data-i18n="v2.cs.challenge">The Problem</h2>
+          <p data-i18n="ipcc.cs1">Climate policy needs numbers it can defend. Quantifying how a changing climate will move building energy demand across an entire country means modelling at a scale, and a level of transparency, that proprietary tools rarely offer — and a policy body cannot cite what it cannot inspect.</p>
+        </div>
+      </article>
+
+      <article class="cs-chapter">
+        <div class="cs-rail">
+          <span class="cs-rail-num">02</span>
+          <span class="cs-rail-kind" data-i18n="v2.cs.how">How</span>
+        </div>
+        <div class="cs-content">
+          <h2 data-i18n="v2.cs.strategy">The Execution</h2>
+          <p data-i18n-html="ipcc.cs2">Science and engineering advance fastest when models, data and methods are open and reproducible. Both models were therefore built to be transparent and highly scalable, and released openly as <a href="https://github.com/jimenofonseca/HBLM-USA" target="_blank" rel="noopener noreferrer">HBLM-USA</a> and <a href="https://github.com/jimenofonseca/DEG-USA" target="_blank" rel="noopener noreferrer">DEG-USA</a>, so the method could be examined rather than taken on trust.</p>
+          <p data-i18n-html="ipcc.cs3">Both models were built with deep neural networks and Bayesian statistics, run across half a million buildings spanning the entire United States, and published in peer-reviewed journals — <a href="https://doi.org/10.1016/j.apenergy.2020.115556" target="_blank" rel="noopener noreferrer">the data-driven study</a> and <a href="https://doi.org/10.1016/j.apenergy.2019.114458" target="_blank" rel="noopener noreferrer">the physics-based study</a>. The resulting demand scenarios were submitted to the IPCC 6th Assessment Report panel, which aggregated them with those of more than 15 other selected teams and published the averaged projections in the report.</p>
+        </div>
+      </article>
+
+      <article class="cs-chapter">
+        <div class="cs-rail">
+          <span class="cs-rail-num">03</span>
+          <span class="cs-rail-kind" data-i18n="v2.cs.what">What</span>
+        </div>
+        <div class="cs-content">
+          <h2 data-i18n="v2.cs.outcome">The Result</h2>
+          <div class="cs-result"><span class="cs-result-key" data-i18n="v2.about.outcome.label">Outcome</span><p data-i18n="about.out3.outcome">Delivered data-driven (HBLM-USA) and physics-based (DEG-USA) forecasts of how climate change will affect energy consumption in the United States to the end of the century.</p></div>
+          <div class="cs-result"><span class="cs-result-key" data-i18n="v2.about.impact.label">Impact</span><p data-i18n="about.out3.impact">Contributed data to the IPCC 6th Assessment Report on Climate Change, informing worldwide environmental policy since 2021.</p></div>
+        </div>
+      </article>
+
+      <!-- Media sits last, as on the other case studies. The figure removes
+           itself if the file is missing, so the page never shows a broken
+           image. -->
+      <section class="page-media">
+        <div class="video-wrap">
+          <img
+            src="/assets/ipcc-data-example.jpg"
+            alt="Example data output from the HBLM-USA and DEG-USA forecasting models."
+            loading="lazy"
+            decoding="async"
+            onerror="this.closest('.page-media').remove()"
+          />
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.ipcc.caption.kind">Figure</span>
+          <span class="sep">·</span>
+          <span class="text" data-i18n="v2.ipcc.caption.text">Example output from the HBLM-USA and DEG-USA forecasting models</span>
+        </p>
+      </section>
+
+      <nav class="page-nav" aria-label="Adjacent case studies">
+        <a href="/cea/" class="prev">
+          <span class="label">← <span data-i18n="v2.prev">Previous</span></span>
+          <span class="title"><span data-i18n="nav.product">Cloud Solution</span></span>
+        </a>
+        <a href="/digital-transformation/" class="next">
+          <span class="label"><span data-i18n="v2.next">Next</span> →</span>
+          <span class="title"><span data-i18n="nav.transformation">Digital Transformation</span></span>
+        </a>
+      </nav>
+
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2012 – 2026 Jimeno Fonseca</span>
+      <span>Zürich, CH</span>
+    </footer>
+
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
