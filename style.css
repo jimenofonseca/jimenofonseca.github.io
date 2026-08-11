@@ -468,16 +468,18 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .video-wrap video {
   width: 100%; height: 100%; border: none; display: block;
 }
-/* Same 16/9 box for a still image, so a case study whose media is a figure
-   rather than a talk occupies exactly the same footprint. contain, not
-   cover: a data figure must never be cropped, and the letterboxing falls on
-   the neutral --hover background the box already has. The fixed box also
-   means no layout shift regardless of the figure's own proportions. */
-.video-wrap img {
-  width: 100%; height: 100%; display: block;
-  object-fit: contain;
-  object-position: center;
+/* A figure keeps its own proportions rather than being forced into the 16/9
+   video box. This one is 1630x1356 — in a 16/9 frame it would sit in a third
+   of a screen of empty background, and its city labels would be too small to
+   read. Same width, background, caption and position as the video block, so
+   it still reads as the same component. width/height on the <img> reserve the
+   box, so there is no layout shift. */
+.figure-wrap {
+  width: 100%;
+  background: var(--hover);
+  overflow: hidden;
 }
+.figure-wrap img { width: 100%; height: auto; display: block; }
 .media-caption {
   margin-top: 14px;
   display: flex;

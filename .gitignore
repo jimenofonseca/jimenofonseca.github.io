@@ -35,3 +35,6 @@ assets/Superurbana_Promo.mp4
 # macOS metadata — never useful in repo
 .DS_Store
 **/.DS_Store
+
+# Figure masters (compressed WebP derivatives are what ship — see build notes)
+assets/_originals/
