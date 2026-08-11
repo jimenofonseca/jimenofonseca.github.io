@@ -44,7 +44,8 @@ var TRANSLATIONS = {
 
     // Stat labels (subpages)
     'v2.stat.years':      'Years',
-    'v2.stat.stakeholders':'Stakeholders',
+    'v2.stat.processes':  'Business processes digitised',
+    'v2.stat.teams':      'Teams',
     'v2.stat.paperless':  'Substation digitally built in DACH',
     'v2.stat.talks':      'Talks Given',
     'v2.stat.institutions':'Institutions',
@@ -119,7 +120,7 @@ var TRANSLATIONS = {
     'v2.about.impact.label':      'Impact',
     'v2.about.out1.title':        'Digital Transformation at Axpo Grid — from OPEX to revenue-generating value',
     'about.out1.outcome':         'Engineered and delivered the DACH region\'s first electrical substation built entirely without paper plans, and pioneered Axpo\'s first Digital Twin as a Service offering.',
-    'about.out1.impact':          'Transitioned internal engineering capabilities into market-facing products, turning a cost centre into a protected revenue line.',
+    'about.out1.impact':          'Transitioned internal engineering capabilities into market-facing products, turning a cost centre into a protected, multi-million CHF service line.',
     'v2.about.out2.title':        'Cloud Solution for City Energy Analyst and Superurbana GmbH — scaled and commercialised IP',
     'about.out2.outcome':         'Scaled an open-source urban energy simulation platform into a global standard used in over 75 countries. Served 30+ enterprise clients worldwide.',
     'about.out2.impact':          'Co-founded and commercialised the underlying IP through Superurbana GmbH, sustaining the technology lifecycle and its ecosystem through 2025.',
@@ -251,7 +252,8 @@ var TRANSLATIONS = {
 
     // Stat-Labels (Unterseiten)
     'v2.stat.years':      'Jahre',
-    'v2.stat.stakeholders':'Stakeholder',
+    'v2.stat.processes':  'Digitalisierte Geschäftsprozesse',
+    'v2.stat.teams':      'Teams',
     'v2.stat.paperless':  'Unterwerk digital erbaut in DACH',
     'v2.stat.talks':      'Vorträge',
     'v2.stat.institutions':'Institutionen',
@@ -326,7 +328,7 @@ var TRANSLATIONS = {
     'v2.about.impact.label':      'Wirkung',
     'v2.about.out1.title':        'Digitale Transformation bei Axpo Grid — von OPEX zu wertschöpfender Leistung',
     'about.out1.outcome':         'Das erste Unterwerk der DACH-Region entwickelt und realisiert, das vollständig ohne Papierpläne gebaut wurde, und Axpos erstes Angebot "Digital Twin as a Service" aufgebaut.',
-    'about.out1.impact':          'Interne Engineering-Fähigkeiten in marktfähige Produkte überführt und so aus einer Kostenstelle eine geschützte Ertragsquelle gemacht.',
+    'about.out1.impact':          'Interne Engineering-Fähigkeiten in marktfähige Produkte überführt und so aus einer Kostenstelle eine geschützte Dienstleistungslinie im Millionenbereich gemacht.',
     'v2.about.out2.title':        'Cloud-Lösung für City Energy Analyst und Superurbana GmbH — IP skaliert und kommerzialisiert',
     'about.out2.outcome':         'Eine Open-Source-Plattform für urbane Energiesimulation zu einem globalen Standard skaliert, der in über 75 Ländern eingesetzt wird. Über 30 Unternehmenskunden weltweit betreut.',
     'about.out2.impact':          'Das zugrunde liegende geistige Eigentum über die mitgegründete Superurbana GmbH kommerzialisiert und den Lebenszyklus der Technologie samt Ökosystem bis 2025 getragen.',

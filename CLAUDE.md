@@ -225,10 +225,18 @@ The distinction that governs this:
 |---|---|
 | `about.proof2` — "an OPEX/CAPEX budget of CHF 8m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
 
-The transformation claim is what reads CDIO; the number never was. If
-magnitude is ever wanted back, phrase it without disclosure — "a
-multi-million CHF service line", "an eight-figure portfolio" — never a
-figure tied to Axpo's results.
+The transformation claim is what reads CDIO; the number never was. Magnitude
+is kept the safe way: the impact line ends "a protected, multi-million CHF
+service line" — a band, not a booked figure. Other phrasings in the same
+register: "an eight-figure portfolio". **Never a number tied to Axpo's
+results.**
+
+The stat band follows the same test. It led with "400 Stakeholders", a
+headcount that says nothing about what changed; it now reads "40+ business
+processes digitised" and "20+ teams" — scope of change and organisational
+reach, both the author's own work rather than the employer's performance.
+The body of `transf.cs3` still says "a group of 400 stakeholders", which is
+fine: in a sentence it has context, in a stat box it did not.
 
 ⚠ One consequence to know about: outcome 02's `.impact` string carries no
 numbers, so the home page no longer states CEA's "over 75 countries" or
