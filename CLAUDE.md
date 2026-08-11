@@ -198,6 +198,16 @@ not a copy, the same string:
 | `/cea/` | 02 | `about.out2.outcome` + `about.out2.impact` | `about.out2.impact` |
 | `/ipcc/` | 03 | `about.out3.outcome` + `about.out3.impact` | `about.out3.impact` |
 
+⚠ **Keep the short claims aligned to the careful long one, not the reverse.**
+`ipcc.cs3` is precise: scenarios were *submitted to the IPCC panel, which
+aggregated them with those of more than 15 other selected teams and
+published the averaged projections*. `about.out3.impact` had drifted to
+"informing worldwide environmental policy since 2021" — a much bigger claim
+in a more prominent place — and the outcome title to "contribution to global
+policy". Both were pulled back to the aggregation wording. The short,
+prominent version is the one a reader checks first; it must be the most
+conservative, not the most flattering.
+
 Editing an `.impact` key updates the home page and the case study together,
 which is the point — a headhunter who reads the summary on the home page
 and then opens the case study must not find two different claims.
@@ -224,6 +234,23 @@ The distinction that governs this:
 | Keep | Cut |
 |---|---|
 | `about.proof2` — "a budget of CHF 10m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
+
+**Method is as sensitive as outcome.** `transf.cs2` used to say "new
+technological services were introduced at a deliberately low margin until
+their value was visible" — Axpo's internal pricing strategy, stated in the
+past tense as something the employer did. Arguably worse than the revenue
+figures, because it is *how they price*, not *what they earned*. The same
+idea is fine as a **principle in the author's own voice**, which is where it
+now lives and only lives: `about.p5` / `v2.about.p5.sum`, "My approach is to
+introduce new technological services at a deliberately low margin…".
+
+The test: *"I do X"* is a position. *"We did X at Axpo"* is disclosure.
+
+**Do not overclaim seniority either.** `v2.about.proof2.label` read "Budget
+and P&L oversight". Managing a budget is not owning a profit-and-loss
+statement, and it is one of the standard things a search consultant probes
+to test whether a technology leader is genuinely commercial. It now reads
+"Budget ownership".
 
 The transformation claim is what reads CDIO; the number never was. Magnitude
 is kept the safe way: the impact line ends "a protected, multi-million CHF
