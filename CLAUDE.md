@@ -239,12 +239,25 @@ The distinction that governs this:
 technological services were introduced at a deliberately low margin until
 their value was visible" — Axpo's internal pricing strategy, stated in the
 past tense as something the employer did. Arguably worse than the revenue
-figures, because it is *how they price*, not *what they earned*. The same
-idea is fine as a **principle in the author's own voice**, which is where it
-now lives and only lives: `about.p5` / `v2.about.p5.sum`, "My approach is to
-introduce new technological services at a deliberately low margin…".
+figures, because it is *how they price*, not *what they earned*.
 
 The test: *"I do X"* is a position. *"We did X at Axpo"* is disclosure.
+
+**The low-margin framing is gone from the site entirely**, including from
+principle 05 where it had survived in the first person. It read as a pricing
+trick rather than a leadership position — cheap, and faintly manipulative.
+Principle 05 now argues the honest version of the same insight: *make the
+value visible before asking for the budget*, because value demonstrated in
+use argues better than a business case. **Do not reintroduce margin or
+pricing language anywhere**, in either voice.
+
+**The principles name no employer.** `about.p8` used to say "why we lead our
+field at Axpo"; it now says "why the teams I lead set the pace in their
+field". `/principles/` is the page most likely to be read as general
+position rather than reportage, so keeping the employer out of it removes
+the antecedent that made neighbouring paragraphs — the balance-sheet
+observation in 05, "the organisation does the work wrong today" in 03 — read
+as being about a specific company.
 
 **Do not overclaim seniority either.** `v2.about.proof2.label` read "Budget
 and P&L oversight". Managing a budget is not owning a profit-and-loss
