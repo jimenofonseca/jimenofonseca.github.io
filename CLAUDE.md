@@ -259,6 +259,14 @@ the antecedent that made neighbouring paragraphs — the balance-sheet
 observation in 05, "the organisation does the work wrong today" in 03 — read
 as being about a specific company.
 
+**Never describe the role as running a "department" / "Abteilung".** The
+word was removed from every string in both languages — the bio, Proof of
+scale, principles 01 and 02, the Axpo case study and its `og:`/`twitter:`
+description. Jimeno is positioning for a larger remit, and "built the
+Digital Engineering department" reads smaller than "built Digital
+Engineering". `v2.role` and the JSON-LD `jobTitle` ("Head of Digital
+Engineering") already carry the seniority; naming the unit only caps it.
+
 **Do not overclaim seniority either.** `v2.about.proof2.label` read "Budget
 and P&L oversight". Managing a budget is not owning a profit-and-loss
 statement, and it is one of the standard things a search consultant probes
