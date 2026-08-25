@@ -233,7 +233,7 @@ The distinction that governs this:
 
 | Keep | Cut |
 |---|---|
-| `about.proof2` — "a budget of CHF 10m". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
+| `about.proof2` — "a multi-million CHF budget". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
 
 **Method is as sensitive as outcome.** `transf.cs2` used to say "new
 technological services were introduced at a deliberately low margin until
@@ -272,6 +272,23 @@ and P&L oversight". Managing a budget is not owning a profit-and-loss
 statement, and it is one of the standard things a search consultant probes
 to test whether a technology leader is genuinely commercial. It now reads
 "Budget ownership".
+
+**Proof of scale carries magnitude, not figures.** `about.proof1` and
+`about.proof2` used to read "from zero to 20 engineers and application
+managers" and "a budget of CHF 10m". Both are now bands — "a full team of
+engineers and application managers", "a multi-million CHF budget" — because
+Jimeno does not want exact numbers findable online, even ones that are his
+own authority rather than the employer's performance.
+
+⚠ **Know the cost of this.** The section is called *Proof of scale*, and a
+number is what makes something proof. Items 1 and 2 now carry none; only
+item 3's "75+ countries" survives, and that is City Energy Analyst — his own
+open-source project, not employer data. If the section ever reads thin, that
+is why.
+
+Prefer "a multi-million CHF budget" over shorthand like "CHF MM+": MM is
+American banking usage that most readers, and most German speakers, will
+take for a typo.
 
 The transformation claim is what reads CDIO; the number never was. Magnitude
 is kept the safe way: the impact line ends "a protected, multi-million CHF
