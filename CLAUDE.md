@@ -156,10 +156,39 @@ since redirect stubs carry no i18n or cache version of their own.
   `.proof-label` used to be 10.5px mono uppercase accent, which made
   section 01 look like a different kind of content from 02 and 03. Don't
   reintroduce a per-section title treatment.
-- **Theme**: light/dark via `[data-theme]` on `<html>`, persists in localStorage
-- **Language**: EN/DE via `[data-i18n]` attributes + JS swap, persists in localStorage
-- **Auto-detection**: first visit honours `navigator.language` (DE if starts with `de`)
-  and `prefers-color-scheme: dark`. Explicit toggle wins after.
+- **Theme**: light/dark via `[data-theme]` on `<html>`, persists in localStorage.
+  **Dark is the default**, and it is a design decision rather than a reading
+  of the visitor's OS: every page ships `<html lang="…" data-theme="dark">`
+  in the markup, so the default survives JS being off and there is no
+  first-paint flash. `prefers-color-scheme` is no longer consulted anywhere
+  on the site — don't reintroduce it thinking it is a missing feature. A
+  `<meta name="color-scheme" content="dark light">` sits next to the viewport
+  tag so the UA paints its own canvas dark before `style.css` arrives.
+- **Language**: one language per URL, shipped as plain HTML. No JS swap, no
+  browser-language detection — see "Two language trees" below.
+
+⚠ **`app.js`'s init must never call `applyTheme()`.** `applyTheme()` writes
+to localStorage, so calling it on load would stamp a theme on a first-time
+visitor who never picked one — freezing whatever the code guessed and making
+any future change to the site default invisible to everyone who has ever
+loaded the page. Init only syncs the toggle's `.active` class; the inline
+head script has already applied any *stored* choice. This was a live bug
+while light was the default: `localStorage.getItem('theme') || 'light'` wrote
+`light` on first paint, which silently overrode the head script's
+`prefers-color-scheme: dark` detection.
+
+The three places that carry the default, and must agree:
+
+| Where | What |
+|---|---|
+| every page's `<html>` tag | `data-theme="dark"` |
+| every page's sidebar toggle | `class="opt active"` on the **dark** span |
+| `app.js` | the `\|\| 'dark'` fallbacks in `toggleTheme()` and init |
+
+`style.css` is the exception: `:root` still holds the **light** palette and
+`html[data-theme="dark"]` overrides it. That inversion is deliberate — the
+markup default does the work, and swapping the two CSS blocks would be a
+large, risky refactor for no visible gain.
 
 ## Sidebar navigation order
 
@@ -787,9 +816,11 @@ are content decisions, not tuning.
   a runtime script, note that a rebase does not fire hooks — that bit us
   once, when `2130478` shipped v=38 and the rebased commit on top would have
   shipped v=38 again.
-- **No-flash-of-English**: an inline head script reads localStorage *before*
-  body renders and sets `data-lang="de"` so CSS can hide the body until
-  `applyLang()` finishes. Don't remove that pre-script.
+- **The inline `<head>` script is load-bearing, but not for language any
+  more.** It applies a stored theme choice and the hyperjump arrival flag
+  before paint. The no-flash-of-English half is gone with the runtime
+  `i18n.js`. **A new page must copy this block**, or it flashes the default
+  theme and lands without the arrival animation.
 - **Path conventions**: subpage HTML references assets with absolute paths
   (`/style.css`, `/app.js`) so they resolve from any nested directory.
 - **GitHub Pages rebuild lag**: usually 30–60s after push. Live URL is

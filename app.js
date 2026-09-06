@@ -7,7 +7,7 @@ function applyTheme(t) {
   });
 }
 function toggleTheme() {
-  var cur = document.documentElement.dataset.theme || 'light';
+  var cur = document.documentElement.dataset.theme || 'dark';
   applyTheme(cur === 'dark' ? 'light' : 'dark');
 }
 
@@ -27,8 +27,15 @@ function toggleSidebar() {
 
 // ── Init ─────────────────────────────────────────────────
 (function(){
-  var t = localStorage.getItem('theme') || 'light';
-  applyTheme(t);
+  // <html data-theme="dark"> is the shipped default and the inline head
+  // script has already applied any stored choice, so init only has to sync
+  // the toggle's active state. It must NOT call applyTheme(): that writes to
+  // localStorage, which on a first visit would stamp a theme the visitor
+  // never picked and freeze the site's default for them forever.
+  var t = document.documentElement.dataset.theme || 'dark';
+  document.querySelectorAll('[data-theme-opt]').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('data-theme-opt') === t);
+  });
 
   document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click', function(){

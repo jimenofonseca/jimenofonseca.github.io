@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
   <!-- Google tag (gtag.js), loaded after the load event.
        The commands below queue into dataLayer immediately, so the pageview is
@@ -20,9 +20,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Dark first: the UA paints its own canvas dark before style.css lands. -->
+  <meta name="color-scheme" content="dark light" />
   <script>(function(){
+    // Dark is the site default: <html> ships with data-theme="dark", so this
+    // only has to honour an explicit stored choice. The OS setting is no
+    // longer consulted — the default is a design decision, not the visitor's.
     var t=localStorage.getItem("theme");
-    if(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)t="dark";
     if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
     // Hyperjump arrival flag — applied before paint so CSS animation
     // starts on the very first frame (no snap-then-jiggle).
@@ -176,9 +180,9 @@
         <div class="control-row">
           <span class="control-label" data-i18n="v2.theme.label">Theme</span>
           <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
-            <span class="opt active" data-theme-opt="light">LIGHT</span>
+            <span class="opt" data-theme-opt="light">LIGHT</span>
             <span class="sep">/</span>
-            <span class="opt" data-theme-opt="dark">DARK</span>
+            <span class="opt active" data-theme-opt="dark">DARK</span>
           </button>
         </div>
         <div class="control-row">

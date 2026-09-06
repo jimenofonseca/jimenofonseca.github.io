@@ -159,7 +159,9 @@ ASSET    = re.compile(r'\.(css|js|jpg|jpeg|png|svg|webp|mp4|ico|xml|txt)$')
 
 def to_german(html, path, en, de):
     """Everything that has to change for the /de/ copy."""
-    html = html.replace('<html lang="en">', '<html lang="de">', 1)
+    # <html> also carries data-theme="dark" (the site default), so match the
+    # lang attribute alone rather than the whole tag.
+    html = html.replace('<html lang="en"', '<html lang="de"', 1)
     html = translate_static_meta(html, en, de)
 
     # internal navigation stays inside the German tree; assets do not move
