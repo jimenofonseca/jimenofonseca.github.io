@@ -68,7 +68,7 @@ markup.
 │   └── photography/            # 13 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, lightbox, hyperjump
-├── i18n.js                     # EN/DE copy — 22 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 21 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -263,7 +263,7 @@ tree exists for.
 
 | | |
 |---|---|
-| `i18n.js` | the only place copy lives, `en:` + `de:`, 22 keys each. **Build input — never served to browsers** |
+| `i18n.js` | the only place copy lives, `en:` + `de:`, 21 keys each. **Build input — never served to browsers** |
 | English pages | hand-authored; `build-i18n.py` refreshes their fallbacks from `en:` |
 | `de/**` | **generated. Never hand-edit** — the generator deletes and rewrites the tree |
 | `hreflang` | every page names `en`, `de` and `x-default`, itself included |
@@ -310,10 +310,10 @@ markup by hand.
 
 ## i18n key conventions
 
-22 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+21 keys per language. `nav.*` is the sidebar plus the two Art part headings;
 `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — `v2.role`, `v2.art.lede`, `v2.music.p1`, `v2.photo.p1/p2`,
+everything else — `v2.art.lede`, `v2.music.p1`, `v2.photo.p1/p2`,
 the caption kinds, and the chrome (`v2.theme.label`, `v2.lang.label`,
 `v2.menu.open`).
 
@@ -374,13 +374,18 @@ After changing meta or the card: re-scrape at
 
 ### When the job title changes
 
-`Head of Digital Engineering` sits in five places — change them together,
-EN **and** DE: `i18n.js` → `v2.role`, `home.desc`, `about.bio`; and
-`index.html`'s JSON-LD (`jobTitle`, `description`) and `og:`/`twitter:`
-descriptions.
+`Head of Digital Engineering` sits in four places — change them together,
+EN **and** DE: `i18n.js` → `home.desc` and `about.bio`; and `index.html`'s
+JSON-LD (`jobTitle`, `description`) and `og:`/`twitter:` descriptions.
 
-⚠ **Re-derive that list if the pages change shape.** It has been wrong
-before — it once carried two keys that rendered on no page at all.
+⚠ **Re-derive that list if the pages change shape.** It has been wrong twice
+— it once carried two keys that rendered on no page at all, and it listed
+`v2.role` after the sidebar role line was deleted.
+
+**The sidebar carries the name only** — the `Digital Engineering — Axpo
+Grid` role line was removed from the brand block on both pages and `v2.role`
+deleted, so nothing states the title above the fold any more; it survives
+only in the bio and the metadata.
 
 ⚠ **The bio still names Axpo**, so the employer-disclosure rules still bite
 even with the case studies gone: never publish Axpo revenue, margin, pricing
