@@ -450,10 +450,6 @@ making the text column absurdly narrow. Asymmetric whitespace is normal in
 this layout; do not "fix" it by shrinking the portrait, which just moves the
 gap back under the picture.
 
-`assets/portrait_music.jpg` and `assets/portrait_photography.jpg` are left
-over from a retired 3-slide reel, referenced nowhere. Delete if it is not
-coming back.
-
 ## Page transition
 
 A 220ms cross-fade, done by the browser. Four rules in `style.css` and **no
