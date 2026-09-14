@@ -1186,16 +1186,6 @@ html.hyper-arrive main.content {
 .cs-content p + p { margin-top: 18px; }
 .cs-result { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--hairline); }
 .cs-result:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
-.cs-result-key {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
 @media (max-width: 860px) {
   .cs-chapter { grid-template-columns: 1fr; gap: 18px; padding: 40px 0; }
   .cs-rail { position: static; flex-direction: row; align-items: baseline; gap: 12px; }

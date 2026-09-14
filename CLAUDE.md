@@ -257,9 +257,20 @@ and then opens the case study must not find two different claims.
 The home page deliberately shows **Impact only, unlabelled**, so all three
 of its sections read the same way: title, one paragraph, optional link. The
 `.outcome` strings are the concrete "what was built" detail and live on the
-case study, which is what the "See case study →" link is for. The labels
-`v2.about.outcome.label` / `v2.about.impact.label` now render on the
-case-study pages only.
+case study, which is what the "See case study →" link is for.
+
+**Nothing is labelled any more, on either surface.** The case studies used
+to print an `OUTCOME` / `IMPACT` mono sub-label above each of the two
+paragraphs in the final chapter; those are gone, and the keys that held them
+(`v2.about.outcome.label`, `v2.about.impact.label`) were deleted as orphans —
+they rendered nowhere else. The `.cs-result` hairline between the two
+paragraphs stays, and is now what separates them. `.cs-result-key` went from
+`style.css` with the markup.
+
+This is the same call the home page got earlier: one section heading, then
+prose. A sub-label directly under a heading that says nearly the same word
+("The Outcome" over "OUTCOME") is noise, and labelling one paragraph makes
+the reader look for the label on the next.
 
 ### ⚠ Employer financials are off the site, deliberately
 
@@ -394,7 +405,7 @@ Every case study runs the same flow:
 page-intro   eyebrow · H1 · lede · full-width stat band
 01 WHY       The Problem     <ns>.cs1
 02 HOW       The Execution   <ns>.cs2 + <ns>.cs3
-03 WHAT      The Result      about.outN.outcome + about.outN.impact
+03 WHAT      The Outcome     about.outN.outcome + about.outN.impact
 page-media   the talk video — LAST, before the pager
 page-nav     closed loop 01 → 02 → 03 → 01
 ```
@@ -403,9 +414,15 @@ page-nav     closed loop 01 → 02 → 03 → 01
 keys `v2.cs.challenge` / `v2.cs.strategy` / `v2.cs.outcome`, and the
 Why/How/What rail labels from `v2.cs.why` / `.how` / `.what`.
 
+`v2.cs.outcome` reads **"The Outcome"** (was "The Result"). German stays
+**"Das Ergebnis"** — German does not split Result/Outcome the way English
+does, and `Das Resultat` would read as the narrower of the two. This is a
+case where EN/DE parity is satisfied without both sides changing; do not
+"fix" the German to match the English edit.
+
 **Chapters must not repeat each other.** The Execution chapter says *how*
 the work was done — approach, sequence, what was stood up. It must not
-restate the numbers or first-of claims that belong to The Result. This is
+restate the numbers or first-of claims that belong to The Outcome. This is
 easy to get wrong: all three pages once carried their own outcome twice
 (Axpo's DACH-first substation in both, CEA's 75 countries in both, the
 IPCC contribution in both). A quick check before shipping copy:
