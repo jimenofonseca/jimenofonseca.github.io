@@ -100,16 +100,16 @@ in both languages). **They serve 404 on purpose** — stubs pointing everything
 at `/` were offered and declined.
 
 The cost, not reversible on Google's timetable: every indexed result and
-inbound link for the case studies breaks, the URLs drop out within weeks, and
-anything restored later returns cold. The pages are intact in
-`_old/retired-pages/`; restoring one is a `git mv` back, a `build-i18n.py`
-run, its `<loc>` entries, and its i18n keys out of git history.
+inbound link breaks, the URLs drop out within weeks, and anything restored
+later returns cold. The pages are intact in `_old/retired-pages/` — restoring
+one is a `git mv` back plus the "Adding a new page" steps, and its i18n keys
+out of git history.
 
 **One stub survives**: `/projects/` → `/` (meta-refresh + canonical +
 `noindex, follow` + JS `location.replace`), because the old Jekyll site
 published `/Projects.html` and the destination still exists.
-`/open-source/` was deleted with the rest — it pointed at `/ipcc/`, and a
-redirect to a 404 is worse than a 404.
+`/open-source/` went with the rest — it pointed at `/ipcc/`, and a redirect
+to a 404 is worse than a 404.
 
 ⚠ **Do not re-justify `/projects/` with LinkedIn.** This file once claimed
 the profile's Portfolio link pointed at `www.jimenofonseca.com/projects`. It
@@ -208,23 +208,21 @@ each label down onto its media so the pair reads as one block.
 
 - **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
 - **Photography**: 13 photos from `assets/photography/`. The `app.js`
-  lightbox binds to `.photo-grid figure[data-full]`, and `cursor: zoom-in` is
-  the only affordance — there is no prose telling people to click.
+  lightbox binds to `.photo-grid figure[data-full]`; `cursor: zoom-in` is the
+  only affordance, since no prose tells people to click.
 
 ⚠ **The page has no body copy, and that is the design.** Three paragraphs
-(`v2.music.p1`, `v2.photo.p1`, `v2.photo.p2`) and the `.gear-list` camera/kit
-aside were removed as clutter; all four keys and `.art-text` /`.gear-*` went
-with them. **Do not add explanatory prose back** — the h1, the lede and two
-caption lines are the whole page by choice.
+(`v2.music.p1`, `v2.photo.p1`, `v2.photo.p2`) and the `.gear-list` camera
+aside were removed as clutter, along with `.art-text` and `.gear-*`. **Do not
+add explanatory prose back** — the h1, the lede and two caption lines are the
+whole page by choice.
 
-⚠ **A lone final thumbnail is centred, not spanned.** 13 photos in 3 columns
-leaves one frame alone on the last row;
-`.photo-grid figure:last-child:nth-child(3n + 1) { grid-column: 2 }` turns
-that into a deliberate closing image. It is keyed to `:nth-child` rather than
-the count, so it survives `build-gallery.py` adding or removing photos, and
-scoped to `min-width: 901px` because the arithmetic is wrong at 2 columns and
-meaningless at 1. Spanning the row was rejected: the thumbnails are 600x600
-centre crops, so stretching one to 3:1 would slice the middle out of it.
+⚠ **A lone final thumbnail is centred, not spanned** —
+`figure:last-child:nth-child(3n + 1) { grid-column: 2 }`, keyed to
+`:nth-child` so it survives `build-gallery.py` changing the photo count, and
+scoped to `min-width: 901px` where 3 columns actually apply. Spanning the row
+was rejected: the thumbs are 600x600 centre crops, so a 3:1 stretch would
+slice the middle out of one.
 
 ### Updating the photo gallery
 
@@ -428,9 +426,8 @@ the name, which the `h1` now says centimetres away). `#bio` stays so old deep
 links land.
 
 ⚠ **The `#recently` section held nine LinkedIn embeds. Do not bring them
-back.** Unfiltered, aged badly, duplicated a surface that already exists, and
-~7.5s of script evaluation on an emulated mid-range phone — the largest
-single cost the site ever carried.
+back** — unfiltered, aged badly, duplicated a surface that already exists,
+and ~7.5s of script evaluation on a mid-range phone.
 
 ### The portrait
 
