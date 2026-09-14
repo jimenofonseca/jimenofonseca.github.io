@@ -10,21 +10,21 @@ Pulls Inter Tight from npm so the card matches the site's typography.
 import os, subprocess, glob, tarfile, tempfile
 from PIL import Image, ImageDraw, ImageFont
 
-# The card mirrors the Intro page: the name is the headline, then two durable
-# facts, then the employer. It used to lead with a slogan over a strapline
-# that appeared nowhere on the site — both were retired from the page, and
-# the card was the last place the slogan survived.
+# The card is the name, the domain, and the portrait. Nothing else.
 #
-# Two standing rules for this text, both because OG images cache hard and a
-# stale card is worse than a plain one:
-#   * no job title — it would go out of date on every promotion.
-#   * no city — the location was removed from the footer, the JSON-LD
-#     homeLocation and og:image:alt on request, and this is the most public
-#     surface of the four.
-# SUB names achievements rather than a role, so it stays true either way.
+# Everything that could go stale is deliberately absent, because OG images
+# cache hard in LinkedIn and a wrong card outlives the correction:
+#   * no slogan      — it led with "I turn technology into lasting
+#                      capability." over a strapline found nowhere on the
+#                      site; the card was the last place that survived.
+#   * no company     — neither the employer nor Superurbana.
+#   * no job title   — it would go out of date on every promotion.
+#   * no city        — removed from the footer, the JSON-LD homeLocation and
+#                      og:image:alt on request; this is the most public
+#                      surface of the four.
+#
+# A name is the one thing that cannot become untrue. Do not add copy back.
 HEAD = "Jimeno Fonseca"
-SUB  = "Developer of City Energy Analyst. Founder of Superurbana GmbH."
-META = "Axpo Grid"
 
 def inter_tight_ttfs():
     """Fetch Inter Tight from npm and convert woff2 -> ttf for Pillow."""
@@ -56,9 +56,8 @@ PANEL_W = 430
 
 d_ = inter_tight_ttfs()
 F = lambda w, px: ImageFont.truetype(os.path.join(d_, f"InterTight-{w}.ttf"), px)
-f_head, f_sub  = F("600", 74), F("400", 26)
-f_meta         = F("400", 21)
-f_label        = F("500", 16)
+f_head  = F("600", 74)
+f_label = F("500", 16)
 
 card = Image.new("RGB", (W, H), BG)
 d = ImageDraw.Draw(card)
@@ -88,19 +87,12 @@ def wrap(text, font, width):
     lines.append(cur)
     return lines
 
-# Centre the text block rather than pinning it to y=150: the copy is short
-# now, and a fixed origin left it riding high in a 630px panel.
-head_lines, sub_lines = wrap(HEAD, f_head, tw), wrap(SUB, f_sub, tw)
-block = len(head_lines) * 86 + 14 + len(sub_lines) * 36 + 30 + 28 + 28
-y = max(150, (H - block) // 2 + 20)
+# One line of type, optically centred in the panel. No rule: a hairline with
+# nothing under it reads as a cut-off card rather than a deliberate one.
+head_lines = wrap(HEAD, f_head, tw)
+y = (H - len(head_lines) * 86) // 2 + 6
 for ln in head_lines:
     d.text((x, y), ln, font=f_head, fill=FG); y += 86
-y += 14
-for ln in sub_lines:
-    d.text((x, y), ln, font=f_sub, fill=MUTE); y += 36
-y += 30
-d.line([(x, y), (x + tw, y)], fill=HAIR, width=1); y += 28
-d.text((x, y), META, font=f_meta, fill=MUTE)
 
 card.save("assets/og-image.jpg", "JPEG", quality=90, optimize=True)
 print("wrote assets/og-image.jpg", card.size,

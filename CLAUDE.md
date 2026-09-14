@@ -371,18 +371,23 @@ matches site typography). ⚠ **It reads `assets/portrait.jpg` and crops a
 panel of it**, so swapping the portrait silently staled the card until this
 was noticed — regenerate it in the same commit, always.
 
-The card is **dark**, using the exact `:root` tokens, and mirrors the Intro
-page: the name as the headline, two durable facts, then the employer. It used
-to lead with "I turn technology into lasting capability." over a strapline
-found nowhere on the site — the card was the last place that slogan survived
-the reduction.
+The card is **dark** (the exact `:root` tokens) and carries **the name, the
+domain, and the portrait — nothing else.** No rule either: a hairline with
+nothing under it reads as a cut-off card rather than a deliberate one.
 
-Two standing rules for its text, both because OG images cache hard and a
-stale card is worse than a plain one: **no job title** (it would go out of
-date on every promotion) and **no city** (the location was removed
-everywhere else on request, and this is the most public surface of the
-four). `SUB` names achievements rather than a role so it stays true either
-way.
+⚠ **Everything that could go stale is deliberately absent**, because
+LinkedIn caches OG images hard and a wrong card outlives the correction:
+
+| Out | Why |
+|---|---|
+| slogan | It led with "I turn technology into lasting capability." over a strapline found nowhere on the site. The card was the last place that survived the reduction. |
+| company | Neither the employer nor Superurbana. |
+| job title | Would go out of date on every promotion. |
+| city | Removed from the footer, the JSON-LD `homeLocation` and `og:image:alt` on request; this is the most public surface of the four. |
+
+A name is the one thing that cannot become untrue. **Do not add copy back.**
+`og:image:alt` is just `"Jimeno Fonseca"` so it describes what the image
+actually shows.
 
 After changing meta or the card, re-scrape at
 <https://www.linkedin.com/post-inspector/> and validate at
