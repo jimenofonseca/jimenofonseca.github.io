@@ -7,10 +7,11 @@ var TRANSLATIONS = {
     'nav.art':               'Off the clock',
     'v2.art.lede':           'Music I have recorded, and photographs I keep coming back to.',
     'art.title':             'Off the Clock | Music and Photography — Jimeno Fonseca',
-    'art.desc':              'Music and photography by Jimeno Fonseca — a long-time hobby, selected clips and photographs.',
+    'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
     'home.title':         'Jimeno Fonseca',
+    'home.desc':          'Jimeno Fonseca',
     'hero.h1':            'Jimeno Fonseca',
 
     // ── Redesign (home v2) ───────────────────────
@@ -64,10 +65,11 @@ var TRANSLATIONS = {
     'nav.art':               'Feierabend',
     'v2.art.lede':           'Musik, die ich aufgenommen habe, und Fotografien, zu denen ich immer wieder zurückkehre.',
     'art.title':             'Feierabend | Musik und Fotografie — Jimeno Fonseca',
-    'art.desc':              'Musik und Fotografie von Jimeno Fonseca — ein langjähriges Hobby, ausgewählte Clips und Fotografien.',
+    'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
     'home.title':         'Jimeno Fonseca',
+    'home.desc':          'Jimeno Fonseca',
     'hero.h1':            'Jimeno Fonseca',
 
     // ── Redesign (home v2) ───────────────────────

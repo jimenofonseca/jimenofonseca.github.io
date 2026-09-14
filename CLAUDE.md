@@ -345,25 +345,42 @@ Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 width/height/alt) and Twitter card tags, all pointing at
 `https://jimenofonseca.com/assets/og-image.jpg` (1200x630).
 
-⚠ **The Intro page has no description at all** — no `<meta name="description">`,
-no `og:description`, no `twitter:description`, and no `description` in the
-Person JSON-LD. `home.title` is also just `"Jimeno Fonseca"`. All of it used
-to read "Jimeno Fonseca turns digital technology into lasting capability.
-Head of Digital Engineering at Axpo Grid, …" — the retired slogan plus the
-job title, which is exactly what was being stripped everywhere else, and the
-metadata was the last place it survived.
+⚠ **Every description on the site is the string `Jimeno Fonseca`** — all
+twelve of them: `<meta name="description">`, `og:description` and
+`twitter:description`, on both pages in both languages. `home.title` and
+`art.title`'s page name aside, the titles are the same. This is deliberate
+and was arrived at twice.
 
-**Removing beat shortening.** A description that just repeats the title
-tells a crawler nothing and makes the share card print the name twice;
-Google synthesises a snippet from page content instead, and the bio
-paragraph is good material for that. `/art/` keeps its `art.desc` — that one
-is factual page content, not positioning.
+They used to read "Jimeno Fonseca turns digital technology into lasting
+capability. Head of Digital Engineering at Axpo Grid, …" — the retired
+slogan plus the job title, stripped from the hero, the sidebar, the share
+card and the title tag, with the metadata as the last place it survived.
 
-⚠ **Know the SEO cost.** `<title>` is the strongest on-page signal there is,
-and the home page no longer matches a query like *"digital technology leader
-energy"*. A name search is unaffected, or slightly better, since the title
-is now exactly the query. This was an explicit choice, twice over — **do not
-"restore" either field.**
+⚠ **They were briefly deleted outright, and that was wrong.** Removing
+`og:description` does not give LinkedIn nothing — it makes LinkedIn **scrape
+the page body instead**, so the card quotes the bio (Axpo, the PhD, the lot)
+with no control over which sentence it picks. A deliberately minimal
+description is the only way to suppress that. **Do not remove them again.**
+
+The Person JSON-LD keeps **no** `description`: nothing scrapes it, so it has
+no fallback to suppress, and a copy of `name` would be noise. The entity
+still carries name, url, image, jobTitle, worksFor, alumniOf, knowsAbout and
+sameAs.
+
+⚠ **The SEO cost is accepted.** `<title>` is the strongest on-page signal
+there is, and the home page no longer matches a query like *"digital
+technology leader energy"*; nothing in the metadata carries those keywords
+now. A name search is unaffected, or slightly better, since the title is
+exactly the query. **Do not "restore" the positioning line.**
+
+⚠ **Four keys now share the `en:` value `Jimeno Fonseca`** — `hero.h1`,
+`home.title`, `home.desc`, `art.desc`. `translate_static_meta()` builds its
+reverse map with `setdefault`, so the first one wins (currently `art.desc`)
+and the rest are unreachable through it. That is harmless only because all
+four have the *same* German value. **Give any one of them a different German
+string and a static `og:` tag on some other page will silently pick up the
+wrong translation.** If that day comes, disambiguate the English values or
+give the tag its own key.
 
 - ⚠ **The `og:`/`twitter:` tags are deliberately static — never wire them to
   `data-i18n`.** Scrapers run no JS, so an i18n attribute buys nothing and
