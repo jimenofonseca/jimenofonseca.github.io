@@ -60,7 +60,7 @@ German tree; its output is committed, exactly like `build-gallery.py`.
 .
 ├── index.html                        # Home — the "About" page: hero, proof of
 │                                     #   scale, enterprise outcomes, 5 of the
-│                                     #   8 operating principles, LinkedIn feed
+│                                     #   8 operating principles, LinkedIn link
 ├── principles/                       # The 8 principles in full — the long
 │                                     #   bodies the home page links out to
 ├── de/                               # GENERATED — the whole site in German.
@@ -201,7 +201,8 @@ large, risky refactor for no visible gain.
    mid-sidebar or renumber Case Studies, and Case Studies 01–03 must keep
    matching the home page's outcomes 01–03.
 1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
-   · Cloud Solution (`/cea/`) · Insights for IPCC (`/ipcc/`) — these
+   · Open-Source Platform (`/cea/`) · Contribution to the IPCC (`/ipcc/`)
+   — these
    three match the home page's Key enterprise outcomes 01–03 exactly
 2. **Media** (04–06): Appearances · Publications · News (anchor to home `#recently`)
 3. **Personal** (07–08): Music · Photography — *public, no password*
@@ -236,6 +237,17 @@ in a more prominent place — and the outcome title to "contribution to global
 policy". Both were pulled back to the aggregation wording. The short,
 prominent version is the one a reader checks first; it must be the most
 conservative, not the most flattering.
+
+**The word "Insights" is gone for the same reason.** "Insights for the IPCC"
+and "Insights for IPCC" can be read as authorship of the report. The page is
+now **"Data and models contributed to the IPCC 6th Assessment Report"**
+(`v2.ipcc.title`, `v2.about.out3.title`, `ipcc.title`, and the static
+`og:title`/`twitter:title` on `ipcc/index.html`), with the short form
+**"Contribution to the IPCC"** in the sidebar (`nav.openSource`) where the
+full phrase will not fit 240px. German: *"Zum 6. IPCC-Sachstandsbericht
+beigesteuerte Daten und Modelle"* / *"Beitrag zum IPCC"*. The key is still
+called `nav.openSource` — it dates from when the page lived at
+`/open-source/`; do not rename it, nothing gains from the churn.
 
 Editing an `.impact` key updates the home page and the case study together,
 which is the point — a headhunter who reads the summary on the home page
@@ -288,6 +300,15 @@ the antecedent that made neighbouring paragraphs — the balance-sheet
 observation in 05, "the organisation does the work wrong today" in 03 — read
 as being about a specific company.
 
+**Name the issuing body on every credential.** The short bio said "a
+certified Agile Practitioner" with no issuer for as long as it existed — the
+exact kind of unattributed claim a search consultant probes. It is now "a
+PMI Agile Certified Practitioner (PMI-ACP)" in English and "PMI Agile
+Certified Practitioner (PMI-ACP)" in German; the credential is a proper
+noun, so it stays in English on the German page, as is normal in German CVs.
+If a credential cannot be attributed, cut it — next to the ETH doctorate and
+CIGRE membership an unverifiable certification is a net negative.
+
 **Never describe the role as running a "department" / "Abteilung".** The
 word was removed from every string in both languages — the bio, Proof of
 scale, principles 01 and 02, the Axpo case study and its `og:`/`twitter:`
@@ -329,8 +350,33 @@ The stat band follows the same test. It led with "400 Stakeholders", a
 headcount that says nothing about what changed; it now reads "40+ business
 processes digitised" and "20+ teams" — scope of change and organisational
 reach, both the author's own work rather than the employer's performance.
-The body of `transf.cs3` still says "a group of 400 stakeholders", which is
-fine: in a sentence it has context, in a stat box it did not.
+The body of `transf.cs3` used to keep "a group of 400 stakeholders" on the
+grounds that a sentence gives a figure context where a stat box does not.
+**That call was reversed.** It now reads "several hundred stakeholders":
+context does not stop it being an internal headcount, and the same
+magnitude-without-figures rule that governs Proof of scale applies to prose.
+
+Three more employer-financial statements came off the case study in the same
+pass. All three had survived the earlier revenue sweep because none of them
+carried a number:
+
+| Was | Now | Why |
+|---|---|---|
+| `v2.about.out1.title` "— from OPEX to revenue-generating value" | "— from cost line to core capability" | Asserted the unit generates revenue. Renders on the **home page** as well as the case study, so it was the most prominent employer-financial claim on the site. |
+| `v2.transf.lede` / `transf.desc` "from an OPEX liability into protected core value" | "made digital engineering a protected core capability" | Classified a named business unit on the employer's books. `transf.desc` is also the share-card description, so it travelled off-site. |
+| `transf.cs1` "a critical, margin-improving service" | "a critical service" | Margin. |
+| `transf.cs3` "with a team built overseas to sustain delivery" | "to own and sustain them" | Stated offshored delivery as fact about a Swiss utility — works-council sensitivity. The rewrite keeps the maintenance point the clause was making. |
+
+⚠ **A claim with no number in it can still be disclosure.** That is the
+lesson of this pass: "revenue-generating" and "OPEX liability" are
+statements about the employer's books, and they sat on the site through two
+earlier sweeps precisely because both sweeps were looking for figures.
+
+Deliberately kept: "Axpo's first Digital Twin as a Service" — Axpo markets
+it publicly and `transf.cs3` links to their own page about it. Also kept:
+`transf.cs1`'s "digital engineering reads to finance as operational overhead
+with unclear return", which is framed as a sector observation and is the
+setup the whole case study rests on.
 
 ⚠ One consequence to know about: outcome 02's `.impact` string carries no
 numbers, so the home page no longer states CEA's "over 75 countries" or
@@ -637,6 +683,7 @@ list rather than trusting it if the home page changes shape again.
 |---|---|
 | `i18n.js` → `v2.role` | sidebar role line, all 9 pages |
 | `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
+| `i18n.js` → `about.bio` | the short bio's opening clause |
 | `index.html` JSON-LD | `"jobTitle"` and `"description"` |
 | `index.html` og/twitter | `og:description`, `twitter:description` |
 
@@ -657,8 +704,14 @@ knowing, because a group called "About" invites the assumption that
 4. **03 Operating principles** — a curated **five** (01, 03, 04, 05, 08),
    each title + one-line summary only, then a "Read the principles in
    full →" link to `/principles/`, which carries all eight in full
-5. **04 Recently** — six LinkedIn embeds, the `#recently` anchor the
-   sidebar's News item points at
+5. **04 Recently** — one line and a link to the LinkedIn profile; the
+   `#recently` anchor the sidebar's News item points at. This was nine
+   LinkedIn embeds (six, then nine). **Do not reintroduce them**: they were
+   unfiltered, aged badly, duplicated a surface that already exists, and
+   cost ~7.5s of script evaluation on an emulated mid-range phone — the
+   largest single cost on the page by a wide margin. Copy lives in
+   `v2.recently.line`; `.feed-grid` and `.feed-item` were deleted from
+   `style.css` with them, leaving `.recently-line` and `.feed-more`.
 
 Retired when this replaced the old home page: the **Selected Work** list
 (five quantified initiative rows), the **Now** section (it restated the
@@ -679,13 +732,35 @@ The eight operating principles are split across two pages by design:
 invention), 03 (integration is expectation management), 04 (plan to
 maintain), 05 (liability to protected value) and 08 (aim to be first — and
 know when not to). Omitted are 02 (structure then get out of the way), 06
-(the customer of my customer) and 07 (meritocracy) — the three that read
+(the customer of my customer) and 07 (hold a high bar) — the three that read
 closest to general leadership advice rather than a position.
 
-⚠ 05 overlaps Key outcome 01 in wording: "from liability to protected
-value" against "from OPEX to revenue-generating value". They sit about a
-screen apart. Kept deliberately — if the outcomes copy is ever reworded,
-check the two do not collide.
+⚠ 05 used to collide with Key outcome 01 in wording — "from liability to
+protected value" against "from OPEX to revenue-generating value", about a
+screen apart. Outcome 01 is now "from cost line to core capability", so the
+overlap is smaller but not gone. Check the pair whenever either is reworded.
+
+**Principle 07 was rewritten from scratch**: "Meritocracy, and leading by
+example" became "Hold a high bar, and make it reachable". The old version
+opened "I do it and show it first" and argued that the best performers get
+the hardest problems — which reads as intensity and self-regard rather than
+a leadership position. The new one keeps the standard-from-the-team's-own-
+work argument, adds the leader's duty to make the bar *reachable*, and
+frames access to the visible work as a route anyone can take. Its body runs
+to three paragraphs, so it uses `about.p7` + `about.p7b` + `about.p7c` —
+the same shape principle 03 uses.
+
+**Principle 01 lost its hackathon texture** (phone ban, pizza, "two days of
+marathon focus"). It signalled intensity culture and read startup rather
+than executive. The protected block of time each quarter, the real
+challenge, the no-permission-needed clause and the three things it buys all
+survive; only the sensory detail went.
+
+**Principle 05's closing sentence was rewritten.** "secure excellent
+capability, nationally and internationally, at genuinely good value" read as
+offshoring or labour arbitrage — a live sensitivity in a Swiss utility with
+a works council. It now argues that the same visibility which wins a budget
+is what lets its cost be questioned in the open.
 
 **They keep their real numbers (01, 03, 04, 05, 08), not 01–05.** The
 number is the principle's identity across both pages, and the gaps are the
@@ -792,18 +867,23 @@ Measured on an emulated Pixel 5, 4x CPU throttle, third party answering in
 - **Only request weights that exist in `style.css`** — currently 300, 400
   and 500. Weight 600 was requested for years and used nowhere: one whole
   font file per page load for nothing.
-- **`.feed-item` uses `content-visibility: auto`.** On mobile the six
-  LinkedIn embeds collapse to one column, ~1,900px of third-party content;
-  this skips layout and paint for the off-screen ones. `loading="lazy"`
-  defers the request, `contain-intrinsic-size` keeps the scrollbar honest.
+- **The LinkedIn embeds are gone**, and with them `.feed-item` and its
+  `content-visibility: auto` / `contain-intrinsic-size` treatment. Those
+  existed to make nine third-party iframes survivable on a phone; deleting
+  the iframes was the better fix. There is now **no third-party script on
+  the home page** except Google Fonts and gtag.
 - The hero portrait carries `width`/`height`, `fetchpriority="high"` and
   `decoding="async"`. CLS is 0 — `.hero-figure img` also has
   `aspect-ratio: 3/4`, so the box is reserved before the image lands.
 
-Still open: the six LinkedIn embeds are the largest remaining third-party
-cost for real users (which is what Search Console's field data reports).
-A click-to-load facade, or simply fewer embeds, is the next lever — both
-are content decisions, not tuning.
+Resolved: the LinkedIn embeds were ~7.5s of the 11.5s main-thread total on
+an emulated mid-range phone, and removing them removes essentially all of
+it. `app.js` is 3.5 KiB transferred, so what remains is fonts and gtag.
+
+Still open, both needing macOS `sips` on Jimeno's machine: the hero portrait
+is served at 901x1202 for a 560x747 box (~55 KiB wasted, wants a `srcset`),
+and the gallery thumbnails are ~4x oversized (1.4 MB across 13 files).
+`music/index.html`'s iframe is still missing `loading="lazy"`.
 
 ## Common gotchas
 

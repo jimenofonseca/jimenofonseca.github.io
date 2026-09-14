@@ -274,28 +274,17 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   color: var(--faint);
 }
 
-/* ── Recently / News feed ── */
-.feed-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+/* ── Recently / News ── */
+/* This was a 3-column grid of LinkedIn embeds. Nine third-party iframes were
+   the single largest cost on the page — ~7.5s of script evaluation on an
+   emulated mid-range phone — for a surface that already exists on LinkedIn
+   and aged badly the moment a post got old. Replaced by one line and the
+   link. Do not reintroduce embeds here without measuring first. */
+.recently-line {
+  max-width: 62ch;
+  color: var(--muted);
+  line-height: 1.65;
 }
-@media (max-width: 1100px) {
-  .feed-grid { grid-template-columns: repeat(2, 1fr); }}
-.feed-item {
-  border: 1px solid var(--hairline);
-  background: var(--bg);
-  transition: border-color 0.15s ease;
-  /* On mobile these collapse to one column — six embeds stacked, ~1,900px of
-     third-party content. content-visibility lets the browser skip layout and
-     paint for the ones off screen; contain-intrinsic-size keeps the scrollbar
-     honest so skipping does not cause jumpiness. Pairs with loading="lazy",
-     which defers the network request. */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 320px;
-}
-.feed-item:hover { border-color: var(--muted); }
-.feed-item iframe { width: 100%; min-height: 320px; border: none; display: block; }
 .feed-more {
   margin-top: 28px;
   font-family: var(--font-mono);
@@ -829,8 +818,6 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
     padding: 24px var(--edge) 32px;
     max-width: none;
   }
-
-  .feed-grid { grid-template-columns: 1fr; }
 
   .hero { grid-template-columns: 1fr; gap: 40px; }
   .hero-figure { max-width: 320px; }}
