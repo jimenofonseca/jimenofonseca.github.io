@@ -491,6 +491,20 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   arrival flag went with the hyperjump.
 - **Absolute asset paths** (`/style.css`, `/app.js`) so they resolve from any
   nested directory.
+- ⚠ **`style.css` and `app.js` carry `?v=N` — bump it when their behaviour
+  changes.** Both are still fetched at runtime, and GitHub Pages serves them
+  with `Cache-Control: max-age=600` and no way to change that without a CDN.
+  Unversioned, a returning visitor keeps running the old JS for up to ten
+  minutes. That bit us the moment the hyperjump was deleted: the code was
+  gone from `main`, Pages had deployed, and the effect still played from
+  cache. Currently `v=1`.
+
+  There is **no pre-commit hook** doing this any more — the old one existed
+  for `i18n.js` and went when `i18n.js` stopped being served. Bumping is
+  manual, so a change to either file that visitors must see immediately
+  needs the version bumped in **both** English pages, then
+  `build-i18n.py`. Note also that a rebase fires no hooks, which is how the
+  old scheme once shipped `v=38` twice.
 - **`.gitignore` does not untrack.** Two videos committed *before* the ignore
   rules kept shipping — 92 MB published that no page referenced.
   `git rm --cached` fixed it. Add a large asset and later ignore it → check
@@ -498,7 +512,11 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   `.git`; the objects stay in history.
 - **Photos in `_originals/` never reach GitHub** (gitignored). Copy the
   folder by hand when switching machines.
-- **Pages rebuild lag**: 30–60s after a push.
+- **Pages rebuild lag**: 30–60s after a push. If a change still is not
+  visible after that, check the deploy actually ran
+  (`pages build and deployment`, not just CI) before assuming the code is
+  wrong — and then check the browser cache, which is the likelier answer for
+  `style.css` / `app.js`.
 
 ## Pushing
 
