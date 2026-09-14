@@ -365,10 +365,8 @@ Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
 matches site typography). **It carries no job title on purpose** — LinkedIn
-caches OG images hard, so a title on it would go stale.
-
-After changing meta or the card: re-scrape at
-<https://www.linkedin.com/post-inspector/> and validate at
+caches OG images hard, so a title would go stale. After changing meta or the
+card, re-scrape at <https://www.linkedin.com/post-inspector/> and validate at
 <https://search.google.com/test/rich-results>.
 
 ### When the job title changes
