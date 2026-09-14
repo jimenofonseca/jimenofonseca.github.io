@@ -122,9 +122,8 @@ unverified.** `validate.js` skips any page with a `<meta http-equiv>`.
 - **Layout**: flush-left sticky sidebar (240px) + content column (max 1200px)
 - **Hairlines, not boxes**: borders between rows, no card shadows
 - **Mono is for labels, sans is for content.** IBM Plex Mono uppercase in
-  `--accent` marks things that are *not* prose: section eyebrows, the number
-  rail, media-caption kinds, the gear list. Everything a reader actually
-  reads is Inter Tight.
+  `--accent` marks what is *not* prose: eyebrows, the number rail,
+  media-caption kinds, the gear list. Everything read is Inter Tight.
 - **One title treatment, never per-section.** Titles are Inter Tight, weight
   500, `var(--fg)`. The retired pages learned this the hard way: one section
   used a 10.5px mono uppercase accent heading, which made it look like a
@@ -240,8 +239,8 @@ run, and the page's two `<loc>` entries in `sitemap.xml`. Copy the inline
 theme and lands without the arrival animation.
 
 For anything large, build it as `art/index-new.html` / `index-new.html` with
-temporary asset names, preview locally, then swap the `-new` files onto the
-canonical names and fix the internal references — all in one commit.
+temporary asset names, preview locally, then swap onto the canonical names
+and fix the internal references — all in one commit.
 
 ### Local preview
 
