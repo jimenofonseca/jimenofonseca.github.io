@@ -390,14 +390,15 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .page-body-row .page-body { padding: 0; }
 
 /* ── Art page ── */
-/* Two parts, Music and Photography, on one page. Each is a plain <section>,
-   so the base `section` rule supplies the hairline that separates them and
-   `section:first-of-type` keeps .page-intro borderless. .art-text is the
-   body copy under each part's media block. */
-.art-text { max-width: var(--prose-w); padding-block: 24px 0; }
-.art-text p { font-size: 16px; line-height: 1.7; font-weight: 300; }
-.art-text p + p { margin-top: 18px; }
-.page-body-row .art-text { padding-block: 0; }
+/* Two parts, Music and Photography. Each is a plain <section>, so the base
+   `section` rule supplies the hairline between them and
+   `section:first-of-type` keeps .page-intro borderless — no layout CSS of its
+   own. There is no body copy on this page by choice: an eyebrow, the media,
+   one caption line. The .art-text rules that held the prose, and the whole
+   .gear-list camera aside, were deleted with it.
+   The eyebrow sits closer to its media than the 28px default so each part
+   reads as one block, not a label floating above a picture. */
+.art-part .eyebrow { margin-bottom: 18px; }
 
 /* Vertical stats sidebar */
 .stats-aside {
@@ -558,7 +559,7 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 10px;
 }
 .photo-grid figure {
   position: relative;
@@ -589,6 +590,16 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   transition: opacity 0.2s ease;
 }
 .photo-grid figure:hover figcaption { opacity: 1; }
+
+/* 13 photos in 3 columns leaves one frame alone on the last row, which reads
+   as a mistake rather than a choice. Centring it makes it a deliberate
+   closing image. Keyed to :nth-child, not to the count, so it keeps working
+   as build-gallery.py adds and removes photos — and scoped to the 3-column
+   breakpoint, since the arithmetic is wrong at 2 columns and meaningless at
+   1. Spanning the row instead was rejected: the thumbnails are 600x600
+   centre crops, and stretching one to 3:1 would slice the middle out of it. */
+@media (min-width: 901px) {
+  .photo-grid figure:last-child:nth-child(3n + 1) { grid-column: 2; }}
 
 @media (max-width: 900px) {
   .photo-grid { grid-template-columns: repeat(2, 1fr); }}
@@ -647,59 +658,6 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 .lightbox-nav:hover { opacity: 1; }
 .lightbox-nav.prev { left: 16px; }
 .lightbox-nav.next { right: 16px; }
-
-/* ── Gear list (Photography sidebar) ────────────────────── */
-.gear-list {
-  position: sticky;
-  top: 32px;
-  display: flex;
-  flex-direction: column;
-}
-.gear-list .gear-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 14px;
-}
-.gear-list .gear-items {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--hairline);
-}
-.gear-list .gear-item {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--hairline);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.gear-list .gear-kind {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.gear-list .gear-model {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--fg);
-  letter-spacing: -0.005em;
-  line-height: 1.4;
-}
-.gear-list .gear-note {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-}
-
-@media (max-width: 1100px) {
-  .gear-list { position: static; }}
 
 /* ── Citations bar chart (Publications hero) ────────────── */
 .citations-chart { margin: 0; }

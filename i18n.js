@@ -53,12 +53,9 @@ var TRANSLATIONS = {
 
     // ── Music ─────────────────────────────────────
     'v2.music.caption.kind': 'Clip',
-    'v2.music.p1':           'Music has been a thread through most of my life — from picking up instruments as a teenager to still playing now. Once in a while I record something worth keeping. The clip above is one of those.',
 
     // ── Photography ───────────────────────────────
     'v2.photo.caption.kind': 'Selected · 2018 – 2025',
-    'v2.photo.p1':           'I\'ve been making photographs for as long as I\'ve been making models — the same instinct, just different tools. Places, people, the way light falls on a building at the wrong time of day.',
-    'v2.photo.p2':           'The collection on this page is small on purpose: photos I keep coming back to, not everything I\'ve ever shot. Click any image to enlarge — use arrow keys or swipe to move through them.',
   },
 
   de: {
@@ -115,12 +112,9 @@ var TRANSLATIONS = {
 
     // ── Musik ─────────────────────────────────────
     'v2.music.caption.kind': 'Clip',
-    'v2.music.p1':           'Musik begleitet mich schon den grössten Teil meines Lebens — angefangen damit, als Teenager Instrumente aufzugreifen, bis hin zum Spielen heute. Ab und zu nehme ich etwas auf, das es wert ist, aufbewahrt zu werden. Der Clip oben ist eines dieser Stücke.',
 
     // ── Fotografie ────────────────────────────────
     'v2.photo.caption.kind': 'Auswahl · 2018 – 2025',
-    'v2.photo.p1':           'Ich fotografiere schon so lange, wie ich Modelle baue — derselbe Instinkt, nur andere Werkzeuge. Orte, Menschen, die Art, wie Licht zur falschen Tageszeit auf ein Gebäude fällt.',
-    'v2.photo.p2':           'Die Sammlung auf dieser Seite ist bewusst klein: Fotos, zu denen ich immer wieder zurückkehre, nicht alles, was ich je aufgenommen habe. Klicken Sie auf ein Bild, um es zu vergrössern — navigieren Sie mit den Pfeiltasten oder wischen Sie.',
   }
 };
 

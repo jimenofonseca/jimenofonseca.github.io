@@ -118,11 +118,11 @@
         <p class="page-lede" data-i18n="v2.art.lede">Musik und Fotografien — die Arbeit, die keine Arbeit ist.</p>
       </section>
 
-      <!-- Music and Photography used to be two pages (/music/ and
-           /photography/). They are one now. Each part keeps its own eyebrow,
-           media block and body copy; the section hairline separates them.
-           build-gallery.py writes into the GALLERY markers below — its target
-           path was updated when this page replaced /photography/. -->
+      <!-- Music and Photography were two pages (/music/, /photography/) until
+           the Intro/Work/Art reduction. Each part is now a plain <section>:
+           an eyebrow, the media, and one caption line. The body copy and the
+           camera/kit list were removed deliberately — see CLAUDE.md.
+           build-gallery.py writes into the GALLERY markers below. -->
       <section class="art-part" aria-labelledby="music-h">
         <p class="eyebrow"><span class="index">01</span><span id="music-h" data-i18n="nav.music">Musik</span></p>
         <div class="video-wrap">
@@ -138,9 +138,6 @@
           <span class="sep">·</span>
           <span class="text">X-Band, Summer 2025</span>
         </p>
-        <div class="art-text">
-          <p data-i18n="v2.music.p1">Musik begleitet mich schon den grössten Teil meines Lebens — angefangen damit, als Teenager Instrumente aufzugreifen, bis hin zum Spielen heute. Ab und zu nehme ich etwas auf, das es wert ist, aufbewahrt zu werden. Der Clip oben ist eines dieser Stücke.</p>
-        </div>
       </section>
 
       <section class="art-part" aria-labelledby="photo-h">
@@ -191,50 +188,6 @@
         <p class="media-caption">
           <span class="kind" data-i18n="v2.photo.caption.kind">Auswahl · 2018 – 2025</span>
         </p>
-        <div class="page-body-row">
-          <div class="art-text">
-            <p data-i18n="v2.photo.p1">Ich fotografiere schon so lange, wie ich Modelle baue — derselbe Instinkt, nur andere Werkzeuge. Orte, Menschen, die Art, wie Licht zur falschen Tageszeit auf ein Gebäude fällt.</p>
-            <p data-i18n="v2.photo.p2">Die Sammlung auf dieser Seite ist bewusst klein: Fotos, zu denen ich immer wieder zurückkehre, nicht alles, was ich je aufgenommen habe. Klicken Sie auf ein Bild, um es zu vergrössern — navigieren Sie mit den Pfeiltasten oder wischen Sie.</p>
-          </div>
-          <aside class="gear-list" aria-label="Photography kit">
-            <div class="gear-label">Kit</div>
-            <div class="gear-items">
-
-            <div class="gear-item">
-              <span class="gear-kind">Body</span>
-              <span class="gear-model">Sony α7R II</span>
-            </div>
-
-            <div class="gear-item">
-              <span class="gear-kind">Lens</span>
-              <span class="gear-model">Rokinon 18mm</span>
-              <span class="gear-note">Wide / landscape</span>
-            </div>
-
-            <div class="gear-item">
-              <span class="gear-kind">Lens</span>
-              <span class="gear-model">Zeiss Distagon 35mm f/1.4</span>
-              <span class="gear-note">Everyday / street</span>
-            </div>
-
-            <div class="gear-item">
-              <span class="gear-kind">Lens</span>
-              <span class="gear-model">Zeiss Batis 85mm</span>
-              <span class="gear-note">Portraits</span>
-            </div>
-
-            <div class="gear-item">
-              <span class="gear-kind">Flash</span>
-              <span class="gear-model">Godox HSS 1200 Ws</span>
-            </div>
-
-            <div class="gear-item">
-              <span class="gear-kind">Modifier</span>
-              <span class="gear-model">Umbrella 80 cm</span>
-            </div>
-            </div>
-          </aside>
-        </div>
       </section>
 
     </main>

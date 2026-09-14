@@ -200,16 +200,31 @@ Edit the **English** page (`index.html`, `art/index.html`), then run
 ### Working on the Art page
 
 `/art/` is **one page, two parts** — Music then Photography, each a plain
-`<section class="art-part">` with a numbered eyebrow. The base `section` rule
-supplies the hairline between them and `section:first-of-type` keeps
-`.page-intro` borderless, so the parts need no layout CSS of their own; only
-`.art-text` was added, for the body copy under each media block.
+`<section class="art-part">`: a numbered eyebrow, the media, one caption
+line. The base `section` rule supplies the hairline between them and
+`section:first-of-type` keeps `.page-intro` borderless, so the parts carry no
+layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
+each label down onto its media so the pair reads as one block.
 
 - **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
 - **Photography**: 13 photos from `assets/photography/`. The `app.js`
-  lightbox binds to `.photo-grid figure[data-full]`.
-- **Kit list**: `.gear-list` is hardcoded English with no i18n keys — they
-  are model names, which do not translate. Six items, edited in the markup.
+  lightbox binds to `.photo-grid figure[data-full]`, and `cursor: zoom-in` is
+  the only affordance — there is no prose telling people to click.
+
+⚠ **The page has no body copy, and that is the design.** Three paragraphs
+(`v2.music.p1`, `v2.photo.p1`, `v2.photo.p2`) and the `.gear-list` camera/kit
+aside were removed as clutter; all four keys and `.art-text` /`.gear-*` went
+with them. **Do not add explanatory prose back** — the h1, the lede and two
+caption lines are the whole page by choice.
+
+⚠ **A lone final thumbnail is centred, not spanned.** 13 photos in 3 columns
+leaves one frame alone on the last row;
+`.photo-grid figure:last-child:nth-child(3n + 1) { grid-column: 2 }` turns
+that into a deliberate closing image. It is keyed to `:nth-child` rather than
+the count, so it survives `build-gallery.py` adding or removing photos, and
+scoped to `min-width: 901px` because the arithmetic is wrong at 2 columns and
+meaningless at 1. Spanning the row was rejected: the thumbnails are 600x600
+centre crops, so stretching one to 3:1 would slice the middle out of it.
 
 ### Updating the photo gallery
 
