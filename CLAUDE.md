@@ -361,6 +361,11 @@ Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
   page's canonical exactly (no `www.`, keep the trailing slash).
   `validate.js` enforces both. `sameAs` holds Wikidata (`Q140798347`) and
   LinkedIn; GitHub and Google Scholar were removed deliberately.
+- ⚠ **No location anywhere.** The footer's "Zürich, CH", the JSON-LD
+  `homeLocation` and the city in `og:image:alt` were all removed on request.
+  `homeLocation` is a genuine local-SEO signal for a Zürich-based candidate,
+  so it is the kind of thing a later session will want to "restore" — don't.
+  The only Zürich left is **ETH Zürich**, which is a degree, not an address.
 
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
