@@ -10,13 +10,21 @@ Pulls Inter Tight from npm so the card matches the site's typography.
 import os, subprocess, glob, tarfile, tempfile
 from PIL import Image, ImageDraw, ImageFont
 
-HEAD = "I turn technology into lasting capability."
-SUB  = "The organisation, the procedures, the people, and the connections between them."
-NAME = "Jimeno Fonseca"
-META = "Axpo Grid"  # no job title (OG images cache hard) and no city:
-                    # the location was removed from the footer, the JSON-LD
-                    # homeLocation and og:image:alt, so it must not survive
-                    # here — the share card is the most public surface of all.
+# The card mirrors the Intro page: the name is the headline, then two durable
+# facts, then the employer. It used to lead with a slogan over a strapline
+# that appeared nowhere on the site — both were retired from the page, and
+# the card was the last place the slogan survived.
+#
+# Two standing rules for this text, both because OG images cache hard and a
+# stale card is worse than a plain one:
+#   * no job title — it would go out of date on every promotion.
+#   * no city — the location was removed from the footer, the JSON-LD
+#     homeLocation and og:image:alt on request, and this is the most public
+#     surface of the four.
+# SUB names achievements rather than a role, so it stays true either way.
+HEAD = "Jimeno Fonseca"
+SUB  = "Developer of City Energy Analyst. Founder of Superurbana GmbH."
+META = "Axpo Grid"
 
 def inter_tight_ttfs():
     """Fetch Inter Tight from npm and convert woff2 -> ttf for Pillow."""
@@ -39,14 +47,17 @@ def inter_tight_ttfs():
     return out
 
 W, H = 1200, 630
-BG, FG, MUTE, HAIR = (255,255,255), (10,10,10), (110,110,110), (219,219,219)
-ACCENT = (11, 79, 168)
+# The site is permanently dark, so the card is too — these are the exact
+# :root tokens from style.css. The portrait's pale background carries the
+# contrast on the right-hand panel.
+BG, FG, MUTE, HAIR = (12,12,12), (245,245,244), (168,162,158), (31,31,31)
+ACCENT = (106, 165, 240)
 PANEL_W = 430
 
 d_ = inter_tight_ttfs()
 F = lambda w, px: ImageFont.truetype(os.path.join(d_, f"InterTight-{w}.ttf"), px)
-f_head, f_sub  = F("600", 62), F("400", 26)
-f_name, f_meta = F("600", 29), F("400", 21)
+f_head, f_sub  = F("600", 74), F("400", 26)
+f_meta         = F("400", 21)
 f_label        = F("500", 16)
 
 card = Image.new("RGB", (W, H), BG)
@@ -77,15 +88,18 @@ def wrap(text, font, width):
     lines.append(cur)
     return lines
 
-y = 150
-for ln in wrap(HEAD, f_head, tw):
-    d.text((x, y), ln, font=f_head, fill=FG); y += 74
+# Centre the text block rather than pinning it to y=150: the copy is short
+# now, and a fixed origin left it riding high in a 630px panel.
+head_lines, sub_lines = wrap(HEAD, f_head, tw), wrap(SUB, f_sub, tw)
+block = len(head_lines) * 86 + 14 + len(sub_lines) * 36 + 30 + 28 + 28
+y = max(150, (H - block) // 2 + 20)
+for ln in head_lines:
+    d.text((x, y), ln, font=f_head, fill=FG); y += 86
 y += 14
-for ln in wrap(SUB, f_sub, tw):
+for ln in sub_lines:
     d.text((x, y), ln, font=f_sub, fill=MUTE); y += 36
 y += 30
 d.line([(x, y), (x + tw, y)], fill=HAIR, width=1); y += 28
-d.text((x, y), NAME, font=f_name, fill=FG); y += 41
 d.text((x, y), META, font=f_meta, fill=MUTE)
 
 card.save("assets/og-image.jpg", "JPEG", quality=90, optimize=True)

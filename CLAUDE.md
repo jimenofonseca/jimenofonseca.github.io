@@ -367,9 +367,25 @@ Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
-matches site typography). **It carries no job title on purpose** — LinkedIn
-caches OG images hard, so a title would go stale. After changing meta or the
-card, re-scrape at <https://www.linkedin.com/post-inspector/> and validate at
+matches site typography). ⚠ **It reads `assets/portrait.jpg` and crops a
+panel of it**, so swapping the portrait silently staled the card until this
+was noticed — regenerate it in the same commit, always.
+
+The card is **dark**, using the exact `:root` tokens, and mirrors the Intro
+page: the name as the headline, two durable facts, then the employer. It used
+to lead with "I turn technology into lasting capability." over a strapline
+found nowhere on the site — the card was the last place that slogan survived
+the reduction.
+
+Two standing rules for its text, both because OG images cache hard and a
+stale card is worse than a plain one: **no job title** (it would go out of
+date on every promotion) and **no city** (the location was removed
+everywhere else on request, and this is the most public surface of the
+four). `SUB` names achievements rather than a role so it stays true either
+way.
+
+After changing meta or the card, re-scrape at
+<https://www.linkedin.com/post-inspector/> and validate at
 <https://search.google.com/test/rich-results>.
 
 ### When the job title changes
