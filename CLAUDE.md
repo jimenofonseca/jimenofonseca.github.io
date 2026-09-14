@@ -273,20 +273,20 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-| | |
-|---|---|
-| `i18n.js` | the only place copy lives, `en:` + `de:`, 21 keys each. **Build input — never served to browsers** |
-| English pages | hand-authored; `build-i18n.py` refreshes their fallbacks from `en:` |
-| `de/**` | **generated. Never hand-edit** — the generator deletes and rewrites the tree |
-| `hreflang` | every page names `en`, `de` and `x-default`, itself included |
-| canonical | self-referential |
+`i18n.js` is the only place copy lives (`en:` + `de:`, 18 keys each) and is
+**build input, never served to browsers**. English pages are hand-authored
+and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
+generated and must never be hand-edited** — the generator deletes and
+rewrites the tree.
 
+- Every page has a **self-referential canonical** and names `en`, `de` and
+  `x-default` in its `hreflang` set, itself included. The set must be
+  **reciprocal**: if German names English but not vice versa, Google
+  silently discards the whole annotation.
+- **`x-default` points at English**, the primary language.
 - **No redirect by browser language.** Each URL serves one language always;
   the sidebar switcher links to the counterpart. Google advises against
   language-sniffing redirects, and one would contradict the canonical.
-- **`x-default` points at English**, the primary language.
-- The `hreflang` set must be **reciprocal** — if German names English but not
-  vice versa, Google silently discards the whole annotation.
 
 ## ⚠ EN/DE parity — non-negotiable
 
@@ -306,15 +306,14 @@ rewording sometimes needs no German change. Do not "fix" those.
 
 ### What the tooling enforces, and what it does not
 
-✅ `node validate.js` checks **4 pages** — 2 English, 2 German — each against
-its *own* language block, plus: EN/DE key parity; every `data-i18n` key
-exists; exactly one `Person` JSON-LD per home page with a `url` matching its
-canonical; a self-referential canonical and a reciprocal `hreflang` set
-(`en`/`de`/`x-default`) with a matching `<html lang>`; and that `sitemap.xml`
-lists **exactly** the validated pages. CI runs it on every push and PR.
-
-That sitemap check exists because the page list comes from a directory scan
-while `sitemap.xml` is hand-written. **Add a page → add its `<loc>`.**
+✅ `node validate.js` checks **4 pages** — 2 English, 2 German — each
+against its *own* language block, plus: EN/DE key parity; every `data-i18n`
+key exists; exactly one `Person` JSON-LD per home page with a `url` matching
+its canonical; a self-referential canonical and a reciprocal `hreflang` set
+with a matching `<html lang>`; and that `sitemap.xml` lists **exactly** the
+validated pages — that last one because the page list comes from a directory
+scan while the sitemap is hand-written, so **add a page → add its `<loc>`**.
+CI runs it on every push and PR.
 
 ❌ Nothing verifies the German is *good*, only that it exists — still a human
 job. `data-i18n-html` keys are checked for existence only, so verify inline
@@ -322,24 +321,16 @@ markup by hand.
 
 ## i18n key conventions
 
-21 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+18 keys per language. `nav.*` is the sidebar plus the two Art part headings;
 `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — `v2.art.lede`, `v2.music.p1`, `v2.photo.p1/p2`,
-the caption kinds, and the chrome (`v2.theme.label`, `v2.lang.label`,
-`v2.menu.open`).
+everything else — `v2.art.lede`, the two caption kinds, and the chrome
+(`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
+artefact of an old redesign, not a version scheme.
 
-The `v2.` prefix is an artefact of an old redesign, not a version scheme.
-Not worth renaming 12 keys to remove it.
-
-Every key MUST exist in both blocks. `node -c i18n.js` after editing.
-
-| Attribute | Sets |
-|---|---|
-| `data-i18n` | `textContent` |
-| `data-i18n-html` | `innerHTML` (content with inline markup) |
-| `data-i18n-content` | the `content` attribute (`<meta>`) |
-| `data-i18n-aria` | `aria-label` |
+Every key MUST exist in both blocks; `node -c i18n.js` after editing.
+`data-i18n` sets `textContent`, `-html` sets `innerHTML`, `-content` sets a
+`<meta>`'s `content`, `-aria` sets `aria-label`.
 
 ## ⚠ HTML fallbacks must match the `en:` values
 
