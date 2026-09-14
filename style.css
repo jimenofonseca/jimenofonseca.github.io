@@ -4,13 +4,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #fafaf9;
-  --fg:        #0a0a0a;
-  --muted:     #6b7280;
-  --faint:     #a3a3a3;
-  --hairline:  #e7e5e4;
-  --hover:     #f5f5f4;
-  --accent:    #0b4fa8;  /* same blue as the OG share card — see appendix-og-image.py */
+  /* The site is dark, permanently: no theme toggle, no light palette. Do not
+     reintroduce a prefers-color-scheme branch or an attribute override —
+     nothing reads either any more. */
+  --bg:        #0c0c0c;
+  --fg:        #f5f5f4;
+  --muted:     #a8a29e;
+  --faint:     #57534e;
+  --hairline:  #1f1f1f;
+  --hover:     #161616;
+  --accent:    #6aa5f0;  /* lightened for the dark ground; the OG card still uses #0b4fa8 */
 
   --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -21,16 +24,6 @@
   --content-w: 1200px;  /* width of the content column (excl. padding) */
   --prose-w:   680px;   /* readable max for body text inside content */
   --portrait-w: 440px;  /* hero portrait column width */
-}
-
-html[data-theme="dark"] {
-  --bg:       #0c0c0c;
-  --fg:       #f5f5f4;
-  --muted:    #a8a29e;
-  --faint:    #57534e;
-  --hairline: #1f1f1f;
-  --hover:    #161616;
-  --accent:   #6aa5f0;  /* lightened for contrast on the dark background */
 }
 
 html { scroll-behavior: smooth; }
@@ -279,10 +272,9 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center top;
-  filter: grayscale(0);
+  filter: grayscale(0.15) brightness(0.92);
   transition: filter 0.3s ease;
 }
-html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.92); }
 .hero-figure figcaption {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -849,7 +841,7 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
    One colour, used sparingly: the numbered index motif, the
    impact numbers, and interactive states. Everything else
    stays greyscale — the restraint is the point.
-   Token lives in :root / html[data-theme="dark"] at the top.
+   Token lives in :root at the top.
    ───────────────────────────────────────────────────────── */
 
 /* The 01–13 numbered index motif — the site's signature detail */

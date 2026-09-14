@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
   <!-- Google tag (gtag.js), loaded after the load event.
        The commands below queue into dataLayer immediately, so the pageview is
@@ -20,15 +20,8 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Dark first: the UA paints its own canvas dark before style.css lands. -->
-  <meta name="color-scheme" content="dark light" />
-  <script>(function(){
-    // Dark is the site default: <html> ships with data-theme="dark", so this
-    // only has to honour an explicit stored choice. The OS setting is no
-    // longer consulted — the default is a design decision, not the visitor's.
-    var t=localStorage.getItem("theme");
-    if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
-  })();</script>
+  <!-- One palette, dark. Lets the UA paint its canvas dark before style.css lands. -->
+  <meta name="color-scheme" content="dark" />
   <title data-i18n="home.title">Jimeno Fonseca | Digital- und Technologieführung für Energie &amp; Infrastruktur</title>
   <meta name="description" data-i18n-content="home.desc" content="Jimeno Fonseca verwandelt digitale Technologie in dauerhafte Fähigkeiten. Leiter Digital Engineering bei Axpo Grid, Entwickler von City Energy Analyst, Gründer von Superurbana GmbH, Doktortitel der ETH Zürich." />
   <link rel="canonical" href="https://jimenofonseca.com/de/" />
@@ -124,14 +117,6 @@
       </div>
 
       <div class="sidebar-controls">
-        <div class="control-row">
-          <span class="control-label" data-i18n="v2.theme.label">Theme</span>
-          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
-            <span class="opt" data-theme-opt="light">LIGHT</span>
-            <span class="sep">/</span>
-            <span class="opt active" data-theme-opt="dark">DARK</span>
-          </button>
-        </div>
         <div class="control-row">
           <span class="control-label" data-i18n="v2.lang.label">Sprache</span>
           <div class="toggle lang-toggle">

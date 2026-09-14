@@ -66,8 +66,8 @@ markup.
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
-├── app.js                      # Theme toggle, mobile sidebar, lightbox. No nav JS
-├── i18n.js                     # EN/DE copy — 21 keys each. Build input only
+├── app.js                      # Mobile sidebar + photo lightbox. Nothing else
+├── i18n.js                     # EN/DE copy — 17 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -117,33 +117,26 @@ LinkedIn" correction: `docs/retired-site.md`.**
 - **Language**: one per URL, plain HTML. No JS swap, no browser-language
   detection — see "Two language trees".
 
-### Theme — dark is the default
+### Theme — there isn't one
 
-Light/dark via `[data-theme]` on `<html>`, persisted in localStorage. **Dark
-is a design decision, not a reading of the visitor's OS**: every page ships
-`<html lang="…" data-theme="dark">` in the markup, so the default survives JS
-being off with no first-paint flash, and `<meta name="color-scheme"
-content="dark light">` lets the UA paint its canvas dark before `style.css`
-lands. `prefers-color-scheme` is **not consulted anywhere** — don't
-reintroduce it thinking it is missing.
+**The site is dark, permanently.** One palette in `:root`, no toggle, no
+`prefers-color-scheme`, no theme attribute or selector anywhere, and
+`<meta name="color-scheme" content="dark">` so the UA paints its canvas dark
+before `style.css` lands. **Do not reintroduce any of it** — nothing reads a
+theme any more, and a `:root`-vs-override split would just be a trap for
+whichever page forgot the attribute.
 
-Three places carry the default and must agree: each page's `<html>` tag
-(`data-theme="dark"`), each page's sidebar toggle (`class="opt active"` on
-the **dark** span), and `app.js`'s `|| 'dark'` fallbacks in `toggleTheme()`
-and init.
+Removed with it: `applyTheme()`, `toggleTheme()`, the `v2.theme.label` key,
+the sidebar's Theme row, and the **entire inline `<head>` script** — its only
+remaining job had been applying a stored theme before paint. `app.js` no
+longer touches `localStorage` at all.
 
-⚠ **`app.js`'s init must never call `applyTheme()`.** It writes to
-localStorage, so calling it on load stamps a theme on a first-time visitor
-who never chose one — freezing the guess and making any future change to the
-site default invisible to everyone who has ever loaded the page. Init only
-syncs the toggle's `.active` class. This was a live bug while light was the
-default: `localStorage.getItem('theme') || 'light'` wrote `light` on first
-paint.
-
-`style.css` is the exception to dark-first: `:root` holds the **light**
-palette and `html[data-theme="dark"]` overrides it. Deliberate — the markup
-default does the work, and swapping the blocks is a risky refactor for no
-visible gain.
+⚠ This was the "large, risky refactor" earlier versions of this file
+deliberately deferred: `:root` held the *light* palette with a dark override
+on `<html>`, which was correct while a toggle existed. With the toggle gone
+the refactor became the safe option, so the dark values now live in `:root`
+directly. Verified after the change: dark with JS on, dark with JS off, and
+dark with the OS set to light.
 
 ## Sidebar navigation order
 
@@ -249,9 +242,8 @@ or the generator silently updates a page nobody serves.
 ### Adding a new page
 
 Three things are required or CI fails: the English file, a `build-i18n.py`
-run, and the page's two `<loc>` entries in `sitemap.xml`. Copy the inline
-`<head>` script from an existing page too, or the page flashes light before
-`style.css` applies the stored theme.
+run, and the page's two `<loc>` entries in `sitemap.xml`. There is no head
+script to copy any more.
 
 For anything large, build it as `art/index-new.html` / `index-new.html` with
 temporary asset names, preview locally, then swap onto the canonical names
@@ -275,7 +267,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 18 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 17 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -323,11 +315,11 @@ markup by hand.
 
 ## i18n key conventions
 
-18 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+17 keys per language. `nav.*` is the sidebar plus the two Art part headings;
 `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — `v2.art.lede`, the two caption kinds, and the chrome
-(`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
+(`v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
 Every key MUST exist in both blocks; `node -c i18n.js` after editing.
@@ -527,10 +519,10 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   `stale-fallback`. Run the generator; do not hand-patch HTML.
 - **Hand-edited something under `de/`** — the next generator run silently
   discards it. German copy lives in `i18n.js`, nowhere else.
-- **The inline `<head>` script is load-bearing.** It applies a stored theme
-  choice before paint, and a new page must copy it. That is now all it does:
-  language detection went with the runtime `i18n.js`, and the hyperjump
-  arrival flag went with the hyperjump.
+- **There is no inline `<head>` script any more.** It had three jobs and
+  lost all of them: language detection (with the runtime `i18n.js`), the
+  hyperjump arrival flag (with the hyperjump), and applying a stored theme
+  (with the theme). A new page needs no script block.
 - **Absolute asset paths** (`/style.css`, `/app.js`) so they resolve from any
   nested directory.
 - ⚠ **`style.css` and `app.js` carry `?v=N` — bump it when their behaviour

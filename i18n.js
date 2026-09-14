@@ -15,7 +15,6 @@ var TRANSLATIONS = {
     'hero.h1':            'Jimeno Fonseca',
 
     // ── Redesign (home v2) ───────────────────────
-    'v2.theme.label':     'Theme',
     'v2.lang.label':      'Language',
     'v2.menu.open':       'Menu',
     'nav.music':          'Music',
@@ -74,7 +73,6 @@ var TRANSLATIONS = {
     'hero.h1':            'Jimeno Fonseca',
 
     // ── Redesign (home v2) ───────────────────────
-    'v2.theme.label':     'Theme',
     'v2.lang.label':      'Sprache',
     'v2.menu.open':       'Menü',
     'nav.music':          'Musik',
