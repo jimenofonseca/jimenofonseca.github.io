@@ -5,7 +5,6 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Work',
     'nav.art':               'Off the clock',
-    'v2.art.lede':           'Music I have recorded, and photographs I keep coming back to.',
     'art.title':             'Off the Clock | Music and Photography — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
@@ -63,7 +62,6 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
     'nav.art':               'Feierabend',
-    'v2.art.lede':           'Musik, die ich aufgenommen habe, und Fotografien, zu denen ich immer wieder zurückkehre.',
     'art.title':             'Feierabend | Musik und Fotografie — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 

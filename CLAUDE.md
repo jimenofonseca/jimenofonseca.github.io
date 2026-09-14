@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Mobile sidebar + photo lightbox. Nothing else
-├── i18n.js                     # EN/DE copy — 17 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 16 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -205,11 +205,14 @@ is generated, so pulling a `<figure>` and the two JPEGs is only half the job
 brings the photo straight back. `photo-05.jpg` was removed this way and its
 original still needs deleting on Jimeno's machine.
 
-⚠ **The page has no body copy, and that is the design.** Three paragraphs
-(`v2.music.p1`, `v2.photo.p1`, `v2.photo.p2`) and the `.gear-list` camera
-aside were removed as clutter, along with `.art-text` and `.gear-*`. **Do not
-add explanatory prose back** — the h1, the lede and two caption lines are the
-whole page by choice.
+⚠ **The page has no prose at all, and that is the design.** The whole page is
+the h1, two numbered eyebrows, two media blocks and two caption lines.
+Removed in stages: three paragraphs (`v2.music.p1`, `v2.photo.p1`,
+`v2.photo.p2`), the `.gear-list` camera aside, and finally the lede
+(`v2.art.lede`, "Music I have recorded, and photographs I keep coming back
+to.") — the h1 already says what the page is. `.art-text`, `.gear-*` and the
+last use of `.page-lede` went with them. **Do not add explanatory prose
+back.**
 
 ⚠ **A lone final thumbnail is centred, not spanned** —
 `figure:last-child:nth-child(3n + 1) { grid-column: 2 }`, keyed to
@@ -267,7 +270,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 17 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 16 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -315,10 +318,10 @@ markup by hand.
 
 ## i18n key conventions
 
-17 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+16 keys per language. `nav.*` is the sidebar plus the two Art part headings;
 `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — `v2.art.lede`, the two caption kinds, and the chrome
+everything else — the two caption kinds and the chrome
 (`v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
