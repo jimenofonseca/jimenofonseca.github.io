@@ -28,11 +28,6 @@
     // longer consulted — the default is a design decision, not the visitor's.
     var t=localStorage.getItem("theme");
     if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
-    // Hyperjump arrival flag — applied before paint so CSS animation
-    // starts on the very first frame (no snap-then-jiggle).
-    if(sessionStorage.getItem("hyperjump-arriving")==="1"){
-      document.documentElement.classList.add("hyper-arrive");
-    }
   })();</script>
   <title data-i18n="art.title">Kunst | Musik und Fotografie — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="art.desc" content="Musik und Fotografie von Jimeno Fonseca — ein langjähriges Hobby, ausgewählte Clips und Fotografien." />

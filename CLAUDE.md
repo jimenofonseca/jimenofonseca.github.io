@@ -14,7 +14,6 @@ other.
 | here | the live site: two pages, three menu items, current mechanics |
 | `docs/retired-site.md` | the nine-page site. **Do not re-document retired pages here** |
 | `docs/deploy-and-git.md` | deploy internals, push auth, credential troubleshooting |
-| `docs/hyperjump.md` | the page-transition anatomy and its tuning knobs |
 | `~/.claude/skills/static-site-workflow/SKILL.md` | anything that would apply to a *second* static site |
 
 - Small surgical edits beat sweeping rewrites; show the diff before
@@ -60,14 +59,14 @@ markup.
 ├── _old/                       # UNPUBLISHED (Jekyll underscore rule)
 │   ├── retired-pages/          #   the nine-page site, archived intact
 │   └── …                       #   plus the original Jekyll site
-├── docs/                       # retired-site.md · deploy-and-git.md · hyperjump.md
+├── docs/                       # retired-site.md · deploy-and-git.md
 ├── private-src/                # GITIGNORED — optional local drafts
 ├── assets/
 │   ├── portrait.jpg            # Intro portrait
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
 │   └── photography/            # 13 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
-├── app.js                      # Theme toggle, mobile sidebar, lightbox, hyperjump
+├── app.js                      # Theme toggle, mobile sidebar, lightbox. No nav JS
 ├── i18n.js                     # EN/DE copy — 21 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
@@ -92,29 +91,16 @@ stray `CNAME` and every page that was deliberately retired.
 **Why there is no `pages.yml`, and the rebuild-lag figure:
 `docs/deploy-and-git.md`.**
 
-### Old URLs — the reduction chose 404 over redirects
+### Old URLs
 
-Sixteen URLs went away (`/principles/`, `/digital-transformation/`, `/cea/`,
-`/ipcc/`, `/appearances/`, `/publications/`, `/music/`, `/photography/`, each
-in both languages). **They serve 404 on purpose** — stubs pointing everything
-at `/` were offered and declined.
+Sixteen URLs went away in the reduction and **serve 404 on purpose** —
+redirect stubs pointing at `/` were offered and declined. One stub survives,
+`/projects/` → `/`, because the old Jekyll site published `/Projects.html`
+and the destination still exists. `validate.js` skips any page with a
+`<meta http-equiv>`.
 
-The cost, not reversible on Google's timetable: every indexed result and
-inbound link breaks, the URLs drop out within weeks, and anything restored
-later returns cold. The pages are intact in `_old/retired-pages/` — restoring
-one is a `git mv` back plus the "Adding a new page" steps, and its i18n keys
-out of git history.
-
-**One stub survives**: `/projects/` → `/` (meta-refresh + canonical +
-`noindex, follow` + JS `location.replace`), because the old Jekyll site
-published `/Projects.html` and the destination still exists.
-`/open-source/` went with the rest — it pointed at `/ipcc/`, and a redirect
-to a 404 is worse than a 404.
-
-⚠ **Do not re-justify `/projects/` with LinkedIn.** This file once claimed
-the profile's Portfolio link pointed at `www.jimenofonseca.com/projects`. It
-does not — the field is the bare domain. **Disproven, not merely
-unverified.** `validate.js` skips any page with a `<meta http-equiv>`.
+**The full list, the SEO cost, and the "do not re-justify `/projects/` with
+LinkedIn" correction: `docs/retired-site.md`.**
 
 ## Design system (Swiss / minimalist)
 
@@ -171,9 +157,9 @@ because nothing conflicts any more (the old About group was deliberately
 | 02 | Work | `https://www.linkedin.com/in/jimenofonseca/` — `↗`, `target="_blank"` |
 | 03 | Art | `/art/` — `→` |
 
-**Work is an outbound link, not a page.** There is no `/work/`, and
-`app.js`'s `isInternalNav()` excludes `target="_blank"`, so the hyperjump
-correctly does not fire on it.
+**Work is an outbound link, not a page.** There is no `/work/`. Nothing
+intercepts clicks any more, so it needs no special handling — the browser
+just follows it.
 
 ⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
 JSON-LD `sameAs`** — an explicit decision, not an oversight. `sameAs` holds
@@ -248,8 +234,8 @@ or the generator silently updates a page nobody serves.
 
 Three things are required or CI fails: the English file, a `build-i18n.py`
 run, and the page's two `<loc>` entries in `sitemap.xml`. Copy the inline
-`<head>` script from an existing page too, or the new page flashes the wrong
-theme and lands without the arrival animation.
+`<head>` script from an existing page too, or the page flashes light before
+`style.css` applies the stored theme.
 
 For anything large, build it as `art/index-new.html` / `index-new.html` with
 temporary asset names, preview locally, then swap onto the canonical names
@@ -430,18 +416,32 @@ in `assets/` (~900x1200, under 200 KB) and repoint the `<img src>` in
 over from a retired 3-slide reel, referenced nowhere. Delete if it is not
 coming back.
 
-## Page transition (hyperjump)
+## Page transition
 
-Every internal navigation plays a ~2s Star Wars hyperspace jump: an overlay
-covers the content frame (the sidebar stays anchored), ~120 stars streak
-right, and the new page arrives scaled-up and blurred. Theme-aware, and
-`prefers-reduced-motion: reduce` gets an instant page swap instead.
+A 220ms cross-fade, done by the browser. Four rules in `style.css` and **no
+JavaScript at all**:
 
-Three pieces: CSS at the end of `style.css`, the second IIFE at the end of
-`app.js`, and the inline `<head>` script that reads the `sessionStorage` flag
-*before paint* so the arrival starts on frame 1.
+```css
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+.sidebar { view-transition-name: sidebar; }   /* holds still across pages */
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+```
 
-**Tuning, disabling, and the full anatomy: `docs/hyperjump.md`.**
+Cross-document view transitions need the at-rule in **both** documents,
+which they get by sharing `style.css`. Unsupported browsers (Firefox, for
+now) navigate instantly — normal web behaviour, and no worse than before.
+
+⚠ **This replaced a ~2s "hyperspace jump"** — a JS overlay of 120 stretching
+star streaks plus an arrival deceleration: 109 lines of `app.js`, ~135 of
+`style.css`, its own theme tokens, and a `sessionStorage` flag read before
+paint. **Its real cost was 1150ms added to every navigation**, because the
+click handler let the animation finish before navigating. Gone, with
+`docs/hyperjump.md`; git history has both.
+
+It also took `isInternalNav()` with it, so nothing intercepts link clicks
+now. If you ever reintroduce that, it existed to exclude cross-origin links
+and `target="_blank"` so the Work link never triggered the effect.
 
 ## Mobile performance
 
@@ -469,9 +469,8 @@ thumbnails are ~4x oversized (1.4 MB across 13 files).
 `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
 `.cta-link`, `.bio-label`, `.feed-more`. Left alone on purpose: one cached
 file, zero runtime cost, and a blind prune risks the **runtime-created**
-classes that look dead to a grep — `hyperjump`, `hyperjump-flash`,
-`hyper-arrive`, `star`, `lightbox`, `lightbox-caption`, `lightbox-close`,
-`lightbox-nav`, `open`.
+classes that look dead to a grep — `lightbox`, `lightbox-caption`,
+`lightbox-close`, `lightbox-nav`, `open`.
 
 ## Common gotchas
 
@@ -480,9 +479,9 @@ classes that look dead to a grep — `hyperjump`, `hyperjump-flash`,
 - **Hand-edited something under `de/`** — the next generator run silently
   discards it. German copy lives in `i18n.js`, nowhere else.
 - **The inline `<head>` script is load-bearing.** It applies a stored theme
-  choice and the hyperjump arrival flag before paint. A new page must copy
-  it. It does *no* language detection — that went with the runtime `i18n.js`,
-  along with `?v=N` cache-busting and the pre-commit hook.
+  choice before paint, and a new page must copy it. That is now all it does:
+  language detection went with the runtime `i18n.js`, and the hyperjump
+  arrival flag went with the hyperjump.
 - **Absolute asset paths** (`/style.css`, `/app.js`) so they resolve from any
   nested directory.
 - **`.gitignore` does not untrack.** Two videos committed *before* the ignore

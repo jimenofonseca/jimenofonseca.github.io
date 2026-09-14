@@ -28,11 +28,6 @@
     // longer consulted — the default is a design decision, not the visitor's.
     var t=localStorage.getItem("theme");
     if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;
-    // Hyperjump arrival flag — applied before paint so CSS animation
-    // starts on the very first frame (no snap-then-jiggle).
-    if(sessionStorage.getItem("hyperjump-arriving")==="1"){
-      document.documentElement.classList.add("hyper-arrive");
-    }
   })();</script>
   <title data-i18n="home.title">Jimeno Fonseca | Digital Technology Leader in Energy &amp; Infrastructure</title>
   <meta name="description" data-i18n-content="home.desc" content="Jimeno Fonseca turns digital technology into lasting capability. Head of Digital Engineering at Axpo Grid, developer of City Energy Analyst, founder of Superurbana GmbH, PhD from ETH Zürich." />

@@ -19,6 +19,33 @@ commit. `git log -- i18n.js` has them.
 
 ---
 
+## What the old URLs serve now
+
+Sixteen URLs went away (`/principles/`, `/digital-transformation/`, `/cea/`,
+`/ipcc/`, `/appearances/`, `/publications/`, `/music/`, `/photography/`, each
+in both languages). **They serve 404 on purpose** — stubs pointing everything
+at `/` were offered and declined.
+
+The cost, not reversible on Google's timetable: every indexed result and
+inbound link breaks, the URLs drop out within weeks, and anything restored
+later returns cold. The pages are intact in `_old/retired-pages/` — restoring
+one is a `git mv` back plus the "Adding a new page" steps, and its i18n keys
+out of git history.
+
+**One stub survives**: `/projects/` → `/` (meta-refresh + canonical +
+`noindex, follow` + JS `location.replace`), because the old Jekyll site
+published `/Projects.html` and the destination still exists.
+`/open-source/` went with the rest — it pointed at `/ipcc/`, and a redirect
+to a 404 is worse than a 404.
+
+⚠ **Do not re-justify `/projects/` with LinkedIn.** This file once claimed
+the profile's Portfolio link pointed at `www.jimenofonseca.com/projects`. It
+does not — the field is the bare domain. **Disproven, not merely
+unverified.** `validate.js` skips any page with a `<meta http-equiv>`.
+
+
+---
+
 ## ⚠ Case studies must mirror the home page
 
 Each case-study page closes with an **Outcome / Impact** pair. The home

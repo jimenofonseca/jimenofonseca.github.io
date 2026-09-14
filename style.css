@@ -790,156 +790,39 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
   .hero { grid-template-columns: 1fr; gap: 40px; }
   .hero-figure { max-width: 320px; }}
 /* ─────────────────────────────────────────────────────────
-   style-morph.css — Hyperspace jump page transition.
-   The actual animation is driven by app-morph.js, which
-   injects an overlay with stretching star streaks before
-   navigating. This file styles the overlay + the arrival
-   "deceleration" effect on the new page.
+   Page transition
+   A plain cross-fade between pages, done by the browser.
 
-   Theme-aware: colors invert with the active theme so each
-   theme gets maximum contrast (dark theme = black bg + white
-   streaks; light theme = white bg + black streaks).
+   This replaced a ~2s "hyperspace jump": a JS-injected overlay
+   of 120 stretching star streaks, a white flash, and an arrival
+   deceleration. It was 109 lines of JS and ~135 of CSS, and it
+   delayed every navigation by 1150ms, because the click handler
+   had to let the animation finish before navigating.
+
+   The View Transitions API does the standard version with no JS
+   and no delay. Where it is unsupported (Firefox, for now)
+   navigation is simply instant — normal web behaviour, and
+   still faster than the old effect. Both documents need the
+   at-rule, which they get by sharing this stylesheet.
    ───────────────────────────────────────────────────────── */
 
-/* ── Theme-aware color tokens for the hyperjump ───────── */
-:root {
-  /* Default = light theme: pure-white bg, pure-black streaks */
-  --hyperjump-bg:   #ffffff;
-  --hyperjump-star: #000000;
-}
-html[data-theme="dark"] {
-  /* Dark theme: pure-black bg, pure-white streaks */
-  --hyperjump-bg:   #000000;
-  --hyperjump-star: #ffffff;
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: ease;
 }
 
-/* ── The outgoing jump overlay (added by JS) ──────────── */
-/* Confined to the main content frame on desktop (sidebar stays
-   anchored and visible). On mobile the sidebar is hidden, so the
-   overlay covers the whole viewport. */
-.hyperjump {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: var(--sidebar-w, 240px);
-  right: 0;
-  background: var(--hyperjump-bg);
-  z-index: 99999;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
-  animation: hyperjump-bg 1.2s cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
-}
-@media (max-width: 900px) {
-  .hyperjump { left: 0; }}
+/* The sidebar is identical on every page, so naming it keeps it
+   out of the root cross-fade: it holds still while the content
+   changes. That anchoring is the one thing worth keeping from
+   the old effect. */
+.sidebar { view-transition-name: sidebar; }
 
-@keyframes hyperjump-bg {
-  0%   { opacity: 0; }
-  15%  { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-/* Each star: a small white dot that stretches into a long streak
-   and races off the right edge. JS generates ~120 of these with
-   random top/left/duration/delay for the chaotic-but-coherent feel. */
-.hyperjump .star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: var(--hyperjump-star);
-  border-radius: 50%;
-  transform-origin: left center;
-  will-change: transform, opacity;
-  opacity: 0;
-  animation: streak 1.1s cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
-}
-
-@keyframes streak {
-  /* translateX values are relative to the OVERLAY width (parent), not
-     the viewport — so 100% = overlay width. Stars stay contained. */
-  0% {
-    opacity: 0;
-    transform: translateX(0) scaleX(1);
-  }
-  10% {
-    opacity: 1;
-    transform: translateX(0) scaleX(1);
-  }
-  60% {
-    opacity: 1;
-    transform: translateX(50%) scaleX(60);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(180%) scaleX(300);
-  }
-}
-
-/* White flash removed — it was making the transition feel like a
-   camera flash going off mid-scene. The streaks + black overlay
-   carry the climax; the arrival on the new page handles emergence. */
-
-/* ── Arrival (decel) on the new page ──────────────────── */
-/* Set by an inline <head> script BEFORE paint, so the CSS below
-   takes effect on the very first frame — no snap-then-jiggle.
-
-   Architecture: body's background is NEVER changed (avoids the
-   sidebar/footer flicker bug). Instead, we paint an opaque arrival
-   overlay via body::before — positioned identically to the outgoing
-   .hyperjump overlay so it covers ONLY the content frame, never the
-   sidebar. The overlay fades from opaque to transparent while the
-   content underneath decelerates (scale/blur only). */
-
-html.hyper-arrive body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: var(--sidebar-w, 240px);
-  right: 0;
-  background: var(--hyperjump-bg);
-  z-index: 50;
-  pointer-events: none;
-  animation: arrival-overlay-fade 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@media (max-width: 900px) {
-  html.hyper-arrive body::before { left: 0; }}
-@keyframes arrival-overlay-fade {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-/* Content beneath the overlay decelerates — scale + blur ONLY.
-   No opacity animation (the overlay handles the reveal).
-   This way the sidebar and body backgrounds are never touched. */
-html.hyper-arrive main.content {
-  animation: hyper-decel 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform: scale(1.08);
-  filter: blur(12px);
-}
-
-@keyframes hyper-decel {
-  from {
-    transform: scale(1.08);
-    filter: blur(12px);
-  }
-  to {
-    transform: scale(1);
-    filter: blur(0);
-  }
-}
-
-/* Sidebar is the persistent anchor — no animation, no bg change,
-   no opacity change. Fully visible from the first frame. */
-
-/* Respect prefers-reduced-motion — skip the jump entirely */
 @media (prefers-reduced-motion: reduce) {
-  .hyperjump, .hyperjump-flash { display: none !important; }
-  html.hyper-arrive main.content,
-  html.hyper-arrive .sidebar {
-    animation: none !important;
-  }}
-
+  @view-transition { navigation: none; }
+}
 /* ─────────────────────────────────────────────────────────
    Accent
    One colour, used sparingly: the numbered index motif, the
