@@ -1,3 +1,21 @@
+// ── Theme toggle ─────────────────────────────────────────
+// Dark is the default and lives in bare :root, so "dark" means NO attribute
+// rather than data-theme="dark". Only light is ever written to the element.
+function applyTheme(t) {
+  if (t === 'light') document.documentElement.dataset.theme = 'light';
+  else delete document.documentElement.dataset.theme;
+  localStorage.setItem('theme', t);
+  syncThemeToggle(t);
+}
+function syncThemeToggle(t) {
+  document.querySelectorAll('[data-theme-opt]').forEach(function (el) {
+    el.classList.toggle('active', el.getAttribute('data-theme-opt') === t);
+  });
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+}
+
 // ── Mobile sidebar ───────────────────────────────────────
 function toggleSidebar() {
   var s = document.getElementById('sidebar');
@@ -14,6 +32,12 @@ function toggleSidebar() {
 
 // ── Init ─────────────────────────────────────────────────
 (function(){
+  // Sync the toggle to whatever the inline head script already applied.
+  // ⚠ Never call applyTheme() here: it writes to localStorage, so it would
+  // stamp a theme on a first-time visitor who never chose one and freeze the
+  // site's default for them forever.
+  syncThemeToggle(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+
   document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click', function(){
       if (window.innerWidth <= 900) {

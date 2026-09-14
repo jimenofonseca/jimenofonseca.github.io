@@ -21,7 +21,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- One palette, dark. Lets the UA paint its canvas dark before style.css lands. -->
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
+  <script>(function(){
+    // Dark is the default and needs no attribute, so this only has to apply
+    // an explicit stored choice of light — before paint, so there is no flash
+    // of dark for someone who picked light.
+    if(localStorage.getItem("theme")==="light")
+      document.documentElement.dataset.theme="light";
+  })();</script>
   <title data-i18n="home.title">Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="home.desc" content="Jimeno Fonseca" />
   <link rel="canonical" href="https://jimenofonseca.com/de/" />
@@ -86,7 +93,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=2" />
+  <link rel="stylesheet" href="/style.css?v=3" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
@@ -116,6 +123,14 @@
       </div>
 
       <div class="sidebar-controls">
+        <div class="control-row">
+          <span class="control-label" data-i18n="v2.theme.label">Thema</span>
+          <button class="toggle" onclick="toggleTheme()" aria-label="Switch theme">
+            <span class="opt" data-theme-opt="light">LIGHT</span>
+            <span class="sep">/</span>
+            <span class="opt active" data-theme-opt="dark">DARK</span>
+          </button>
+        </div>
         <div class="control-row">
           <span class="control-label" data-i18n="v2.lang.label">Sprache</span>
           <div class="toggle lang-toggle">
@@ -152,6 +167,6 @@
 
   </div>
 
-  <script src="/app.js?v=2" defer></script>
+  <script src="/app.js?v=3" defer></script>
 </body>
 </html>

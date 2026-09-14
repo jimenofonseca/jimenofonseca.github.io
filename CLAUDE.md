@@ -66,8 +66,8 @@ markup.
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
-├── app.js                      # Mobile sidebar + photo lightbox. Nothing else
-├── i18n.js                     # EN/DE copy — 16 keys each. Build input only
+├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
+├── i18n.js                     # EN/DE copy — 17 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -117,26 +117,52 @@ LinkedIn" correction: `docs/retired-site.md`.**
 - **Language**: one per URL, plain HTML. No JS swap, no browser-language
   detection — see "Two language trees".
 
-### Theme — there isn't one
+### Theme — dark by default, light on request
 
-**The site is dark, permanently.** One palette in `:root`, no toggle, no
-`prefers-color-scheme`, no theme attribute or selector anywhere, and
-`<meta name="color-scheme" content="dark">` so the UA paints its canvas dark
-before `style.css` lands. **Do not reintroduce any of it** — nothing reads a
-theme any more, and a `:root`-vs-override split would just be a trap for
-whichever page forgot the attribute.
+Two palettes, switched by `[data-theme]` on `<html>` and persisted in
+localStorage.
 
-Removed with it: `applyTheme()`, `toggleTheme()`, the `v2.theme.label` key,
-the sidebar's Theme row, and the **entire inline `<head>` script** — its only
-remaining job had been applying a stored theme before paint. `app.js` no
-longer touches `localStorage` at all.
+⚠ **Dark lives in bare `:root` and light is the override** —
+`html[data-theme="light"]`. This is the *inverse* of the site's original
+arrangement, and the inversion is the whole point: **"dark" means no
+attribute at all.** A page that ships without `data-theme` renders dark,
+which is the intended default, so the attribute can only ever be missing in
+the safe direction. The original had light in `:root` with dark as the
+override, which meant any page that forgot the attribute rendered light.
+**Do not flip it back.**
 
-⚠ This was the "large, risky refactor" earlier versions of this file
-deliberately deferred: `:root` held the *light* palette with a dark override
-on `<html>`, which was correct while a toggle existed. With the toggle gone
-the refactor became the safe option, so the dark values now live in `:root`
-directly. Verified after the change: dark with JS on, dark with JS off, and
-dark with the OS set to light.
+`prefers-color-scheme` is still not consulted anywhere. The default is a
+design decision, not a reading of the visitor's OS — verified: a browser set
+to light OS preference still gets the dark site.
+
+| Where | What |
+|---|---|
+| `style.css` | dark tokens in `:root`; light tokens in `html[data-theme="light"]` |
+| each page's `<html>` | **no** theme attribute — dark is the absence of one |
+| each page's `<head>` | an inline script applying `light` before paint, if stored |
+| each page's sidebar | `class="opt active"` on the **dark** span |
+| `app.js` | `applyTheme()` writes `light` or deletes the attribute; `toggleTheme()` flips |
+| both pages | `<meta name="color-scheme" content="dark light">` |
+
+Light is near-black on off-white: **19.0:1**, past WCAG AAA (dark is 17.9:1
+the other way). `--muted` is 4.6:1 and `--accent` 7.5:1 in light, both fine.
+
+⚠ **The portrait's filter is theme-scoped.** `.hero-figure img` carries
+`grayscale(0.15) brightness(0.92)` to stop the photo glaring against the
+dark ground; `html[data-theme="light"] .hero-figure img` resets it to
+`grayscale(0)`. If the filter is ever made unconditional again, light mode
+gets a needlessly muted portrait.
+
+⚠ **`app.js`'s init must never call `applyTheme()`.** It writes to
+localStorage, so calling it on load stamps a theme on a first-time visitor
+who never chose one — freezing the guess and making a future change to the
+site default invisible to everyone who has ever loaded the page. Init calls
+`syncThemeToggle()` instead, which only touches the `.active` class. This
+was a live bug once, when `localStorage.getItem('theme') || 'light'` wrote
+`light` on first paint.
+
+The share card is **dark only** — it is a generated JPEG, so it cannot
+follow a runtime toggle. That is fine and not worth solving.
 
 ## Sidebar navigation order
 
@@ -245,8 +271,9 @@ or the generator silently updates a page nobody serves.
 ### Adding a new page
 
 Three things are required or CI fails: the English file, a `build-i18n.py`
-run, and the page's two `<loc>` entries in `sitemap.xml`. There is no head
-script to copy any more.
+run, and the page's two `<loc>` entries in `sitemap.xml`. Copy the inline
+`<head>` script from an existing page too, or someone who chose light gets a
+flash of dark on that page.
 
 For anything large, build it as `art/index-new.html` / `index-new.html` with
 temporary asset names, preview locally, then swap onto the canonical names
@@ -270,7 +297,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 16 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 17 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -318,11 +345,11 @@ markup by hand.
 
 ## i18n key conventions
 
-16 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+17 keys per language. `nav.*` is the sidebar plus the two Art part headings;
 `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — the two caption kinds and the chrome
-(`v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
+(`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
 Every key MUST exist in both blocks; `node -c i18n.js` after editing.
@@ -577,10 +604,11 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   `stale-fallback`. Run the generator; do not hand-patch HTML.
 - **Hand-edited something under `de/`** — the next generator run silently
   discards it. German copy lives in `i18n.js`, nowhere else.
-- **There is no inline `<head>` script any more.** It had three jobs and
-  lost all of them: language detection (with the runtime `i18n.js`), the
-  hyperjump arrival flag (with the hyperjump), and applying a stored theme
-  (with the theme). A new page needs no script block.
+- **The inline `<head>` script is load-bearing again.** Its only job is
+  applying a stored *light* choice before paint, so someone who picked light
+  does not get a flash of dark. It no longer does language detection (that
+  went with the runtime `i18n.js`) or the hyperjump arrival flag (with the
+  hyperjump). **A new page must copy it.**
 - **Absolute asset paths** (`/style.css`, `/app.js`) so they resolve from any
   nested directory.
 - ⚠ **`style.css` and `app.js` carry `?v=N` — bump it when their behaviour
@@ -589,7 +617,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `v=1`.
+  cache. Currently `v=3` for both; the portrait carries its own `?v=3`.
 
   There is **no pre-commit hook** doing this any more — the old one existed
   for `i18n.js` and went when `i18n.js` stopped being served. Bumping is

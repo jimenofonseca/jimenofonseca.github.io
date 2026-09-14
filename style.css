@@ -4,9 +4,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* The site is dark, permanently: no theme toggle, no light palette. Do not
-     reintroduce a prefers-color-scheme branch or an attribute override —
-     nothing reads either any more. */
+  /* DARK IS THE DEFAULT and lives here, in bare :root, so it needs no
+     attribute: a page that ships without data-theme renders dark, which is
+     the right failure. Light is the override below.
+     This is the inverse of the original arrangement, where :root held light
+     and dark was the override — that way round, any page missing the
+     attribute rendered light, which is what made it a trap.
+     `prefers-color-scheme` is still not consulted anywhere: the default is a
+     design decision, not a reading of the visitor's OS. */
   --bg:        #0c0c0c;
   --fg:        #f5f5f4;
   --muted:     #a8a29e;
@@ -25,6 +30,21 @@
   --prose-w:   680px;   /* readable max for body text inside content */
   --portrait-w: 440px;  /* hero portrait column width */
 }
+
+/* Light, applied only when the visitor has explicitly chosen it. Text is
+   near-black on an off-white ground: 19.0:1, well past WCAG AAA. (Dark is
+   17.9:1 the other way.) --muted is 4.6:1 and --accent 7.5:1, both fine. */
+html[data-theme="light"] {
+  --bg:        #fafaf9;
+  --fg:        #0a0a0a;
+  --muted:     #6b7280;
+  --faint:     #a3a3a3;
+  --hairline:  #e7e5e4;
+  --hover:     #f5f5f4;
+  --accent:    #0b4fa8;  /* the darker blue; --accent above is lightened for the dark ground */
+}
+
+html[data-theme="light"] .hero-figure img { filter: grayscale(0); }
 
 html { scroll-behavior: smooth; }
 
@@ -272,7 +292,7 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center top;
-  filter: grayscale(0.15) brightness(0.92);
+  filter: grayscale(0.15) brightness(0.92);  /* dark default; reset in light below */
   transition: filter 0.3s ease;
 }
 .hero-figure figcaption {
