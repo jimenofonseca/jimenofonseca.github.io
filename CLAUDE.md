@@ -341,9 +341,29 @@ long after the visible text moved on. `validate.js` catches it now.
 ## Social meta & structured data
 
 Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
-`og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`,
-`og:image` + width/height/alt) and Twitter card tags, all pointing at
+`og:site_name`, `og:locale`, `og:url`, `og:title`, `og:image` +
+width/height/alt) and Twitter card tags, all pointing at
 `https://jimenofonseca.com/assets/og-image.jpg` (1200x630).
+
+⚠ **The Intro page has no description at all** — no `<meta name="description">`,
+no `og:description`, no `twitter:description`, and no `description` in the
+Person JSON-LD. `home.title` is also just `"Jimeno Fonseca"`. All of it used
+to read "Jimeno Fonseca turns digital technology into lasting capability.
+Head of Digital Engineering at Axpo Grid, …" — the retired slogan plus the
+job title, which is exactly what was being stripped everywhere else, and the
+metadata was the last place it survived.
+
+**Removing beat shortening.** A description that just repeats the title
+tells a crawler nothing and makes the share card print the name twice;
+Google synthesises a snippet from page content instead, and the bio
+paragraph is good material for that. `/art/` keeps its `art.desc` — that one
+is factual page content, not positioning.
+
+⚠ **Know the SEO cost.** `<title>` is the strongest on-page signal there is,
+and the home page no longer matches a query like *"digital technology leader
+energy"*. A name search is unaffected, or slightly better, since the title
+is now exactly the query. This was an explicit choice, twice over — **do not
+"restore" either field.**
 
 - ⚠ **The `og:`/`twitter:` tags are deliberately static — never wire them to
   `data-i18n`.** Scrapers run no JS, so an i18n attribute buys nothing and
