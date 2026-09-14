@@ -389,6 +389,16 @@ html[data-theme="dark"] .hero-figure img { filter: grayscale(0.15) brightness(0.
 }
 .page-body-row .page-body { padding: 0; }
 
+/* ── Art page ── */
+/* Two parts, Music and Photography, on one page. Each is a plain <section>,
+   so the base `section` rule supplies the hairline that separates them and
+   `section:first-of-type` keeps .page-intro borderless. .art-text is the
+   body copy under each part's media block. */
+.art-text { max-width: var(--prose-w); padding-block: 24px 0; }
+.art-text p { font-size: 16px; line-height: 1.7; font-weight: 300; }
+.art-text p + p { margin-top: 18px; }
+.page-body-row .art-text { padding-block: 0; }
+
 /* Vertical stats sidebar */
 .stats-aside {
   position: sticky;

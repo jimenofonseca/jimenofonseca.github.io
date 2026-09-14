@@ -24,9 +24,10 @@ something to improve when warranted.
 
 **What belongs HERE vs. in the skill:**
 
-- ✅ **Here (project-specific)**: file structure of THIS site, current
-  cache version, the actual number of LinkedIn embeds, gear list contents,
-  etc.
+- ✅ **Here (project-specific)**: file structure of THIS site, the three
+  menu items, gear list contents, etc.
+- 🗄 **In `docs/retired-site.md`**: anything about the nine-page site that no
+  longer exists. Do not re-document retired pages here.
 - ↗️ **In `~/.claude/skills/static-site-workflow/SKILL.md` (generalizable)**:
   the *pattern* of cache-busting via pre-commit hook, the *pattern* of
   dev-then-prod swaps. Anything that would apply to a hypothetical second
@@ -40,7 +41,10 @@ detail here, generalized lesson in the skill.
 - Always show diffs before committing CLAUDE.md updates; small surgical
   edits beat sweeping rewrites.
 - Keep this file under ~500 lines. If it grows past that, factor sections
-  into `docs/*.md` and leave this file as an index pointing to them.
+  into `docs/*.md` and leave this file as an index pointing to them. This
+  happened once already: the file hit 983 lines, and the Intro/Work/Art
+  reduction was the occasion to move the retired-page material into
+  `docs/retired-site.md`.
 - Commit CLAUDE.md changes alongside the work that motivated them, not as
   isolated "documentation" commits — they're easier to find later that way.
 
@@ -54,41 +58,52 @@ Pure static HTML/CSS/JS, no framework. Nothing builds in CI — GitHub Pages
 serves committed files. One local generator, `build-i18n.py`, produces the
 German tree; its output is committed, exactly like `build-gallery.py`.
 
+**Two content pages, two languages.** The menu is three items: **Intro**
+(`/`), **Work** (an outbound link to the LinkedIn profile — no page) and
+**Art** (`/art/`).
+
+⚠ **This used to be a nine-page site** built around an enterprise CDIO/CTO
+pitch: Proof of scale, three case studies, eight operating principles,
+Appearances, Publications. All of it was retired in the Intro/Work/Art
+reduction. The pages are in `_old/retired-pages/` and
+**`docs/retired-site.md` holds everything that was documented about them** —
+the case-study/home-page mirroring contract, the employer-disclosure rules in
+full, the principles split. Read that file before restoring any of it; the
+reasoning was expensive and is not re-derivable from the markup.
+
 ## File layout
 
 ```
 .
-├── index.html                        # Home — the "About" page: hero, proof of
-│                                     #   scale, enterprise outcomes, 5 of the
-│                                     #   8 operating principles, LinkedIn link
-├── principles/                       # The 8 principles in full — the long
-│                                     #   bodies the home page links out to
+├── index.html                        # Intro — the h1 is the name, then the
+│                                     #   short bio and the portrait. Nothing else.
+├── art/                              # Art — Music and Photography merged onto
+│                                     #   one page. Was /music/ + /photography/
 ├── de/                               # GENERATED — the whole site in German.
 │                                     #   Never hand-edit; run build-i18n.py
-├── digital-transformation/  cea/     # Case Studies (01-03)
-├── ipcc/                             # was /open-source/ (stub left behind)
-├── projects/  open-source/           # redirect stubs only — see "Old URLs"
-├── appearances/  publications/       # Media (04-05)
-├── music/  photography/              # Personal (09-10) — public plain HTML
+├── projects/                         # redirect stub only — see "Old URLs"
+├── _old/                             # UNPUBLISHED (Jekyll underscore rule)
+│   ├── retired-pages/                #   the nine-page site, archived intact
+│   └── …                             #   plus the original Jekyll site
+├── docs/
+│   └── retired-site.md               # what was documented about the retired pages
 ├── private-src/                      # GITIGNORED — optional local editing drafts
-│   ├── music.html
-│   └── photography.html
 ├── assets/
-│   ├── portrait.jpg                  # Hero portrait (home page)
-│   ├── og-image.jpg                  # 1200×630 social share card (all pages)
-│   ├── photography/                  # Web-size gallery photos (gitignored: _originals/)
-│   │   ├── *.jpg                     # ~1600px max, ~500KB
+│   ├── portrait.jpg                  # Intro portrait
+│   ├── og-image.jpg                  # 1200×630 social share card (both pages)
+│   ├── photography/                  # Gallery photos (gitignored: _originals/)
+│   │   ├── *.jpg                     # 13 files, ~1600px max
 │   │   ├── thumb/*.jpg               # 600×600 square crops
 │   │   └── _originals/               # GITIGNORED — full-res master files
 │                                     #   (large videos are gitignored — see below)
 ├── style.css                         # All site styles
-├── app.js                            # Theme toggle, mobile sidebar, lightbox
-├── i18n.js                           # EN/DE translations + lang switcher
-├── build-gallery.py                  # Photo pipeline (originals → thumbs + fulls)
+├── app.js                            # Theme toggle, mobile sidebar, lightbox, hyperjump
+├── i18n.js                           # EN/DE translations — 22 keys each
+├── build-gallery.py                  # Photo pipeline → writes into art/index.html
 ├── appendix-og-image.py              # Regenerates assets/og-image.jpg
 ├── build-i18n.py                     # Generates de/ from the EN pages + i18n.js
 ├── validate.js                       # Site checks — run before committing; CI runs it too
-├── sitemap.xml                       # 9 pages x 2 languages; stubs excluded (noindex)
+├── sitemap.xml                       # 2 pages x 2 languages; the stub is excluded (noindex)
 └── robots.txt                        # Allow all + Sitemap: pointer
 ```
 
@@ -118,13 +133,30 @@ underscore exclusion is load-bearing.
 
 ### Old URLs
 
-Two redirect stubs, both meta-refresh + canonical + `noindex, follow` +
-a JS `location.replace`:
+**One redirect stub survives**: `/projects/` → `/`, a meta-refresh +
+canonical + `noindex, follow` + a JS `location.replace`. The former Jekyll
+site published a Projects page (`_old/Projects.md` → `/Projects.html`), so a
+bookmark or inbound link still lands somewhere. Its destination survived the
+reduction, which is why it stayed.
 
-| Stub | → | Why |
-|---|---|---|
-| `/projects/` | `/` | The former Jekyll site published a Projects page (`_old/Projects.md` → `/Projects.html`). Nothing has served it since the rebuild, so it 404s for anyone still linking to it. |
-| `/open-source/` | `/ipcc/` | Case study 03 lived there while it was framed around the open-source platform. Reframed around the IPCC contribution and moved. |
+`/open-source/` was deleted with the rest: it pointed at `/ipcc/`, and a
+redirect to a 404 is worse than a 404.
+
+### ⚠ The reduction chose 404 over redirects — deliberately
+
+Sixteen URLs went away (`/principles/`, `/digital-transformation/`, `/cea/`,
+`/ipcc/`, `/appearances/`, `/publications/`, `/music/`, `/photography/`, each
+in both languages). **They serve 404 on purpose.** Stubs pointing everything
+at `/` were offered and declined.
+
+Know what that costs, because it is not reversible on Google's timetable:
+every indexed result and inbound link for the case studies breaks, Google
+drops the URLs within weeks, and re-indexing them later is slow. If any page
+comes back, it returns to a cold URL.
+
+The pages themselves are intact in `_old/retired-pages/` — restoring one is
+`git mv` back, a `build-i18n.py` run, its `<loc>` entries in `sitemap.xml`,
+and its i18n keys out of git history.
 
 ⚠ **Settled, and the record was wrong.** An earlier version of this file
 claimed the Portfolio link on Jimeno's LinkedIn profile pointed at
@@ -192,248 +224,29 @@ large, risky refactor for no visible gain.
 
 ## Sidebar navigation order
 
-0. **About** (unnumbered): Short bio · Proof of scale · Key outcomes ·
-   Operating principles. The first three are anchors into the home page, so
-   `#bio` on the home page itself and `/#bio` from every subpage.
-   **Operating principles is the exception** — it is a real page link
-   (`/principles/`, `→` not `↓`) on every page including the home page.
-   Deliberately unnumbered: numbering them would either restart the counter
-   mid-sidebar or renumber Case Studies, and Case Studies 01–03 must keep
-   matching the home page's outcomes 01–03.
-1. **Case Studies** (01–03): Digital Transformation (`/digital-transformation/`)
-   · Open-Source Platform (`/cea/`) · Contribution to the IPCC (`/ipcc/`)
-   — these
-   three match the home page's Key enterprise outcomes 01–03 exactly
-2. **Media** (04–06): Appearances · Publications · News (anchor to home `#recently`)
-3. **Personal** (07–08): Music · Photography — *public, no password*
-4. **Connect** (09–11): LinkedIn · GitHub · Google Scholar — all external
+**Three items, one flat `.nav-group`, no group label.**
 
-`/superurbana/` and `/innovation/` are **fully retired**. They live in
-`_old/retired-pages/`, which Jekyll's underscore rule keeps out of the
-published site, and no live page links to them any more — the case-study
-pagers now form a closed loop across the three case studies. Their i18n
-keys (`nav.company`, `nav.training`, `superurbana.*`, `innov.*`,
-`v2.superurbana.*`, `v2.innov.*`) were deleted with the rest of the
-orphans; git history has them if the pages ever come back.
-
-## ⚠ Case studies must mirror the home page
-
-Each case-study page closes with an **Outcome / Impact** pair. The home
-page's Key enterprise outcomes render the **Impact half of the same keys** —
-not a copy, the same string:
-
-| Page | Home outcome | Case study renders | Home page renders |
-|---|---|---|---|
-| `/digital-transformation/` | 01 | `about.out1.outcome` + `about.out1.impact` | `about.out1.impact` |
-| `/cea/` | 02 | `about.out2.outcome` + `about.out2.impact` | `about.out2.impact` |
-| `/ipcc/` | 03 | `about.out3.outcome` + `about.out3.impact` | `about.out3.impact` |
-
-⚠ **Keep the short claims aligned to the careful long one, not the reverse.**
-`ipcc.cs3` is precise: scenarios were *submitted to the IPCC panel, which
-aggregated them with those of more than 15 other selected teams and
-published the averaged projections*. `about.out3.impact` had drifted to
-"informing worldwide environmental policy since 2021" — a much bigger claim
-in a more prominent place — and the outcome title to "contribution to global
-policy". Both were pulled back to the aggregation wording. The short,
-prominent version is the one a reader checks first; it must be the most
-conservative, not the most flattering.
-
-**The word "Insights" is gone for the same reason.** "Insights for the IPCC"
-and "Insights for IPCC" can be read as authorship of the report. The page is
-now **"Data and models contributed to the IPCC 6th Assessment Report"**
-(`v2.ipcc.title`, `v2.about.out3.title`, `ipcc.title`, and the static
-`og:title`/`twitter:title` on `ipcc/index.html`), with the short form
-**"Contribution to the IPCC"** in the sidebar (`nav.openSource`) where the
-full phrase will not fit 240px. German: *"Zum 6. IPCC-Sachstandsbericht
-beigesteuerte Daten und Modelle"* / *"Beitrag zum IPCC"*. The key is still
-called `nav.openSource` — it dates from when the page lived at
-`/open-source/`; do not rename it, nothing gains from the churn.
-
-Editing an `.impact` key updates the home page and the case study together,
-which is the point — a headhunter who reads the summary on the home page
-and then opens the case study must not find two different claims.
-**Never fork these into page-specific keys.**
-
-The home page deliberately shows **Impact only, unlabelled**, so all three
-of its sections read the same way: title, one paragraph, optional link. The
-`.outcome` strings are the concrete "what was built" detail and live on the
-case study, which is what the "See case study →" link is for.
-
-**Nothing is labelled any more, on either surface.** The case studies used
-to print an `OUTCOME` / `IMPACT` mono sub-label above each of the two
-paragraphs in the final chapter; those are gone, and the keys that held them
-(`v2.about.outcome.label`, `v2.about.impact.label`) were deleted as orphans —
-they rendered nowhere else. The `.cs-result` hairline between the two
-paragraphs stays, and is now what separates them. `.cs-result-key` went from
-`style.css` with the markup.
-
-This is the same call the home page got earlier: one section heading, then
-prose. A sub-label directly under a heading that says nearly the same word
-("The Outcome" over "OUTCOME") is noise, and labelling one paragraph makes
-the reader look for the label on the next.
-
-### ⚠ Employer financials are off the site, deliberately
-
-**Never restore Axpo revenue figures.** The impact line for outcome 01 used
-to read "secured CHF 30m in at-risk business and launched CHF 1.5m in
-net-new digital services", and the case-study stat band led with
-"&gt;30 mCHF revenue secured". Both were removed: they are **Axpo's P&L** —
-revenue at risk, new revenue booked — published by an employee on a site
-whose video makes the employer unmistakable.
-
-The distinction that governs this:
-
-| Keep | Cut |
-|---|---|
-| `about.proof2` — "a multi-million CHF budget". Budget **scope is your own authority**, standard executive-CV material, and says nothing about the employer's commercial performance. | Anything describing revenue, margin, pipeline or business won/at risk. |
-
-**Method is as sensitive as outcome.** `transf.cs2` used to say "new
-technological services were introduced at a deliberately low margin until
-their value was visible" — Axpo's internal pricing strategy, stated in the
-past tense as something the employer did. Arguably worse than the revenue
-figures, because it is *how they price*, not *what they earned*.
-
-The test: *"I do X"* is a position. *"We did X at Axpo"* is disclosure.
-
-**The low-margin framing is gone from the site entirely**, including from
-principle 05 where it had survived in the first person. It read as a pricing
-trick rather than a leadership position — cheap, and faintly manipulative.
-Principle 05 now argues the honest version of the same insight: *make the
-value visible before asking for the budget*, because value demonstrated in
-use argues better than a business case. **Do not reintroduce margin or
-pricing language anywhere**, in either voice.
-
-**The principles name no employer.** `about.p8` used to say "why we lead our
-field at Axpo"; it now says "why the teams I lead set the pace in their
-field". `/principles/` is the page most likely to be read as general
-position rather than reportage, so keeping the employer out of it removes
-the antecedent that made neighbouring paragraphs — the balance-sheet
-observation in 05, "the organisation does the work wrong today" in 03 — read
-as being about a specific company.
-
-**Name the issuing body on every credential.** The short bio said "a
-certified Agile Practitioner" with no issuer for as long as it existed — the
-exact kind of unattributed claim a search consultant probes. It is now "a
-PMI Agile Certified Practitioner (PMI-ACP)" in English and "PMI Agile
-Certified Practitioner (PMI-ACP)" in German; the credential is a proper
-noun, so it stays in English on the German page, as is normal in German CVs.
-If a credential cannot be attributed, cut it — next to the ETH doctorate and
-CIGRE membership an unverifiable certification is a net negative.
-
-**Never describe the role as running a "department" / "Abteilung".** The
-word was removed from every string in both languages — the bio, Proof of
-scale, principles 01 and 02, the Axpo case study and its `og:`/`twitter:`
-description. Jimeno is positioning for a larger remit, and "built the
-Digital Engineering department" reads smaller than "built Digital
-Engineering". `v2.role` and the JSON-LD `jobTitle` ("Head of Digital
-Engineering") already carry the seniority; naming the unit only caps it.
-
-**Do not overclaim seniority either.** `v2.about.proof2.label` read "Budget
-and P&L oversight". Managing a budget is not owning a profit-and-loss
-statement, and it is one of the standard things a search consultant probes
-to test whether a technology leader is genuinely commercial. It now reads
-"Budget ownership".
-
-**Proof of scale carries magnitude, not figures.** `about.proof1` and
-`about.proof2` used to read "from zero to 20 engineers and application
-managers" and "a budget of CHF 10m". Both are now bands — "a full team of
-engineers and application managers", "a multi-million CHF budget" — because
-Jimeno does not want exact numbers findable online, even ones that are his
-own authority rather than the employer's performance.
-
-⚠ **Know the cost of this.** The section is called *Proof of scale*, and a
-number is what makes something proof. Items 1 and 2 now carry none; only
-item 3's "75+ countries" survives, and that is City Energy Analyst — his own
-open-source project, not employer data. If the section ever reads thin, that
-is why.
-
-Prefer "a multi-million CHF budget" over shorthand like "CHF MM+": MM is
-American banking usage that most readers, and most German speakers, will
-take for a typo.
-
-The transformation claim is what reads CDIO; the number never was. Magnitude
-is kept the safe way: the impact line ends "a protected, multi-million CHF
-service line" — a band, not a booked figure. Other phrasings in the same
-register: "an eight-figure portfolio". **Never a number tied to Axpo's
-results.**
-
-The stat band follows the same test. It led with "400 Stakeholders", a
-headcount that says nothing about what changed; it now reads "40+ business
-processes digitised" and "20+ teams" — scope of change and organisational
-reach, both the author's own work rather than the employer's performance.
-The body of `transf.cs3` used to keep "a group of 400 stakeholders" on the
-grounds that a sentence gives a figure context where a stat box does not.
-**That call was reversed.** It now reads "several hundred stakeholders":
-context does not stop it being an internal headcount, and the same
-magnitude-without-figures rule that governs Proof of scale applies to prose.
-
-Three more employer-financial statements came off the case study in the same
-pass. All three had survived the earlier revenue sweep because none of them
-carried a number:
-
-| Was | Now | Why |
+| | | |
 |---|---|---|
-| `v2.about.out1.title` "— from OPEX to revenue-generating value" | "— from cost line to core capability" | Asserted the unit generates revenue. Renders on the **home page** as well as the case study, so it was the most prominent employer-financial claim on the site. |
-| `v2.transf.lede` / `transf.desc` "from an OPEX liability into protected core value" | "made digital engineering a protected core capability" | Classified a named business unit on the employer's books. `transf.desc` is also the share-card description, so it travelled off-site. |
-| `transf.cs1` "a critical, margin-improving service" | "a critical service" | Margin. |
-| `transf.cs3` "with a team built overseas to sustain delivery" | "to own and sustain them" | Stated offshored delivery as fact about a Swiss utility — works-council sensitivity. The rewrite keeps the maintenance point the clause was making. |
+| 01 | Intro | `/` — `→` |
+| 02 | Work | `https://www.linkedin.com/in/jimenofonseca/` — `↗`, `target="_blank"` |
+| 03 | Art | `/art/` — `→` |
 
-⚠ **A claim with no number in it can still be disclosure.** That is the
-lesson of this pass: "revenue-generating" and "OPEX liability" are
-statements about the employer's books, and they sat on the site through two
-earlier sweeps precisely because both sweeps were looking for figures.
+They are numbered 01–03 because nothing conflicts any more. The old About
+group was deliberately *un*numbered to avoid colliding with Case Studies
+01–03; that constraint is gone.
 
-Deliberately kept: "Axpo's first Digital Twin as a Service" — Axpo markets
-it publicly and `transf.cs3` links to their own page about it. Also kept:
-`transf.cs1`'s "digital engineering reads to finance as operational overhead
-with unclear return", which is framed as a sector observation and is the
-setup the whole case study rests on.
+**Work is an outbound link, not a page.** There is no `/work/`, and
+`app.js`'s `isInternalNav()` excludes `target="_blank"`, so the hyperjump
+correctly does not fire on it.
 
-⚠ One consequence to know about: outcome 02's `.impact` string carries no
-numbers, so the home page no longer states CEA's "over 75 countries" or
-"30+ enterprise clients" on that row. The 75-countries claim still appears
-in Proof of scale (`about.proof3`). **Do not fix this by adding the numbers
-to `about.out2.impact`** — that key also renders on `/cea/`, directly below
-an Outcome line that already states them, and the no-repetition rule below
-exists precisely to stop that.
+⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
+JSON-LD `sameAs` array** — that was an explicit decision, not an oversight.
+`sameAs` now holds Wikidata (`Q140798347`) and LinkedIn only. Do not
+"restore" them.
 
-### Case study page shape
-
-Every case study runs the same flow:
-
-```
-page-intro   eyebrow · H1 · lede · full-width stat band
-01 WHY       The Problem     <ns>.cs1
-02 HOW       The Execution   <ns>.cs2 + <ns>.cs3
-03 WHAT      The Outcome     about.outN.outcome + about.outN.impact
-page-media   the talk video — LAST, before the pager
-page-nav     closed loop 01 → 02 → 03 → 01
-```
-
-`<ns>` is `transf`, `cea` or `ipcc`. Section titles come from the shared
-keys `v2.cs.challenge` / `v2.cs.strategy` / `v2.cs.outcome`, and the
-Why/How/What rail labels from `v2.cs.why` / `.how` / `.what`.
-
-`v2.cs.outcome` reads **"The Outcome"** (was "The Result"). German stays
-**"Das Ergebnis"** — German does not split Result/Outcome the way English
-does, and `Das Resultat` would read as the narrower of the two. This is a
-case where EN/DE parity is satisfied without both sides changing; do not
-"fix" the German to match the English edit.
-
-**Chapters must not repeat each other.** The Execution chapter says *how*
-the work was done — approach, sequence, what was stood up. It must not
-restate the numbers or first-of claims that belong to The Outcome. This is
-easy to get wrong: all three pages once carried their own outcome twice
-(Axpo's DACH-first substation in both, CEA's 75 countries in both, the
-IPCC contribution in both). A quick check before shipping copy:
-
-```bash
-node -e "…compare <ns>.cs2 + <ns>.cs3 against about.outN.* for shared claims…"
-```
-
-The video sits at the end deliberately: it is a talk *about* the work, so
-it corroborates a claim the reader has already met, and being below the
-fold means its lazy-loaded iframe usually never loads at all.
+`/superurbana/` and `/innovation/` were retired long before this, and live in
+`_old/retired-pages/` alongside everything else.
 
 ## Workflows
 
@@ -461,14 +274,23 @@ Edit the **English** page directly (`index.html`, `*/index.html`), then run
 `python3 build-i18n.py` to mirror the change into `de/`. Never hand-edit
 anything under `de/` — the generator overwrites it.
 
-### Working on Music and Photography pages
+### Working on the Art page
 
-Both pages are **public plain HTML** — the whole site is public, with no
-password or client-side encryption anywhere. Edit `music/index.html` and
-`photography/index.html` directly and commit.
+`/art/` is **one page with two parts**, Music then Photography, each a plain
+`<section class="art-part">` with its own numbered eyebrow. The base
+`section` rule supplies the hairline that separates them, and
+`section:first-of-type` keeps `.page-intro` borderless — so the parts need no
+layout CSS of their own. Only `.art-text` was added, for the body copy under
+each part's media block.
 
-- **Music**: embeds a YouTube iframe (`6dDU8wfSiEg`). Local video files are
-  gitignored (`assets/music/` — all content now on YouTube).
+The page is public plain HTML, like the rest of the site — no password or
+client-side encryption anywhere. Edit `art/index.html` and commit.
+
+- **Music**: embeds a YouTube iframe (`6dDU8wfSiEg`), now with
+  `loading="lazy"`, which the standalone `/music/` page never had.
+- **Kit list**: the `.gear-list` aside is hardcoded English in the markup and
+  carries no i18n keys — it is model names, which do not translate. Six
+  items; edit them in `art/index.html`.
 
 ⚠ **`.gitignore` does not untrack.** Both site videos were committed
 *before* the ignore rules existed, so `assets/music/music.mp4` (42.5 MB)
@@ -478,12 +300,14 @@ index with `git rm --cached` (files kept on disk). If you add a large asset
 and later ignore it, check `git ls-files` rather than trusting the ignore
 rule. Note this frees the *published* site, not `.git` (118 MB) — the
 objects stay in history, and rewriting that would break every clone.
-- **Photography**: gallery sourced from `assets/photography/`. Edit via
-  `build-gallery.py` (see "Updating the photo gallery" below).
+- **Photography**: 13 photos sourced from `assets/photography/`. Edit via
+  `build-gallery.py` (see "Updating the photo gallery" below). The lightbox
+  in `app.js` binds to `.photo-grid figure[data-full]`, which the merged page
+  preserves unchanged.
 
-`private-src/music.html` and `private-src/photography.html` may be kept as
-convenient local editing drafts (gitignored), but the committed files in
-`music/` and `photography/` are the authoritative sources.
+⚠ **`build-gallery.py` writes into `art/index.html`.** Its target moved when
+the gallery did. If you ever restore `/photography/`, move the target back —
+otherwise the generator silently updates a page nobody serves.
 
 ### Updating the photo gallery
 
@@ -493,11 +317,11 @@ open assets/photography/_originals/
 
 # 2. Generate web-size fulls + 600×600 thumbnails AND auto-inject <figure>
 #    blocks between <!-- GALLERY-START --> / <!-- GALLERY-END --> markers
-#    in photography/index.html:
+#    in art/index.html:
 python3 build-gallery.py
 
 # 3. Commit and push
-git add assets/photography/ photography/
+git add assets/photography/ art/
 git commit -m "Update photo gallery"
 git push
 ```
@@ -533,8 +357,8 @@ content directly — no password gate.
 
 ## Two language trees — one URL per language
 
-English lives at `/`, `/cea/`, `/ipcc/`… and German at `/de/`, `/de/cea/`,
-`/de/ipcc/`… Every page ships its text as plain HTML in **one** language.
+English lives at `/` and `/art/`, German at `/de/` and `/de/art/`. Every
+page ships its text as plain HTML in **one** language.
 
 **Why, in one sentence:** Google indexes what is in the HTML, and it does
 not run the language switcher — so while both languages shared one URL,
@@ -545,7 +369,7 @@ How the pieces fit:
 
 | | |
 |---|---|
-| `i18n.js` | the only place copy lives, `en:` + `de:`. **Build input — not served to browsers.** |
+| `i18n.js` | the only place copy lives, `en:` + `de:`, 22 keys each. **Build input — not served to browsers.** |
 | English pages | hand-authored; `build-i18n.py` refreshes their fallbacks from `en:` |
 | `de/**` | **generated, never hand-edited** |
 | `hreflang` | every page names `en`, `de` and `x-default`, including itself |
@@ -565,7 +389,7 @@ Rules that keep it correct:
 
 The `hreflang` set must be reciprocal — if the German page names the
 English one but not vice versa, Google discards the whole annotation
-silently. `validate.js` checks this on all 18 pages.
+silently. `validate.js` checks this on all 4 pages.
 
 ## ⚠ EN/DE parity — non-negotiable
 
@@ -593,7 +417,7 @@ straight on the German version and may never see your English update.
 
 ### What the tooling enforces vs. what it doesn't
 
-- ✅ `node validate.js` checks **18 pages** — 9 English plus 9 German — each
+- ✅ `node validate.js` checks **4 pages** — 2 English plus 2 German — each
   against its **own** language block, so a page that drifts from `i18n.js`
   fails whichever language it is in. It also checks EN/DE key parity, that
   every `data-i18n` key exists, that each home page carries exactly one
@@ -617,13 +441,17 @@ the German equivalent diff alongside the English one — no exceptions.
 
 Keys are namespaced. When adding a new key:
 
-- `nav.*` — sidebar navigation (Initiatives, Media labels, item titles)
-- `v2.eyebrow.*` / `v2.stats.*` — section labels (NOW, IMPACT, SNAPSHOT, etc.)
-- `v2.stat.*` — stat labels in the right sidebar (Years, Countries, Stakeholders, …)
-- `v2.<page>.*` — page-specific (v2.cea.title, v2.cea.lede, v2.cea.caption.kind)
-- `v2.work.<id>.desc` / `.year` — home page Selected Work list
-- `<page>.p1`, `<page>.p2` — body paragraphs of subpages
-- `<page>.title`, `<page>.desc` — meta tag content per subpage
+- `nav.*` — sidebar navigation (`nav.intro`, `nav.work`, `nav.art`) and the
+  two Art part headings (`nav.music`, `nav.photography`)
+- `home.*` / `art.*` — per-page `<title>` and `<meta description>`
+- `hero.h1` — the Intro page's heading (the name)
+- `about.bio` — the short bio, the only body copy on the Intro page
+- `v2.*` — everything else: `v2.role`, `v2.art.lede`, `v2.music.p1`,
+  `v2.photo.p1`, `v2.photo.p2`, the two `*.caption.kind` labels, and the
+  chrome (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`)
+
+The `v2.` prefix is a historical artefact of a redesign, not a version
+scheme. It is not worth renaming 12 keys to remove it.
 
 Every key MUST exist in both `en:` and `de:` blocks. Validate with
 `node -c i18n.js` after editing.
@@ -655,7 +483,7 @@ those by hand.
 
 ## Social meta & structured data
 
-All 9 content pages carry `<link rel="canonical">`, Open Graph (`og:type`,
+Both content pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 `og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`,
 `og:image` + width/height/alt) and Twitter card tags. Share cards point at
 `https://jimenofonseca.com/assets/og-image.jpg` (1200×630).
@@ -674,8 +502,8 @@ Two rules that are easy to get wrong:
   block at the top of `<head>` while the original sat further down. Its
   `url` must also match the page's `<link rel="canonical">` exactly
   (no `www.`, keep the trailing slash). `validate.js` now enforces both.
-  `sameAs` holds Wikidata (`Q140798347`) plus the three sidebar links
-  (LinkedIn, GitHub, Google Scholar).
+  `sameAs` holds Wikidata (`Q140798347`) and LinkedIn — GitHub and Google
+  Scholar were removed from it deliberately along with their sidebar links.
 
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
@@ -698,113 +526,43 @@ list rather than trusting it if the home page changes shape again.
 
 | Location | Contains |
 |---|---|
-| `i18n.js` → `v2.role` | sidebar role line, all 9 pages |
+| `i18n.js` → `v2.role` | sidebar role line, both pages |
 | `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
 | `i18n.js` → `about.bio` | the short bio's opening clause |
 | `index.html` JSON-LD | `"jobTitle"` and `"description"` |
 | `index.html` og/twitter | `og:description`, `twitter:description` |
 
-## Home page
+⚠ **The bio still names Axpo**, so the employer-disclosure rules still bite
+even though the case studies are gone. The short version: never publish Axpo
+revenue, margin, pricing method or internal headcount; budget *scope* is
+Jimeno's own authority and is fine as a band; never call the role a
+"department" / "Abteilung"; name the issuing body on every credential. The
+full reasoning, with every phrase that was cut and why, is in
+`docs/retired-site.md` — read it before adding any employer detail back.
 
-The home page *is* the About page — **there is no `/about/` URL**, and
-nothing links to one. The sidebar group named "About" is anchors into this
-page (`#bio`, `#proof`, `#outcomes`) plus the `/principles/` link. Worth
-knowing, because a group called "About" invites the assumption that
-`/about/` exists. Sections, in order:
+## The Intro page
 
-1. Hero — `hero.h1` + `hero.p`, portrait right, Short Bio beside it
-   (the third-person copy-ready bio, for recruiters and event organisers)
-2. **01 Proof of scale** — org footprint, budget oversight, global reach
-3. **02 Key enterprise outcomes** — three, each **title + the Impact
-   paragraph only, unlabelled**, plus a "See case study →" link pointing at
-   `/digital-transformation/`, `/cea/` and `/ipcc/` respectively.
-4. **03 Operating principles** — a curated **five** (01, 03, 04, 05, 08),
-   each title + one-line summary only, then a "Read the principles in
-   full →" link to `/principles/`, which carries all eight in full
-5. **04 Recently** — one line and a link to the LinkedIn profile; the
-   `#recently` anchor the sidebar's News item points at. This was nine
-   LinkedIn embeds (six, then nine). **Do not reintroduce them**: they were
-   unfiltered, aged badly, duplicated a surface that already exists, and
-   cost ~7.5s of script evaluation on an emulated mid-range phone — the
-   largest single cost on the page by a wide margin. Copy lives in
-   `v2.recently.line`; `.feed-grid` and `.feed-item` were deleted from
-   `style.css` with them, leaving `.recently-line` and `.feed-more`.
+The whole page is an `<h1>`, one paragraph and the portrait. That is all it
+is meant to be.
 
-Retired when this replaced the old home page: the **Selected Work** list
-(five quantified initiative rows), the **Now** section (it restated the
-hero almost verbatim) and the **Connect** section (it duplicated the
-sidebar's links 11–13).
+⚠ **`hero.h1` holds the name, not a slogan.** It used to read "I turn digital
+technology into lasting capability."; `hero.p` carried a supporting lede.
+Both were dropped — but an `<h1>` was kept, with the name in it, because this
+is now the site's entire search surface and a home page with no heading is a
+real defect. **Do not read the empty-looking hero as unfinished**, and do not
+reintroduce a tagline unless asked.
 
-## ⚠ The principles live in two places — don't merge them back
+Gone with the slogan: the `page-eyebrow` ("About"), the `bio-label` ("Short
+bio") and the portrait's `figcaption` — the caption held the name, which the
+`h1` now says a few centimetres away.
 
-The eight operating principles are split across two pages by design:
+`#bio` is still on the bio block so old deep links (`/#bio`) land, though
+nothing links to it any more.
 
-| | Home page `#principles` | `/principles/` |
-|---|---|---|
-| number + `v2.about.pN.title` | **5 of 8** (01, 03, 04, 05, 08) | all 8 |
-| `v2.about.pN.sum` (one line) | **5 of 8** | all 8 |
-| `about.pN` (the long body) | ❌ | ✅ |
+### The portrait
 
-**The home page shows a curated five, not all eight**: 01 (make room for
-invention), 03 (integration is expectation management), 04 (plan to
-maintain), 05 (liability to protected value) and 08 (aim to be first — and
-know when not to). Omitted are 02 (structure then get out of the way), 06
-(the customer of my customer) and 07 (hold a high bar) — the three that read
-closest to general leadership advice rather than a position.
-
-⚠ 05 used to collide with Key outcome 01 in wording — "from liability to
-protected value" against "from OPEX to revenue-generating value", about a
-screen apart. Outcome 01 is now "from cost line to core capability", so the
-overlap is smaller but not gone. Check the pair whenever either is reworded.
-
-**Principle 07 was rewritten from scratch**: "Meritocracy, and leading by
-example" became "Hold a high bar, and make it reachable". The old version
-opened "I do it and show it first" and argued that the best performers get
-the hardest problems — which reads as intensity and self-regard rather than
-a leadership position. The new one keeps the standard-from-the-team's-own-
-work argument, adds the leader's duty to make the bar *reachable*, and
-frames access to the visible work as a route anyone can take. Its body runs
-to three paragraphs, so it uses `about.p7` + `about.p7b` + `about.p7c` —
-the same shape principle 03 uses.
-
-**Principle 01 lost its hackathon texture** (phone ban, pizza, "two days of
-marathon focus"). It signalled intensity culture and read startup rather
-than executive. The protected block of time each quarter, the real
-challenge, the no-permission-needed clause and the three things it buys all
-survive; only the sensory detail went.
-
-**Principle 05's closing sentence was rewritten.** "secure excellent
-capability, nationally and internationally, at genuinely good value" read as
-offshoring or labour arbitrage — a live sensitivity in a Swiss utility with
-a works council. It now argues that the same visibility which wins a budget
-is what lets its cost be questioned in the open.
-
-**They keep their real numbers (01, 03, 04, 05, 08), not 01–05.** The
-number is the principle's identity across both pages, and the gaps are the
-honest signal that there are more behind the link.
-
-The bodies were 1,089 of the home page's 1,350 words — 81% of everything
-below the hero — so a recruiter hit eight full essays before reaching the
-LinkedIn feed. Moving them out, and then curating the home page list down
-to five, took it from 1,350 words to **319**.
-
-Two things to keep true:
-
-- **The keys are shared, not forked.** `v2.about.pN.title` and
-  `v2.about.pN.sum` render on both pages, exactly like the case-study
-  Outcome/Impact keys. Editing one updates both — that is the point. Never
-  fork them into page-specific keys.
-- **`index.html` keeps `id="principles"`** even though nothing in the
-  sidebar points at it any more. Old deep links (`/#principles`) still land
-  on the summary list.
-
-Adding a ninth principle means editing **both** pages: title + summary on
-the home page, title + summary + body on `/principles/`.
-
-## Home page hero portrait
-
-A single static portrait (`assets/portrait.jpg`, 3:4) with a one-line
-caption holding just the name. No rotation, no dots, no JS.
+A single static portrait (`assets/portrait.jpg`, 3:4). No caption, no
+rotation, no dots, no JS.
 
 It used to be a 3-slide auto-rotating reel cycling
 `portrait.jpg` → `portrait_music.jpg` → `portrait_photography.jpg`, with
@@ -897,10 +655,24 @@ Resolved: the LinkedIn embeds were ~7.5s of the 11.5s main-thread total on
 an emulated mid-range phone, and removing them removes essentially all of
 it. `app.js` is 3.5 KiB transferred, so what remains is fonts and gtag.
 
-Still open, both needing macOS `sips` on Jimeno's machine: the hero portrait
-is served at 901x1202 for a 560x747 box (~55 KiB wasted, wants a `srcset`),
-and the gallery thumbnails are ~4x oversized (1.4 MB across 13 files).
-`music/index.html`'s iframe is still missing `loading="lazy"`.
+The Intro page is now about as light as a page with a web font and an
+analytics tag can be: one image, no iframes, no third-party scripts beyond
+fonts and gtag.
+
+Still open, both needing macOS `sips` on Jimeno's machine: the portrait is
+served at 901x1202 for a 560x747 box (~55 KiB wasted, wants a `srcset`), and
+the gallery thumbnails on `/art/` are ~4x oversized (1.4 MB across 13 files).
+The `loading="lazy"` the music iframe was missing is now on it.
+
+⚠ **`style.css` carries a lot of dead rules** after the reduction —
+`.principle*`, `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`,
+`.page-actions`, `.cta-link`, `.bio-label`, `.feed-more` and more. It was
+left alone on purpose: it is one cached file and the classes cost nothing at
+runtime, whereas a blind prune risks the **runtime-created** classes that
+look dead to a grep but are not — `hyperjump`, `hyperjump-flash`,
+`hyper-arrive`, `star`, `lightbox`, `lightbox-caption`, `lightbox-close`,
+`lightbox-nav`, `open`. If you do prune, restoring a retired page means
+restoring its CSS too.
 
 ## Common gotchas
 

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Nine content pages in two languages. Each <url> carries xhtml:link
+  Two content pages in two languages. Each <url> carries xhtml:link
   alternates naming every language version of that page, including itself —
   Google requires the set to be reciprocal and self-referential.
 
-  Deliberately excluded: /projects/ and /open-source/ are redirect stubs
-  carrying <meta name="robots" content="noindex, follow">, so listing them
-  would ask Google to index pages that ask not to be indexed.
+  The site was nine pages until the Intro/Work/Art rebuild. Work is an
+  outbound link to the LinkedIn profile, so it has no URL here. The retired
+  pages are in _old/retired-pages/ and deliberately serve 404 — see
+  CLAUDE.md, "The 2026 reduction".
+
+  Deliberately excluded: /projects/ is a redirect stub carrying
+  <meta name="robots" content="noindex, follow">, so listing it would ask
+  Google to index a page that asks not to be indexed.
 
   No <lastmod>: on a hand-maintained sitemap the dates go stale immediately
   and a wrong date is worse than none.
@@ -26,76 +31,13 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/"/></url>
 
-  <url><loc>https://jimenofonseca.com/principles/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/principles/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/principles/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/principles/"/></url>
-  <url><loc>https://jimenofonseca.com/de/principles/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/principles/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/principles/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/principles/"/></url>
-
-  <url><loc>https://jimenofonseca.com/digital-transformation/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/digital-transformation/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/digital-transformation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/digital-transformation/"/></url>
-  <url><loc>https://jimenofonseca.com/de/digital-transformation/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/digital-transformation/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/digital-transformation/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/digital-transformation/"/></url>
-
-  <url><loc>https://jimenofonseca.com/cea/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/cea/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/cea/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/cea/"/></url>
-  <url><loc>https://jimenofonseca.com/de/cea/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/cea/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/cea/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/cea/"/></url>
-
-  <url><loc>https://jimenofonseca.com/ipcc/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/ipcc/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/ipcc/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/ipcc/"/></url>
-  <url><loc>https://jimenofonseca.com/de/ipcc/</loc><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/ipcc/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/ipcc/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/ipcc/"/></url>
-
-  <url><loc>https://jimenofonseca.com/appearances/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/appearances/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/appearances/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/appearances/"/></url>
-  <url><loc>https://jimenofonseca.com/de/appearances/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/appearances/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/appearances/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/appearances/"/></url>
-
-  <url><loc>https://jimenofonseca.com/publications/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/publications/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/publications/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/publications/"/></url>
-  <url><loc>https://jimenofonseca.com/de/publications/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/publications/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/publications/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/publications/"/></url>
-
-  <url><loc>https://jimenofonseca.com/music/</loc><priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/music/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/music/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/music/"/></url>
-  <url><loc>https://jimenofonseca.com/de/music/</loc><priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/music/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/music/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/music/"/></url>
-
-  <url><loc>https://jimenofonseca.com/photography/</loc><priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/photography/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/photography/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/photography/"/></url>
-  <url><loc>https://jimenofonseca.com/de/photography/</loc><priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/photography/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/photography/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/photography/"/></url>
+  <url><loc>https://jimenofonseca.com/art/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/art/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/art/"/></url>
+  <url><loc>https://jimenofonseca.com/de/art/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/art/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/art/"/></url>
 
 </urlset>

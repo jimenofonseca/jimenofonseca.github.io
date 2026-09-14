@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
 
-# The redirect stubs carry their own noindex, so they are not listed in the
-# sitemap. They are intentionally left crawlable so the redirect is followed
-# and link equity reaches the destination.
+# /projects/ carries its own noindex, so it is not listed in the sitemap. It
+# is intentionally left crawlable so the redirect is followed and link equity
+# reaches the destination.
+#
+# The pages retired in the Intro/Work/Art reduction are gone, not redirected —
+# they serve 404 by design. Nothing here needs to say so; a 404 is the signal.
 
 Sitemap: https://jimenofonseca.com/sitemap.xml

@@ -15,7 +15,7 @@ Workflow
 3. The script generates:
      assets/photography/<name>.jpg          ← web-size (max 1600px long side)
      assets/photography/thumb/<name>.jpg    ← square 600×600 thumbnail
-   and replaces the <figure> blocks inside photography/index.html
+   and replaces the <figure> blocks inside art/index.html
    between the markers:
      <!-- GALLERY-START -->
      <!-- GALLERY-END -->
@@ -38,7 +38,7 @@ ROOT = Path(__file__).resolve().parent
 ORIG = ROOT / "assets" / "photography" / "_originals"
 FULL = ROOT / "assets" / "photography"
 THUMB = ROOT / "assets" / "photography" / "thumb"
-HTML = ROOT / "photography" / "index.html"
+HTML = ROOT / "art" / "index.html"
 
 ORIG.mkdir(parents=True, exist_ok=True)
 THUMB.mkdir(parents=True, exist_ok=True)
