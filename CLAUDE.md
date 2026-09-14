@@ -2,55 +2,33 @@
 
 ## ⚙ Maintenance — keep this file alive
 
-This file is the project's memory. It should *grow* as the site grows.
-Future Claude sessions reading this should treat it as both reference AND
-something to improve when warranted.
+This file is the project's memory. Treat it as reference **and** as something
+to correct when it is wrong. Propose additions at the end of any session that
+introduced a pattern or a non-obvious gotcha; edit immediately on "remember
+this"; on "review CLAUDE.md", re-read the whole thing and flag stale
+sections, dead file references, redundancy, and claims that contradict each
+other.
 
-**When to propose an update:**
+| Where things go | |
+|---|---|
+| here | the live site: two pages, three menu items, current mechanics |
+| `docs/retired-site.md` | the nine-page site. **Do not re-document retired pages here** |
+| `docs/deploy-and-git.md` | deploy internals, push auth, credential troubleshooting |
+| `docs/hyperjump.md` | the page-transition anatomy and its tuning knobs |
+| `~/.claude/skills/static-site-workflow/SKILL.md` | anything that would apply to a *second* static site |
 
-1. **End of any session** that introduced a new pattern, file, workflow,
-   refinement, or non-obvious gotcha → before wrapping up, ask the user:
-   *"Should I capture anything from this session into CLAUDE.md?"* and
-   propose specific additions.
-
-2. **Mid-session, on explicit user request** — phrases like *"remember
-   this"*, *"add this to CLAUDE.md"*, *"checkpoint what we just learned"*,
-   *"save that lesson"* should immediately trigger an edit + commit.
-
-3. **Periodic review** when the user says *"review CLAUDE.md"* or
-   *"audit project memory"* — re-read the whole file, flag stale sections,
-   outdated cache versions, removed files still referenced, redundancies,
-   and propose a cleanup pass.
-
-**What belongs HERE vs. in the skill:**
-
-- ✅ **Here (project-specific)**: file structure of THIS site, the three
-  menu items, gear list contents, etc.
-- 🗄 **In `docs/retired-site.md`**: anything about the nine-page site that no
-  longer exists. Do not re-document retired pages here.
-- ↗️ **In `~/.claude/skills/static-site-workflow/SKILL.md` (generalizable)**:
-  the *pattern* of cache-busting via pre-commit hook, the *pattern* of
-  dev-then-prod swaps. Anything that would apply to a hypothetical second
-  static site.
-
-If a lesson is useful in both places, capture it in both — project-specific
-detail here, generalized lesson in the skill.
-
-**Hygiene rules:**
-
-- Always show diffs before committing CLAUDE.md updates; small surgical
-  edits beat sweeping rewrites.
-- Keep this file under ~500 lines. If it grows past that, factor sections
-  into `docs/*.md` and leave this file as an index pointing to them. This
-  happened once already: the file hit 983 lines, and the Intro/Work/Art
-  reduction was the occasion to move the retired-page material into
-  `docs/retired-site.md`.
-- Commit CLAUDE.md changes alongside the work that motivated them, not as
-  isolated "documentation" commits — they're easier to find later that way.
+- Small surgical edits beat sweeping rewrites; show the diff before
+  committing, and commit alongside the work that motivated it.
+- **Keep this under ~500 lines.** It hit 983 once. When it grows, factor into
+  `docs/` — do not trim by deleting knowledge.
+- ⚠ **A stale claim here is worse than a missing one.** This file has
+  asserted, at various times: a browser-language redirect that had been
+  deleted, light as the theme default after dark became it, a LinkedIn link
+  that never existed, and a five-row table it described as four. Each sent a
+  session down the wrong path. **When you change behaviour, grep this file
+  for what you just made untrue.**
 
 ---
-
-
 
 Personal website of Jimeno Fonseca, served on GitHub Pages at
 `https://jimenofonseca.com` (CNAME → `jimenofonseca.github.io`).
@@ -64,167 +42,129 @@ German tree; its output is committed, exactly like `build-gallery.py`.
 
 ⚠ **This used to be a nine-page site** built around an enterprise CDIO/CTO
 pitch: Proof of scale, three case studies, eight operating principles,
-Appearances, Publications. All of it was retired in the Intro/Work/Art
-reduction. The pages are in `_old/retired-pages/` and
-**`docs/retired-site.md` holds everything that was documented about them** —
-the case-study/home-page mirroring contract, the employer-disclosure rules in
-full, the principles split. Read that file before restoring any of it; the
-reasoning was expensive and is not re-derivable from the markup.
+Appearances, Publications. All retired in the Intro/Work/Art reduction. The
+pages sit in `_old/retired-pages/`, and **`docs/retired-site.md` holds
+everything that was documented about them** — the case-study mirroring
+contract, the employer-disclosure rules in full, the principles split. Read
+it before restoring any of it; that reasoning is not re-derivable from the
+markup.
 
 ## File layout
 
 ```
 .
-├── index.html                        # Intro — the h1 is the name, then the
-│                                     #   short bio and the portrait. Nothing else.
-├── art/                              # Art — Music and Photography merged onto
-│                                     #   one page. Was /music/ + /photography/
-├── de/                               # GENERATED — the whole site in German.
-│                                     #   Never hand-edit; run build-i18n.py
-├── projects/                         # redirect stub only — see "Old URLs"
-├── _old/                             # UNPUBLISHED (Jekyll underscore rule)
-│   ├── retired-pages/                #   the nine-page site, archived intact
-│   └── …                             #   plus the original Jekyll site
-├── docs/
-│   └── retired-site.md               # what was documented about the retired pages
-├── private-src/                      # GITIGNORED — optional local editing drafts
+├── index.html                  # Intro — h1 (the name), short bio, portrait
+├── art/                        # Art — Music + Photography on one page
+├── de/                         # GENERATED. Never hand-edit; run build-i18n.py
+├── projects/                   # redirect stub → / (see "Old URLs")
+├── _old/                       # UNPUBLISHED (Jekyll underscore rule)
+│   ├── retired-pages/          #   the nine-page site, archived intact
+│   └── …                       #   plus the original Jekyll site
+├── docs/                       # retired-site.md · deploy-and-git.md · hyperjump.md
+├── private-src/                # GITIGNORED — optional local drafts
 ├── assets/
-│   ├── portrait.jpg                  # Intro portrait
-│   ├── og-image.jpg                  # 1200×630 social share card (both pages)
-│   ├── photography/                  # Gallery photos (gitignored: _originals/)
-│   │   ├── *.jpg                     # 13 files, ~1600px max
-│   │   ├── thumb/*.jpg               # 600×600 square crops
-│   │   └── _originals/               # GITIGNORED — full-res master files
-│                                     #   (large videos are gitignored — see below)
-├── style.css                         # All site styles
-├── app.js                            # Theme toggle, mobile sidebar, lightbox, hyperjump
-├── i18n.js                           # EN/DE translations — 22 keys each
-├── build-gallery.py                  # Photo pipeline → writes into art/index.html
-├── appendix-og-image.py              # Regenerates assets/og-image.jpg
-├── build-i18n.py                     # Generates de/ from the EN pages + i18n.js
-├── validate.js                       # Site checks — run before committing; CI runs it too
-├── sitemap.xml                       # 2 pages x 2 languages; the stub is excluded (noindex)
-└── robots.txt                        # Allow all + Sitemap: pointer
+│   ├── portrait.jpg            # Intro portrait
+│   ├── og-image.jpg            # 1200×630 share card (both pages)
+│   └── photography/            # 13 gallery photos + thumb/ (_originals/ gitignored)
+├── style.css                   # All site styles
+├── app.js                      # Theme toggle, mobile sidebar, lightbox, hyperjump
+├── i18n.js                     # EN/DE copy — 22 keys each. Build input only
+├── build-gallery.py            # Photo pipeline → writes into art/index.html
+├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
+├── appendix-og-image.py        # Regenerates assets/og-image.jpg
+├── validate.js                 # Site checks — CI runs this on every push
+├── sitemap.xml                 # 2 pages × 2 languages; the stub is excluded
+└── robots.txt                  # Allow all + Sitemap: pointer
 ```
 
-### How the site actually deploys
+### How the site deploys
 
-GitHub Pages serves this repo **from the branch** (Settings → Pages →
-"Deploy from a branch"). There is no deploy workflow and there should not
-be one — a `pages.yml` running `bundle exec jekyll build` used to sit here
-and failed all 71 of its runs, because the repo stopped being a Jekyll
-site and has no `Gemfile`. It never deployed anything; it only produced a
-red X on every push. Deleted.
+Branch deploy (Settings → Pages → "Deploy from a branch"). No build step —
+Pages serves committed files. `.github/workflows/ci.yml` is the only
+workflow and it just runs `node validate.js`.
 
-`.github/workflows/ci.yml` is the only workflow, and it just runs
-`node validate.js`.
+⚠ **Never add a `.nojekyll` file.** Jekyll's underscore rule is what keeps
+`_old/` unpublished, and `_old/` holds the entire former Jekyll site *plus
+`_old/retired-pages/`* — the whole nine-page site taken down in the
+reduction. `.nojekyll` would publish all of it at `/_old/...`, including a
+stray `CNAME` and every page that was deliberately retired.
 
-**Do not add a `.nojekyll` file.** Pages still runs Jekyll on the branch,
-and it is Jekyll's underscore rule that keeps `_old/` out of the published
-site. `_old/` is not a couple of retired pages — it is the **entire former
-Jekyll site**: `_config.yml`, `_includes/`, `Gemfile`, a second `CNAME`,
-`Projects.md`, `Publications.md`, plus the retired `superurbana/` and
-`innovation/` pages. Adding `.nojekyll` would publish all of it verbatim
-at `/_old/...`, including a stray CNAME and the old site's config.
+**Why there is no `pages.yml`, and the rebuild-lag figure:
+`docs/deploy-and-git.md`.**
 
-Jekyll running over the site is not a problem to solve — it has processed
-every one of the 72 successful `pages-build-deployment` runs, and the
-underscore exclusion is load-bearing.
-
-### Old URLs
-
-**One redirect stub survives**: `/projects/` → `/`, a meta-refresh +
-canonical + `noindex, follow` + a JS `location.replace`. The former Jekyll
-site published a Projects page (`_old/Projects.md` → `/Projects.html`), so a
-bookmark or inbound link still lands somewhere. Its destination survived the
-reduction, which is why it stayed.
-
-`/open-source/` was deleted with the rest: it pointed at `/ipcc/`, and a
-redirect to a 404 is worse than a 404.
-
-### ⚠ The reduction chose 404 over redirects — deliberately
+### Old URLs — the reduction chose 404 over redirects
 
 Sixteen URLs went away (`/principles/`, `/digital-transformation/`, `/cea/`,
 `/ipcc/`, `/appearances/`, `/publications/`, `/music/`, `/photography/`, each
-in both languages). **They serve 404 on purpose.** Stubs pointing everything
+in both languages). **They serve 404 on purpose** — stubs pointing everything
 at `/` were offered and declined.
 
-Know what that costs, because it is not reversible on Google's timetable:
-every indexed result and inbound link for the case studies breaks, Google
-drops the URLs within weeks, and re-indexing them later is slow. If any page
-comes back, it returns to a cold URL.
+The cost, not reversible on Google's timetable: every indexed result and
+inbound link for the case studies breaks, the URLs drop out within weeks, and
+anything restored later returns cold. The pages are intact in
+`_old/retired-pages/`; restoring one is a `git mv` back, a `build-i18n.py`
+run, its `<loc>` entries, and its i18n keys out of git history.
 
-The pages themselves are intact in `_old/retired-pages/` — restoring one is
-`git mv` back, a `build-i18n.py` run, its `<loc>` entries in `sitemap.xml`,
-and its i18n keys out of git history.
+**One stub survives**: `/projects/` → `/` (meta-refresh + canonical +
+`noindex, follow` + JS `location.replace`), because the old Jekyll site
+published `/Projects.html` and the destination still exists.
+`/open-source/` was deleted with the rest — it pointed at `/ipcc/`, and a
+redirect to a 404 is worse than a 404.
 
-⚠ **Settled, and the record was wrong.** An earlier version of this file
-claimed the Portfolio link on Jimeno's LinkedIn profile pointed at
-`www.jimenofonseca.com/projects`, and the `/projects/` stub was committed
-on that basis. Jimeno has since checked the profile: **the website field is
-`jimenofonseca.com`, the bare domain.** The claim was never true — it came
-from a third-party analysis that was taken at face value, and no tooling in
-this repo can see LinkedIn.
-
-The stub stays, on the evidence that actually holds: `/projects` was a real
-URL on the former Jekyll site and has 404'd since the rebuild, so anyone
-with an old bookmark or inbound link still lands somewhere. **Do not
-reintroduce the LinkedIn justification** — it is disproven, not merely
-unverified.
-
-`validate.js` skips any page containing a `<meta http-equiv="refresh">`,
-since redirect stubs carry no i18n or cache version of their own.
+⚠ **Do not re-justify `/projects/` with LinkedIn.** This file once claimed
+the profile's Portfolio link pointed at `www.jimenofonseca.com/projects`. It
+does not — the field is the bare domain. **Disproven, not merely
+unverified.** `validate.js` skips any page with a `<meta http-equiv>`.
 
 ## Design system (Swiss / minimalist)
 
 - **Typography**: Inter Tight (sans) + IBM Plex Mono (labels, numbers)
-- **Layout**: Flush-left sticky sidebar (240px) + content column (max 1200px)
+- **Layout**: flush-left sticky sidebar (240px) + content column (max 1200px)
 - **Hairlines, not boxes**: borders between rows, no card shadows
 - **Mono is for labels, sans is for content.** IBM Plex Mono uppercase in
-  `--accent` marks things that are *not* prose: section eyebrows, number
-  rails, stat labels, the `See case study →` links. Every item **title** on
-  a page is Inter Tight 17–19px, weight 500, `var(--fg)` — `.proof-label`,
-  `.outcome-text h2` and `.principle-text h2` are deliberately identical.
-  `.proof-label` used to be 10.5px mono uppercase accent, which made
-  section 01 look like a different kind of content from 02 and 03. Don't
-  reintroduce a per-section title treatment.
-- **Theme**: light/dark via `[data-theme]` on `<html>`, persists in localStorage.
-  **Dark is the default**, and it is a design decision rather than a reading
-  of the visitor's OS: every page ships `<html lang="…" data-theme="dark">`
-  in the markup, so the default survives JS being off and there is no
-  first-paint flash. `prefers-color-scheme` is no longer consulted anywhere
-  on the site — don't reintroduce it thinking it is a missing feature. A
-  `<meta name="color-scheme" content="dark light">` sits next to the viewport
-  tag so the UA paints its own canvas dark before `style.css` arrives.
-- **Language**: one language per URL, shipped as plain HTML. No JS swap, no
-  browser-language detection — see "Two language trees" below.
+  `--accent` marks things that are *not* prose: section eyebrows, the number
+  rail, media-caption kinds, the gear list. Everything a reader actually
+  reads is Inter Tight.
+- **One title treatment, never per-section.** Titles are Inter Tight, weight
+  500, `var(--fg)`. The retired pages learned this the hard way: one section
+  used a 10.5px mono uppercase accent heading, which made it look like a
+  different *kind* of content from its neighbours.
+- **Language**: one per URL, plain HTML. No JS swap, no browser-language
+  detection — see "Two language trees".
 
-⚠ **`app.js`'s init must never call `applyTheme()`.** `applyTheme()` writes
-to localStorage, so calling it on load would stamp a theme on a first-time
-visitor who never picked one — freezing whatever the code guessed and making
-any future change to the site default invisible to everyone who has ever
-loaded the page. Init only syncs the toggle's `.active` class; the inline
-head script has already applied any *stored* choice. This was a live bug
-while light was the default: `localStorage.getItem('theme') || 'light'` wrote
-`light` on first paint, which silently overrode the head script's
-`prefers-color-scheme: dark` detection.
+### Theme — dark is the default
 
-The three places that carry the default, and must agree:
+Light/dark via `[data-theme]` on `<html>`, persisted in localStorage. **Dark
+is a design decision, not a reading of the visitor's OS**: every page ships
+`<html lang="…" data-theme="dark">` in the markup, so the default survives JS
+being off with no first-paint flash, and `<meta name="color-scheme"
+content="dark light">` lets the UA paint its canvas dark before `style.css`
+lands. `prefers-color-scheme` is **not consulted anywhere** — don't
+reintroduce it thinking it is missing.
 
-| Where | What |
-|---|---|
-| every page's `<html>` tag | `data-theme="dark"` |
-| every page's sidebar toggle | `class="opt active"` on the **dark** span |
-| `app.js` | the `\|\| 'dark'` fallbacks in `toggleTheme()` and init |
+Three places carry the default and must agree: each page's `<html>` tag
+(`data-theme="dark"`), each page's sidebar toggle (`class="opt active"` on
+the **dark** span), and `app.js`'s `|| 'dark'` fallbacks in `toggleTheme()`
+and init.
 
-`style.css` is the exception: `:root` still holds the **light** palette and
-`html[data-theme="dark"]` overrides it. That inversion is deliberate — the
-markup default does the work, and swapping the two CSS blocks would be a
-large, risky refactor for no visible gain.
+⚠ **`app.js`'s init must never call `applyTheme()`.** It writes to
+localStorage, so calling it on load stamps a theme on a first-time visitor
+who never chose one — freezing the guess and making any future change to the
+site default invisible to everyone who has ever loaded the page. Init only
+syncs the toggle's `.active` class. This was a live bug while light was the
+default: `localStorage.getItem('theme') || 'light'` wrote `light` on first
+paint.
+
+`style.css` is the exception to dark-first: `:root` holds the **light**
+palette and `html[data-theme="dark"]` overrides it. Deliberate — the markup
+default does the work, and swapping the blocks is a risky refactor for no
+visible gain.
 
 ## Sidebar navigation order
 
-**Three items, one flat `.nav-group`, no group label.**
+**Three items, one flat `.nav-group`, no group label** — numbered 01–03
+because nothing conflicts any more (the old About group was deliberately
+*un*numbered to avoid colliding with Case Studies 01–03).
 
 | | | |
 |---|---|---|
@@ -232,524 +172,328 @@ large, risky refactor for no visible gain.
 | 02 | Work | `https://www.linkedin.com/in/jimenofonseca/` — `↗`, `target="_blank"` |
 | 03 | Art | `/art/` — `→` |
 
-They are numbered 01–03 because nothing conflicts any more. The old About
-group was deliberately *un*numbered to avoid colliding with Case Studies
-01–03; that constraint is gone.
-
 **Work is an outbound link, not a page.** There is no `/work/`, and
 `app.js`'s `isInternalNav()` excludes `target="_blank"`, so the hyperjump
 correctly does not fire on it.
 
 ⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
-JSON-LD `sameAs` array** — that was an explicit decision, not an oversight.
-`sameAs` now holds Wikidata (`Q140798347`) and LinkedIn only. Do not
-"restore" them.
-
-`/superurbana/` and `/innovation/` were retired long before this, and live in
-`_old/retired-pages/` alongside everything else.
+JSON-LD `sameAs`** — an explicit decision, not an oversight. `sameAs` holds
+Wikidata (`Q140798347`) and LinkedIn only. Do not "restore" them.
 
 ## Workflows
 
-### Updating translations (`i18n.js`)
+### Updating copy
 
-1. Edit `i18n.js` — both `en:` and `de:` blocks.
-2. **`python3 build-i18n.py`** — rewrites the English fallbacks from `en:`
-   and regenerates the whole `de/` tree from `de:`.
+1. Edit `i18n.js` — **both** `en:` and `de:`.
+2. `python3 build-i18n.py` — rewrites the English fallbacks from `en:` and
+   regenerates the whole `de/` tree from `de:`.
 3. `node validate.js`, then commit `i18n.js`, the English pages and `de/`
    together.
 
-**Forgetting step 2 fails CI**, by design: `validate.js` compares every
-page's text against its own language block, so an edited `i18n.js` with a
-stale page is caught.
+Forgetting step 2 fails CI by design. ⚠ `og:`/`twitter:` tags carry no i18n
+attribute, so they do **not** follow — hand-edit them in the same pass.
 
-⚠ **`i18n.js` is no longer sent to browsers.** It is build input only. The
-pages ship their text as plain HTML, which is the whole reason German is now
-indexable. There is therefore no `?v=N` cache-busting and no pre-commit hook
-any more — both were deleted, along with the no-flash-of-English hack and
-the `data-lang` pre-paint script, which existed only to hide the swap.
+### Updating structure (HTML / CSS)
 
-### Updating page content (HTML / CSS)
-
-Edit the **English** page directly (`index.html`, `*/index.html`), then run
-`python3 build-i18n.py` to mirror the change into `de/`. Never hand-edit
-anything under `de/` — the generator overwrites it.
+Edit the **English** page (`index.html`, `art/index.html`), then run
+`build-i18n.py` to mirror it into `de/`. Never hand-edit `de/`.
 
 ### Working on the Art page
 
-`/art/` is **one page with two parts**, Music then Photography, each a plain
-`<section class="art-part">` with its own numbered eyebrow. The base
-`section` rule supplies the hairline that separates them, and
-`section:first-of-type` keeps `.page-intro` borderless — so the parts need no
-layout CSS of their own. Only `.art-text` was added, for the body copy under
-each part's media block.
+`/art/` is **one page, two parts** — Music then Photography, each a plain
+`<section class="art-part">` with a numbered eyebrow. The base `section` rule
+supplies the hairline between them and `section:first-of-type` keeps
+`.page-intro` borderless, so the parts need no layout CSS of their own; only
+`.art-text` was added, for the body copy under each media block.
 
-The page is public plain HTML, like the rest of the site — no password or
-client-side encryption anywhere. Edit `art/index.html` and commit.
-
-- **Music**: embeds a YouTube iframe (`6dDU8wfSiEg`), now with
-  `loading="lazy"`, which the standalone `/music/` page never had.
-- **Kit list**: the `.gear-list` aside is hardcoded English in the markup and
-  carries no i18n keys — it is model names, which do not translate. Six
-  items; edit them in `art/index.html`.
-
-⚠ **`.gitignore` does not untrack.** Both site videos were committed
-*before* the ignore rules existed, so `assets/music/music.mp4` (42.5 MB)
-and `assets/Superurbana_Promo.mp4` (48 MB) kept shipping — 92 MB published
-on the live domain that no page referenced. They were removed from the
-index with `git rm --cached` (files kept on disk). If you add a large asset
-and later ignore it, check `git ls-files` rather than trusting the ignore
-rule. Note this frees the *published* site, not `.git` (118 MB) — the
-objects stay in history, and rewriting that would break every clone.
-- **Photography**: 13 photos sourced from `assets/photography/`. Edit via
-  `build-gallery.py` (see "Updating the photo gallery" below). The lightbox
-  in `app.js` binds to `.photo-grid figure[data-full]`, which the merged page
-  preserves unchanged.
-
-⚠ **`build-gallery.py` writes into `art/index.html`.** Its target moved when
-the gallery did. If you ever restore `/photography/`, move the target back —
-otherwise the generator silently updates a page nobody serves.
+- **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
+- **Photography**: 13 photos from `assets/photography/`. The `app.js`
+  lightbox binds to `.photo-grid figure[data-full]`.
+- **Kit list**: `.gear-list` is hardcoded English with no i18n keys — they
+  are model names, which do not translate. Six items, edited in the markup.
 
 ### Updating the photo gallery
 
-```
+```bash
 # 1. Drop full-size originals (any size, any name) into:
 open assets/photography/_originals/
 
-# 2. Generate web-size fulls + 600×600 thumbnails AND auto-inject <figure>
-#    blocks between <!-- GALLERY-START --> / <!-- GALLERY-END --> markers
-#    in art/index.html:
+# 2. Generate web-size fulls + 600x600 thumbs AND rewrite the <figure> blocks
+#    between the GALLERY-START / GALLERY-END markers in art/index.html:
 python3 build-gallery.py
 
-# 3. Commit and push
-git add assets/photography/ art/
-git commit -m "Update photo gallery"
-git push
+# 3. Commit
+git add assets/photography/ art/ && git commit -m "Update photo gallery" && git push origin main
 ```
 
-Uses macOS native `sips` (no ImageMagick dependency).
-`_originals/` is gitignored — only optimised versions ship to GitHub.
+Uses macOS native `sips`, no ImageMagick. `_originals/` is gitignored.
 
-### Adding a new page (Dev-then-Prod workflow)
+⚠ **`build-gallery.py` writes into `art/index.html`.** Its target moved when
+the gallery did. If you ever restore `/photography/`, move the target back,
+or the generator silently updates a page nobody serves.
 
-When designing something new (e.g., a redesign or a new subpage), don't edit
-the live file directly. Use the dev-then-swap pattern:
+### Adding a new page
 
-1. **Build in a separate file**: e.g., `cea/index-new.html` or `index-new.html`.
-   Reference temporary asset names (`style-new.css`, `app-new.js`) if doing a
-   large design change.
-2. **Preview locally** via the dev server (see "Local preview" below). Iterate.
-3. **When approved, swap**: rename `-new` files to canonical names (overwriting
-   the old), update all internal references (`/style-new.css → /style.css`), and
-   bump `i18n.js?v=N` if needed. Use Python or sed for batch renames.
-4. **Single commit**: ship the swap as one atomic change.
+Three things are required or CI fails: the English file, a `build-i18n.py`
+run, and the page's two `<loc>` entries in `sitemap.xml`. Copy the inline
+`<head>` script from an existing page too, or the new page flashes the wrong
+theme and lands without the arrival animation.
+
+For anything large, build it as `art/index-new.html` / `index-new.html` with
+temporary asset names, preview locally, then swap the `-new` files onto the
+canonical names and fix the internal references — all in one commit.
 
 ### Local preview
 
-```
-# .claude/launch.json defines a Python static server on :8080
-# Start via Claude's preview tool (preferred) or manually:
-python3 -m http.server 8080
-# → http://localhost:8080/
+```bash
+python3 -m http.server 8080    # → http://localhost:8080/
 ```
 
-Every page is public plain HTML, so the local preview shows the live
-content directly — no password gate.
+`.claude/launch.json` defines the same for Claude's preview tool.
 
 ## Two language trees — one URL per language
 
-English lives at `/` and `/art/`, German at `/de/` and `/de/art/`. Every
-page ships its text as plain HTML in **one** language.
+English at `/` and `/art/`, German at `/de/` and `/de/art/`. Every page ships
+its text as plain HTML in **one** language.
 
-**Why, in one sentence:** Google indexes what is in the HTML, and it does
-not run the language switcher — so while both languages shared one URL,
-every German string on this site was invisible to search, including to the
-German-speaking recruiters the site is aimed at.
-
-How the pieces fit:
+**Why:** Google indexes what is in the HTML and does not run a language
+switcher — so while both languages shared one URL, every German string was
+invisible to search, including to the German-speaking recruiters the `/de/`
+tree exists for.
 
 | | |
 |---|---|
-| `i18n.js` | the only place copy lives, `en:` + `de:`, 22 keys each. **Build input — not served to browsers.** |
+| `i18n.js` | the only place copy lives, `en:` + `de:`, 22 keys each. **Build input — never served to browsers** |
 | English pages | hand-authored; `build-i18n.py` refreshes their fallbacks from `en:` |
-| `de/**` | **generated, never hand-edited** |
-| `hreflang` | every page names `en`, `de` and `x-default`, including itself |
-| canonical | self-referential — each page points at its own URL |
+| `de/**` | **generated. Never hand-edit** — the generator deletes and rewrites the tree |
+| `hreflang` | every page names `en`, `de` and `x-default`, itself included |
+| canonical | self-referential |
 
-Rules that keep it correct:
-
-- **Never hand-edit `de/`.** The generator deletes and rewrites the tree.
-- **A new page needs three things**: the English file, a `build-i18n.py`
-  run, and its two `<loc>` entries in `sitemap.xml`. `validate.js` fails if
-  the sitemap and the page set disagree.
-- **No automatic redirect by browser language.** Each URL serves one
-  language, always; the sidebar switcher links to the counterpart. Google
-  advises against language-sniffing redirects, and a redirect would also
-  contradict the canonical.
-- **`x-default` points at English**, which is the site's primary language.
-
-The `hreflang` set must be reciprocal — if the German page names the
-English one but not vice versa, Google discards the whole annotation
-silently. `validate.js` checks this on all 4 pages.
+- **No redirect by browser language.** Each URL serves one language always;
+  the sidebar switcher links to the counterpart. Google advises against
+  language-sniffing redirects, and one would contradict the canonical.
+- **`x-default` points at English**, the primary language.
+- The `hreflang` set must be **reciprocal** — if German names English but not
+  vice versa, Google silently discards the whole annotation.
 
 ## ⚠ EN/DE parity — non-negotiable
 
 **Every change to an English `i18n.js` key MUST update the German equivalent
-in the same edit and the same commit.** Never defer "I'll do German later" —
-that's how stale translations accumulate and German-speaking visitors see
-contradictory content.
+in the same edit and the same commit.** Never defer "I'll do German later".
 
-This matters more than it sounds because the site auto-detects browser
-language: a visitor with `navigator.language` starting with `de-` lands
-straight on the German version and may never see your English update.
+`grep -n "'your.key.name'" i18n.js` returns two lines — one per block. Edit
+both. If you cannot write the German, ship a literal translation with a
+`// FIXME(de)` comment rather than an English-only key.
 
-### How to keep parity
+⚠ Two traps. **On bulk edits, assert the change landed exactly twice** — a
+regex requiring whitespace after the colon silently misses keys written
+`'key':'value'`, which has caused a real one-sided edit here. And **parity
+means *equivalent*, not *simultaneously edited***: "The Outcome" maps to
+"Das Ergebnis" because German does not split Result/Outcome, so an English
+rewording sometimes needs no German change. Do not "fix" those.
 
-1. When editing `i18n.js`, find both occurrences of the key:
-   ```bash
-   grep -n "'your.key.name'" i18n.js
-   ```
-   You'll get two line numbers — one in the `en:` block (top half of the
-   file), one in the `de:` block (bottom half).
-2. Edit **both** in the same session, before the commit.
-3. If you don't speak German well enough for a phrase, write a literal
-   translation and leave a `// FIXME(de)` comment so the parity exists and
-   the polish can come later — but never ship EN-only.
+### What the tooling enforces, and what it does not
 
-### What the tooling enforces vs. what it doesn't
+✅ `node validate.js` checks **4 pages** — 2 English, 2 German — each against
+its *own* language block, plus: EN/DE key parity; every `data-i18n` key
+exists; exactly one `Person` JSON-LD per home page with a `url` matching its
+canonical; a self-referential canonical and a reciprocal `hreflang` set
+(`en`/`de`/`x-default`) with a matching `<html lang>`; and that `sitemap.xml`
+lists **exactly** the validated pages. CI runs it on every push and PR.
 
-- ✅ `node validate.js` checks **4 pages** — 2 English plus 2 German — each
-  against its **own** language block, so a page that drifts from `i18n.js`
-  fails whichever language it is in. It also checks EN/DE key parity, that
-  every `data-i18n` key exists, that each home page carries exactly one
-  `Person` JSON-LD block whose `url` matches that page's canonical, that
-  every page has a self-referential canonical and a complete reciprocal
-  `hreflang` set (`en` / `de` / `x-default`) with a matching `<html lang>`,
-  and that `sitemap.xml` lists **exactly** the validated pages. CI runs it
-  on every push and PR — run it locally before committing.
+That sitemap check exists because the page list comes from a directory scan
+while `sitemap.xml` is hand-written. **Add a page → add its `<loc>`.**
 
-  That last check exists because the page list is discovered by directory
-  scan while `sitemap.xml` is hand-written: without it, adding a page
-  silently leaves it out of the sitemap and deleting one leaves a 404 in
-  it. **Add a page → add its `<loc>`**, or CI fails.
-- ❌ Nothing verifies that the German is *good*, only that it exists.
-  That's still a human job.
-
-If you're proposing copy changes (a single key or a batch), always end with
-the German equivalent diff alongside the English one — no exceptions.
+❌ Nothing verifies the German is *good*, only that it exists — still a human
+job. `data-i18n-html` keys are checked for existence only, so verify inline
+markup by hand.
 
 ## i18n key conventions
 
-Keys are namespaced. When adding a new key:
+22 keys per language. `nav.*` is the sidebar plus the two Art part headings;
+`home.*` / `art.*` are per-page `<title>` and `<meta description>`;
+`hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
+everything else — `v2.role`, `v2.art.lede`, `v2.music.p1`, `v2.photo.p1/p2`,
+the caption kinds, and the chrome (`v2.theme.label`, `v2.lang.label`,
+`v2.menu.open`).
 
-- `nav.*` — sidebar navigation (`nav.intro`, `nav.work`, `nav.art`) and the
-  two Art part headings (`nav.music`, `nav.photography`)
-- `home.*` / `art.*` — per-page `<title>` and `<meta description>`
-- `hero.h1` — the Intro page's heading (the name)
-- `about.bio` — the short bio, the only body copy on the Intro page
-- `v2.*` — everything else: `v2.role`, `v2.art.lede`, `v2.music.p1`,
-  `v2.photo.p1`, `v2.photo.p2`, the two `*.caption.kind` labels, and the
-  chrome (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`)
+The `v2.` prefix is an artefact of an old redesign, not a version scheme.
+Not worth renaming 12 keys to remove it.
 
-The `v2.` prefix is a historical artefact of a redesign, not a version
-scheme. It is not worth renaming 12 keys to remove it.
+Every key MUST exist in both blocks. `node -c i18n.js` after editing.
 
-Every key MUST exist in both `en:` and `de:` blocks. Validate with
-`node -c i18n.js` after editing.
-
-For HTML elements:
-- `data-i18n="key"` → sets `textContent`
-- `data-i18n-html="key"` → sets `innerHTML` (for content with inline markup like `<span>` or `<a>`)
-- `data-i18n-content="key"` → sets `content` attribute (for `<meta>` tags)
-- `data-i18n-aria="key"` → sets `aria-label`
+| Attribute | Sets |
+|---|---|
+| `data-i18n` | `textContent` |
+| `data-i18n-html` | `innerHTML` (content with inline markup) |
+| `data-i18n-content` | the `content` attribute (`<meta>`) |
+| `data-i18n-aria` | `aria-label` |
 
 ## ⚠ HTML fallbacks must match the `en:` values
 
-Every `data-i18n` element carries hardcoded fallback text, and every
+Every `data-i18n` element carries hardcoded fallback text and every
 `data-i18n-content` a hardcoded `content` attribute. **Crawlers index that
-fallback, not the JS-rendered text** — Google never runs `applyLang()`.
+fallback** — Google never runs `applyLang()`. So `build-i18n.py` rewrites
+them from `en:`; never hand-patch the HTML.
 
-So when you change an `en:` value in `i18n.js`, change the fallback in the
-HTML too, in the same commit. If you don't, the site silently serves two
-different versions: the current copy to visitors, superseded copy to search
-engines and to LinkedIn's scraper. This actually happened — the publications
-page advertised "an h-index of 20" to Googlebot long after the visible text
-had moved on.
-
-`node validate.js` catches this: for every `data-i18n="k"` it checks that the
-element's text equals `en[k]` whitespace-normalised, and likewise for
-`data-i18n-content="k"` and its `content` attribute. `data-i18n-html` keys
-are checked for existence only — the inline markup isn't compared, so verify
-those by hand.
+Skip the generator and the site serves two versions: current copy to
+visitors, superseded copy to search engines and LinkedIn's scraper. That
+happened — the publications page advertised "an h-index of 20" to Googlebot
+long after the visible text moved on. `validate.js` catches it now.
 
 ## Social meta & structured data
 
-Both content pages carry `<link rel="canonical">`, Open Graph (`og:type`,
+Both pages carry `<link rel="canonical">`, Open Graph (`og:type`,
 `og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`,
-`og:image` + width/height/alt) and Twitter card tags. Share cards point at
-`https://jimenofonseca.com/assets/og-image.jpg` (1200×630).
+`og:image` + width/height/alt) and Twitter card tags, all pointing at
+`https://jimenofonseca.com/assets/og-image.jpg` (1200x630).
 
-Two rules that are easy to get wrong:
-
-- **These tags are deliberately static — never wire them to `data-i18n`.**
-  Scrapers don't execute JS, so an i18n attribute buys nothing and doubles
-  the parity burden. The flip side: when a matching `i18n.js` key changes,
-  the `og:`/`twitter:` copy does **not** follow. Edit it by hand in the same
-  pass.
-- **`Person` JSON-LD lives on `index.html` only, and there must be exactly
-  ONE block.** It's the entity anchor; a second Person block on the same
-  page hands Google conflicting claims about the same person and undermines
-  the Knowledge Panel. This has happened once — a hand-edit added a second
-  block at the top of `<head>` while the original sat further down. Its
-  `url` must also match the page's `<link rel="canonical">` exactly
-  (no `www.`, keep the trailing slash). `validate.js` now enforces both.
-  `sameAs` holds Wikidata (`Q140798347`) and LinkedIn — GitHub and Google
-  Scholar were removed from it deliberately along with their sidebar links.
+- ⚠ **The `og:`/`twitter:` tags are deliberately static — never wire them to
+  `data-i18n`.** Scrapers run no JS, so an i18n attribute buys nothing and
+  doubles the parity burden. The flip side, and the thing that keeps biting:
+  **when an `i18n.js` key changes, the social copy does not follow.** Edit it
+  by hand in the same pass. `build-i18n.py` translates these into German by
+  exact reverse-lookup of the `en:` values, so the English tag must match its
+  key's value verbatim or the German card silently stays English.
+- ⚠ **Exactly one `Person` JSON-LD block, on `index.html` only.** It is the
+  entity anchor; a second block hands Google conflicting claims about the
+  same person. That has happened once — a hand-edit added one at the top of
+  `<head>` while the original sat further down. Its `url` must match the
+  page's canonical exactly (no `www.`, keep the trailing slash).
+  `validate.js` enforces both. `sameAs` holds Wikidata (`Q140798347`) and
+  LinkedIn; GitHub and Google Scholar were removed deliberately.
 
 Regenerate the share card with `python3 appendix-og-image.py` (needs
 `pillow`, `fonttools`, `brotli`; pulls Inter Tight from npm so the card
-matches site typography). **The card carries no job title on purpose** —
-LinkedIn caches OG images hard, so a title on it would go stale.
+matches site typography). **It carries no job title on purpose** — LinkedIn
+caches OG images hard, so a title on it would go stale.
 
-After changing meta or the card: force a re-scrape at
-<https://www.linkedin.com/post-inspector/> and validate the schema at
+After changing meta or the card: re-scrape at
+<https://www.linkedin.com/post-inspector/> and validate at
 <https://search.google.com/test/rich-results>.
 
 ### When the job title changes
 
-The current title (`Head of Digital Engineering`) is spread across four
-places. Change all of them together, EN **and** DE.
+`Head of Digital Engineering` sits in five places — change them together,
+EN **and** DE: `i18n.js` → `v2.role`, `home.desc`, `about.bio`; and
+`index.html`'s JSON-LD (`jobTitle`, `description`) and `og:`/`twitter:`
+descriptions.
 
-This table used to list six, including `hero.proof` and `v2.now` — both of
-which had become orphans rendering on no page, so following the old list
-meant editing two dead keys and believing the job was done. Re-derive the
-list rather than trusting it if the home page changes shape again.
-
-| Location | Contains |
-|---|---|
-| `i18n.js` → `v2.role` | sidebar role line, both pages |
-| `i18n.js` → `home.desc` | "Head of Digital Engineering at Axpo Grid…" |
-| `i18n.js` → `about.bio` | the short bio's opening clause |
-| `index.html` JSON-LD | `"jobTitle"` and `"description"` |
-| `index.html` og/twitter | `og:description`, `twitter:description` |
+⚠ **Re-derive that list if the pages change shape.** It has been wrong
+before — it once carried two keys that rendered on no page at all.
 
 ⚠ **The bio still names Axpo**, so the employer-disclosure rules still bite
-even though the case studies are gone. The short version: never publish Axpo
-revenue, margin, pricing method or internal headcount; budget *scope* is
-Jimeno's own authority and is fine as a band; never call the role a
-"department" / "Abteilung"; name the issuing body on every credential. The
-full reasoning, with every phrase that was cut and why, is in
-`docs/retired-site.md` — read it before adding any employer detail back.
+even with the case studies gone: never publish Axpo revenue, margin, pricing
+method or internal headcount; budget *scope* is Jimeno's own authority and is
+fine as a band; never call the role a "department" / "Abteilung"; name the
+issuing body on every credential. **A claim with no number in it can still be
+disclosure** — "revenue-generating" and "OPEX liability" survived two sweeps
+that were only looking for figures. Full reasoning in
+`docs/retired-site.md`.
 
 ## The Intro page
 
-The whole page is an `<h1>`, one paragraph and the portrait. That is all it
-is meant to be.
+An `<h1>`, one paragraph, and the portrait. That is all it is meant to be.
 
 ⚠ **`hero.h1` holds the name, not a slogan.** It used to read "I turn digital
-technology into lasting capability."; `hero.p` carried a supporting lede.
-Both were dropped — but an `<h1>` was kept, with the name in it, because this
-is now the site's entire search surface and a home page with no heading is a
-real defect. **Do not read the empty-looking hero as unfinished**, and do not
-reintroduce a tagline unless asked.
+technology into lasting capability.", with `hero.p` as a supporting lede;
+both went in the reduction. An `<h1>` was *kept*, with the name in it,
+because this page is now the site's entire search surface and a home page
+with no heading is a real defect. **Do not read the sparse hero as
+unfinished**, and do not add a tagline unless asked. Gone with the slogan:
+the `page-eyebrow`, the `bio-label`, and the portrait's `figcaption` (it held
+the name, which the `h1` now says centimetres away). `#bio` stays so old deep
+links land.
 
-Gone with the slogan: the `page-eyebrow` ("About"), the `bio-label` ("Short
-bio") and the portrait's `figcaption` — the caption held the name, which the
-`h1` now says a few centimetres away.
-
-`#bio` is still on the bio block so old deep links (`/#bio`) land, though
-nothing links to it any more.
+⚠ **The `#recently` section held nine LinkedIn embeds. Do not bring them
+back.** Unfiltered, aged badly, duplicated a surface that already exists, and
+~7.5s of script evaluation on an emulated mid-range phone — the largest
+single cost the site ever carried.
 
 ### The portrait
 
-A single static portrait (`assets/portrait.jpg`, 3:4). No caption, no
-rotation, no dots, no JS.
+`assets/portrait.jpg`, 3:4, no caption and no JS. To replace: drop a new file
+in `assets/` (~900x1200, under 200 KB) and repoint the `<img src>` in
+`.hero-figure`. On macOS, `sips -c` crops and `sips -Z 1200` resizes.
 
-It used to be a 3-slide auto-rotating reel cycling
-`portrait.jpg` → `portrait_music.jpg` → `portrait_photography.jpg`, with
-the caption's right side swapping to match. That was removed — along with
-its JS block in `app.js` and CSS layer in `style.css` — so `.hero-figure`
-is now plain markup styled entirely by the base rules near the top of
-`style.css`.
-
-`assets/portrait_music.jpg` and `assets/portrait_photography.jpg` are
-still in the repo but referenced nowhere. Delete them if the reel is not
+`assets/portrait_music.jpg` and `assets/portrait_photography.jpg` are left
+over from a retired 3-slide reel, referenced nowhere. Delete if it is not
 coming back.
-
-### Changing the portrait
-
-Drop a replacement into `assets/` (3:4, ~900×1200, under 200 KB) and
-point the `<img src>` in the `.hero-figure` at it. On macOS, `sips -c` to
-crop and `sips -Z 1200` to resize.
 
 ## Page transition (hyperjump)
 
-Every internal navigation triggers a **Star Wars-style hyperspace jump**:
-a black/white overlay covers the main content frame (the sidebar stays
-anchored), ~120 white/black stars stretch into long streaks racing right,
-then the new page emerges scaled-up + blurred and settles. About 2 seconds
-total, theme-aware (inverts colors in light vs. dark theme).
+Every internal navigation plays a ~2s Star Wars hyperspace jump: an overlay
+covers the content frame (the sidebar stays anchored), ~120 stars streak
+right, and the new page arrives scaled-up and blurred. Theme-aware, and
+`prefers-reduced-motion: reduce` gets an instant page swap instead.
 
-### Where the pieces live
+Three pieces: CSS at the end of `style.css`, the second IIFE at the end of
+`app.js`, and the inline `<head>` script that reads the `sessionStorage` flag
+*before paint* so the arrival starts on frame 1.
 
-- **CSS**: end of `style.css`, under the `Hyperspace jump page transition`
-  heading. Defines `.hyperjump`, `.hyperjump .star`, `@keyframes streak`,
-  and `html.hyper-arrive` (the arrival decel).
-- **JS**: end of `app.js`, the second IIFE. Intercepts internal-link
-  clicks, injects the starfield overlay, sets a `sessionStorage` flag,
-  navigates after 1150ms.
-- **Inline `<head>` script** on every page reads
-  `sessionStorage.getItem('hyperjump-arriving')` *before paint* and adds
-  `html.hyper-arrive` if true. This is why the arrival animation starts
-  on frame 1 with no snap-then-jiggle. **If you add a new page, copy this
-  block into its `<head>` script** — it's the same one that handles
-  lang + theme auto-detection.
-
-### Theme-aware colors
-
-Two CSS vars at `:root` (and overridden by `html[data-theme="dark"]`):
-
-| Theme | `--hyperjump-bg` | `--hyperjump-star` |
-|-------|------------------|---------------------|
-| Light (default) | `#ffffff` | `#000000` |
-| Dark | `#000000` | `#ffffff` |
-
-To tweak intensity: bump star count in `app.js` (`STAR_COUNT = 120`),
-streak distance in `@keyframes streak` (`scaleX(300)`), or duration in
-the `setTimeout(…, 1150)` + matching CSS animation-durations.
-
-### To disable it temporarily
-
-Either:
-- Remove the IIFE block at the end of `app.js`, or
-- Comment out the `if(sessionStorage.getItem("hyperjump-arriving")…)`
-  block in the inline `<head>` script (the arrival half).
-
-Or for a single user opt-out: respect `prefers-reduced-motion: reduce` —
-already wired. Users with that preference get instant page-swap, no jump.
+**Tuning, disabling, and the full anatomy: `docs/hyperjump.md`.**
 
 ## Mobile performance
 
 Measured on an emulated Pixel 5, 4x CPU throttle, third party answering in
-800ms. **FCP went from ~1,100ms to ~330ms** on one change.
+800ms. Two changes did nearly all the work: the non-blocking font stylesheet
+took FCP from ~1,100ms to ~330ms, and deleting the LinkedIn embeds removed
+~7.5s of the 11.5s main-thread total.
 
 - **The Google Fonts stylesheet must stay non-blocking.** A third-party
-  `<link rel="stylesheet">` in the critical path holds up first paint by a
-  full round trip to `fonts.googleapis.com` — nothing renders until it
-  resolves. It is loaded as `media="print" onload="this.media='all'"` with a
-  `preload` warming the request and a `<noscript>` fallback. `display=swap`
-  keeps text readable in the fallback face meanwhile. **Do not "tidy" this
-  back into a plain stylesheet link.**
-- **Only request weights that exist in `style.css`** — currently 300, 400
-  and 500. Weight 600 was requested for years and used nowhere: one whole
-  font file per page load for nothing.
-- **The LinkedIn embeds are gone**, and with them `.feed-item` and its
-  `content-visibility: auto` / `contain-intrinsic-size` treatment. Those
-  existed to make nine third-party iframes survivable on a phone; deleting
-  the iframes was the better fix. There is now **no third-party script on
-  the home page** except Google Fonts and gtag.
-- The hero portrait carries `width`/`height`, `fetchpriority="high"` and
-  `decoding="async"`. CLS is 0 — `.hero-figure img` also has
-  `aspect-ratio: 3/4`, so the box is reserved before the image lands.
+  `<link rel="stylesheet">` in the critical path holds first paint for a full
+  round trip. It loads as `media="print" onload="this.media='all'"` with a
+  `preload` warming the request and a `<noscript>` fallback; `display=swap`
+  keeps text readable meanwhile. **Do not "tidy" this into a plain link.**
+- **Only request weights that exist in `style.css`** — 300, 400, 500.
+- **gtag loads on the `load` event**, queueing into `dataLayer` first so the
+  pageview is not lost. In the head it cost a 171ms forced reflow.
+- The portrait carries `width`/`height`, `fetchpriority="high"`,
+  `decoding="async"` and `aspect-ratio: 3/4`, so CLS is 0.
 
-Resolved: the LinkedIn embeds were ~7.5s of the 11.5s main-thread total on
-an emulated mid-range phone, and removing them removes essentially all of
-it. `app.js` is 3.5 KiB transferred, so what remains is fonts and gtag.
+Still open, both needing macOS `sips`: the portrait is served at 901x1202
+into a 560x747 box (~55 KiB wasted, wants a `srcset`), and `/art/`'s gallery
+thumbnails are ~4x oversized (1.4 MB across 13 files).
 
-The Intro page is now about as light as a page with a web font and an
-analytics tag can be: one image, no iframes, no third-party scripts beyond
-fonts and gtag.
-
-Still open, both needing macOS `sips` on Jimeno's machine: the portrait is
-served at 901x1202 for a 560x747 box (~55 KiB wasted, wants a `srcset`), and
-the gallery thumbnails on `/art/` are ~4x oversized (1.4 MB across 13 files).
-The `loading="lazy"` the music iframe was missing is now on it.
-
-⚠ **`style.css` carries a lot of dead rules** after the reduction —
-`.principle*`, `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`,
-`.page-actions`, `.cta-link`, `.bio-label`, `.feed-more` and more. It was
-left alone on purpose: it is one cached file and the classes cost nothing at
-runtime, whereas a blind prune risks the **runtime-created** classes that
-look dead to a grep but are not — `hyperjump`, `hyperjump-flash`,
+⚠ **`style.css` keeps many dead rules** after the reduction — `.principle*`,
+`.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
+`.cta-link`, `.bio-label`, `.feed-more`. Left alone on purpose: one cached
+file, zero runtime cost, and a blind prune risks the **runtime-created**
+classes that look dead to a grep — `hyperjump`, `hyperjump-flash`,
 `hyper-arrive`, `star`, `lightbox`, `lightbox-caption`, `lightbox-close`,
-`lightbox-nav`, `open`. If you do prune, restoring a retired page means
-restoring its CSS too.
+`lightbox-nav`, `open`.
 
 ## Common gotchas
 
 - **Edited `i18n.js` and forgot `build-i18n.py`** — `validate.js` fails with
-  `stale-fallback`. Run the generator; do not hand-patch the HTML.
+  `stale-fallback`. Run the generator; do not hand-patch HTML.
 - **Hand-edited something under `de/`** — the next generator run silently
   discards it. German copy lives in `i18n.js`, nowhere else.
-- **Cache-busting and the pre-commit hook are gone.** They existed because
-  `i18n.js` was fetched at runtime; it is not any more. If you re-introduce
-  a runtime script, note that a rebase does not fire hooks — that bit us
-  once, when `2130478` shipped v=38 and the rebased commit on top would have
-  shipped v=38 again.
-- **The inline `<head>` script is load-bearing, but not for language any
-  more.** It applies a stored theme choice and the hyperjump arrival flag
-  before paint. The no-flash-of-English half is gone with the runtime
-  `i18n.js`. **A new page must copy this block**, or it flashes the default
-  theme and lands without the arrival animation.
-- **Path conventions**: subpage HTML references assets with absolute paths
-  (`/style.css`, `/app.js`) so they resolve from any nested directory.
-- **GitHub Pages rebuild lag**: usually 30–60s after push. Live URL is
-  `https://jimenofonseca.com` (custom domain via `CNAME`).
-- **Photos in `_originals/` never go to GitHub**: gitignored. If switching
-  machines, manually copy `_originals/` over.
+- **The inline `<head>` script is load-bearing.** It applies a stored theme
+  choice and the hyperjump arrival flag before paint. A new page must copy
+  it. It does *no* language detection — that went with the runtime `i18n.js`,
+  along with `?v=N` cache-busting and the pre-commit hook.
+- **Absolute asset paths** (`/style.css`, `/app.js`) so they resolve from any
+  nested directory.
+- **`.gitignore` does not untrack.** Two videos committed *before* the ignore
+  rules kept shipping — 92 MB published that no page referenced.
+  `git rm --cached` fixed it. Add a large asset and later ignore it → check
+  `git ls-files`, not the ignore rule. This frees the *published* site, not
+  `.git`; the objects stay in history.
+- **Photos in `_originals/` never reach GitHub** (gitignored). Copy the
+  folder by hand when switching machines.
+- **Pages rebuild lag**: 30–60s after a push.
 
-## Push authentication
+## Pushing
 
-**Always push with `git push origin main`** — nothing fancier.
+**Always `git push origin main`** — never the URL-with-embedded-token form.
+Pushing to an explicit URL uploads the commits but leaves
+`refs/remotes/origin/main` stale, so every local tool reports unpushed work
+and Jimeno has to "push" again from GitHub Desktop to sync the ref.
 
-The PAT is already stored in **macOS Keychain** via the `osxkeychain`
-credential helper (set up by GitHub Desktop). Plain `git push origin main`
-finds it automatically and works seamlessly.
+The PAT is in the macOS Keychain via the `osxkeychain` helper, so plain
+`git push origin main` just works. `git config http.postBuffer 524288000` is
+already set for this clone — needed for 20+ MB photo batches.
 
-### ⚠ Do NOT use the URL-with-embedded-token form
-
-```bash
-# ❌ DON'T do this:
-git push https://USERNAME:TOKEN@github.com/...  main
-
-# ✅ DO this:
-git push origin main
-```
-
-Why it matters: pushing to an explicit URL **does not update the local
-`refs/remotes/origin/main` reference** even though the commits do reach
-github.com. The result is that local tools (GitHub Desktop, `git status`,
-`git log origin/main..main`) all think there are unpushed commits — and
-the user has to "push" manually from GitHub Desktop just to update the
-tracking ref. The actual upload is a no-op; the tracking-ref sync is
-what they perceive as "the push working".
-
-Symptom to watch for: user says *"your commits are landing but I have to
-push manually from GitHub Desktop"*. That's this bug. Switch to
-`git push origin main` and the tracking ref updates atomically.
-
-### Large pushes (photo batches, etc.)
-
-Pushing 20+ MB in one go can fail with `fatal: the remote end hung up
-unexpectedly` because git's default HTTP post buffer (1 MB) is too small.
-The fix is a one-time setting per clone:
-
-```bash
-git config http.postBuffer 524288000   # 500 MB
-```
-
-Already set for this repo. If you ever re-clone, run it once. Symptom:
-push exits with the "hung up" error, but `git log origin/main..main` shows
-the commit is still unpushed. After the buffer fix, the same `git push
-origin main` succeeds.
-
-### Verify credentials still work
-
-```bash
-git push origin main --dry-run
-# → "Everything up-to-date" (good)
-# → auth prompt or error (PAT expired / keychain entry stale)
-```
-
-If the keychain entry ever stops working, regenerate the PAT at
-github.com/settings/tokens and run `git push origin main` once
-interactively to refresh the keychain entry.
+**Credential troubleshooting and large-push symptoms:
+`docs/deploy-and-git.md`.**
