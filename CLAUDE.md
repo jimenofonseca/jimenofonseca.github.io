@@ -422,11 +422,41 @@ links land.
 back** — unfiltered, aged badly, duplicated a surface that already exists,
 and ~7.5s of script evaluation on a mid-range phone.
 
-### The portrait
+### The portrait, and the dead space under it
 
 `assets/portrait.jpg`, 3:4, no caption and no JS. To replace: drop a new file
 in `assets/` (~900x1200, under 200 KB) and repoint the `<img src>` in
 `.hero-figure`. On macOS, `sips -c` crops and `sips -Z 1200` resizes.
+
+⚠ **`main.content` is stretched to 100vh whatever is on the page**, because
+`.shell` carries a `min-height: 100vh` and the sticky sidebar is
+`height: 100vh`. On a one-section page that dumped the whole surplus below
+the portrait — measured at 1440x900: 64px of section padding, **196px of
+empty stretched content box**, and 96px of main padding, so **356px of
+nothing** between the picture and the footer, growing on taller screens.
+
+Two changes fixed it, and the numbers are worth keeping because the cause is
+not visible in the markup:
+
+| | |
+|---|---|
+| `--portrait-w` 360px → **440px** | fills the surplus with the subject of the page rather than removing space. The portrait is the only visual on it. |
+| `main.content:has(> .hero)` gets `flex` + `justify-content: center`, `padding-bottom: 56px`, and its `.hero` loses `padding-bottom` | turns the remaining slack into balanced space above and below instead of a gap at the bottom |
+
+Dead space under the portrait went 356px → 153px at 1440x900, and at
+1440x1080 it is now symmetric (251px above the name, 243px below the
+picture) rather than all at the bottom.
+
+**The `:has()` scoping is load-bearing**: the Off-the-clock page has real
+sections and must start at the top, so it must keep `display: block` and its
+96px padding. Verified after the change — do not widen the selector to plain
+`main.content`.
+
+⚠ **The left column will still look empty below the bio**, and that is
+unavoidable: a ~220px bio next to a 587px portrait cannot balance without
+making the text column absurdly narrow. Asymmetric whitespace is normal in
+this layout; do not "fix" it by shrinking the portrait, which just moves the
+gap back under the picture.
 
 `assets/portrait_music.jpg` and `assets/portrait_photography.jpg` are left
 over from a retired 3-slide reel, referenced nowhere. Delete if it is not
@@ -477,9 +507,12 @@ took FCP from ~1,100ms to ~330ms, and deleting the LinkedIn embeds removed
 - The portrait carries `width`/`height`, `fetchpriority="high"`,
   `decoding="async"` and `aspect-ratio: 3/4`, so CLS is 0.
 
-Still open, both needing macOS `sips`: the portrait is served at 901x1202
-into a 560x747 box (~55 KiB wasted, wants a `srcset`), and `/art/`'s gallery
-thumbnails are ~4x oversized (~1.3 MB across 12 files).
+Still open, needing macOS `sips`: `/art/`'s gallery thumbnails are ~4x
+oversized (~1.3 MB across 12 files).
+
+The portrait's oversizing resolved itself when `--portrait-w` went to 440px:
+a 440px CSS box is 880 device px on a 2x display, and the file is 901px wide,
+so it is now about right and no longer wants a `srcset`.
 
 ⚠ **`style.css` keeps many dead rules** after the reduction — `.principle*`,
 `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
