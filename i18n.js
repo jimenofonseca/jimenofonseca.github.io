@@ -10,7 +10,7 @@ var TRANSLATIONS = {
     'art.desc':              'Music and photography by Jimeno Fonseca — a long-time hobby, selected clips and photographs.',
 
     // ── Home ─────────────────────────────────────
-    'home.title':         'Jimeno Fonseca | Digital Technology Leader in Energy & Infrastructure',
+    'home.title':         'Jimeno Fonseca',
     'home.desc':          'Jimeno Fonseca turns digital technology into lasting capability. Head of Digital Engineering at Axpo Grid, developer of City Energy Analyst, founder of Superurbana GmbH, PhD from ETH Zürich.',
     'hero.h1':            'Jimeno Fonseca',
 
@@ -68,7 +68,7 @@ var TRANSLATIONS = {
     'art.desc':              'Musik und Fotografie von Jimeno Fonseca — ein langjähriges Hobby, ausgewählte Clips und Fotografien.',
 
     // ── Home ─────────────────────────────────────
-    'home.title':         'Jimeno Fonseca | Digital- und Technologieführung für Energie & Infrastruktur',
+    'home.title':         'Jimeno Fonseca',
     'home.desc':          'Jimeno Fonseca verwandelt digitale Technologie in dauerhafte Fähigkeiten. Leiter Digital Engineering bei Axpo Grid, Entwickler von City Energy Analyst, Gründer von Superurbana GmbH, Doktortitel der ETH Zürich.',
     'hero.h1':            'Jimeno Fonseca',
 
