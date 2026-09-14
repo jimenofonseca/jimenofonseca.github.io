@@ -560,8 +560,9 @@ Still open, needing macOS `sips`: `/art/`'s gallery thumbnails are ~4x
 oversized (~1.3 MB across 12 files).
 
 The portrait's oversizing resolved itself when `--portrait-w` went to 440px:
-a 440px CSS box is 880 device px on a 2x display, and the file is 901px wide,
-so it is now about right and no longer wants a `srcset`.
+a 440px CSS box is 880 device px on a 2x display and the file is 896px wide,
+so it is now about right and no longer wants a `srcset`. **Keep replacements
+near 896x1200** to hold that.
 
 ⚠ **`style.css` keeps many dead rules** after the reduction — `.principle*`,
 `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
