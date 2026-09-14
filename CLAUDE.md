@@ -64,7 +64,7 @@ markup.
 ├── assets/
 │   ├── portrait.jpg            # Intro portrait
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
-│   └── photography/            # 13 gallery photos + thumb/ (_originals/ gitignored)
+│   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, lightbox. No nav JS
 ├── i18n.js                     # EN/DE copy — 21 keys each. Build input only
@@ -193,9 +193,15 @@ layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
 - **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
-- **Photography**: 13 photos from `assets/photography/`. The `app.js`
+- **Photography**: 12 photos from `assets/photography/`. The `app.js`
   lightbox binds to `.photo-grid figure[data-full]`; `cursor: zoom-in` is the
   only affordance, since no prose tells people to click.
+
+⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
+is generated, so pulling a `<figure>` and the two JPEGs is only half the job
+— the next `build-gallery.py` run rebuilds the list from `_originals/` and
+brings the photo straight back. `photo-05.jpg` was removed this way and its
+original still needs deleting on Jimeno's machine.
 
 ⚠ **The page has no body copy, and that is the design.** Three paragraphs
 (`v2.music.p1`, `v2.photo.p1`, `v2.photo.p2`) and the `.gear-list` camera
@@ -208,7 +214,8 @@ whole page by choice.
 `:nth-child` so it survives `build-gallery.py` changing the photo count, and
 scoped to `min-width: 901px` where 3 columns actually apply. Spanning the row
 was rejected: the thumbs are 600x600 centre crops, so a 3:1 stretch would
-slice the middle out of one.
+slice the middle out of one. At 12 photos the rule is dormant — 12 divides by
+3 — so **do not assume it works because the grid looks right today.**
 
 ### Updating the photo gallery
 
@@ -463,7 +470,7 @@ took FCP from ~1,100ms to ~330ms, and deleting the LinkedIn embeds removed
 
 Still open, both needing macOS `sips`: the portrait is served at 901x1202
 into a 560x747 box (~55 KiB wasted, wants a `srcset`), and `/art/`'s gallery
-thumbnails are ~4x oversized (1.4 MB across 13 files).
+thumbnails are ~4x oversized (~1.3 MB across 12 files).
 
 ⚠ **`style.css` keeps many dead rules** after the reduction — `.principle*`,
 `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
