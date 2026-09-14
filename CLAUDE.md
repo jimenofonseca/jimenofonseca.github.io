@@ -37,7 +37,7 @@ German tree; its output is committed, exactly like `build-gallery.py`.
 
 **Two content pages, two languages.** The menu is three items: **Intro**
 (`/`), **Work** (an outbound link to the LinkedIn profile — no page) and
-**Art** (`/art/`).
+**Off the clock** (`/art/`).
 
 ⚠ **This used to be a nine-page site** built around an enterprise CDIO/CTO
 pitch: Proof of scale, three case studies, eight operating principles,
@@ -155,11 +155,20 @@ because nothing conflicts any more (the old About group was deliberately
 |---|---|---|
 | 01 | Intro | `/` — `→` |
 | 02 | Work | `https://www.linkedin.com/in/jimenofonseca/` — `↗`, `target="_blank"` |
-| 03 | Art | `/art/` — `→` |
+| 03 | Off the clock | `/art/` — `→` |
 
 **Work is an outbound link, not a page.** There is no `/work/`. Nothing
 intercepts clicks any more, so it needs no special handling — the browser
 just follows it.
+
+⚠ **The third item is called "Off the clock" but lives at `/art/`**, and its
+keys are still `nav.art`, `art.title`, `art.desc`, `v2.art.lede`. The label
+was renamed from "Art"; the URL and the key names were deliberately left
+alone — same call as `nav.openSource` on the retired IPCC page. `/art/` is
+short, already in `sitemap.xml` and submitted to Search Console, and no
+reader sees a key name. **Do not rename either for tidiness.** German:
+**Feierabend**, which is precisely the time after work and keeps the menu to
+single words: *Intro · Arbeit · Feierabend*.
 
 ⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
 JSON-LD `sameAs`** — an explicit decision, not an oversight. `sameAs` holds
@@ -183,7 +192,7 @@ attribute, so they do **not** follow — hand-edit them in the same pass.
 Edit the **English** page (`index.html`, `art/index.html`), then run
 `build-i18n.py` to mirror it into `de/`. Never hand-edit `de/`.
 
-### Working on the Art page
+### Working on the Off-the-clock page (`/art/`)
 
 `/art/` is **one page, two parts** — Music then Photography, each a plain
 `<section class="art-part">`: a numbered eyebrow, the media, one caption

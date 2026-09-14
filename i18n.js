@@ -4,9 +4,9 @@ var TRANSLATIONS = {
     'skip':               'Skip to Content',
     'nav.intro':             'Intro',
     'nav.work':              'Work',
-    'nav.art':               'Art',
-    'v2.art.lede':           'Music and photographs — the work that is not work.',
-    'art.title':             'Art | Music and Photography — Jimeno Fonseca',
+    'nav.art':               'Off the clock',
+    'v2.art.lede':           'Music I have recorded, and photographs I keep coming back to.',
+    'art.title':             'Off the Clock | Music and Photography — Jimeno Fonseca',
     'art.desc':              'Music and photography by Jimeno Fonseca — a long-time hobby, selected clips and photographs.',
 
     // ── Home ─────────────────────────────────────
@@ -63,9 +63,9 @@ var TRANSLATIONS = {
     'skip':               'Zum Inhalt springen',
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
-    'nav.art':               'Kunst',
-    'v2.art.lede':           'Musik und Fotografien — die Arbeit, die keine Arbeit ist.',
-    'art.title':             'Kunst | Musik und Fotografie — Jimeno Fonseca',
+    'nav.art':               'Feierabend',
+    'v2.art.lede':           'Musik, die ich aufgenommen habe, und Fotografien, zu denen ich immer wieder zurückkehre.',
+    'art.title':             'Feierabend | Musik und Fotografie — Jimeno Fonseca',
     'art.desc':              'Musik und Fotografie von Jimeno Fonseca — ein langjähriges Hobby, ausgewählte Clips und Fotografien.',
 
     // ── Home ─────────────────────────────────────
