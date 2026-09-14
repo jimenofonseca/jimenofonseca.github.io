@@ -13,7 +13,10 @@ from PIL import Image, ImageDraw, ImageFont
 HEAD = "I turn technology into lasting capability."
 SUB  = "The organisation, the procedures, the people, and the connections between them."
 NAME = "Jimeno Fonseca"
-META = "Axpo Grid   ·   Zürich, CH"  # no job title: OG images cache hard
+META = "Axpo Grid"  # no job title (OG images cache hard) and no city:
+                    # the location was removed from the footer, the JSON-LD
+                    # homeLocation and og:image:alt, so it must not survive
+                    # here — the share card is the most public surface of all.
 
 def inter_tight_ttfs():
     """Fetch Inter Tight from npm and convert woff2 -> ttf for Pillow."""
