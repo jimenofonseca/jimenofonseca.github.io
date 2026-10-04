@@ -29,7 +29,7 @@
     if(localStorage.getItem("theme")==="light")
       document.documentElement.dataset.theme="light";
   })();</script>
-  <title data-i18n="art.title">Library | Music, Photography and Code — Jimeno Fonseca</title>
+  <title data-i18n="art.title">Library | Music, Photography, Code and Text — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="art.desc" content="Jimeno Fonseca" />
   <link rel="canonical" href="https://jimenofonseca.com/art/" />
   <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/" />
@@ -39,14 +39,14 @@
   <meta property="og:site_name" content="Jimeno Fonseca" />
   <meta property="og:locale" content="en" />
   <meta property="og:url" content="https://jimenofonseca.com/art/" />
-  <meta property="og:title" content="Library | Music, Photography and Code — Jimeno Fonseca" />
+  <meta property="og:title" content="Library | Music, Photography, Code and Text — Jimeno Fonseca" />
   <meta property="og:description" content="Jimeno Fonseca" />
   <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Jimeno Fonseca" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Library | Music, Photography and Code — Jimeno Fonseca" />
+  <meta name="twitter:title" content="Library | Music, Photography, Code and Text — Jimeno Fonseca" />
   <meta name="twitter:description" content="Jimeno Fonseca" />
   <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=7" />
+  <link rel="stylesheet" href="/style.css?v=8" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
@@ -254,6 +254,23 @@
             <span class="app-desc" data-i18n="v2.app.climascope">Climate-driven demand forecast</span>
             <span class="app-repo">DEG-USA <span class="arrow">↗</span></span>
           </a>
+          <!-- The one card not under jimenofonseca/: CityEnergyAnalyst lives
+               in the ETH Architecture and Building Systems org, which is why
+               this card alone prints the owner as well as the repository. -->
+          <a class="app-card" href="https://github.com/architecture-building-systems/CityEnergyAnalyst"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 52V30h12v22M26 52V18h12v34M42 52V36h12v16"/>
+                <path d="M6 52h52"/>
+                <path d="M16 24v-8M32 12V6M48 30v-8"/>
+              </svg>
+            </span>
+            <span class="app-name">Urban Twin</span>
+            <span class="app-desc" data-i18n="v2.app.urbantwin">City-scale energy simulation</span>
+            <span class="app-repo">architecture-building-systems/<wbr />CityEnergyAnalyst <span class="arrow">↗</span></span>
+          </a>
           <a class="app-card" href="https://github.com/jimenofonseca/EnthalpyGradients"
              target="_blank" rel="noopener">
             <span class="app-mark" aria-hidden="true">
@@ -269,6 +286,51 @@
         </div>
         <p class="media-caption">
           <span class="kind" data-i18n="v2.code.caption.kind">Open source · GitHub</span>
+        </p>
+      </section>
+
+      <!-- Text. Each card links to the paper's DOI, so the title on the card
+           is checkable in one click — the same contract as the repository
+           name on a Code card. Titles are the works' own and are never
+           translated, which is why only the heading and caption are keyed.
+           This is a SELECTION, not the full Scholar list. -->
+      <section class="art-part" aria-labelledby="text-h">
+        <p class="eyebrow"><span class="index">04</span><span id="text-h" data-i18n="nav.text">Text</span></p>
+        <div class="pub-row" role="region" tabindex="0"
+             data-i18n-aria="nav.text" aria-label="Text">
+          <a class="pub-card" href="https://doi.org/10.1016/j.apenergy.2019.114458" target="_blank" rel="noopener">
+            <span class="pub-year">2020</span>
+            <span class="pub-title">Daily enthalpy gradients and the effects of climate change on the thermal energy demand of buildings in the United States</span>
+            <span class="pub-venue">Applied Energy <span class="arrow">↗</span></span>
+          </a>
+          <a class="pub-card" href="https://doi.org/10.1016/j.enbuild.2018.06.030" target="_blank" rel="noopener">
+            <span class="pub-year">2018</span>
+            <span class="pub-title">A review on occupant behavior in urban building energy models</span>
+            <span class="pub-venue">Energy and Buildings <span class="arrow">↗</span></span>
+          </a>
+          <a class="pub-card" href="https://doi.org/10.1016/j.buildenv.2017.05.006" target="_blank" rel="noopener">
+            <span class="pub-year">2017</span>
+            <span class="pub-title">A review of simulation-based urban form generation and optimization for energy-driven urban design</span>
+            <span class="pub-venue">Building and Environment <span class="arrow">↗</span></span>
+          </a>
+          <a class="pub-card" href="https://doi.org/10.1016/j.enbuild.2015.11.055" target="_blank" rel="noopener">
+            <span class="pub-year">2016</span>
+            <span class="pub-title">City Energy Analyst (CEA): Integrated framework for analysis and optimization of building energy systems in neighborhoods and city districts</span>
+            <span class="pub-venue">Energy and Buildings <span class="arrow">↗</span></span>
+          </a>
+          <a class="pub-card" href="https://www.research-collection.ethz.ch/handle/20.500.11850/116267" target="_blank" rel="noopener">
+            <span class="pub-year">2016</span>
+            <span class="pub-title">Energy efficiency strategies in urban communities</span>
+            <span class="pub-venue">Doctoral thesis, ETH Zürich <span class="arrow">↗</span></span>
+          </a>
+          <a class="pub-card" href="https://doi.org/10.1016/j.apenergy.2014.12.068" target="_blank" rel="noopener">
+            <span class="pub-year">2015</span>
+            <span class="pub-title">Integrated model for characterization of spatiotemporal building energy consumption patterns in neighborhoods and city districts</span>
+            <span class="pub-venue">Applied Energy <span class="arrow">↗</span></span>
+          </a>
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.text.caption.kind">Selected · Peer-reviewed</span>
         </p>
       </section>
 

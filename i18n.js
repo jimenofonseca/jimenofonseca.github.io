@@ -5,7 +5,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Work',
     'nav.art':               'Library',
-    'art.title':             'Library | Music, Photography and Code — Jimeno Fonseca',
+    'art.title':             'Library | Music, Photography, Code and Text — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -68,6 +68,13 @@ var TRANSLATIONS = {
     'v2.app.windrunner':     'Weather station on wheels',
     'v2.app.climascope':     'Climate-driven demand forecast',
     'v2.app.gradient':       'Enthalpy gradient library',
+    'v2.app.urbantwin':      'City-scale energy simulation',
+
+    // ── Text ──────────────────────────────────────
+    // Publication titles are the works' own titles and are never
+    // translated, so only the heading and the caption live here.
+    'nav.text':              'Text',
+    'v2.text.caption.kind':  'Selected · Peer-reviewed',
   },
 
   de: {
@@ -76,7 +83,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
     'nav.art':               'Bibliothek',
-    'art.title':             'Bibliothek | Musik, Fotografie und Code — Jimeno Fonseca',
+    'art.title':             'Bibliothek | Musik, Fotografie, Code und Text — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -136,6 +143,11 @@ var TRANSLATIONS = {
     'v2.app.windrunner':     'Wetterstation auf Rädern',
     'v2.app.climascope':     'Klimabedingte Bedarfsprognose',
     'v2.app.gradient':       'Bibliothek für Enthalpiegradienten',
+    'v2.app.urbantwin':      'Energiesimulation im Stadtmassstab',
+
+    // ── Text ──────────────────────────────────────
+    'nav.text':              'Text',
+    'v2.text.caption.kind':  'Auswahl · Begutachtet',
   }
 };
 

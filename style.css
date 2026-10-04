@@ -600,10 +600,10 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
    `.photo-grid figure[data-full]` and build-gallery.py writes the figures
    inside this container — neither needs to know the layout changed, and
    renaming would break both for nothing. */
-/* Both horizontal rows share the mechanics; only the children differ —
-   .photo-grid holds <figure>s that open the lightbox, .app-row holds <a>s
-   that leave for GitHub. */
-.photo-grid, .app-row {
+/* The three horizontal rows share the mechanics; only the children differ —
+   .photo-grid holds <figure>s that open the lightbox, .app-row and .pub-row
+   hold <a>s that leave for GitHub and for a DOI. */
+.photo-grid, .app-row, .pub-row {
   display: flex;
   gap: 10px;
   overflow-x: auto;
@@ -614,16 +614,21 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   scrollbar-color: var(--faint) var(--hairline);
 }
 .photo-grid:focus-visible,
-.app-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.app-row:focus-visible,
+.pub-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .photo-grid::-webkit-scrollbar,
-.app-row::-webkit-scrollbar { height: 6px; }
+.app-row::-webkit-scrollbar,
+.pub-row::-webkit-scrollbar { height: 6px; }
 .photo-grid::-webkit-scrollbar-track,
-.app-row::-webkit-scrollbar-track { background: var(--hairline); }
+.app-row::-webkit-scrollbar-track,
+.pub-row::-webkit-scrollbar-track { background: var(--hairline); }
 .photo-grid::-webkit-scrollbar-thumb,
-.app-row::-webkit-scrollbar-thumb { background: var(--faint); }
+.app-row::-webkit-scrollbar-thumb,
+.pub-row::-webkit-scrollbar-thumb { background: var(--faint); }
 .photo-grid::-webkit-scrollbar-thumb:hover,
-.app-row::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-.photo-grid figure, .app-card {
+.app-row::-webkit-scrollbar-thumb:hover,
+.pub-row::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+.photo-grid figure, .app-card, .pub-card {
   flex: 0 0 auto;
   width: 320px;
   aspect-ratio: 1 / 1;
@@ -661,16 +666,16 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 /* Narrower frames on small screens so more than one is visible at a time,
    which is what tells someone the row scrolls. */
 @media (max-width: 900px) {
-  .photo-grid figure, .app-card { width: 260px; }}
+  .photo-grid figure, .app-card, .pub-card { width: 260px; }}
 @media (max-width: 520px) {
-  .photo-grid figure, .app-card { width: 72vw; }}
+  .photo-grid figure, .app-card, .pub-card { width: 72vw; }}
 
 /* ── App cards (Code) ───────────────────────────────────── */
 /* An app tile, built in CSS rather than generated as a JPEG like the share
    card: a drawn tile would be dark-only and would sit on the light palette
    as a hole, and the names would be baked into pixels no crawler can read.
    Everything here follows the theme and is selectable text. */
-.app-card {
+.app-card, .pub-card {
   display: flex;
   flex-direction: column;
   padding: 22px 22px 18px;
@@ -679,7 +684,7 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   color: inherit;
   transition: border-color 0.18s ease, background-color 0.18s ease;
 }
-.app-card:hover { border-color: var(--accent); }
+.app-card:hover, .pub-card:hover { border-color: var(--accent); }
 .app-card .app-mark {
   flex: 1 1 auto;
   display: flex;
@@ -712,12 +717,51 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   margin-top: 14px;
   font-family: var(--font-mono);
   font-size: 10.5px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transition: color 0.18s ease;
+  overflow-wrap: anywhere;   /* the one owner/repo line long enough to wrap */
+  /* Two lines' worth on every card, so the one that wraps does not push its
+     name up out of line with its neighbours. */
+  min-height: calc(10.5px * 1.5 * 2);
+}
+.app-card:hover .app-repo { color: var(--accent); }
+
+/* ── Publication cards (Text) ───────────────────────────── */
+/* Same square, different insides: the year leads as a mono eyebrow, the
+   title fills the card, the venue closes it. Titles are the works' own, so
+   they are neither translated nor abbreviated — a trimmed paper title is
+   not the same paper. */
+.pub-card .pub-year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.pub-card .pub-title {
+  flex: 1 1 auto;
+  font-size: 15.5px;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;   /* a guard, not a design: nothing reaches it today */
+}
+.pub-card .pub-venue {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
   transition: color 0.18s ease;
 }
-.app-card:hover .app-repo { color: var(--accent); }
+.pub-card:hover .pub-venue { color: var(--accent); }
 
 /* ── Lightbox ───────────────────────────────────────────── */
 .lightbox {

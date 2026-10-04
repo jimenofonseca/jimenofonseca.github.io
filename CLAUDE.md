@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 25 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 28 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -218,7 +218,7 @@ Edit the **English** page (`index.html`, `art/index.html`), then run
 
 ### Working on the Library page (`/art/`)
 
-`/art/` is **one page, three parts** — Music, Photography, Code — each a plain
+`/art/` is **one page, four parts** — Music, Photography, Code, Text — each a plain
 `<section class="art-part">`: a numbered eyebrow, the media, one caption
 line. The base `section` rule supplies the hairline between them and
 `section:first-of-type` keeps `.page-intro` borderless, so the parts carry no
@@ -230,8 +230,10 @@ each label down onto its media so the pair reads as one block.
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
-- **Code**: six app cards in a second scroller, each an outbound link to a
-  `github.com/jimenofonseca/…` repository.
+- **Code**: seven app cards in a second scroller, each an outbound link to a
+  GitHub repository.
+- **Text**: six publication cards in a third scroller, each an outbound link
+  to the paper's DOI.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -307,12 +309,45 @@ it for tidiness.** The marks are original abstract geometry (a bell curve, a
 bar rail, a step change, wheels under a gust, a projection fan, stacked
 bands); each says what the project does without borrowing anyone's logo.
 
-**Only `jimenofonseca/*` is on the page.** The forked `causalimpact` and the
-website's own repository are left out, and so is everything under
-`architecture-building-systems` — CityEnergyAnalyst included, which is the
-most substantial code Jimeno has public. That was a scope call about "my
-GitHub", **not** an oversight: if it should be there, it is one more entry
-in the list and one more `v2.app.*` key pair.
+**Six of the seven are `jimenofonseca/*`; the seventh is
+`architecture-building-systems/CityEnergyAnalyst`**, added on request after
+the first six shipped. ⚠ **That card alone prints `owner/repo`** — the
+others print the bare repository name, because printing `JIMENOFONSECA/` six
+times is noise, while hiding CEA's owner would imply it is his repository
+rather than the ETH chair's, which he co-created. `.app-repo` carries a
+two-line `min-height` so the one wrapping label does not lift its card's
+name out of line with its neighbours.
+
+Still deliberately absent: the forked `causalimpact` and this website's own
+repository.
+
+#### The Text cards
+
+Six publication cards in a third scroller, `.pub-row` / `.pub-card`, sharing
+the same square and the same scroll mechanics as the Code cards. The insides
+differ: a mono year in `--accent` leads, the title fills the card, the venue
+closes it, and the card links to the paper's **DOI** — the same contract as
+the repository name on a Code card, one click to check the claim.
+
+⚠ **This is a selection, not the Scholar list, and the caption says so.**
+Google Scholar, OpenAlex, Crossref, Semantic Scholar, doi.org and
+research-collection.ethz.ch are **all blocked by the session egress proxy**,
+so the list could not be pulled from the profile Jimeno linked. Every entry
+here was confirmed title-by-title through web search against its publisher
+record, and the DOIs for the two IPCC-related papers came from his own
+repository READMEs. One candidate — a 2019 Nature Communications paper that
+search kept returning next to his name — was **dropped after checking the
+author list and finding he is not on it.** Scholar lists more work than
+these six.
+
+⚠ **Do not "fill in the rest" from memory.** If more publications are
+wanted, take the list from Jimeno or from a reachable publisher record, with
+a DOI for each. A wrong citation on a researcher's own site is worse than a
+short one.
+
+⚠ **Titles are never translated or trimmed.** A paper's title is its title
+in both trees, and `-webkit-line-clamp: 9` on `.pub-title` is a guard
+against a future monster, not a design — nothing reaches it today.
 
 ### Updating the photo gallery
 
@@ -363,7 +398,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 25 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 28 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -411,19 +446,19 @@ markup by hand.
 
 ## i18n key conventions
 
-25 keys per language. `nav.*` is the sidebar plus the three Library part
+28 keys per language. `nav.*` is the sidebar plus the four Library part
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — the three caption kinds, the six `v2.app.*` card
+everything else — the four caption kinds, the seven `v2.app.*` card
 descriptors and the chrome (`v2.theme.label`, `v2.lang.label`,
 `v2.menu.open`). The `v2.` prefix is an artefact of an old redesign, not a
 version scheme.
 
-⚠ **The app *names* are deliberately not keys.** "Bayes Atlas",
-"Ledgerline" and the rest are invented proper nouns that read the same in
-both languages, so they sit in the HTML; only the descriptor line under each
-is translated. Adding German variants of the names would be eight more keys
-buying nothing.
+⚠ **The app names and the publication titles are deliberately not keys.**
+"Bayes Atlas", "Ledgerline" and the rest are invented proper nouns that read
+the same in both languages, and a paper's title is the title of that paper
+in every language — translating one would name a work that does not exist.
+Both sit in the HTML; only the descriptor line under an app name is keyed.
 
 Every key MUST exist in both blocks; `node -c i18n.js` after editing.
 `data-i18n` sets `textContent`, `-html` sets `innerHTML`, `-content` sets a
@@ -705,7 +740,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=7` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=8` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 
