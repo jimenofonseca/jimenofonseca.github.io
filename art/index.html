@@ -29,7 +29,7 @@
     if(localStorage.getItem("theme")==="light")
       document.documentElement.dataset.theme="light";
   })();</script>
-  <title data-i18n="art.title">Off the Clock | Music and Photography — Jimeno Fonseca</title>
+  <title data-i18n="art.title">Library | Music and Photography — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="art.desc" content="Jimeno Fonseca" />
   <link rel="canonical" href="https://jimenofonseca.com/art/" />
   <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/" />
@@ -39,14 +39,14 @@
   <meta property="og:site_name" content="Jimeno Fonseca" />
   <meta property="og:locale" content="en" />
   <meta property="og:url" content="https://jimenofonseca.com/art/" />
-  <meta property="og:title" content="Off the Clock | Music and Photography — Jimeno Fonseca" />
+  <meta property="og:title" content="Library | Music and Photography — Jimeno Fonseca" />
   <meta property="og:description" content="Jimeno Fonseca" />
   <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Jimeno Fonseca" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Off the Clock | Music and Photography — Jimeno Fonseca" />
+  <meta name="twitter:title" content="Library | Music and Photography — Jimeno Fonseca" />
   <meta name="twitter:description" content="Jimeno Fonseca" />
   <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=5" />
+  <link rel="stylesheet" href="/style.css?v=6" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Skip to Content</a>
@@ -82,7 +82,7 @@
         <ul class="nav-list" role="list">
           <li><a href="/"><span class="num">01</span><span data-i18n="nav.intro">Intro</span><span class="arrow">→</span></a></li>
           <li><a href="https://www.linkedin.com/in/jimenofonseca/" target="_blank" rel="noopener"><span class="num">02</span><span data-i18n="nav.work">Work</span><span class="arrow">↗</span></a></li>
-          <li><a href="/art/"><span class="num">03</span><span data-i18n="nav.art">Off the clock</span><span class="arrow">→</span></a></li>
+          <li><a href="/art/"><span class="num">03</span><span data-i18n="nav.art">Library</span><span class="arrow">→</span></a></li>
         </ul>
       </div>
 
@@ -109,7 +109,7 @@
     <main class="content" id="page" tabindex="-1">
 
       <section class="page-intro">
-        <h1 class="page-title" data-i18n="nav.art">Off the clock</h1>
+        <h1 class="page-title" data-i18n="nav.art">Library</h1>
       </section>
 
       <!-- Music and Photography were two pages (/music/, /photography/) until
@@ -136,7 +136,11 @@
 
       <section class="art-part" aria-labelledby="photo-h">
         <p class="eyebrow"><span class="index">02</span><span id="photo-h" data-i18n="nav.photography">Photography</span></p>
-        <div class="photo-grid">
+        <!-- tabindex + role make the scroller reachable and announced; a
+             scroll container whose children are not focusable is otherwise
+             unreachable by keyboard. aria-label goes through i18n. -->
+        <div class="photo-grid" role="region" tabindex="0"
+             data-i18n-aria="nav.photography" aria-label="Photography">
           <!-- GALLERY-START -->
           <figure data-full="/assets/photography/photo-01.jpg">
             <img src="/assets/photography/thumb/photo-01.jpg" alt="photo 01" loading="lazy" />

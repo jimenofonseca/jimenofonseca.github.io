@@ -79,7 +79,12 @@ a { color: inherit; text-decoration: none; }
    ───────────────────────────────────────────────────────── */
 .shell {
   display: grid;
-  grid-template-columns: var(--sidebar-w) 1fr;
+  /* ⚠ minmax(0, 1fr), never plain 1fr. A bare 1fr track has min-width:auto,
+     so it is sized by its content's min-content width — and the photo
+     scroller's min-content is every thumbnail laid end to end. That blew the
+     content column out to 3480px on a phone and pushed the whole page into
+     horizontal scroll. The 0 floor lets overflow-x:auto do its job. */
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   min-height: 100vh;
 }
 
@@ -586,16 +591,37 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 }
 .page-nav .next { text-align: right; align-items: flex-end; }
 
-/* ── Photo gallery (Photography hero) ───────────────────── */
+/* ── Photo scroller ─────────────────────────────────────── */
+/* Was a 3-column grid: 12 square thumbs stacked into four rows, ~1,500px of
+   vertical page for the lighter half of the site. One horizontal row costs
+   ~320px and shows the same photos.
+
+   ⚠ The class is still .photo-grid on purpose. app.js's lightbox binds to
+   `.photo-grid figure[data-full]` and build-gallery.py writes the figures
+   inside this container — neither needs to know the layout changed, and
+   renaming would break both for nothing. */
 .photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 10px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;   /* no accidental back-swipe on trackpads */
+  scroll-snap-type: x proximity;
+  padding-bottom: 14px;             /* room for the scrollbar under the row */
+  scrollbar-width: thin;
+  scrollbar-color: var(--faint) var(--hairline);
 }
+.photo-grid:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.photo-grid::-webkit-scrollbar { height: 6px; }
+.photo-grid::-webkit-scrollbar-track { background: var(--hairline); }
+.photo-grid::-webkit-scrollbar-thumb { background: var(--faint); }
+.photo-grid::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 .photo-grid figure {
   position: relative;
   margin: 0;
+  flex: 0 0 auto;
+  width: 320px;
   aspect-ratio: 1 / 1;
+  scroll-snap-align: start;
   overflow: hidden;
   cursor: zoom-in;
   background: var(--hover);
@@ -622,20 +648,12 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 }
 .photo-grid figure:hover figcaption { opacity: 1; }
 
-/* 13 photos in 3 columns leaves one frame alone on the last row, which reads
-   as a mistake rather than a choice. Centring it makes it a deliberate
-   closing image. Keyed to :nth-child, not to the count, so it keeps working
-   as build-gallery.py adds and removes photos — and scoped to the 3-column
-   breakpoint, since the arithmetic is wrong at 2 columns and meaningless at
-   1. Spanning the row instead was rejected: the thumbnails are 600x600
-   centre crops, and stretching one to 3:1 would slice the middle out of it. */
-@media (min-width: 901px) {
-  .photo-grid figure:last-child:nth-child(3n + 1) { grid-column: 2; }}
-
+/* Narrower frames on small screens so more than one is visible at a time,
+   which is what tells someone the row scrolls. */
 @media (max-width: 900px) {
-  .photo-grid { grid-template-columns: repeat(2, 1fr); }}
+  .photo-grid figure { width: 260px; }}
 @media (max-width: 520px) {
-  .photo-grid { grid-template-columns: 1fr; }}
+  .photo-grid figure { width: 72vw; }}
 
 /* ── Lightbox ───────────────────────────────────────────── */
 .lightbox {
@@ -772,7 +790,7 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   :root { --edge: 24px; }
 
   .shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);   /* see the desktop rule */
   }
 
   .sidebar {

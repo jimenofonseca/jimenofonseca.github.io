@@ -37,7 +37,7 @@ German tree; its output is committed, exactly like `build-gallery.py`.
 
 **Two content pages, two languages.** The menu is three items: **Intro**
 (`/`), **Work** (an outbound link to the LinkedIn profile — no page) and
-**Off the clock** (`/art/`).
+**Library** (`/art/`).
 
 ⚠ **This used to be a nine-page site** built around an enterprise CDIO/CTO
 pitch: Proof of scale, three case studies, eight operating principles,
@@ -174,20 +174,22 @@ because nothing conflicts any more (the old About group was deliberately
 |---|---|---|
 | 01 | Intro | `/` — `→` |
 | 02 | Work | `https://www.linkedin.com/in/jimenofonseca/` — `↗`, `target="_blank"` |
-| 03 | Off the clock | `/art/` — `→` |
+| 03 | Library | `/art/` — `→` |
 
 **Work is an outbound link, not a page.** There is no `/work/`. Nothing
 intercepts clicks any more, so it needs no special handling — the browser
 just follows it.
 
-⚠ **The third item is called "Off the clock" but lives at `/art/`**, and its
-keys are still `nav.art`, `art.title`, `art.desc`, `v2.art.lede`. The label
-was renamed from "Art"; the URL and the key names were deliberately left
-alone — same call as `nav.openSource` on the retired IPCC page. `/art/` is
-short, already in `sitemap.xml` and submitted to Search Console, and no
-reader sees a key name. **Do not rename either for tidiness.** German:
-**Feierabend**, which is precisely the time after work and keeps the menu to
-single words: *Intro · Arbeit · Feierabend*.
+⚠ **The third item is called "Library" but lives at `/art/`**, and its keys
+are still `nav.art`, `art.title`, `art.desc`. The label has now been renamed
+twice — "Art" → "Off the clock" → "Library" — and the URL and the key names
+were deliberately left alone each time, same call as `nav.openSource` on the
+retired IPCC page. `/art/` is short, already in `sitemap.xml` and submitted
+to Search Console, and no reader sees a key name. **Do not rename either for
+tidiness**, and do not read the mismatch as leftover from an unfinished
+rename. German: **Bibliothek**, which keeps the menu to single words:
+*Intro · Arbeit · Bibliothek*. `nav.art` is also the page's `<h1>`, so the
+label and the heading always move together.
 
 ⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
 JSON-LD `sameAs`** — an explicit decision, not an oversight. `sameAs` holds
@@ -211,7 +213,7 @@ attribute, so they do **not** follow — hand-edit them in the same pass.
 Edit the **English** page (`index.html`, `art/index.html`), then run
 `build-i18n.py` to mirror it into `de/`. Never hand-edit `de/`.
 
-### Working on the Off-the-clock page (`/art/`)
+### Working on the Library page (`/art/`)
 
 `/art/` is **one page, two parts** — Music then Photography, each a plain
 `<section class="art-part">`: a numbered eyebrow, the media, one caption
@@ -221,9 +223,10 @@ layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
 - **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
-- **Photography**: 12 photos from `assets/photography/`. The `app.js`
-  lightbox binds to `.photo-grid figure[data-full]`; `cursor: zoom-in` is the
-  only affordance, since no prose tells people to click.
+- **Photography**: 12 photos from `assets/photography/`, in a **horizontal
+  scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
+  figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
+  prose tells people to click.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -240,13 +243,36 @@ to.") — the h1 already says what the page is. `.art-text`, `.gear-*` and the
 last use of `.page-lede` went with them. **Do not add explanatory prose
 back.**
 
-⚠ **A lone final thumbnail is centred, not spanned** —
-`figure:last-child:nth-child(3n + 1) { grid-column: 2 }`, keyed to
-`:nth-child` so it survives `build-gallery.py` changing the photo count, and
-scoped to `min-width: 901px` where 3 columns actually apply. Spanning the row
-was rejected: the thumbs are 600x600 centre crops, so a 3:1 stretch would
-slice the middle out of one. At 12 photos the rule is dormant — 12 divides by
-3 — so **do not assume it works because the grid looks right today.**
+#### The photo scroller
+
+⚠ **`.photo-grid` is a flex row that scrolls sideways, and the class name is
+a lie kept on purpose.** It was a 3-column CSS grid; it is now
+`display: flex; overflow-x: auto` with `scroll-snap-type: x proximity`,
+fixed-width figures (320px, 260px under 901px, 72vw under 521px) and a
+themed thin scrollbar. The name stayed because **`app.js`'s lightbox and
+`build-gallery.py` both key off `.photo-grid`** — renaming it means touching
+the generator and the runtime, for nothing a reader sees. Gone with the grid:
+`grid-template-columns`, the 2-column and 1-column breakpoints, and the
+`figure:last-child:nth-child(3n + 1) { grid-column: 2 }` orphan-centring
+rule, which has no meaning in a single row.
+
+It bought back real vertical space — the page went **2823px → 1714px at
+1440x900 and 5116px → 1197px on a 390px phone**, which is what the scroller
+was for.
+
+⚠ **`.shell`'s content track is `minmax(0, 1fr)`, and that is load-bearing
+for the scroller.** A bare `1fr` track has `min-width: auto`, so it is sized
+by its content's *min-content* width — and a flex row of 12 fixed-width
+thumbs has a min-content of 3480px. With plain `1fr` the content column blew
+out to that width, `overflow-x: auto` never engaged, and the whole page
+scrolled sideways on a phone. The `0` floor is what lets the scroller clip.
+Both the desktop and the ≤900px `.shell` rules carry it. **Do not "simplify"
+either back to `1fr`.**
+
+The container takes `role="region"` + `tabindex="0"` (via
+`data-i18n-aria="nav.photography"`, so German reads *Fotografie*) because a
+scroll container whose children are not focusable cannot be reached by
+keyboard at all.
 
 ### Updating the photo gallery
 

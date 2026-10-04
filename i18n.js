@@ -4,8 +4,8 @@ var TRANSLATIONS = {
     'skip':               'Skip to Content',
     'nav.intro':             'Intro',
     'nav.work':              'Work',
-    'nav.art':               'Off the clock',
-    'art.title':             'Off the Clock | Music and Photography — Jimeno Fonseca',
+    'nav.art':               'Library',
+    'art.title':             'Library | Music and Photography — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -62,8 +62,8 @@ var TRANSLATIONS = {
     'skip':               'Zum Inhalt springen',
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
-    'nav.art':               'Feierabend',
-    'art.title':             'Feierabend | Musik und Fotografie — Jimeno Fonseca',
+    'nav.art':               'Bibliothek',
+    'art.title':             'Bibliothek | Musik und Fotografie — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
