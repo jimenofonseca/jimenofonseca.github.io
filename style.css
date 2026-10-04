@@ -235,25 +235,18 @@ section:first-of-type { border-top: none; padding-top: 0; }
   font-variant-numeric: tabular-nums;
 }
 
-/* The Intro page is one short section, but .shell carries a 100vh floor
-   (the sticky sidebar is height:100vh), so main.content is stretched to the
-   full viewport however little is in it. At 1440x900 that left 196px of
-   empty content box under the portrait, plus 64px of section padding and
-   96px of main padding — 356px of nothing between the picture and the
-   footer, and worse on a taller screen.
+/* The Intro page is one short section, but .shell carries a 100vh floor (the
+   sticky sidebar is height:100vh), so main.content is stretched to the full
+   viewport however little is in it. The surplus lands below the content.
 
-   Centring the hero in whatever height main ends up with turns that slack
-   into balanced space above and below instead of a gap at the bottom, and
-   the section loses its padding-bottom because nothing follows it.
+   This block used to centre the hero in that surplus, which balanced a tall
+   3:4 portrait nicely. It stopped working when the portrait became a 440px
+   circle: the content is ~150px shorter, so centring pushed the whole page
+   down and read as sagging on a big screen. Top-aligned now — the slack all
+   sits at the bottom, which is the ordinary way a short page looks.
 
-   Scoped with :has() so the Off-the-clock page — which has real sections and
-   must start at the top — is untouched. */
-main.content:has(> .hero) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: 56px;
-}
+   Scoped with :has() so the Off-the-clock page keeps its own 96px padding. */
+main.content:has(> .hero) { padding-bottom: 56px; }
 main.content:has(> .hero) .hero { padding-bottom: 0; }
 
 /* ── Hero ── */

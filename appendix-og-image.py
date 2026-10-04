@@ -49,31 +49,42 @@ def inter_tight_ttfs():
     return out
 
 W, H = 1200, 630
-# The site is permanently dark, so the card is too — these are the exact
-# :root tokens from style.css. The portrait's pale background carries the
-# contrast on the right-hand panel.
+# The card is dark whatever the site toggle says — it is a generated JPEG and
+# cannot follow a runtime theme. These are the exact :root dark tokens.
 BG, FG, MUTE, HAIR = (12,12,12), (245,245,244), (168,162,158), (31,31,31)
 ACCENT = (106, 165, 240)
-PANEL_W = 430
+DIA    = 470       # portrait diameter
+MARGIN = 72        # same gutter as the text
 
 d_ = inter_tight_ttfs()
 F = lambda w, px: ImageFont.truetype(os.path.join(d_, f"InterTight-{w}.ttf"), px)
-f_head  = F("600", 74)
+f_head  = F("600", 68)
 f_sub   = F("400", 27)
 f_label = F("500", 16)
 
 card = Image.new("RGB", (W, H), BG)
 d = ImageDraw.Draw(card)
 
-# Portrait panel, right edge, full-bleed centre crop
+# The portrait is a circular avatar, so show the WHOLE circle rather than
+# cropping a full-bleed panel out of it — a panel sliced its left and right
+# edges off. Square-cropped to centre, scaled to DIA, then pasted through a
+# circular mask: the mask also drops the source's pure-black corners, which
+# would otherwise sit on the card's #0c0c0c as a faint visible rectangle.
 p = Image.open("assets/portrait.jpg").convert("RGB")
-s = H / p.height
-new = p.resize((int(p.width * s), H), Image.LANCZOS)
-left = max(0, (new.width - PANEL_W) // 2)
-card.paste(new.crop((left, 0, left + PANEL_W, H)), (W - PANEL_W, 0))
-d.line([(W - PANEL_W - 1, 0), (W - PANEL_W - 1, H)], fill=HAIR, width=1)
+side = min(p.size)
+p = p.crop(((p.width - side) // 2, (p.height - side) // 2,
+            (p.width + side) // 2, (p.height + side) // 2))
+p = p.resize((DIA, DIA), Image.LANCZOS)
 
-x, tw = 72, W - PANEL_W - 72 - 64
+SS = 4                                  # supersample the mask for a clean edge
+mask = Image.new("L", (DIA * SS, DIA * SS), 0)
+ImageDraw.Draw(mask).ellipse((0, 0, DIA * SS - 1, DIA * SS - 1), fill=255)
+mask = mask.resize((DIA, DIA), Image.LANCZOS)
+
+PX, PY = W - MARGIN - DIA, (H - DIA) // 2
+card.paste(p, (PX, PY), mask)
+
+x, tw = MARGIN, PX - MARGIN - 56      # text stops short of the circle
 
 # Eyebrow with accent tick
 d.rectangle([x, 64, x + 22, 67], fill=ACCENT)

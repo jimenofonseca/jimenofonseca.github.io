@@ -443,6 +443,15 @@ name, `Dr. sc. ETH Zürich` beneath it, and the portrait. No rule: a hairline
 with nothing under it reads as a cut-off card rather than a deliberate one.
 The card stays dark whatever the site toggle says — it is a generated JPEG.
 
+⚠ **The portrait is pasted as a whole circle through a mask, not cropped
+into a panel.** It used to be a full-bleed 430px column, which sliced the
+left and right off a circular avatar. It is now centre-square-cropped,
+scaled to a 470px diameter and pasted through a 4x-supersampled elliptical
+mask. The mask does two jobs: it shows the complete circle, and it drops the
+source's pure-black corners, which would otherwise sit on the card's
+`#0c0c0c` as a faint but visible rectangle. The vertical hairline went with
+the panel.
+
 ⚠ **Everything that could go stale is deliberately absent**, because
 LinkedIn caches OG images hard and a wrong card outlives the correction:
 
@@ -523,33 +532,27 @@ the real file either way, and bump the `?v=N` on its `src`.
 
 ⚠ **`main.content` is stretched to 100vh whatever is on the page**, because
 `.shell` carries a `min-height: 100vh` and the sticky sidebar is
-`height: 100vh`. On a one-section page that dumped the whole surplus below
-the portrait — measured at 1440x900: 64px of section padding, **196px of
-empty stretched content box**, and 96px of main padding, so **356px of
-nothing** between the picture and the footer, growing on taller screens.
+`height: 100vh`. On a one-section page the whole surplus lands below the
+content — measured at 1440x900 with the old 3:4 portrait: 64px of section
+padding, **196px of empty stretched content box**, and 96px of main padding.
 
-Two changes fixed it, and the numbers are worth keeping because the cause is
-not visible in the markup:
+`main.content:has(> .hero)` therefore drops its `.hero` padding-bottom and
+trims its own to 56px. **The `:has()` scoping is load-bearing** — the
+Off-the-clock page has real sections and must keep `display: block` and its
+96px padding.
 
-| | |
-|---|---|
-| `--portrait-w` 360px → **440px** | fills the surplus with the subject of the page rather than removing space. The portrait is the only visual on it. |
-| `main.content:has(> .hero)` gets `flex` + `justify-content: center`, `padding-bottom: 56px`, and its `.hero` loses `padding-bottom` | turns the remaining slack into balanced space above and below instead of a gap at the bottom |
+⚠ **It used to centre the hero in that surplus, and that was reverted.**
+Centring balanced a tall 3:4 portrait, but the portrait is now a 440px
+circle — ~150px shorter — so centring pushed the whole page down and read as
+sagging on a big screen. Top-aligned now: `h1` sits at 64px at every viewport
+height, and the slack all collects at the bottom, which is simply how a short
+page looks. **Do not reintroduce `justify-content: center` here** unless the
+portrait goes back to being tall.
 
-Dead space under the portrait went 356px → 153px at 1440x900, and at
-1440x1080 it is now symmetric (251px above the name, 243px below the
-picture) rather than all at the bottom.
-
-**The `:has()` scoping is load-bearing**: the Off-the-clock page has real
-sections and must start at the top, so it must keep `display: block` and its
-96px padding. Verified after the change — do not widen the selector to plain
-`main.content`.
-
-⚠ **The left column will still look empty below the bio**, and that is
-unavoidable: a ~220px bio next to a 587px portrait cannot balance without
-making the text column absurdly narrow. Asymmetric whitespace is normal in
-this layout; do not "fix" it by shrinking the portrait, which just moves the
-gap back under the picture.
+⚠ **Whitespace below the content is expected and is not a bug.** The page is
+a heading, a paragraph and a picture inside a 100vh frame; there is simply
+less content than viewport. Do not chase it with centring, a taller
+portrait, or extra copy.
 
 ## Page transition
 
