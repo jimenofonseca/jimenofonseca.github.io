@@ -5,7 +5,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Work',
     'nav.art':               'Library',
-    'art.title':             'Library | Music and Photography — Jimeno Fonseca',
+    'art.title':             'Library | Music, Photography and Code — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -55,6 +55,19 @@ var TRANSLATIONS = {
 
     // ── Photography ───────────────────────────────
     'v2.photo.caption.kind': 'Selected · 2018 – 2025',
+
+    // ── Code ──────────────────────────────────────
+    // The app names are invented proper nouns and are the same in both
+    // languages, so they live in the HTML, not here. Only the one-line
+    // descriptor under each name is translated.
+    'nav.code':              'Code',
+    'v2.code.caption.kind':  'Open source · GitHub',
+    'v2.app.ledgerline':     'Personal finance',
+    'v2.app.bayesatlas':     'Bayesian energy forecast',
+    'v2.app.nudgemeter':     'Impact of behaviour change',
+    'v2.app.windrunner':     'Weather station on wheels',
+    'v2.app.climascope':     'Climate-driven demand forecast',
+    'v2.app.gradient':       'Enthalpy gradient library',
   },
 
   de: {
@@ -63,7 +76,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
     'nav.art':               'Bibliothek',
-    'art.title':             'Bibliothek | Musik und Fotografie — Jimeno Fonseca',
+    'art.title':             'Bibliothek | Musik, Fotografie und Code — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -113,6 +126,16 @@ var TRANSLATIONS = {
 
     // ── Fotografie ────────────────────────────────
     'v2.photo.caption.kind': 'Auswahl · 2018 – 2025',
+
+    // ── Code ──────────────────────────────────────
+    'nav.code':              'Code',
+    'v2.code.caption.kind':  'Open Source · GitHub',
+    'v2.app.ledgerline':     'Privatfinanzen',
+    'v2.app.bayesatlas':     'Bayessche Energieprognose',
+    'v2.app.nudgemeter':     'Wirkung von Verhaltensänderungen',
+    'v2.app.windrunner':     'Wetterstation auf Rädern',
+    'v2.app.climascope':     'Klimabedingte Bedarfsprognose',
+    'v2.app.gradient':       'Bibliothek für Enthalpiegradienten',
   }
 };
 

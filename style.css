@@ -591,7 +591,7 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 }
 .page-nav .next { text-align: right; align-items: flex-end; }
 
-/* ── Photo scroller ─────────────────────────────────────── */
+/* ── Scrollers (Photography, Code) ──────────────────────── */
 /* Was a 3-column grid: 12 square thumbs stacked into four rows, ~1,500px of
    vertical page for the lighter half of the site. One horizontal row costs
    ~320px and shows the same photos.
@@ -600,7 +600,10 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
    `.photo-grid figure[data-full]` and build-gallery.py writes the figures
    inside this container — neither needs to know the layout changed, and
    renaming would break both for nothing. */
-.photo-grid {
+/* Both horizontal rows share the mechanics; only the children differ —
+   .photo-grid holds <figure>s that open the lightbox, .app-row holds <a>s
+   that leave for GitHub. */
+.photo-grid, .app-row {
   display: flex;
   gap: 10px;
   overflow-x: auto;
@@ -610,18 +613,25 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   scrollbar-width: thin;
   scrollbar-color: var(--faint) var(--hairline);
 }
-.photo-grid:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.photo-grid::-webkit-scrollbar { height: 6px; }
-.photo-grid::-webkit-scrollbar-track { background: var(--hairline); }
-.photo-grid::-webkit-scrollbar-thumb { background: var(--faint); }
-.photo-grid::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-.photo-grid figure {
-  position: relative;
-  margin: 0;
+.photo-grid:focus-visible,
+.app-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.photo-grid::-webkit-scrollbar,
+.app-row::-webkit-scrollbar { height: 6px; }
+.photo-grid::-webkit-scrollbar-track,
+.app-row::-webkit-scrollbar-track { background: var(--hairline); }
+.photo-grid::-webkit-scrollbar-thumb,
+.app-row::-webkit-scrollbar-thumb { background: var(--faint); }
+.photo-grid::-webkit-scrollbar-thumb:hover,
+.app-row::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+.photo-grid figure, .app-card {
   flex: 0 0 auto;
   width: 320px;
   aspect-ratio: 1 / 1;
   scroll-snap-align: start;
+}
+.photo-grid figure {
+  position: relative;
+  margin: 0;
   overflow: hidden;
   cursor: zoom-in;
   background: var(--hover);
@@ -651,9 +661,63 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 /* Narrower frames on small screens so more than one is visible at a time,
    which is what tells someone the row scrolls. */
 @media (max-width: 900px) {
-  .photo-grid figure { width: 260px; }}
+  .photo-grid figure, .app-card { width: 260px; }}
 @media (max-width: 520px) {
-  .photo-grid figure { width: 72vw; }}
+  .photo-grid figure, .app-card { width: 72vw; }}
+
+/* ── App cards (Code) ───────────────────────────────────── */
+/* An app tile, built in CSS rather than generated as a JPEG like the share
+   card: a drawn tile would be dark-only and would sit on the light palette
+   as a hole, and the names would be baked into pixels no crawler can read.
+   Everything here follows the theme and is selectable text. */
+.app-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 18px;
+  border: 1px solid var(--hairline);
+  background: var(--hover);
+  color: inherit;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.app-card:hover { border-color: var(--accent); }
+.app-card .app-mark {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--accent);
+}
+.app-card .app-mark svg {
+  width: 88px; height: 88px;
+  opacity: 0.85;
+  transition: opacity 0.18s ease, transform 0.25s ease;
+}
+.app-card:hover .app-mark svg { opacity: 1; transform: translateX(3px); }
+.app-card .app-name {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.app-card .app-desc {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+/* The repo name is what makes an invented app name checkable. Mono, because
+   it is a label and an identifier, not prose. */
+.app-card .app-repo {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transition: color 0.18s ease;
+}
+.app-card:hover .app-repo { color: var(--accent); }
 
 /* ── Lightbox ───────────────────────────────────────────── */
 .lightbox {

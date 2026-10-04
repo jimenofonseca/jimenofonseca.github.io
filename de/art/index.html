@@ -29,7 +29,7 @@
     if(localStorage.getItem("theme")==="light")
       document.documentElement.dataset.theme="light";
   })();</script>
-  <title data-i18n="art.title">Bibliothek | Musik und Fotografie — Jimeno Fonseca</title>
+  <title data-i18n="art.title">Bibliothek | Musik, Fotografie und Code — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="art.desc" content="Jimeno Fonseca" />
   <link rel="canonical" href="https://jimenofonseca.com/de/art/" />
   <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/" />
@@ -39,14 +39,14 @@
   <meta property="og:site_name" content="Jimeno Fonseca" />
   <meta property="og:locale" content="de_CH" />
   <meta property="og:url" content="https://jimenofonseca.com/de/art/" />
-  <meta property="og:title" content="Bibliothek | Musik und Fotografie — Jimeno Fonseca" />
+  <meta property="og:title" content="Bibliothek | Musik, Fotografie und Code — Jimeno Fonseca" />
   <meta property="og:description" content="Jimeno Fonseca" />
   <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Jimeno Fonseca" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Bibliothek | Musik und Fotografie — Jimeno Fonseca" />
+  <meta name="twitter:title" content="Bibliothek | Musik, Fotografie und Code — Jimeno Fonseca" />
   <meta name="twitter:description" content="Jimeno Fonseca" />
   <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=6" />
+  <link rel="stylesheet" href="/style.css?v=7" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
@@ -113,15 +113,15 @@
       </section>
 
       <!-- Music and Photography were two pages (/music/, /photography/) until
-           the Intro/Work/Art reduction. Each part is now a plain <section>:
-           an eyebrow, the media, and one caption line. The body copy and the
-           camera/kit list were removed deliberately — see CLAUDE.md.
-           build-gallery.py writes into the GALLERY markers below. -->
+           the Intro/Work/Art reduction; Code was added later. Each part is a
+           plain <section>: an eyebrow, the media, and one caption line. The
+           body copy and the camera/kit list were removed deliberately — see
+           CLAUDE.md. build-gallery.py writes into the GALLERY markers. -->
       <section class="art-part" aria-labelledby="music-h">
         <p class="eyebrow"><span class="index">01</span><span id="music-h" data-i18n="nav.music">Musik</span></p>
         <div class="video-wrap">
           <iframe
-            src="https://www.youtube.com/embed/6dDU8wfSiEg"
+            src="https://www.youtube.com/embed/m8g75C5WbgU"
             title="Music — Jimeno Fonseca"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
@@ -182,6 +182,93 @@
         </div>
         <p class="media-caption">
           <span class="kind" data-i18n="v2.photo.caption.kind">Auswahl · 2018 – 2025</span>
+        </p>
+      </section>
+
+      <!-- Code. The app names are invented — the repository name under each
+           card is what makes them checkable, so do not drop it. These are
+           links, not a lightbox: the container is .app-row, NOT .photo-grid,
+           because app.js binds its lightbox to `.photo-grid figure` and
+           build-gallery.py rewrites whatever sits inside a .photo-grid. -->
+      <section class="art-part" aria-labelledby="code-h">
+        <p class="eyebrow"><span class="index">03</span><span id="code-h" data-i18n="nav.code">Code</span></p>
+        <div class="app-row" role="region" tabindex="0"
+             data-i18n-aria="nav.code" aria-label="Code">
+          <a class="app-card" href="https://github.com/jimenofonseca/HBLM-USA"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 50C16 50 18 18 32 18s16 32 28 32"/><path d="M32 18v32" stroke-dasharray="3 4"/><path d="M4 54h56"/>
+              </svg>
+            </span>
+            <span class="app-name">Bayes Atlas</span>
+            <span class="app-desc" data-i18n="v2.app.bayesatlas">Bayessche Energieprognose</span>
+            <span class="app-repo">HBLM-USA <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card" href="https://github.com/jimenofonseca/FineBank"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 46V34M26 46V26M40 46V18M54 46V10"/><path d="M6 52h52"/>
+              </svg>
+            </span>
+            <span class="app-name">Ledgerline</span>
+            <span class="app-desc" data-i18n="v2.app.ledgerline">Privatfinanzen</span>
+            <span class="app-repo">FineBank <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card" href="https://github.com/jimenofonseca/BSTS-SG"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 42h20"/><path d="M34 30l24-9"/><path d="M30 12v40" stroke-dasharray="3 4"/>
+              </svg>
+            </span>
+            <span class="app-name">Nudge Meter</span>
+            <span class="app-desc" data-i18n="v2.app.nudgemeter">Wirkung von Verhaltensänderungen</span>
+            <span class="app-repo">BSTS-SG <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card" href="https://github.com/jimenofonseca/WoW-SG"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 20h26a7 7 0 1 0-7-7"/><path d="M8 32h18a6 6 0 1 1-6 6"/><circle cx="20" cy="50" r="6"/><circle cx="46" cy="50" r="6"/><path d="M26 50h14"/>
+              </svg>
+            </span>
+            <span class="app-name">Windrunner</span>
+            <span class="app-desc" data-i18n="v2.app.windrunner">Wetterstation auf Rädern</span>
+            <span class="app-repo">WoW-SG <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card" href="https://github.com/jimenofonseca/DEG-USA"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 32h8"/><path d="M16 32l42-16M16 32h42M16 32l42 16"/><path d="M58 16a28 28 0 0 1 0 32" stroke-dasharray="3 4"/>
+              </svg>
+            </span>
+            <span class="app-name">Climascope</span>
+            <span class="app-desc" data-i18n="v2.app.climascope">Klimabedingte Bedarfsprognose</span>
+            <span class="app-repo">DEG-USA <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card" href="https://github.com/jimenofonseca/EnthalpyGradients"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 14v38"/><path d="M12 20h42M12 30h34M12 40h26M12 50h18"/>
+              </svg>
+            </span>
+            <span class="app-name">Gradient</span>
+            <span class="app-desc" data-i18n="v2.app.gradient">Bibliothek für Enthalpiegradienten</span>
+            <span class="app-repo">EnthalpyGradients <span class="arrow">↗</span></span>
+          </a>
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.code.caption.kind">Open Source · GitHub</span>
         </p>
       </section>
 

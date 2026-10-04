@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 17 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 25 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -191,9 +191,12 @@ rename. German: **Bibliothek**, which keeps the menu to single words:
 *Intro · Arbeit · Bibliothek*. `nav.art` is also the page's `<h1>`, so the
 label and the heading always move together.
 
-⚠ **GitHub and Google Scholar are gone from the site *and* from the Person
-JSON-LD `sameAs`** — an explicit decision, not an oversight. `sameAs` holds
-Wikidata (`Q140798347`) and LinkedIn only. Do not "restore" them.
+⚠ **GitHub and Google Scholar are gone from the Person JSON-LD `sameAs`** —
+an explicit decision, not an oversight. `sameAs` holds Wikidata
+(`Q140798347`) and LinkedIn only. The Library page's Code cards now link out
+to six GitHub repositories, and **that is not a reason to put GitHub back in
+`sameAs`**: those are links to individual projects, not a claim that the
+profile is the same entity. Do not "restore" either one.
 
 ## Workflows
 
@@ -215,18 +218,20 @@ Edit the **English** page (`index.html`, `art/index.html`), then run
 
 ### Working on the Library page (`/art/`)
 
-`/art/` is **one page, two parts** — Music then Photography, each a plain
+`/art/` is **one page, three parts** — Music, Photography, Code — each a plain
 `<section class="art-part">`: a numbered eyebrow, the media, one caption
 line. The base `section` rule supplies the hairline between them and
 `section:first-of-type` keeps `.page-intro` borderless, so the parts carry no
 layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
-- **Music**: a YouTube iframe (`6dDU8wfSiEg`) with `loading="lazy"`.
+- **Music**: a YouTube iframe (`m8g75C5WbgU`) with `loading="lazy"`.
 - **Photography**: 12 photos from `assets/photography/`, in a **horizontal
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
+- **Code**: six app cards in a second scroller, each an outbound link to a
+  `github.com/jimenofonseca/…` repository.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -273,6 +278,41 @@ The container takes `role="region"` + `tabindex="0"` (via
 `data-i18n-aria="nav.photography"`, so German reads *Fotografie*) because a
 scroll container whose children are not focusable cannot be reached by
 keyboard at all.
+
+#### The Code cards
+
+Six app cards, one per repository, in a second scroller. They share the
+photo scroller's mechanics through grouped selectors
+(`.photo-grid, .app-row { … }`), so a change to the scroll behaviour reaches
+both.
+
+⚠ **The container is `.app-row`, never `.photo-grid`.** `app.js` binds its
+lightbox to `.photo-grid figure` and `build-gallery.py` rewrites whatever
+sits between the GALLERY markers inside a `.photo-grid`. Putting the cards
+in a second `.photo-grid` would hand them to one or both.
+
+⚠ **The tiles are CSS and inline SVG, not generated images.** The obvious
+route was `appendix-og-image.py` again — draw six JPEGs. That would have
+been wrong twice over: a drawn tile carries baked-in dark tokens and sits on
+the light palette as a hole, and the app names would be pixels no crawler
+and no screen reader can read. Everything on a card is live text and a
+`currentColor` line drawing, so both themes and both languages come free.
+**Do not "upgrade" these to images.**
+
+The names are invented — *Bayes Atlas*, *Ledgerline*, *Nudge Meter*,
+*Windrunner*, *Climascope*, *Gradient*, mapped to `HBLM-USA`, `FineBank`,
+`BSTS-SG`, `WoW-SG`, `DEG-USA` and `EnthalpyGradients`. ⚠ **The mono repo
+name on each card is what makes an invented name checkable — do not remove
+it for tidiness.** The marks are original abstract geometry (a bell curve, a
+bar rail, a step change, wheels under a gust, a projection fan, stacked
+bands); each says what the project does without borrowing anyone's logo.
+
+**Only `jimenofonseca/*` is on the page.** The forked `causalimpact` and the
+website's own repository are left out, and so is everything under
+`architecture-building-systems` — CityEnergyAnalyst included, which is the
+most substantial code Jimeno has public. That was a scope call about "my
+GitHub", **not** an oversight: if it should be there, it is one more entry
+in the list and one more `v2.app.*` key pair.
 
 ### Updating the photo gallery
 
@@ -323,7 +363,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 17 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 25 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -371,12 +411,19 @@ markup by hand.
 
 ## i18n key conventions
 
-17 keys per language. `nav.*` is the sidebar plus the two Art part headings;
-`home.*` / `art.*` are per-page `<title>` and `<meta description>`;
+25 keys per language. `nav.*` is the sidebar plus the three Library part
+headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — the two caption kinds and the chrome
-(`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
-artefact of an old redesign, not a version scheme.
+everything else — the three caption kinds, the six `v2.app.*` card
+descriptors and the chrome (`v2.theme.label`, `v2.lang.label`,
+`v2.menu.open`). The `v2.` prefix is an artefact of an old redesign, not a
+version scheme.
+
+⚠ **The app *names* are deliberately not keys.** "Bayes Atlas",
+"Ledgerline" and the rest are invented proper nouns that read the same in
+both languages, so they sit in the HTML; only the descriptor line under each
+is translated. Adding German variants of the names would be eight more keys
+buying nothing.
 
 Every key MUST exist in both blocks; `node -c i18n.js` after editing.
 `data-i18n` sets `textContent`, `-html` sets `innerHTML`, `-content` sets a
@@ -658,7 +705,9 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `v=4` for both; the portrait carries its own `?v=4`.
+  cache. Currently `style.css?v=7` and `app.js?v=4`; the portrait carries
+  its own `?v=4`. (This line has been stale before — check the pages, not
+  this sentence, before assuming a number.)
 
   There is **no pre-commit hook** doing this any more — the old one existed
   for `i18n.js` and went when `i18n.js` stopped being served. Bumping is
