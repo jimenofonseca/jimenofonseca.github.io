@@ -232,8 +232,8 @@ each label down onto its media so the pair reads as one block.
   prose tells people to click.
 - **Code**: seven app cards in a second scroller, each an outbound link to a
   GitHub repository.
-- **Text**: six publication cards in a third scroller, each an outbound link
-  to the paper's DOI.
+- **Text**: seventeen publication cards in a third scroller, each an
+  outbound link to the paper.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -323,27 +323,43 @@ repository.
 
 #### The Text cards
 
-Six publication cards in a third scroller, `.pub-row` / `.pub-card`, sharing
-the same square and the same scroll mechanics as the Code cards. The insides
-differ: a mono year in `--accent` leads, the title fills the card, the venue
-closes it, and the card links to the paper's **DOI** — the same contract as
-the repository name on a Code card, one click to check the claim.
+Seventeen publication cards in a third scroller, `.pub-row` / `.pub-card`,
+sharing the same square and the same scroll mechanics as the Code cards. The
+insides differ: a mono year in `--accent` leads, the title fills the card,
+the venue closes it, and the card links out — the same contract as the
+repository name on a Code card, one click to check the claim.
 
-⚠ **This is a selection, not the Scholar list, and the caption says so.**
-Google Scholar, OpenAlex, Crossref, Semantic Scholar, doi.org and
-research-collection.ethz.ch are **all blocked by the session egress proxy**,
-so the list could not be pulled from the profile Jimeno linked. Every entry
-here was confirmed title-by-title through web search against its publisher
-record, and the DOIs for the two IPCC-related papers came from his own
-repository READMEs. One candidate — a 2019 Nature Communications paper that
-search kept returning next to his name — was **dropped after checking the
-author list and finding he is not on it.** Scholar lists more work than
-these six.
+**Where the list came from.** ⚠ Google Scholar, OpenAlex, Crossref, Semantic
+Scholar, doi.org and research-collection.ethz.ch are **all blocked by the
+session egress proxy**, so no session can pull the profile itself. The list
+on the page was transcribed from a **PDF of the Scholar profile that Jimeno
+exported and uploaded**. If it needs extending, ask him for a fresh export
+rather than trying to fetch one.
 
-⚠ **Do not "fill in the rest" from memory.** If more publications are
-wanted, take the list from Jimeno or from a reachable publisher record, with
-a DOI for each. A wrong citation on a researcher's own site is worse than a
-short one.
+⚠ **It is a curated subset of a 57-entry profile, and the caption says
+"Selected".** Left out on purpose:
+- **Zenodo software releases** — five `CityEnergyAnalyst` version DOIs and a
+  `RegionalEnergyAnalyst` one. That software is already the Code section;
+  listing its releases as publications would pad the row.
+- **Cooling Singapore technical reports** — eight deliverables, grey
+  literature rather than publications.
+- **Short conference pieces** (several `Energy Procedia` papers, workshop
+  and symposium items) and one 2010 student project.
+- ⚠ **Two journal articles whose titles Scholar truncated with an ellipsis**
+  — the 2017 *livability of spaces* paper and the 2013 *Novel approach for
+  decentralized energy supply …* paper. **They are missing because a
+  truncated title is a wrong title, not because they do not count.** Add
+  them the moment someone supplies the full titles.
+
+**Linking.** Six cards point at a **verified DOI** (or, for the thesis, the
+ETH Research Collection handle); the other eleven point at a Google Scholar
+search for the exact quoted title. ⚠ **Never invent a DOI to make the set
+uniform.** A Scholar title search always resolves; a guessed DOI silently
+sends a reader to someone else's paper.
+
+⚠ **No citation counts on the cards.** The Scholar export has them, and they
+fail the same test the OG card applies to a job title: they expire. The year
+and the venue cannot.
 
 ⚠ **Titles are never translated or trimmed.** A paper's title is its title
 in both trees, and `-webkit-line-clamp: 9` on `.pub-title` is a guard

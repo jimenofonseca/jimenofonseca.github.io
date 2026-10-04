@@ -74,7 +74,7 @@ var TRANSLATIONS = {
     // Publication titles are the works' own titles and are never
     // translated, so only the heading and the caption live here.
     'nav.text':              'Text',
-    'v2.text.caption.kind':  'Selected · Peer-reviewed',
+    'v2.text.caption.kind':  'Selected · 2015 – 2025',
   },
 
   de: {
@@ -147,7 +147,7 @@ var TRANSLATIONS = {
 
     // ── Text ──────────────────────────────────────
     'nav.text':              'Text',
-    'v2.text.caption.kind':  'Auswahl · Begutachtet',
+    'v2.text.caption.kind':  'Auswahl · 2015 – 2025',
   }
 };
 
