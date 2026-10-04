@@ -438,9 +438,10 @@ matches site typography). ⚠ **It reads `assets/portrait.jpg` and crops a
 panel of it**, so swapping the portrait silently staled the card until this
 was noticed — regenerate it in the same commit, always.
 
-The card is **dark** (the exact `:root` tokens) and carries **the name, the
-domain, and the portrait — nothing else.** No rule either: a hairline with
-nothing under it reads as a cut-off card rather than a deliberate one.
+The card is **dark** (the exact `:root` tokens) and carries the domain, the
+name, `Dr. sc. ETH Zürich` beneath it, and the portrait. No rule: a hairline
+with nothing under it reads as a cut-off card rather than a deliberate one.
+The card stays dark whatever the site toggle says — it is a generated JPEG.
 
 ⚠ **Everything that could go stale is deliberately absent**, because
 LinkedIn caches OG images hard and a wrong card outlives the correction:
@@ -450,6 +451,7 @@ LinkedIn caches OG images hard and a wrong card outlives the correction:
 | slogan | It led with "I turn technology into lasting capability." over a strapline found nowhere on the site. The card was the last place that survived the reduction. |
 | company | Neither the employer nor Superurbana. |
 | job title | Would go out of date on every promotion. |
+| | **but a conferred degree is not a job title** — `SUB` reads `Dr. sc. ETH Zürich`, which can no more become untrue than the name can. That is the test for anything added here: not "is it a credential" but "can it expire". |
 | city | Removed from the footer, the JSON-LD `homeLocation` and `og:image:alt` on request; this is the most public surface of the four. |
 
 A name is the one thing that cannot become untrue. **Do not add copy back.**
@@ -504,9 +506,20 @@ and ~7.5s of script evaluation on a mid-range phone.
 
 ### The portrait, and the dead space under it
 
-`assets/portrait.jpg`, 3:4, no caption and no JS. To replace: drop a new file
-in `assets/` (~900x1200, under 200 KB) and repoint the `<img src>` in
-`.hero-figure`. On macOS, `sips -c` crops and `sips -Z 1200` resizes.
+`assets/portrait.jpg` — **809x809, shown as a circle.** No caption, no JS.
+
+⚠ **The hero portrait is round because the source is.** The current file is a
+circular avatar on a pure-black field. In the old 3:4 box, `object-fit:
+cover` cropped 25% off its sides *and* left the black corners showing, which
+is glaring against the light palette. `.hero-figure img` therefore carries
+`aspect-ratio: 1/1` + `border-radius: 50%`, which clips the corners away
+entirely so the circle sits on whichever page background is active.
+
+**If a future portrait is a plain rectangle again**, drop the
+`border-radius` and put `aspect-ratio` back to `3 / 4` with
+`object-position: center top` — the layout was originally built for a 3:4
+portrait and reads better with one. Match `width`/`height` on the `<img>` to
+the real file either way, and bump the `?v=N` on its `src`.
 
 ⚠ **`main.content` is stretched to 100vh whatever is on the page**, because
 `.shell` carries a `min-height: 100vh` and the sticky sidebar is
@@ -581,15 +594,14 @@ took FCP from ~1,100ms to ~330ms, and deleting the LinkedIn embeds removed
 - **gtag loads on the `load` event**, queueing into `dataLayer` first so the
   pageview is not lost. In the head it cost a 171ms forced reflow.
 - The portrait carries `width`/`height`, `fetchpriority="high"`,
-  `decoding="async"` and `aspect-ratio: 3/4`, so CLS is 0.
+  `decoding="async"` and an explicit `aspect-ratio`, so CLS is 0.
 
 Still open, needing macOS `sips`: `/art/`'s gallery thumbnails are ~4x
 oversized (~1.3 MB across 12 files).
 
-The portrait's oversizing resolved itself when `--portrait-w` went to 440px:
-a 440px CSS box is 880 device px on a 2x display and the file is 896px wide,
-so it is now about right and no longer wants a `srcset`. **Keep replacements
-near 896x1200** to hold that.
+The portrait sits in a 440px CSS box, which is 880 device px on a 2x display;
+the file is 809px square, so it is close enough and wants no `srcset`.
+**Keep replacements around 800-900px on the long edge** to hold that.
 
 ⚠ **`style.css` keeps many dead rules** after the reduction — `.principle*`,
 `.proof*`, `.outcome*`, `.cs-*`, `.page-nav`, `.page-stats`, `.page-actions`,
@@ -617,7 +629,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `v=3` for both; the portrait carries its own `?v=3`.
+  cache. Currently `v=4` for both; the portrait carries its own `?v=4`.
 
   There is **no pre-commit hook** doing this any more — the old one existed
   for `i18n.js` and went when `i18n.js` stopped being served. Bumping is

@@ -289,9 +289,14 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
+  /* The source is a circular avatar on a black field (809x809). A 3:4 box
+     cropped 25% off its sides and left the black corners showing, which is
+     glaring in light mode. Square box + border-radius clips the corners away
+     entirely, so the circle sits on whichever page background is active. */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   filter: grayscale(0.15) brightness(0.92);  /* dark default; reset in light below */
   transition: filter 0.3s ease;
 }

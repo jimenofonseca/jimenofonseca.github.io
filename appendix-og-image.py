@@ -23,8 +23,10 @@ from PIL import Image, ImageDraw, ImageFont
 #                      og:image:alt on request; this is the most public
 #                      surface of the four.
 #
-# A name is the one thing that cannot become untrue. Do not add copy back.
+# A name cannot become untrue, and neither can a conferred degree — which is
+# why SUB is allowed where a job title is not.
 HEAD = "Jimeno Fonseca"
+SUB  = "Dr. sc. ETH Zürich"
 
 def inter_tight_ttfs():
     """Fetch Inter Tight from npm and convert woff2 -> ttf for Pillow."""
@@ -57,6 +59,7 @@ PANEL_W = 430
 d_ = inter_tight_ttfs()
 F = lambda w, px: ImageFont.truetype(os.path.join(d_, f"InterTight-{w}.ttf"), px)
 f_head  = F("600", 74)
+f_sub   = F("400", 27)
 f_label = F("500", 16)
 
 card = Image.new("RGB", (W, H), BG)
@@ -87,12 +90,17 @@ def wrap(text, font, width):
     lines.append(cur)
     return lines
 
-# One line of type, optically centred in the panel. No rule: a hairline with
-# nothing under it reads as a cut-off card rather than a deliberate one.
+# Name, then the degree beneath it, optically centred as one block. No rule:
+# a hairline with nothing under it reads as a cut-off card.
 head_lines = wrap(HEAD, f_head, tw)
-y = (H - len(head_lines) * 86) // 2 + 6
+sub_lines  = wrap(SUB, f_sub, tw)
+block = len(head_lines) * 86 + 12 + len(sub_lines) * 38
+y = (H - block) // 2 + 6
 for ln in head_lines:
     d.text((x, y), ln, font=f_head, fill=FG); y += 86
+y += 12
+for ln in sub_lines:
+    d.text((x, y), ln, font=f_sub, fill=MUTE); y += 38
 
 card.save("assets/og-image.jpg", "JPEG", quality=90, optimize=True)
 print("wrote assets/og-image.jpg", card.size,
