@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 28 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 29 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -225,7 +225,7 @@ line. The base `section` rule supplies the hairline between them and
 layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
-- **Music**: a YouTube iframe (`m8g75C5WbgU`) with `loading="lazy"`.
+- **Music**: one link card to the video (`m8g75C5WbgU`) — see below.
 - **Photography**: 12 photos from `assets/photography/`, in a **horizontal
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
@@ -242,13 +242,29 @@ brings the photo straight back. `photo-05.jpg` was removed this way and its
 original still needs deleting on Jimeno's machine.
 
 ⚠ **The page has no prose at all, and that is the design.** The whole page is
-the h1, two numbered eyebrows, two media blocks and two caption lines.
+the h1, four numbered eyebrows, four rows of cards and four caption lines.
 Removed in stages: three paragraphs (`v2.music.p1`, `v2.photo.p1`,
 `v2.photo.p2`), the `.gear-list` camera aside, and finally the lede
 (`v2.art.lede`, "Music I have recorded, and photographs I keep coming back
 to.") — the h1 already says what the page is. `.art-text`, `.gear-*` and the
 last use of `.page-lede` went with them. **Do not add explanatory prose
 back.**
+
+#### The Music card
+
+⚠ **The Music part used to be an inline YouTube iframe, and the embed is
+gone on purpose.** It was a full-width 16/9 block — the most prominent thing
+on a page where it is the least prominent part — and the page's only third
+party besides the font stylesheet and gtag. It is now a single `.app-card`
+linking to `youtu.be/m8g75C5WbgU`, which cut `/art/` from 2772px to 2498px
+at 1440x900 and made Music look like the three rows under it. **Do not
+restore the embed without being asked.** `.video-wrap` is still in
+`style.css`, unused, so restoring one does not mean rewriting it.
+
+The caption reads *Clip · Summer 2025*; the band name moved onto the card,
+where it is the card's title. ⚠ That `Summer 2025` is plain text with no
+`data-i18n`, so it stays English in `/de/` — as it did when it read
+"X-Band, Summer 2025". Key it if that ever matters.
 
 #### The photo scroller
 
@@ -283,10 +299,15 @@ keyboard at all.
 
 #### The Code cards
 
-Six app cards, one per repository, in a second scroller. They share the
-photo scroller's mechanics through grouped selectors
-(`.photo-grid, .app-row { … }`), so a change to the scroll behaviour reaches
-both.
+Seven app cards, one per repository. They share the photo scroller's
+mechanics through grouped selectors (`.photo-grid, .app-row, .pub-row { … }`),
+so a change to the scroll behaviour reaches all three rows.
+
+⚠ **`.app-row` / `.app-card` are the shared *link-card* classes, not
+Code-only** — the Music part uses exactly the same two, with one card in the
+row. The name is as much of a half-truth as `.photo-grid`, and kept for the
+same reason: a third near-identical pair of classes would triple every
+grouped selector for nothing a reader sees.
 
 ⚠ **The container is `.app-row`, never `.photo-grid`.** `app.js` binds its
 lightbox to `.photo-grid figure` and `build-gallery.py` rewrites whatever
@@ -414,7 +435,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 28 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 29 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -462,13 +483,13 @@ markup by hand.
 
 ## i18n key conventions
 
-28 keys per language. `nav.*` is the sidebar plus the four Library part
+29 keys per language. `nav.*` is the sidebar plus the four Library part
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — the four caption kinds, the seven `v2.app.*` card
-descriptors and the chrome (`v2.theme.label`, `v2.lang.label`,
-`v2.menu.open`). The `v2.` prefix is an artefact of an old redesign, not a
-version scheme.
+descriptors, `v2.clip.desc` for the Music card and the chrome
+(`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
+artefact of an old redesign, not a version scheme.
 
 ⚠ **The app names and the publication titles are deliberately not keys.**
 "Bayes Atlas", "Ledgerline" and the rest are invented proper nouns that read
@@ -756,7 +777,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=8` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=9` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 

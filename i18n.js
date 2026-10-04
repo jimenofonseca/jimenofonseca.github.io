@@ -69,6 +69,7 @@ var TRANSLATIONS = {
     'v2.app.climascope':     'Climate-driven demand forecast',
     'v2.app.gradient':       'Enthalpy gradient library',
     'v2.app.urbantwin':      'City-scale energy simulation',
+    'v2.clip.desc':          'Music video',
 
     // ── Text ──────────────────────────────────────
     // Publication titles are the works' own titles and are never
@@ -144,6 +145,7 @@ var TRANSLATIONS = {
     'v2.app.climascope':     'Klimabedingte Bedarfsprognose',
     'v2.app.gradient':       'Bibliothek für Enthalpiegradienten',
     'v2.app.urbantwin':      'Energiesimulation im Stadtmassstab',
+    'v2.clip.desc':          'Musikvideo',
 
     // ── Text ──────────────────────────────────────
     'nav.text':              'Text',

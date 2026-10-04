@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=8" />
+  <link rel="stylesheet" href="/style.css?v=9" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
@@ -119,18 +119,31 @@
            CLAUDE.md. build-gallery.py writes into the GALLERY markers. -->
       <section class="art-part" aria-labelledby="music-h">
         <p class="eyebrow"><span class="index">01</span><span id="music-h" data-i18n="nav.music">Musik</span></p>
-        <div class="video-wrap">
-          <iframe
-            src="https://www.youtube.com/embed/m8g75C5WbgU"
-            title="Music — Jimeno Fonseca"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            loading="lazy"></iframe>
+        <!-- One card, not an embed. The inline YouTube iframe was the most
+             prominent thing on the page and the only third party on it; the
+             card links out instead and matches the three rows below. .app-row
+             / .app-card are the shared link-card classes, so Music and Code
+             are literally the same component. -->
+        <div class="app-row">
+          <a class="app-card" href="https://youtu.be/m8g75C5WbgU"
+             target="_blank" rel="noopener">
+            <span class="app-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 27v10M13 21v22M20 25v14"/>
+                <circle cx="42" cy="32" r="16"/>
+                <path d="M37 24l13 8-13 8z"/>
+              </svg>
+            </span>
+            <span class="app-name">X-Band</span>
+            <span class="app-desc" data-i18n="v2.clip.desc">Musikvideo</span>
+            <span class="app-repo">YouTube <span class="arrow">↗</span></span>
+          </a>
         </div>
         <p class="media-caption">
           <span class="kind" data-i18n="v2.music.caption.kind">Clip</span>
           <span class="sep">·</span>
-          <span class="text">X-Band, Summer 2025</span>
+          <span class="text">Summer 2025</span>
         </p>
       </section>
 

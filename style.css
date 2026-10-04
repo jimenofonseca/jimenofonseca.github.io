@@ -496,6 +496,9 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 .page-media {
   padding-block: 16px 0;
 }
+/* Nothing uses this today — the Music part became a link card. Kept because
+   it is the whole inline-video treatment, and restoring an embed should not
+   mean rewriting it from scratch. */
 .video-wrap {
   width: 100%;
   aspect-ratio: 16/9;
