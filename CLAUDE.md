@@ -254,12 +254,30 @@ back.**
 
 ⚠ **The Music part used to be an inline YouTube iframe, and the embed is
 gone on purpose.** It was a full-width 16/9 block — the most prominent thing
-on a page where it is the least prominent part — and the page's only third
-party besides the font stylesheet and gtag. It is now a single `.app-card`
-linking to `youtu.be/m8g75C5WbgU`, which cut `/art/` from 2772px to 2498px
-at 1440x900 and made Music look like the three rows under it. **Do not
-restore the embed without being asked.** `.video-wrap` is still in
-`style.css`, unused, so restoring one does not mean rewriting it.
+on a page where it is the least prominent part. It is now a single
+`.app-card.clip-card` linking to `youtu.be/m8g75C5WbgU`, which cut `/art/`
+from 2772px to 2498px at 1440x900 and made Music look like the three rows
+under it. **Do not restore the embed without being asked.** `.video-wrap` is
+still in `style.css`, unused, so restoring one does not mean rewriting it.
+
+**The card leads with the video's own still**, full-bleed across the top of
+the square (`.clip-shot`, whose negative margins undo the card padding),
+with a drawn play glyph over it and the text below. It is the only card that
+leads with an image rather than a `currentColor` line drawing, so
+`.clip-card .app-repo` gets `margin-top: auto` to do the job `.app-mark`'s
+`flex-grow` does elsewhere.
+
+⚠ **The still is hotlinked from `img.youtube.com`, not committed**, because
+`img.youtube.com` is blocked by the session egress proxy and no session here
+can download it. That puts one third-party *image* back on the page — no
+script, no cookies, no main-thread cost, nothing like the iframe. `src` is
+`maxresdefault.jpg` with an inline `onerror` falling back to
+`hqdefault.jpg`: maxres exists for any upload at 720p or better but is not
+guaranteed, hqdefault always is, and `object-fit: cover` crops hqdefault's
+4:3 letterbox away. **If a self-hosted still is ever wanted, Jimeno has to
+supply the frame** — put it in `assets/`, point `src` at it and drop the
+`onerror`. ⚠ A hotlinked still also silently follows the video: re-cut the
+upload and the card changes with no commit here.
 
 The caption reads *Clip · Summer 2025*; the band name moved onto the card,
 where it is the card's title. ⚠ That `Summer 2025` is plain text with no
@@ -777,7 +795,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=9` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=10` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 

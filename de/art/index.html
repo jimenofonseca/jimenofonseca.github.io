@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=9" />
+  <link rel="stylesheet" href="/style.css?v=10" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
@@ -125,15 +125,25 @@
              / .app-card are the shared link-card classes, so Music and Code
              are literally the same component. -->
         <div class="app-row">
-          <a class="app-card" href="https://youtu.be/m8g75C5WbgU"
+          <a class="app-card clip-card" href="https://youtu.be/m8g75C5WbgU"
              target="_blank" rel="noopener">
-            <span class="app-mark" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 27v10M13 21v22M20 25v14"/>
-                <circle cx="42" cy="32" r="16"/>
-                <path d="M37 24l13 8-13 8z"/>
-              </svg>
+            <!-- The frame is hotlinked from YouTube's thumbnail CDN because
+                 the still cannot be fetched and committed from the build
+                 environment. It is an image, not the embed: no script, no
+                 cookies, no main-thread cost. maxresdefault exists for any
+                 upload at 720p or better; onerror falls back to hqdefault,
+                 which always exists, and object-fit crops its 4:3 bars. -->
+            <span class="clip-shot">
+              <img src="https://img.youtube.com/vi/m8g75C5WbgU/maxresdefault.jpg"
+                   alt="" width="1280" height="720" loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='https://img.youtube.com/vi/m8g75C5WbgU/hqdefault.jpg'" />
+              <span class="clip-play" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="24" cy="24" r="15"/>
+                  <path d="M20 16l12 8-12 8z"/>
+                </svg>
+              </span>
             </span>
             <span class="app-name">X-Band</span>
             <span class="app-desc" data-i18n="v2.clip.desc">Musikvideo</span>

@@ -732,6 +732,47 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 }
 .app-card:hover .app-repo { color: var(--accent); }
 
+/* ── The Music card's still ─────────────────────────────── */
+/* The one card that leads with an image instead of a drawn mark. The still
+   is full-bleed to the card's top and side edges, which is what the negative
+   margins undo the card padding for. */
+.clip-card { padding-top: 0; }
+.clip-shot {
+  position: relative;
+  display: block;
+  margin: 0 -22px 16px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--hover);
+}
+.clip-shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;          /* crops hqdefault's 4:3 letterbox away */
+  display: block;
+  transition: transform 0.4s ease;
+}
+.clip-card:hover .clip-shot img { transform: scale(1.04); }
+/* A play glyph over the still, so the card reads as a video rather than a
+   photograph. Drawn, not YouTube's mark. */
+.clip-shot .clip-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.92;
+  transition: opacity 0.18s ease;
+}
+.clip-shot .clip-play svg {
+  width: 46px; height: 46px;
+  filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.55));
+}
+.clip-card:hover .clip-play { opacity: 1; }
+/* The still is a fixed height, so the mono line needs pushing to the floor
+   the way .app-mark's flex-grow does it on the drawn cards. */
+.clip-card .app-repo { margin-top: auto; }
+
 /* ── Publication cards (Text) ───────────────────────────── */
 /* Same square, different insides: the year leads as a mono eyebrow, the
    title fills the card, the venue closes it. Titles are the works' own, so
