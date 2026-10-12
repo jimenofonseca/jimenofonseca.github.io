@@ -421,13 +421,14 @@ Music card does, with the same `maxresdefault` → `hqdefault` fallback.
 
 ⚠ **Titles come from Jimeno, not from the video hosts.** YouTube,
 `img.youtube.com` and `video.ethz.ch` are all blocked by the session egress
-proxy, and search finds nothing for bare video IDs. Three cards today:
+proxy, and search finds nothing for bare video IDs. Four cards today:
 
 | Card | Source of the title |
 |---|---|
 | *Integrating BIM and digital twins at Axpo* — YouTube `S84aLW_PXXY` | the caption it had on the retired `digital-transformation` page; describes the talk, may not be its published title |
 | *From Code to Company — Part I* — ETH `DTLiuDe91xF` | Jimeno: one talk recorded in two parts |
 | *From Code to Company — Part II* — ETH `LHD7ZDvZ9DI` | the same |
+| *City Energy Analyst executive course, 2022* — YouTube `5uJvzQDoz30` | Jimeno, verbatim |
 
 `fctc` in the ETH path is **From Code to Company: Energy Tools That Power
 the Future**, a 2025 event run by Superurbana. Part I/II follow the order
@@ -436,9 +437,9 @@ recordings. Part I's card used to read *Urban energy and digital tools*, a
 caption from the retired `appearances` page that turned out to describe the
 wrong thing.
 
-⚠ **Two more he supplied are held back** — `youtube.com/watch?v=5uJvzQDoz30`
-and `…lFmHrS78vRg` — because nobody here could see what they are and search
-finds neither ID. Add them when he sends titles; do not invent one.
+⚠ **One more he supplied is held back** — `youtube.com/watch?v=lFmHrS78vRg`
+— because nobody here could see what it is and search finds nothing for the
+ID. Add it when he sends a title; do not invent one.
 
 Talk titles are not keyed, for the same reason paper titles are not.
 
