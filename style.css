@@ -776,18 +776,6 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
 .clip-shot.blank .clip-play { color: var(--accent); opacity: 0.85; }
 .clip-shot.blank .clip-play svg { filter: none; }
 .clip-card:hover .clip-shot.blank .clip-play { opacity: 1; }
-/* The video's category (Lecture, Promotion, Music video) as a mono label
-   above the title, in the accent — the same place and treatment the year
-   gets on a publication card, so it never moves with the title's length. */
-.clip-card .clip-kind {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
 /* The still is a fixed height, so the mono line needs pushing to the floor
    the way .app-mark's flex-grow does it on the drawn cards. */
 .clip-card .app-repo {
@@ -797,6 +785,13 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
      reserved empty line is what squeezed it against a two-line title. */
   min-height: 0;
 }
+/* At 260px (≤900px) a video card holds a 146px still, so a two-line title
+   and a two-line publisher line (the City Energy Analyst course) met with
+   no gap. A smaller title and a tighter still margin buy it back. This has
+   to come after the rules above, which it overrides at equal specificity. */
+@media (max-width: 900px) {
+  .clip-card .app-name { font-size: 17px; }
+  .clip-shot { margin-bottom: 12px; }}
 
 /* ── Publication cards (Text) ───────────────────────────── */
 /* Same square, different insides: the year leads as a mono eyebrow, the

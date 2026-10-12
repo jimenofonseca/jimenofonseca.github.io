@@ -411,28 +411,37 @@ against a future monster, not a design — nothing reaches it today.
 #### The Video cards
 
 The concert card's anatomy, repeated: `.app-row` of `.app-card.clip-card`,
-a 16/9 still on top, the title, then **who published it and the year, in
-mono** (`ETH ZÜRICH · 2025`). The year lives in the mono line, not the
+a 16/9 still on top, the title, then **one grey mono line: category,
+publisher, year** (`LECTURE · ETH ZÜRICH · 2025`). The year lives in the mono line, not the
 title, so every card carries it in the same place. ⚠ **The label is the
 publisher Jimeno names, not the platform**: the BIM talk reads `AXPO` and
 the course `CITY ENERGY ANALYST` although both are YouTube links; only the
 concert still says `YOUTUBE`. Do not "correct" those to the host.
 
-**Each card carries a category, as a mono label in `--accent` above the
-title** (`.clip-kind`) — the place and treatment the year gets on a Text
-card, so it never moves with the title's length. It was first tried as a
-line under the title, where it landed at a different height on every card
-and crowded the publisher line. Categories are Jimeno's: *Lecture* (DE
-*Vortrag*), *Promotion*, *Music video* (DE *Musikvideo*). ⚠ **German for
-Promotion is *Imagefilm*, not *Promotion*** — in German a *Promotion* is a
-doctorate, which on this site, beside `Dr. sc. ETH Zürich`, would read as a
-claim.
+**The category leads the grey line** — Jimeno's call, after two other
+placements were tried and dropped: a line under the title (it landed at a
+different height on every card and crowded the publisher) and an accent
+label above the title (he preferred it grey and with the publisher). **Do
+not move it back out.** Categories are his: *Lecture* (DE *Vortrag*),
+*Promotion*, *Music video* (DE *Musikvideo*), each a `data-i18n` span
+inside `.app-repo`. ⚠ **German for Promotion is *Imagefilm*, not
+*Promotion*** — in German a *Promotion* is a doctorate, which on this site,
+beside `Dr. sc. ETH Zürich`, would read as a claim.
 
-⚠ **The card is full.** Still 179 + label + a two-line title + the
-publisher line come to ~300px of the 320px square. A three-line title will
-not fit — shorten it or drop a size. `.clip-card .app-repo` sets
-`min-height: 0` because the Code row's two-line floor left an empty line
-that crushed the publisher against the title.
+⚠ **The separators are glued with `&nbsp;`** — `Lecture&nbsp;· ETH
+Zürich&nbsp;· 2025&nbsp;↗` — so a line can only break *after* a dot.
+Without it the City Energy Analyst card, the one long label, wrapped with
+the `↗` alone on its second line. It now breaks as `PROMOTION · CITY
+ENERGY ANALYST ·` / `2022 ↗`.
+
+⚠ **Video cards are nearly full.** At 320px the still, a two-line title and
+a two-line grey line leave ~26px; at 260px (≤900px) they met with no gap,
+which is why a media block **after** the clip-card rules drops the title to
+17px and the still's margin to 12px there. (It sat in the earlier
+breakpoint block first and did nothing — the later rules win at equal
+specificity.) A three-line title will not fit. `.clip-card .app-repo` sets
+`min-height: 0`, since the Code row's two-line floor would add an empty
+line on every one-line card.
 
 **Ordered by year, newest first**, as the Text row is; within 2025 the two
 lecture parts stay together, then the concert:
@@ -873,7 +882,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=12` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=14` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 
