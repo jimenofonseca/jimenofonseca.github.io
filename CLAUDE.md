@@ -64,7 +64,7 @@ markup.
 ├── assets/
 │   ├── portrait.jpg            # Intro portrait
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
-│   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
+│   └── photography/            #  8 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
 ├── i18n.js                     # EN/DE copy — 31 keys each. Build input only
@@ -230,7 +230,7 @@ each label down onto its media so the pair reads as one block.
 - **Code**: seven app cards, each an outbound link to a GitHub repository.
 - **Text**: seventeen publication cards, each an outbound link to the paper.
 - **RGB** — the photographs; the key is still `nav.photography`, same call as
-  `nav.art`: 12 photos from `assets/photography/`, in a **horizontal
+  `nav.art`: 8 photos from `assets/photography/`, in a **horizontal
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
@@ -240,8 +240,11 @@ each label down onto its media so the pair reads as one block.
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
 — the next `build-gallery.py` run rebuilds the list from `_originals/` and
-brings the photo straight back. `photo-05.jpg` was removed this way and its
-original still needs deleting on Jimeno's machine.
+brings the photo straight back. ⚠ **Five originals still need deleting on
+Jimeno's machine**: `photo-05` (removed earlier) and `photo-06`, `-12`,
+`-13`, `-16` (the karst reflection, the cyclist, the night bridge, the
+park — removed at his request). Until they go, the next `build-gallery.py`
+run republishes all five. Remaining: `01 02 04 07 10 11 14 15`.
 
 ⚠ **The page has no prose at all, and that is the design.** The whole page is
 the h1, four numbered eyebrows, four rows of cards and four caption lines.
