@@ -765,8 +765,10 @@ that were only looking for figures. Full reasoning in
 products and services"** — Jimeno's own wording, and it was flagged to him
 as the same kind of claim as "revenue-generating" before it shipped. He
 kept it. **Do not strip it in a confidentiality sweep**; raise it with him
-instead. The bio's other wording is his too, apart from one grammar fix
-("and co-founder of Superurbana" → "and co-founded"); it says *co-founded*
+instead. The bio's other wording is his too, apart from three edits he
+approved: "and co-founder of Superurbana" → "and co-founded", "member of
+CIGRE's work" → "a member of CIGRE's working group", "asset-management" →
+"asset management". It says *co-founded*
 for both the City Energy Analyst and Superurbana, which supersedes an
 earlier "founder and developer everywhere" instruction.
 
