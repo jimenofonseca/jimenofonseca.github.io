@@ -226,7 +226,8 @@ layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
 - **Music**: one link card to the video (`m8g75C5WbgU`) — see below.
-- **Photography**: 12 photos from `assets/photography/`, in a **horizontal
+- **Photography** — headed **RGB** on the page, in both languages; the key
+  is still `nav.photography`: 12 photos from `assets/photography/`, in a **horizontal
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
@@ -312,7 +313,7 @@ Both the desktop and the ≤900px `.shell` rules carry it. **Do not "simplify"
 either back to `1fr`.**
 
 The container takes `role="region"` + `tabindex="0"` (via
-`data-i18n-aria="nav.photography"`, so German reads *Fotografie*) because a
+`data-i18n-aria="nav.photography"`, which reads *RGB* in both trees) because a
 scroll container whose children are not focusable cannot be reached by
 keyboard at all.
 

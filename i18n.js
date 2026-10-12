@@ -18,7 +18,7 @@ var TRANSLATIONS = {
     'v2.lang.label':      'Language',
     'v2.menu.open':       'Menu',
     'nav.music':          'Music',
-    'nav.photography':    'Photography',
+    'nav.photography':    'RGB',
 
     // Stat labels (subpages)
 
@@ -102,7 +102,7 @@ var TRANSLATIONS = {
     'v2.lang.label':      'Sprache',
     'v2.menu.open':       'Menü',
     'nav.music':          'Musik',
-    'nav.photography':    'Fotografie',
+    'nav.photography':    'RGB',
 
     // Stat-Labels (Unterseiten)
 
