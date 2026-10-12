@@ -474,14 +474,18 @@ it** without a clean frame for *What have we built?*. `.clip-shot.blank`
 (an empty 16/9 panel with the glyph in `--accent`) is still in `style.css`
 for the next ETH talk that arrives without a frame.
 
-**The City Energy Analyst course card is self-hosted too** —
-`assets/video/city-energy-analyst-course.webp` (1479x825), a frame Jimeno
-supplied in place of YouTube's thumbnail, so it has no `onerror` fallback.
-It carries an inline `object-position: left center`, which spends the
-`cover` crop on the right edge, where a sliver of the next frame survives
-in the still. Its burnt-in subtitle (*how to plan a low carbon city.*) is
-part of the frame. The BIM and concert cards still hotlink their YouTube
-stills as described under the concert card.
+**Two YouTube cards are self-hosted too**, with frames Jimeno supplied in
+place of YouTube's thumbnails, so they have no `onerror` fallback and still
+draw the play glyph:
+
+| Card | Still | Note |
+|---|---|---|
+| *City Energy Analyst executive course* | `assets/video/city-energy-analyst-course.webp` (1479x825) | inline `object-position: left center` spends the `cover` crop on the right edge, where a sliver of the next frame survives; burnt-in subtitle *how to plan a low carbon city.* |
+| *Integrating BIM and digital twins at Axpo* | `assets/video/bim-digital-twins-axpo.webp` (2000x1125, exactly 16/9) | burnt-in German subtitle; the glyph lands on the window, clear of every face |
+
+⚠ **Only the concert card still hotlinks `img.youtube.com`** (as described
+under the concert card). Four of the five Video stills are now committed
+files in `assets/video/`.
 
 ⚠ **One more video he supplied is held back** —
 `youtube.com/watch?v=lFmHrS78vRg` — because nobody here could see what it
