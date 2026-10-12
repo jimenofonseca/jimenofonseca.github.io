@@ -251,15 +251,16 @@ to.") — the h1 already says what the page is. `.art-text`, `.gear-*` and the
 last use of `.page-lede` went with them. **Do not add explanatory prose
 back.**
 
-#### The music video card
+#### The concert card (the music video)
 
 ⚠ **There is no Music part any more.** The music video is the last card in
 the Video row; its own part, with its eyebrow and *Clip · Summer 2025*
 caption, went in the reorder, along with `nav.music` and
 `v2.music.caption.kind`. It is the **only Video card with a descriptor line**
-(`v2.clip.desc`, *Music video*), because "X-Band" on its own says nothing,
-while a talk title says what it is. Everything below still describes the
-card itself.
+(`v2.clip.desc`, *Music video*). It was added when the card's title was a
+bare "X-Band"; the title is now *Concert X-Band Zürich*, so the line is
+close to redundant and could go. Everything below still describes the card
+itself.
 
 ⚠ **The music video used to be an inline YouTube iframe, and the embed is
 gone on purpose.** It was a full-width 16/9 block — the most prominent thing
@@ -410,39 +411,42 @@ against a future monster, not a design — nothing reaches it today.
 
 #### The Video cards
 
-The music video card's anatomy, repeated: `.app-row` of `.app-card.clip-card`, a
-16/9 still on top, the talk title, the outlet in mono (`YOUTUBE` or
-`ETH ZÜRICH`). **No descriptor line** — the eyebrow already says Video and
-the mono line says where, and dropping it gives a title three lines before
-it can push the mono line off the 320px square.
+The concert card's anatomy, repeated: `.app-row` of `.app-card.clip-card`,
+a 16/9 still on top, the title, then **the outlet and year in mono**
+(`ETH ZÜRICH · 2025`). The year lives in the mono line, not the title, so
+every card carries it in the same place. **No descriptor line** except on
+the concert card — the eyebrow already says Video, and dropping it gives a
+title three lines before it can push the mono line off the 320px square.
 
-⚠ **ETH cards have no still, on purpose.** `video.ethz.ch` has no
-predictable thumbnail URL, so `.clip-shot.blank` keeps the 16/9 panel —
-the row stays one shape — and draws the play glyph in `--accent` rather
-than white-over-footage. YouTube cards hotlink their still as described
-under the music video card, with the `maxresdefault` → `hqdefault` fallback.
+| Card | Link | Year |
+|---|---|---|
+| *Integrating BIM and digital twins at Axpo* | YouTube `S84aLW_PXXY` | ⚠ **unknown — ask Jimeno** |
+| *From Code to Company — What have we built?* | ETH `DTLiuDe91xF` | 2025 |
+| *From Code to Company — What is next?* | ETH `LHD7ZDvZ9DI` | 2025 |
+| *City Energy Analyst executive course* | YouTube `5uJvzQDoz30` | 2022 |
+| *Concert X-Band Zürich* (+ *Music video*) | YouTube `m8g75C5WbgU` | 2025 |
 
-⚠ **Titles come from Jimeno, not from the video hosts.** YouTube,
-`img.youtube.com` and `video.ethz.ch` are all blocked by the session egress
-proxy, and search finds nothing for bare video IDs. Four cards today:
+All titles are Jimeno's own wording, except the BIM card's, which is the
+caption that video had on the retired `digital-transformation` page and may
+not be its published title. `fctc` in the ETH path is **From Code to
+Company: Energy Tools That Power the Future**, a 2025 event run by
+Superurbana; the two cards are one talk recorded in two parts.
 
-| Card | Source of the title |
-|---|---|
-| *Integrating BIM and digital twins at Axpo* — YouTube `S84aLW_PXXY` | the caption it had on the retired `digital-transformation` page; describes the talk, may not be its published title |
-| *From Code to Company — Part I* — ETH `DTLiuDe91xF` | Jimeno: one talk recorded in two parts |
-| *From Code to Company — Part II* — ETH `LHD7ZDvZ9DI` | the same |
-| *City Energy Analyst executive course, 2022* — YouTube `5uJvzQDoz30` | Jimeno, verbatim |
+⚠ **The two From Code to Company cards use a self-hosted still,
+`assets/video/from-code-to-company.webp`** (1846x992), which Jimeno
+supplied: `video.ethz.ch` has no predictable thumbnail URL and is blocked by
+the session egress proxy. **That frame already has the ETH player's play
+button in it, so those two cards draw no `.clip-play` of their own** — two
+concentric play buttons is what you get if someone "fixes" the
+inconsistency. Both cards share the one file. `.clip-shot.blank` (an empty
+16/9 panel with the glyph in `--accent`) is still in `style.css` for the
+next ETH talk that arrives without a frame. YouTube cards hotlink their
+still as described under the concert card.
 
-`fctc` in the ETH path is **From Code to Company: Energy Tools That Power
-the Future**, a 2025 event run by Superurbana. Part I/II follow the order
-Jimeno listed the links in, which nobody here could check against the
-recordings. Part I's card used to read *Urban energy and digital tools*, a
-caption from the retired `appearances` page that turned out to describe the
-wrong thing.
-
-⚠ **One more he supplied is held back** — `youtube.com/watch?v=lFmHrS78vRg`
-— because nobody here could see what it is and search finds nothing for the
-ID. Add it when he sends a title; do not invent one.
+⚠ **One more video he supplied is held back** —
+`youtube.com/watch?v=lFmHrS78vRg` — because nobody here could see what it
+is and search finds nothing for the ID. Add it when he sends a title; do
+not invent one.
 
 Talk titles are not keyed, for the same reason paper titles are not.
 
@@ -547,7 +551,7 @@ markup by hand.
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — the four caption kinds, the seven `v2.app.*` card
-descriptors, `v2.clip.desc` for the music video card and the chrome
+descriptors, `v2.clip.desc` for the concert card and the chrome
 (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
