@@ -420,7 +420,7 @@ title three lines before it can push the mono line off the 320px square.
 
 | Card | Link | Year |
 |---|---|---|
-| *Integrating BIM and digital twins at Axpo* | YouTube `S84aLW_PXXY` | ⚠ **unknown — ask Jimeno** |
+| *Integrating BIM and digital twins at Axpo* | YouTube `S84aLW_PXXY` | 2024 |
 | *From Code to Company — What have we built?* | ETH `DTLiuDe91xF` | 2025 |
 | *From Code to Company — What is next?* | ETH `LHD7ZDvZ9DI` | 2025 |
 | *City Energy Analyst executive course* | YouTube `5uJvzQDoz30` | 2022 |
@@ -444,8 +444,16 @@ blocked by the session egress proxy:
 So the pair is deliberately inconsistent about the glyph — **do not "fix"
 it** without a clean frame for *What have we built?*. `.clip-shot.blank`
 (an empty 16/9 panel with the glyph in `--accent`) is still in `style.css`
-for the next ETH talk that arrives without a frame. YouTube cards hotlink
-their still as described under the concert card.
+for the next ETH talk that arrives without a frame.
+
+**The City Energy Analyst course card is self-hosted too** —
+`assets/video/city-energy-analyst-course.webp` (1479x825), a frame Jimeno
+supplied in place of YouTube's thumbnail, so it has no `onerror` fallback.
+It carries an inline `object-position: left center`, which spends the
+`cover` crop on the right edge, where a sliver of the next frame survives
+in the still. Its burnt-in subtitle (*how to plan a low carbon city.*) is
+part of the frame. The BIM and concert cards still hotlink their YouTube
+stills as described under the concert card.
 
 ⚠ **One more video he supplied is held back** —
 `youtube.com/watch?v=lFmHrS78vRg` — because nobody here could see what it
