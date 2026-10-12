@@ -769,6 +769,13 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.55));
 }
 .clip-card:hover .clip-play { opacity: 1; }
+/* A still with nothing to show: video.ethz.ch has no predictable thumbnail
+   URL, so ETH cards keep the 16/9 panel — the row stays one shape — and draw
+   the play glyph in the accent instead of white-over-footage. */
+.clip-shot.blank { background: var(--hairline); }
+.clip-shot.blank .clip-play { color: var(--accent); opacity: 0.85; }
+.clip-shot.blank .clip-play svg { filter: none; }
+.clip-card:hover .clip-shot.blank .clip-play { opacity: 1; }
 /* The still is a fixed height, so the mono line needs pushing to the floor
    the way .app-mark's flex-grow does it on the drawn cards. */
 .clip-card .app-repo { margin-top: auto; }

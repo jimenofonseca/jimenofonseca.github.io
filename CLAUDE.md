@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 29 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 31 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -218,7 +218,7 @@ Edit the **English** page (`index.html`, `art/index.html`), then run
 
 ### Working on the Library page (`/art/`)
 
-`/art/` is **one page, four parts** — Music, Photography, Code, Text — each a plain
+`/art/` is **one page, five parts** — Music, Photography, Code, Text, Video — each a plain
 `<section class="art-part">`: a numbered eyebrow, the media, one caption
 line. The base `section` rule supplies the hairline between them and
 `section:first-of-type` keeps `.page-intro` borderless, so the parts carry no
@@ -234,6 +234,7 @@ each label down onto its media so the pair reads as one block.
   GitHub repository.
 - **Text**: seventeen publication cards in a third scroller, each an
   outbound link to the paper.
+- **Video**: talk cards in a fourth scroller, the same `.clip-card` as Music.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -242,7 +243,7 @@ brings the photo straight back. `photo-05.jpg` was removed this way and its
 original still needs deleting on Jimeno's machine.
 
 ⚠ **The page has no prose at all, and that is the design.** The whole page is
-the h1, four numbered eyebrows, four rows of cards and four caption lines.
+the h1, five numbered eyebrows, five rows of cards and five caption lines.
 Removed in stages: three paragraphs (`v2.music.p1`, `v2.photo.p1`,
 `v2.photo.p2`), the `.gear-list` camera aside, and finally the lede
 (`v2.art.lede`, "Music I have recorded, and photographs I keep coming back
@@ -404,6 +405,32 @@ and the venue cannot.
 in both trees, and `-webkit-line-clamp: 9` on `.pub-title` is a guard
 against a future monster, not a design — nothing reaches it today.
 
+#### The Video cards
+
+The Music card's anatomy, repeated: `.app-row` of `.app-card.clip-card`, a
+16/9 still on top, the talk title, the outlet in mono (`YOUTUBE` or
+`ETH ZÜRICH`). **No descriptor line** — the eyebrow already says Video and
+the mono line says where, and dropping it gives a title three lines before
+it can push the mono line off the 320px square.
+
+⚠ **ETH cards have no still, on purpose.** `video.ethz.ch` has no
+predictable thumbnail URL, so `.clip-shot.blank` keeps the 16/9 panel —
+the row stays one shape — and draws the play glyph in `--accent` rather
+than white-over-footage. YouTube cards hotlink their still exactly as the
+Music card does, with the same `maxresdefault` → `hqdefault` fallback.
+
+⚠ **Titles come from Jimeno, not from the video hosts.** YouTube,
+`img.youtube.com` and `video.ethz.ch` are all blocked by the session egress
+proxy, and search finds nothing for bare video IDs. The first two cards'
+titles are the captions those videos had on his retired pages
+(`_old/retired-pages/digital-transformation/` and `…/appearances/`), so
+they describe the talk but may not match its published title. Three more
+he supplied — `video.ethz.ch/…/LHD7ZDvZ9DI`, `youtube.com/watch?v=5uJvzQDoz30`
+and `…lFmHrS78vRg` — are **not on the page yet because nobody here could
+see what they are.** Add them when he sends titles; do not invent one.
+
+Talk titles are not keyed, for the same reason paper titles are not.
+
 ### Updating the photo gallery
 
 ```bash
@@ -453,7 +480,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 29 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 31 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -501,10 +528,10 @@ markup by hand.
 
 ## i18n key conventions
 
-29 keys per language. `nav.*` is the sidebar plus the four Library part
+31 keys per language. `nav.*` is the sidebar plus the five Library part
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — the four caption kinds, the seven `v2.app.*` card
+everything else — the five caption kinds, the seven `v2.app.*` card
 descriptors, `v2.clip.desc` for the Music card and the chrome
 (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
@@ -795,7 +822,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=10` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=11` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 

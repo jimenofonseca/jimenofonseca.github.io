@@ -5,7 +5,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Work',
     'nav.art':               'Library',
-    'art.title':             'Library | Music, Photography, Code and Text — Jimeno Fonseca',
+    'art.title':             'Library | Music, Photography, Code, Text and Video — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -76,6 +76,11 @@ var TRANSLATIONS = {
     // translated, so only the heading and the caption live here.
     'nav.text':              'Text',
     'v2.text.caption.kind':  'Selected · 2015 – 2025',
+
+    // ── Video ─────────────────────────────────────
+    // Talk titles are the talks' own and are not keyed, like paper titles.
+    'nav.video':             'Video',
+    'v2.video.caption.kind': 'Appearances',
   },
 
   de: {
@@ -84,7 +89,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
     'nav.art':               'Bibliothek',
-    'art.title':             'Bibliothek | Musik, Fotografie, Code und Text — Jimeno Fonseca',
+    'art.title':             'Bibliothek | Musik, Fotografie, Code, Text und Video — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -150,6 +155,10 @@ var TRANSLATIONS = {
     // ── Text ──────────────────────────────────────
     'nav.text':              'Text',
     'v2.text.caption.kind':  'Auswahl · 2015 – 2025',
+
+    // ── Video ─────────────────────────────────────
+    'nav.video':             'Video',
+    'v2.video.caption.kind': 'Auftritte',
   }
 };
 

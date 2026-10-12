@@ -29,7 +29,7 @@
     if(localStorage.getItem("theme")==="light")
       document.documentElement.dataset.theme="light";
   })();</script>
-  <title data-i18n="art.title">Bibliothek | Musik, Fotografie, Code und Text — Jimeno Fonseca</title>
+  <title data-i18n="art.title">Bibliothek | Musik, Fotografie, Code, Text und Video — Jimeno Fonseca</title>
   <meta name="description" data-i18n-content="art.desc" content="Jimeno Fonseca" />
   <link rel="canonical" href="https://jimenofonseca.com/de/art/" />
   <link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/" />
@@ -39,14 +39,14 @@
   <meta property="og:site_name" content="Jimeno Fonseca" />
   <meta property="og:locale" content="de_CH" />
   <meta property="og:url" content="https://jimenofonseca.com/de/art/" />
-  <meta property="og:title" content="Bibliothek | Musik, Fotografie, Code und Text — Jimeno Fonseca" />
+  <meta property="og:title" content="Bibliothek | Musik, Fotografie, Code, Text und Video — Jimeno Fonseca" />
   <meta property="og:description" content="Jimeno Fonseca" />
   <meta property="og:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Jimeno Fonseca" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Bibliothek | Musik, Fotografie, Code und Text — Jimeno Fonseca" />
+  <meta name="twitter:title" content="Bibliothek | Musik, Fotografie, Code, Text und Video — Jimeno Fonseca" />
   <meta name="twitter:description" content="Jimeno Fonseca" />
   <meta name="twitter:image" content="https://jimenofonseca.com/assets/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,7 +59,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
-  <link rel="stylesheet" href="/style.css?v=10" />
+  <link rel="stylesheet" href="/style.css?v=11" />
 </head>
 <body>
   <a class="skip-link" href="#page" data-i18n="skip">Zum Inhalt springen</a>
@@ -409,6 +409,52 @@
         </div>
         <p class="media-caption">
           <span class="kind" data-i18n="v2.text.caption.kind">Auswahl · 2015 – 2025</span>
+        </p>
+      </section>
+
+      <!-- Video. The same .clip-card as Music: a 16/9 still on top, the title,
+           the outlet in mono. YouTube cards hotlink the still (see the Music
+           card); video.ethz.ch has no predictable thumbnail URL, so ETH cards
+           get a blank panel with the play glyph instead of a still.
+           Talk titles are the talks' own and are not keyed. -->
+      <section class="art-part" aria-labelledby="video-h">
+        <p class="eyebrow"><span class="index">05</span><span id="video-h" data-i18n="nav.video">Video</span></p>
+        <div class="app-row" role="region" tabindex="0"
+             data-i18n-aria="nav.video" aria-label="Video">
+          <a class="app-card clip-card" href="https://www.youtube.com/watch?v=S84aLW_PXXY"
+             target="_blank" rel="noopener">
+            <span class="clip-shot">
+              <img src="https://img.youtube.com/vi/S84aLW_PXXY/maxresdefault.jpg"
+                   alt="" width="1280" height="720" loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='https://img.youtube.com/vi/S84aLW_PXXY/hqdefault.jpg'" />
+              <span class="clip-play" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="24" cy="24" r="15"/>
+                  <path d="M20 16l12 8-12 8z"/>
+                </svg>
+              </span>
+            </span>
+            <span class="app-name">Integrating BIM and digital twins at Axpo</span>
+            <span class="app-repo">YouTube <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card clip-card" href="https://video.ethz.ch/events/2025/fctc/v/DTLiuDe91xF"
+             target="_blank" rel="noopener">
+            <span class="clip-shot blank">
+              <span class="clip-play" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="24" cy="24" r="15"/>
+                  <path d="M20 16l12 8-12 8z"/>
+                </svg>
+              </span>
+            </span>
+            <span class="app-name">Urban energy and digital tools</span>
+            <span class="app-repo">ETH Zürich <span class="arrow">↗</span></span>
+          </a>
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.video.caption.kind">Auftritte</span>
         </p>
       </section>
 
