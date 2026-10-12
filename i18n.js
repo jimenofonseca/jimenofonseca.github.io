@@ -79,6 +79,8 @@ var TRANSLATIONS = {
     // Talk titles are the talks' own and are not keyed, like paper titles.
     'nav.video':             'Video',
     'v2.video.caption.kind': 'Appearances',
+    'v2.video.lecture':      'Lecture',
+    'v2.video.promo':        'Promotion',
   },
 
   de: {
@@ -155,6 +157,9 @@ var TRANSLATIONS = {
     // ── Video ─────────────────────────────────────
     'nav.video':             'Video',
     'v2.video.caption.kind': 'Auftritte',
+    'v2.video.lecture':      'Vortrag',
+    // Not "Promotion": in German that is the doctorate.
+    'v2.video.promo':        'Imagefilm',
   }
 };
 

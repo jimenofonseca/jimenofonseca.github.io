@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 29 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 31 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -234,7 +234,8 @@ each label down onto its media so the pair reads as one block.
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
-- **Video**: four talk cards, then the X-Band music video last.
+- **Video**: five cards, newest first, each labelled Lecture, Promotion or
+  Music video.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -256,11 +257,9 @@ back.**
 ⚠ **There is no Music part any more.** The music video is the last card in
 the Video row; its own part, with its eyebrow and *Clip · Summer 2025*
 caption, went in the reorder, along with `nav.music` and
-`v2.music.caption.kind`. It is the **only Video card with a descriptor line**
-(`v2.clip.desc`, *Music video*). It was added when the card's title was a
-bare "X-Band"; the title is now *Concert X-Band Zürich*, so the line is
-close to redundant and could go. Everything below still describes the card
-itself.
+`v2.music.caption.kind`. Its category label is *Music video*
+(`v2.clip.desc`, the key's name surviving from when it was a descriptor
+line). Everything below still describes the card itself.
 
 ⚠ **The music video used to be an inline YouTube iframe, and the embed is
 gone on purpose.** It was a full-width 16/9 block — the most prominent thing
@@ -417,17 +416,34 @@ mono** (`ETH ZÜRICH · 2025`). The year lives in the mono line, not the
 title, so every card carries it in the same place. ⚠ **The label is the
 publisher Jimeno names, not the platform**: the BIM talk reads `AXPO` and
 the course `CITY ENERGY ANALYST` although both are YouTube links; only the
-concert still says `YOUTUBE`. Do not "correct" those to the host. **No descriptor line** except on
-the concert card — the eyebrow already says Video, and dropping it gives a
-title three lines before it can push the mono line off the 320px square.
+concert still says `YOUTUBE`. Do not "correct" those to the host.
 
-| Card | Link | Year |
-|---|---|---|
-| *Integrating BIM and digital twins at Axpo* | YouTube `S84aLW_PXXY` | 2024 |
-| *From Code to Company — What have we built?* | ETH `DTLiuDe91xF` | 2025 |
-| *From Code to Company — What is next?* | ETH `LHD7ZDvZ9DI` | 2025 |
-| *City Energy Analyst executive course* | YouTube `5uJvzQDoz30` | 2022 |
-| *Concert X-Band Zürich* (+ *Music video*) | YouTube `m8g75C5WbgU` | 2025 |
+**Each card carries a category, as a mono label in `--accent` above the
+title** (`.clip-kind`) — the place and treatment the year gets on a Text
+card, so it never moves with the title's length. It was first tried as a
+line under the title, where it landed at a different height on every card
+and crowded the publisher line. Categories are Jimeno's: *Lecture* (DE
+*Vortrag*), *Promotion*, *Music video* (DE *Musikvideo*). ⚠ **German for
+Promotion is *Imagefilm*, not *Promotion*** — in German a *Promotion* is a
+doctorate, which on this site, beside `Dr. sc. ETH Zürich`, would read as a
+claim.
+
+⚠ **The card is full.** Still 179 + label + a two-line title + the
+publisher line come to ~300px of the 320px square. A three-line title will
+not fit — shorten it or drop a size. `.clip-card .app-repo` sets
+`min-height: 0` because the Code row's two-line floor left an empty line
+that crushed the publisher against the title.
+
+**Ordered by year, newest first**, as the Text row is; within 2025 the two
+lecture parts stay together, then the concert:
+
+| Card | Category | Link | Year |
+|---|---|---|---|
+| *From Code to Company — What have we built?* | Lecture | ETH `DTLiuDe91xF` | 2025 |
+| *From Code to Company — What is next?* | Lecture | ETH `LHD7ZDvZ9DI` | 2025 |
+| *Concert X-Band Zürich* | Music video | YouTube `m8g75C5WbgU` | 2025 |
+| *Integrating BIM and digital twins at Axpo* | Promotion | YouTube `S84aLW_PXXY` | 2024 |
+| *City Energy Analyst executive course* | Promotion | YouTube `5uJvzQDoz30` | 2022 |
 
 All titles are Jimeno's own wording, except the BIM card's, which is the
 caption that video had on the retired `digital-transformation` page and may
@@ -514,7 +530,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 29 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 31 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -562,11 +578,12 @@ markup by hand.
 
 ## i18n key conventions
 
-29 keys per language. `nav.*` is the sidebar plus the four Library part
+31 keys per language. `nav.*` is the sidebar plus the four Library part
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — the four caption kinds, the seven `v2.app.*` card
-descriptors, `v2.clip.desc` for the concert card and the chrome
+descriptors, the three video categories (`v2.video.lecture`,
+`v2.video.promo`, and `v2.clip.desc` for *Music video*) and the chrome
 (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
@@ -856,7 +873,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=11` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=12` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 
