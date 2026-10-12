@@ -235,7 +235,7 @@ each label down onto its media so the pair reads as one block.
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
 - **Video**: five cards, newest first, each labelled Lecture, Promotion or
-  Music video.
+  Concert.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -257,7 +257,8 @@ back.**
 ⚠ **There is no Music part any more.** The music video is the last card in
 the Video row; its own part, with its eyebrow and *Clip · Summer 2025*
 caption, went in the reorder, along with `nav.music` and
-`v2.music.caption.kind`. Its category label is *Music video*
+`v2.music.caption.kind`. Its category label is *Concert* (DE *Konzert*;
+it read *Music video* until Jimeno renamed it)
 (`v2.clip.desc`, the key's name surviving from when it was a descriptor
 line). Everything below still describes the card itself.
 
@@ -423,7 +424,7 @@ placements were tried and dropped: a line under the title (it landed at a
 different height on every card and crowded the publisher) and an accent
 label above the title (he preferred it grey and with the publisher). **Do
 not move it back out.** Categories are his: *Lecture* (DE *Vortrag*),
-*Promotion*, *Music video* (DE *Musikvideo*), each a `data-i18n` span
+*Promotion*, *Concert* (DE *Konzert*), each a `data-i18n` span
 inside `.app-repo`. ⚠ **German for Promotion is *Imagefilm*, not
 *Promotion*** — in German a *Promotion* is a doctorate, which on this site,
 beside `Dr. sc. ETH Zürich`, would read as a claim.
@@ -450,7 +451,7 @@ lecture parts stay together, then the concert:
 |---|---|---|---|
 | *From Code to Company — What have we built?* | Lecture | ETH `DTLiuDe91xF` | 2025 |
 | *From Code to Company — What is next?* | Lecture | ETH `LHD7ZDvZ9DI` | 2025 |
-| *Concert X-Band Zürich* | Music video | YouTube `m8g75C5WbgU` | 2025 |
+| *Concert X-Band Zürich* | Concert | YouTube `m8g75C5WbgU` | 2025 |
 | *Integrating BIM and digital twins at Axpo* | Promotion | YouTube `S84aLW_PXXY` | 2024 |
 | *City Energy Analyst executive course* | Promotion | YouTube `5uJvzQDoz30` | 2022 |
 
@@ -596,7 +597,7 @@ headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
 everything else — the four caption kinds, the seven `v2.app.*` card
 descriptors, the three video categories (`v2.video.lecture`,
-`v2.video.promo`, and `v2.clip.desc` for *Music video*) and the chrome
+`v2.video.promo`, and `v2.clip.desc` for *Concert*) and the chrome
 (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 
