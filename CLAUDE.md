@@ -421,13 +421,24 @@ Music card does, with the same `maxresdefault` → `hqdefault` fallback.
 
 ⚠ **Titles come from Jimeno, not from the video hosts.** YouTube,
 `img.youtube.com` and `video.ethz.ch` are all blocked by the session egress
-proxy, and search finds nothing for bare video IDs. The first two cards'
-titles are the captions those videos had on his retired pages
-(`_old/retired-pages/digital-transformation/` and `…/appearances/`), so
-they describe the talk but may not match its published title. Three more
-he supplied — `video.ethz.ch/…/LHD7ZDvZ9DI`, `youtube.com/watch?v=5uJvzQDoz30`
-and `…lFmHrS78vRg` — are **not on the page yet because nobody here could
-see what they are.** Add them when he sends titles; do not invent one.
+proxy, and search finds nothing for bare video IDs. Three cards today:
+
+| Card | Source of the title |
+|---|---|
+| *Integrating BIM and digital twins at Axpo* — YouTube `S84aLW_PXXY` | the caption it had on the retired `digital-transformation` page; describes the talk, may not be its published title |
+| *From Code to Company — Part I* — ETH `DTLiuDe91xF` | Jimeno: one talk recorded in two parts |
+| *From Code to Company — Part II* — ETH `LHD7ZDvZ9DI` | the same |
+
+`fctc` in the ETH path is **From Code to Company: Energy Tools That Power
+the Future**, a 2025 event run by Superurbana. Part I/II follow the order
+Jimeno listed the links in, which nobody here could check against the
+recordings. Part I's card used to read *Urban energy and digital tools*, a
+caption from the retired `appearances` page that turned out to describe the
+wrong thing.
+
+⚠ **Two more he supplied are held back** — `youtube.com/watch?v=5uJvzQDoz30`
+and `…lFmHrS78vRg` — because nobody here could see what they are and search
+finds neither ID. Add them when he sends titles; do not invent one.
 
 Talk titles are not keyed, for the same reason paper titles are not.
 
