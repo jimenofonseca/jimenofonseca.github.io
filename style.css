@@ -829,6 +829,23 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   transition: color 0.18s ease;
 }
 .pub-card:hover .pub-venue { color: var(--accent); }
+/* A drawn mark per paper, in the Code cards' idiom, smaller because these
+   cards carry up to five lines of title. Top-aligned rather than centred in
+   spare space like .app-mark, so every year and title starts at the same
+   height across the row. */
+.pub-card .pub-mark { display: block; color: var(--accent); margin-bottom: 18px; }
+.pub-card .pub-mark svg {
+  display: block;
+  width: 64px; height: 64px;
+  opacity: 0.85;
+  transition: opacity 0.18s ease, transform 0.25s ease;
+}
+.pub-card:hover .pub-mark svg { opacity: 1; transform: translateX(3px); }
+/* At 260px a five-line title leaves ~65px; this has to follow the rules
+   above, which it overrides at equal specificity. */
+@media (max-width: 900px) {
+  .pub-card .pub-mark { margin-bottom: 12px; }
+  .pub-card .pub-mark svg { width: 44px; height: 44px; }}
 
 /* ── Lightbox ───────────────────────────────────────────── */
 .lightbox {

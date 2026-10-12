@@ -380,8 +380,8 @@ repository.
 
 Seventeen publication cards in a third scroller, `.pub-row` / `.pub-card`,
 sharing the same square and the same scroll mechanics as the Code cards. The
-insides differ: a mono year in `--accent` leads, the title fills the card,
-the venue closes it, and the card links out — the same contract as the
+insides differ: a drawn mark (`.pub-mark`), a mono year in `--accent`, the
+title filling the card, the venue closing it, and the card links out — the same contract as the
 repository name on a Code card, one click to check the claim.
 
 **Where the list came from.** ⚠ Google Scholar, OpenAlex, Crossref, Semantic
@@ -415,6 +415,24 @@ sends a reader to someone else's paper.
 ⚠ **No citation counts on the cards.** The Scholar export has them, and they
 fail the same test the OG card applies to a job title: they expire. The year
 and the venue cannot.
+
+**Each paper has its own line drawing**, added at Jimeno's request because
+the Code marks "look very nice". Same idiom — 64x64 viewBox,
+`currentColor`, 1.5px strokes, original abstract geometry — and each says
+what the paper is about: a life-cycle loop round a substation bay, two
+towers with a dashed twin of their line, a sun over blocks, a citation
+network, a projection inside its uncertainty band, a radial feeder, a
+street grid with one network run traced through it, an open book for the
+thesis, and so on. They are matched to cards by a fragment of the title in
+the build script, not by position, so reordering the row cannot shuffle
+them. ⚠ **A new paper needs its own drawing**; do not reuse one.
+
+⚠ **The marks are top-aligned and smaller than the Code ones** (64px, 44px
+at ≤900px) — these cards carry up to five lines of title, and at 260px the
+fullest leaves ~65px. Top-aligning keeps every year and title at one
+height across the row, where centring them in spare space as `.app-mark`
+does would scatter them. The ≤900px override sits *after* the base rules,
+for the same equal-specificity reason as the Video cards'.
 
 ⚠ **Titles are never translated or trimmed.** A paper's title is its title
 in both trees, and `-webkit-line-clamp: 9` on `.pub-title` is a guard
@@ -909,7 +927,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=15` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=16` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 
