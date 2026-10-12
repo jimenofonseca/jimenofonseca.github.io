@@ -112,109 +112,17 @@
         <h1 class="page-title" data-i18n="nav.art">Bibliothek</h1>
       </section>
 
-      <!-- Music and Photography were two pages (/music/, /photography/) until
-           the Intro/Work/Art reduction; Code was added later. Each part is a
-           plain <section>: an eyebrow, the media, and one caption line. The
-           body copy and the camera/kit list were removed deliberately — see
-           CLAUDE.md. build-gallery.py writes into the GALLERY markers. -->
-      <section class="art-part" aria-labelledby="music-h">
-        <p class="eyebrow"><span class="index">01</span><span id="music-h" data-i18n="nav.music">Musik</span></p>
-        <!-- One card, not an embed. The inline YouTube iframe was the most
-             prominent thing on the page and the only third party on it; the
-             card links out instead and matches the three rows below. .app-row
-             / .app-card are the shared link-card classes, so Music and Code
-             are literally the same component. -->
-        <div class="app-row">
-          <a class="app-card clip-card" href="https://youtu.be/m8g75C5WbgU"
-             target="_blank" rel="noopener">
-            <!-- The frame is hotlinked from YouTube's thumbnail CDN because
-                 the still cannot be fetched and committed from the build
-                 environment. It is an image, not the embed: no script, no
-                 cookies, no main-thread cost. maxresdefault exists for any
-                 upload at 720p or better; onerror falls back to hqdefault,
-                 which always exists, and object-fit crops its 4:3 bars. -->
-            <span class="clip-shot">
-              <img src="https://img.youtube.com/vi/m8g75C5WbgU/maxresdefault.jpg"
-                   alt="" width="1280" height="720" loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='https://img.youtube.com/vi/m8g75C5WbgU/hqdefault.jpg'" />
-              <span class="clip-play" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
-                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="24" cy="24" r="15"/>
-                  <path d="M20 16l12 8-12 8z"/>
-                </svg>
-              </span>
-            </span>
-            <span class="app-name">X-Band</span>
-            <span class="app-desc" data-i18n="v2.clip.desc">Musikvideo</span>
-            <span class="app-repo">YouTube <span class="arrow">↗</span></span>
-          </a>
-        </div>
-        <p class="media-caption">
-          <span class="kind" data-i18n="v2.music.caption.kind">Clip</span>
-          <span class="sep">·</span>
-          <span class="text">Summer 2025</span>
-        </p>
-      </section>
-
-      <section class="art-part" aria-labelledby="photo-h">
-        <p class="eyebrow"><span class="index">02</span><span id="photo-h" data-i18n="nav.photography">RGB</span></p>
-        <!-- tabindex + role make the scroller reachable and announced; a
-             scroll container whose children are not focusable is otherwise
-             unreachable by keyboard. aria-label goes through i18n. -->
-        <div class="photo-grid" role="region" tabindex="0"
-             data-i18n-aria="nav.photography" aria-label="RGB">
-          <!-- GALLERY-START -->
-          <figure data-full="/assets/photography/photo-01.jpg">
-            <img src="/assets/photography/thumb/photo-01.jpg" alt="photo 01" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-02.jpg">
-            <img src="/assets/photography/thumb/photo-02.jpg" alt="photo 02" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-04.jpg">
-            <img src="/assets/photography/thumb/photo-04.jpg" alt="photo 04" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-06.jpg">
-            <img src="/assets/photography/thumb/photo-06.jpg" alt="photo 06" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-07.jpg">
-            <img src="/assets/photography/thumb/photo-07.jpg" alt="photo 07" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-10.jpg">
-            <img src="/assets/photography/thumb/photo-10.jpg" alt="photo 10" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-11.jpg">
-            <img src="/assets/photography/thumb/photo-11.jpg" alt="photo 11" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-12.jpg">
-            <img src="/assets/photography/thumb/photo-12.jpg" alt="photo 12" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-13.jpg">
-            <img src="/assets/photography/thumb/photo-13.jpg" alt="photo 13" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-14.jpg">
-            <img src="/assets/photography/thumb/photo-14.jpg" alt="photo 14" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-15.jpg">
-            <img src="/assets/photography/thumb/photo-15.jpg" alt="photo 15" loading="lazy" />
-          </figure>
-          <figure data-full="/assets/photography/photo-16.jpg">
-            <img src="/assets/photography/thumb/photo-16.jpg" alt="photo 16" loading="lazy" />
-          </figure>
-          <!-- GALLERY-END -->
-        </div>
-        <p class="media-caption">
-          <span class="kind" data-i18n="v2.photo.caption.kind">Auswahl · 2018 – 2025</span>
-        </p>
-      </section>
-
+      <!-- Four parts: Code, Text, RGB (the photographs), Video. Each is a
+           plain <section>: a numbered eyebrow, one horizontal row of cards,
+           one caption line. No prose, on purpose — see CLAUDE.md.
+           build-gallery.py writes into the GALLERY markers under RGB. -->
       <!-- Code. The app names are invented — the repository name under each
            card is what makes them checkable, so do not drop it. These are
            links, not a lightbox: the container is .app-row, NOT .photo-grid,
            because app.js binds its lightbox to `.photo-grid figure` and
            build-gallery.py rewrites whatever sits inside a .photo-grid. -->
       <section class="art-part" aria-labelledby="code-h">
-        <p class="eyebrow"><span class="index">03</span><span id="code-h" data-i18n="nav.code">Code</span></p>
+        <p class="eyebrow"><span class="index">01</span><span id="code-h" data-i18n="nav.code">Code</span></p>
         <div class="app-row" role="region" tabindex="0"
              data-i18n-aria="nav.code" aria-label="Code">
           <a class="app-card" href="https://github.com/jimenofonseca/HBLM-USA"
@@ -318,7 +226,7 @@
            translated, which is why only the heading and caption are keyed.
            This is a SELECTION, not the full Scholar list. -->
       <section class="art-part" aria-labelledby="text-h">
-        <p class="eyebrow"><span class="index">04</span><span id="text-h" data-i18n="nav.text">Text</span></p>
+        <p class="eyebrow"><span class="index">02</span><span id="text-h" data-i18n="nav.text">Text</span></p>
         <div class="pub-row" role="region" tabindex="0"
              data-i18n-aria="nav.text" aria-label="Text">
           <a class="pub-card" href="https://scholar.google.com/scholar?q=%22Parametric%20LCA%20tool%20for%20assessing%20whole-life%20carbon%20emissions%20of%20electrical%20substations%20utilizing%20BIM%22" target="_blank" rel="noopener">
@@ -412,13 +320,65 @@
         </p>
       </section>
 
-      <!-- Video. The same .clip-card as Music: a 16/9 still on top, the title,
-           the outlet in mono. YouTube cards hotlink the still (see the Music
+      <section class="art-part" aria-labelledby="photo-h">
+        <p class="eyebrow"><span class="index">03</span><span id="photo-h" data-i18n="nav.photography">RGB</span></p>
+        <!-- tabindex + role make the scroller reachable and announced; a
+             scroll container whose children are not focusable is otherwise
+             unreachable by keyboard. aria-label goes through i18n. -->
+        <div class="photo-grid" role="region" tabindex="0"
+             data-i18n-aria="nav.photography" aria-label="RGB">
+          <!-- GALLERY-START -->
+          <figure data-full="/assets/photography/photo-01.jpg">
+            <img src="/assets/photography/thumb/photo-01.jpg" alt="photo 01" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-02.jpg">
+            <img src="/assets/photography/thumb/photo-02.jpg" alt="photo 02" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-04.jpg">
+            <img src="/assets/photography/thumb/photo-04.jpg" alt="photo 04" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-06.jpg">
+            <img src="/assets/photography/thumb/photo-06.jpg" alt="photo 06" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-07.jpg">
+            <img src="/assets/photography/thumb/photo-07.jpg" alt="photo 07" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-10.jpg">
+            <img src="/assets/photography/thumb/photo-10.jpg" alt="photo 10" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-11.jpg">
+            <img src="/assets/photography/thumb/photo-11.jpg" alt="photo 11" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-12.jpg">
+            <img src="/assets/photography/thumb/photo-12.jpg" alt="photo 12" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-13.jpg">
+            <img src="/assets/photography/thumb/photo-13.jpg" alt="photo 13" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-14.jpg">
+            <img src="/assets/photography/thumb/photo-14.jpg" alt="photo 14" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-15.jpg">
+            <img src="/assets/photography/thumb/photo-15.jpg" alt="photo 15" loading="lazy" />
+          </figure>
+          <figure data-full="/assets/photography/photo-16.jpg">
+            <img src="/assets/photography/thumb/photo-16.jpg" alt="photo 16" loading="lazy" />
+          </figure>
+          <!-- GALLERY-END -->
+        </div>
+        <p class="media-caption">
+          <span class="kind" data-i18n="v2.photo.caption.kind">Auswahl · 2018 – 2025</span>
+        </p>
+      </section>
+
+      <!-- Video. Talks, plus the music video, which was a part of its own
+           (01 Music) until the parts were reordered. A .clip-card is a 16/9
+           still on top, the title, the outlet in mono. YouTube cards hotlink the still (see the Music
            card); video.ethz.ch has no predictable thumbnail URL, so ETH cards
            get a blank panel with the play glyph instead of a still.
            Talk titles are the talks' own and are not keyed. -->
       <section class="art-part" aria-labelledby="video-h">
-        <p class="eyebrow"><span class="index">05</span><span id="video-h" data-i18n="nav.video">Video</span></p>
+        <p class="eyebrow"><span class="index">04</span><span id="video-h" data-i18n="nav.video">Video</span></p>
         <div class="app-row" role="region" tabindex="0"
              data-i18n-aria="nav.video" aria-label="Video">
           <a class="app-card clip-card" href="https://www.youtube.com/watch?v=S84aLW_PXXY"
@@ -481,6 +441,30 @@
               </span>
             </span>
             <span class="app-name">City Energy Analyst executive course, 2022</span>
+            <span class="app-repo">YouTube <span class="arrow">↗</span></span>
+          </a>
+          <a class="app-card clip-card" href="https://youtu.be/m8g75C5WbgU"
+             target="_blank" rel="noopener">
+            <!-- The frame is hotlinked from YouTube's thumbnail CDN because
+                 the still cannot be fetched and committed from the build
+                 environment. It is an image, not the embed: no script, no
+                 cookies, no main-thread cost. maxresdefault exists for any
+                 upload at 720p or better; onerror falls back to hqdefault,
+                 which always exists, and object-fit crops its 4:3 bars. -->
+            <span class="clip-shot">
+              <img src="https://img.youtube.com/vi/m8g75C5WbgU/maxresdefault.jpg"
+                   alt="" width="1280" height="720" loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='https://img.youtube.com/vi/m8g75C5WbgU/hqdefault.jpg'" />
+              <span class="clip-play" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="24" cy="24" r="15"/>
+                  <path d="M20 16l12 8-12 8z"/>
+                </svg>
+              </span>
+            </span>
+            <span class="app-name">X-Band</span>
+            <span class="app-desc" data-i18n="v2.clip.desc">Musikvideo</span>
             <span class="app-repo">YouTube <span class="arrow">↗</span></span>
           </a>
         </div>

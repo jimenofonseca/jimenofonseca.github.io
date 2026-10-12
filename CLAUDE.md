@@ -67,7 +67,7 @@ markup.
 │   └── photography/            # 12 gallery photos + thumb/ (_originals/ gitignored)
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
-├── i18n.js                     # EN/DE copy — 31 keys each. Build input only
+├── i18n.js                     # EN/DE copy — 29 keys each. Build input only
 ├── build-gallery.py            # Photo pipeline → writes into art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
@@ -218,24 +218,23 @@ Edit the **English** page (`index.html`, `art/index.html`), then run
 
 ### Working on the Library page (`/art/`)
 
-`/art/` is **one page, five parts** — Music, Photography, Code, Text, Video — each a plain
-`<section class="art-part">`: a numbered eyebrow, the media, one caption
-line. The base `section` rule supplies the hairline between them and
+`/art/` is **one page, four parts, in this order: 01 Code, 02 Text, 03 RGB
+(the photographs), 04 Video** — each a plain `<section class="art-part">`: a
+numbered eyebrow, one row of cards, one caption line. The order is Jimeno's;
+Music used to be part 01 and Photography 02 until he reordered them and
+folded the music video into Video. The base `section` rule supplies the hairline between them and
 `section:first-of-type` keeps `.page-intro` borderless, so the parts carry no
 layout CSS beyond `.art-part .eyebrow { margin-bottom: 18px }`, which pulls
 each label down onto its media so the pair reads as one block.
 
-- **Music**: one link card to the video (`m8g75C5WbgU`) — see below.
-- **Photography** — headed **RGB** on the page, in both languages; the key
-  is still `nav.photography`: 12 photos from `assets/photography/`, in a **horizontal
+- **Code**: seven app cards, each an outbound link to a GitHub repository.
+- **Text**: seventeen publication cards, each an outbound link to the paper.
+- **RGB** — the photographs; the key is still `nav.photography`, same call as
+  `nav.art`: 12 photos from `assets/photography/`, in a **horizontal
   scroller**, not a grid. The `app.js` lightbox binds to `.photo-grid
   figure[data-full]`; `cursor: zoom-in` is the only affordance, since no
   prose tells people to click.
-- **Code**: seven app cards in a second scroller, each an outbound link to a
-  GitHub repository.
-- **Text**: seventeen publication cards in a third scroller, each an
-  outbound link to the paper.
-- **Video**: talk cards in a fourth scroller, the same `.clip-card` as Music.
+- **Video**: four talk cards, then the X-Band music video last.
 
 ⚠ **To drop a photo, delete it from `_originals/` too.** The gallery markup
 is generated, so pulling a `<figure>` and the two JPEGs is only half the job
@@ -244,7 +243,7 @@ brings the photo straight back. `photo-05.jpg` was removed this way and its
 original still needs deleting on Jimeno's machine.
 
 ⚠ **The page has no prose at all, and that is the design.** The whole page is
-the h1, five numbered eyebrows, five rows of cards and five caption lines.
+the h1, four numbered eyebrows, four rows of cards and four caption lines.
 Removed in stages: three paragraphs (`v2.music.p1`, `v2.photo.p1`,
 `v2.photo.p2`), the `.gear-list` camera aside, and finally the lede
 (`v2.art.lede`, "Music I have recorded, and photographs I keep coming back
@@ -252,9 +251,17 @@ to.") — the h1 already says what the page is. `.art-text`, `.gear-*` and the
 last use of `.page-lede` went with them. **Do not add explanatory prose
 back.**
 
-#### The Music card
+#### The music video card
 
-⚠ **The Music part used to be an inline YouTube iframe, and the embed is
+⚠ **There is no Music part any more.** The music video is the last card in
+the Video row; its own part, with its eyebrow and *Clip · Summer 2025*
+caption, went in the reorder, along with `nav.music` and
+`v2.music.caption.kind`. It is the **only Video card with a descriptor line**
+(`v2.clip.desc`, *Music video*), because "X-Band" on its own says nothing,
+while a talk title says what it is. Everything below still describes the
+card itself.
+
+⚠ **The music video used to be an inline YouTube iframe, and the embed is
 gone on purpose.** It was a full-width 16/9 block — the most prominent thing
 on a page where it is the least prominent part. It is now a single
 `.app-card.clip-card` linking to `youtu.be/m8g75C5WbgU`, which cut `/art/`
@@ -280,11 +287,6 @@ guaranteed, hqdefault always is, and `object-fit: cover` crops hqdefault's
 supply the frame** — put it in `assets/`, point `src` at it and drop the
 `onerror`. ⚠ A hotlinked still also silently follows the video: re-cut the
 upload and the card changes with no commit here.
-
-The caption reads *Clip · Summer 2025*; the band name moved onto the card,
-where it is the card's title. ⚠ That `Summer 2025` is plain text with no
-`data-i18n`, so it stays English in `/de/` — as it did when it read
-"X-Band, Summer 2025". Key it if that ever matters.
 
 #### The photo scroller
 
@@ -324,8 +326,8 @@ mechanics through grouped selectors (`.photo-grid, .app-row, .pub-row { … }`),
 so a change to the scroll behaviour reaches all three rows.
 
 ⚠ **`.app-row` / `.app-card` are the shared *link-card* classes, not
-Code-only** — the Music part uses exactly the same two, with one card in the
-row. The name is as much of a half-truth as `.photo-grid`, and kept for the
+Code-only** — the Video row (talks and the music video) uses exactly the
+same two. The name is as much of a half-truth as `.photo-grid`, and kept for the
 same reason: a third near-identical pair of classes would triple every
 grouped selector for nothing a reader sees.
 
@@ -408,7 +410,7 @@ against a future monster, not a design — nothing reaches it today.
 
 #### The Video cards
 
-The Music card's anatomy, repeated: `.app-row` of `.app-card.clip-card`, a
+The music video card's anatomy, repeated: `.app-row` of `.app-card.clip-card`, a
 16/9 still on top, the talk title, the outlet in mono (`YOUTUBE` or
 `ETH ZÜRICH`). **No descriptor line** — the eyebrow already says Video and
 the mono line says where, and dropping it gives a title three lines before
@@ -417,8 +419,8 @@ it can push the mono line off the 320px square.
 ⚠ **ETH cards have no still, on purpose.** `video.ethz.ch` has no
 predictable thumbnail URL, so `.clip-shot.blank` keeps the 16/9 panel —
 the row stays one shape — and draws the play glyph in `--accent` rather
-than white-over-footage. YouTube cards hotlink their still exactly as the
-Music card does, with the same `maxresdefault` → `hqdefault` fallback.
+than white-over-footage. YouTube cards hotlink their still as described
+under the music video card, with the `maxresdefault` → `hqdefault` fallback.
 
 ⚠ **Titles come from Jimeno, not from the video hosts.** YouTube,
 `img.youtube.com` and `video.ethz.ch` are all blocked by the session egress
@@ -493,7 +495,7 @@ switcher — so while both languages shared one URL, every German string was
 invisible to search, including to the German-speaking recruiters the `/de/`
 tree exists for.
 
-`i18n.js` is the only place copy lives (`en:` + `de:`, 31 keys each) and is
+`i18n.js` is the only place copy lives (`en:` + `de:`, 29 keys each) and is
 **build input, never served to browsers**. English pages are hand-authored
 and `build-i18n.py` refreshes their fallbacks from `en:`; **`de/**` is
 generated and must never be hand-edited** — the generator deletes and
@@ -541,11 +543,11 @@ markup by hand.
 
 ## i18n key conventions
 
-31 keys per language. `nav.*` is the sidebar plus the five Library part
+29 keys per language. `nav.*` is the sidebar plus the four Library part
 headings; `home.*` / `art.*` are per-page `<title>` and `<meta description>`;
 `hero.h1` is the Intro heading (the name); `about.bio` is the bio; `v2.*` is
-everything else — the five caption kinds, the seven `v2.app.*` card
-descriptors, `v2.clip.desc` for the Music card and the chrome
+everything else — the four caption kinds, the seven `v2.app.*` card
+descriptors, `v2.clip.desc` for the music video card and the chrome
 (`v2.theme.label`, `v2.lang.label`, `v2.menu.open`). The `v2.` prefix is an
 artefact of an old redesign, not a version scheme.
 

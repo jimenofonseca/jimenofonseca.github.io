@@ -17,7 +17,6 @@ var TRANSLATIONS = {
     'v2.theme.label':     'Theme',
     'v2.lang.label':      'Language',
     'v2.menu.open':       'Menu',
-    'nav.music':          'Music',
     'nav.photography':    'RGB',
 
     // Stat labels (subpages)
@@ -51,7 +50,6 @@ var TRANSLATIONS = {
     // ── Publications ─────────────────────────────
 
     // ── Music ─────────────────────────────────────
-    'v2.music.caption.kind': 'Clip',
 
     // ── Photography ───────────────────────────────
     'v2.photo.caption.kind': 'Selected · 2018 – 2025',
@@ -101,7 +99,6 @@ var TRANSLATIONS = {
     'v2.theme.label':     'Thema',
     'v2.lang.label':      'Sprache',
     'v2.menu.open':       'Menü',
-    'nav.music':          'Musik',
     'nav.photography':    'RGB',
 
     // Stat-Labels (Unterseiten)
@@ -135,7 +132,6 @@ var TRANSLATIONS = {
     // ── Publications ─────────────────────────────
 
     // ── Musik ─────────────────────────────────────
-    'v2.music.caption.kind': 'Clip',
 
     // ── Fotografie ────────────────────────────────
     'v2.photo.caption.kind': 'Auswahl · 2018 – 2025',
