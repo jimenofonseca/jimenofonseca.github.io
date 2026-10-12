@@ -432,16 +432,20 @@ not be its published title. `fctc` in the ETH path is **From Code to
 Company: Energy Tools That Power the Future**, a 2025 event run by
 Superurbana; the two cards are one talk recorded in two parts.
 
-⚠ **The two From Code to Company cards use a self-hosted still,
-`assets/video/from-code-to-company.webp`** (1846x992), which Jimeno
-supplied: `video.ethz.ch` has no predictable thumbnail URL and is blocked by
-the session egress proxy. **That frame already has the ETH player's play
-button in it, so those two cards draw no `.clip-play` of their own** — two
-concentric play buttons is what you get if someone "fixes" the
-inconsistency. Both cards share the one file. `.clip-shot.blank` (an empty
-16/9 panel with the glyph in `--accent`) is still in `style.css` for the
-next ETH talk that arrives without a frame. YouTube cards hotlink their
-still as described under the concert card.
+⚠ **The two From Code to Company cards use self-hosted stills Jimeno
+supplied**, because `video.ethz.ch` has no predictable thumbnail URL and is
+blocked by the session egress proxy:
+
+| Card | Still | Drawn play glyph? |
+|---|---|---|
+| *What have we built?* | `assets/video/from-code-to-company.webp` (1846x992, the event's title slide) | **No** — the frame already has the ETH player's play button in it; drawing ours too gives two concentric buttons |
+| *What is next?* | `assets/video/from-code-to-company-what-is-next.webp` (2000x1095, Jimeno on stage) | Yes, like the YouTube cards; it sits on his chest, clear of his face |
+
+So the pair is deliberately inconsistent about the glyph — **do not "fix"
+it** without a clean frame for *What have we built?*. `.clip-shot.blank`
+(an empty 16/9 panel with the glyph in `--accent`) is still in `style.css`
+for the next ETH talk that arrives without a frame. YouTube cards hotlink
+their still as described under the concert card.
 
 ⚠ **One more video he supplied is held back** —
 `youtube.com/watch?v=lFmHrS78vRg` — because nobody here could see what it
