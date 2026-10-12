@@ -358,12 +358,20 @@ bands); each says what the project does without borrowing anyone's logo.
 
 **Six of the seven are `jimenofonseca/*`; the seventh is
 `architecture-building-systems/CityEnergyAnalyst`**, added on request after
-the first six shipped. ⚠ **That card alone prints `owner/repo`** — the
+the first six shipped. ⚠ **That card is titled with the project's real
+name, *City Energy Analyst*, not an invented one** — it was *Urban Twin*
+until Jimeno renamed it; the six `jimenofonseca/*` cards keep their
+invented names. ⚠ **That card alone prints `owner/repo`** — the
 others print the bare repository name, because printing `JIMENOFONSECA/` six
 times is noise, while hiding CEA's owner would imply it is his repository
 rather than the ETH chair's, which he co-created. `.app-repo` carries a
 two-line `min-height` so the one wrapping label does not lift its card's
-name out of line with its neighbours.
+name out of line with its neighbours, and `.app-card .app-desc` reserves
+two lines for the same reason: Jimeno's longer descriptors for Bayes Atlas
+(*Bayesian hierarchical learner for energy forecast*) and Nudge Meter
+(*Bayesian deep metalearner for behavioural change*) wrap, and lifted those
+names ~19px above the rest. ⚠ Those two descriptors are his wording, with
+*behavioural* in the site's British spelling where he wrote *behavioral*.
 
 Still deliberately absent: the forked `causalimpact` and this website's own
 repository.
@@ -890,7 +898,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   Unversioned, a returning visitor keeps running the old JS for up to ten
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
-  cache. Currently `style.css?v=14` and `app.js?v=4`; the portrait carries
+  cache. Currently `style.css?v=15` and `app.js?v=4`; the portrait carries
   its own `?v=4`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 

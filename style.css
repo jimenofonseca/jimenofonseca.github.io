@@ -713,6 +713,9 @@ main.content:has(> .hero) .hero { padding-bottom: 0; }
   color: var(--muted);
   line-height: 1.4;
   margin-top: 2px;
+  /* Two lines on every card, so the descriptors that wrap (Bayes Atlas,
+     Nudge Meter) do not lift their names above their neighbours'. */
+  min-height: calc(13.5px * 1.4 * 2);
 }
 /* The repo name is what makes an invented app name checkable. Mono, because
    it is a label and an identifier, not prose. */
