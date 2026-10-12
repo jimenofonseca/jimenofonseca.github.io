@@ -412,9 +412,12 @@ against a future monster, not a design — nothing reaches it today.
 #### The Video cards
 
 The concert card's anatomy, repeated: `.app-row` of `.app-card.clip-card`,
-a 16/9 still on top, the title, then **the outlet and year in mono**
-(`ETH ZÜRICH · 2025`). The year lives in the mono line, not the title, so
-every card carries it in the same place. **No descriptor line** except on
+a 16/9 still on top, the title, then **who published it and the year, in
+mono** (`ETH ZÜRICH · 2025`). The year lives in the mono line, not the
+title, so every card carries it in the same place. ⚠ **The label is the
+publisher Jimeno names, not the platform**: the BIM talk reads `AXPO` and
+the course `CITY ENERGY ANALYST` although both are YouTube links; only the
+concert still says `YOUTUBE`. Do not "correct" those to the host. **No descriptor line** except on
 the concert card — the eyebrow already says Video, and dropping it gives a
 title three lines before it can push the mono line off the 320px square.
 
