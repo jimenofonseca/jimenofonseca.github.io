@@ -5,7 +5,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Work',
     'nav.art':               'Library',
-    'art.title':             'Library | Music, Photography, Code, Text and Video — Jimeno Fonseca',
+    'art.title':             'Library — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
@@ -89,7 +89,7 @@ var TRANSLATIONS = {
     'nav.intro':             'Intro',
     'nav.work':              'Arbeit',
     'nav.art':               'Bibliothek',
-    'art.title':             'Bibliothek | Musik, Fotografie, Code, Text und Video — Jimeno Fonseca',
+    'art.title':             'Bibliothek — Jimeno Fonseca',
     'art.desc':              'Jimeno Fonseca',
 
     // ── Home ─────────────────────────────────────
