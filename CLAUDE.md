@@ -779,11 +779,12 @@ disclosure** — "revenue-generating" and "OPEX liability" survived two sweeps
 that were only looking for figures. Full reasoning in
 `docs/retired-site.md`.
 
-⚠ **The current bio says the unit "builds and commercialises digital & IT
-products and services"** — Jimeno's own wording, and it was flagged to him
-as the same kind of claim as "revenue-generating" before it shipped. He
-kept it. **Do not strip it in a confidentiality sweep**; raise it with him
-instead. The bio's other wording is his too, apart from three edits he
+⚠ **The current bio (Oct 2026) says he and his teams "spearhead digital
+transformation programs, new digital products and services and the
+maintenance of enterprise-technology"** — Jimeno's own wording, replacing an
+earlier "builds and commercialises digital & IT products and services" that
+he had kept after it was flagged as a disclosure-style claim. **Do not strip
+or reword it in a confidentiality sweep**; raise it with him instead. The bio's other wording is his too, apart from three edits he
 approved: "and co-founder of Superurbana" → "and co-founded", "member of
 CIGRE's work" → "a member of CIGRE's working group", "asset-management" →
 "asset management". It says *co-founded*

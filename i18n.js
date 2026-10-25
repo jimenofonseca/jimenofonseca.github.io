@@ -32,7 +32,7 @@ var TRANSLATIONS = {
     // ── Case studies ─────────────────────────────
 
     // ── About ───────────────────────────────────
-    'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he builds and commercialises digital & IT products and services for power networks — including the first substation in the region built digitally. He co-founded the City Energy Analyst, an open-source cloud platform for energy simulation now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until its pivot to asset management in 2025. He holds a PhD from ETH Zürich, is a PMI Agile Certified Practitioner (PMI-ACP) and a member of CIGRE\'s working group on digital twins. Privately, he codes, writes, takes pictures and plays guitar.',
+    'about.bio':                  'Jimeno Fonseca leads Digital Engineering at Axpo Grid in Switzerland, where he and his teams spearhead digital transformation programs, new digital products and services and the maintenance of enterprise-technology. He co-founded the City Energy Analyst, an open-source cloud platform now used in more than 75 countries, and co-founded Superurbana GmbH, which commercialised that work until its pivot to asset management in 2025. He holds a PhD from ETH Zürich, is a PMI Agile Certified Practitioner (PMI-ACP) and a member of CIGRE\'s working group on digital twins. Privately, he codes, takes pictures and plays guitar.',
 
 
     // ── Superurbana ──────────────────────────────
@@ -116,7 +116,7 @@ var TRANSLATIONS = {
     // ── Case studies ─────────────────────────────
 
     // ── About ───────────────────────────────────
-    'about.bio':                  'Jimeno Fonseca leitet das Digital Engineering bei Axpo Grid in der Schweiz, wo er digitale und IT-Produkte und -Dienstleistungen für Stromnetze entwickelt und kommerzialisiert — darunter das erste digital gebaute Unterwerk der Region. Er ist Mitgründer des City Energy Analyst, einer Open-Source-Cloud-Plattform für Energiesimulation, die heute in über 75 Ländern eingesetzt wird, sowie der Superurbana GmbH, die diese Arbeit bis zu ihrer Neuausrichtung auf Asset-Management im Jahr 2025 kommerzialisiert hat. Er hat an der ETH Zürich promoviert, ist PMI Agile Certified Practitioner (PMI-ACP) und Mitglied der CIGRE-Arbeitsgruppe zu digitalen Zwillingen. Privat programmiert er, schreibt, fotografiert und spielt Gitarre.',
+    'about.bio':                  'Jimeno Fonseca leitet das Digital Engineering bei Axpo Grid in der Schweiz, wo er mit seinen Teams digitale Transformationsprogramme, neue digitale Produkte und Dienstleistungen sowie den Betrieb der Unternehmenstechnologie vorantreibt. Er ist Mitgründer des City Energy Analyst, einer Open-Source-Cloud-Plattform, die heute in über 75 Ländern eingesetzt wird, sowie der Superurbana GmbH, die diese Arbeit bis zu ihrer Neuausrichtung auf Asset-Management im Jahr 2025 kommerzialisiert hat. Er hat an der ETH Zürich promoviert, ist PMI Agile Certified Practitioner (PMI-ACP) und Mitglied der CIGRE-Arbeitsgruppe zu digitalen Zwillingen. Privat programmiert er, fotografiert und spielt Gitarre.',
 
 
     // ── Superurbana ──────────────────────────────
