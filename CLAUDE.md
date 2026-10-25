@@ -812,8 +812,10 @@ and ~7.5s of script evaluation on a mid-range phone.
 
 `assets/portrait.jpg` — **809x809, shown as a circle.** No caption, no JS.
 
-⚠ **The hero portrait is round because the source is.** The current file is a
-circular avatar on a pure-black field. In the old 3:4 box, `object-fit:
+⚠ **The hero portrait is round by CSS.** The current file (Oct 2026) is a
+square-cropped photo with a real background; the circle is the
+`border-radius`. The previous file was a circular avatar on a pure-black
+field, which is where the round treatment came from. In the old 3:4 box, `object-fit:
 cover` cropped 25% off its sides *and* left the black corners showing, which
 is glaring against the light palette. `.hero-figure img` therefore carries
 `aspect-ratio: 1/1` + `border-radius: 50%`, which clips the corners away
@@ -928,7 +930,7 @@ classes that look dead to a grep — `lightbox`, `lightbox-caption`,
   minutes. That bit us the moment the hyperjump was deleted: the code was
   gone from `main`, Pages had deployed, and the effect still played from
   cache. Currently `style.css?v=16` and `app.js?v=4`; the portrait carries
-  its own `?v=4`. (This line has been stale before — check the pages, not
+  its own `?v=5`. (This line has been stale before — check the pages, not
   this sentence, before assuming a number.)
 
   There is **no pre-commit hook** doing this any more — the old one existed
