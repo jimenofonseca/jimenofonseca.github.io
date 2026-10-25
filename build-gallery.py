@@ -38,7 +38,7 @@ ROOT = Path(__file__).resolve().parent
 ORIG = ROOT / "assets" / "photography" / "_originals"
 FULL = ROOT / "assets" / "photography"
 THUMB = ROOT / "assets" / "photography" / "thumb"
-HTML = ROOT / "art" / "index.html"
+HTML = ROOT / "private-src" / "art" / "index.html"  # plaintext source; build-i18n.py encrypts it
 
 ORIG.mkdir(parents=True, exist_ok=True)
 THUMB.mkdir(parents=True, exist_ok=True)

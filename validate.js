@@ -37,7 +37,9 @@ const enPages = ['index.html'].concat(
     .filter(p => fs.existsSync(path.join(ROOT, p)))
 ).sort()
   // Redirect stubs carry no content of their own — no i18n, no canonical pair.
-  .filter(p => !/<meta http-equiv="refresh"/i.test(fs.readFileSync(path.join(ROOT, p), 'utf8')));
+  .filter(p => !/<meta http-equiv="refresh"/i.test(fs.readFileSync(path.join(ROOT, p), 'utf8')))
+  // StatiCrypt pages are ciphertext; their plaintext is gitignored in private-src/.
+  .filter(p => !/staticrypt-html/.test(fs.readFileSync(path.join(ROOT, p), 'utf8')));
 
 const dePages = enPages.map(p => path.join('de', p))
   .filter(p => fs.existsSync(path.join(ROOT, p)));

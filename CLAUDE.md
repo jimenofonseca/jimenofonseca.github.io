@@ -53,14 +53,14 @@ markup.
 ```
 .
 ├── index.html                  # Intro — h1 (the name), short bio, portrait
-├── art/                        # Art — Music + Photography on one page
+├── art/                        # Library — ENCRYPTED (StatiCrypt output; source in private-src/)
 ├── de/                         # GENERATED. Never hand-edit; run build-i18n.py
 ├── projects/                   # redirect stub → / (see "Old URLs")
 ├── _old/                       # UNPUBLISHED (Jekyll underscore rule)
 │   ├── retired-pages/          #   the nine-page site, archived intact
 │   └── …                       #   plus the original Jekyll site
 ├── docs/                       # retired-site.md · deploy-and-git.md
-├── private-src/                # GITIGNORED — optional local drafts
+├── private-src/                # GITIGNORED — Library plaintext source + its password file
 ├── assets/
 │   ├── portrait.jpg            # Intro portrait
 │   ├── og-image.jpg            # 1200×630 share card (both pages)
@@ -68,11 +68,11 @@ markup.
 ├── style.css                   # All site styles
 ├── app.js                      # Theme toggle, mobile sidebar, photo lightbox
 ├── i18n.js                     # EN/DE copy — 31 keys each. Build input only
-├── build-gallery.py            # Photo pipeline → writes into art/index.html
+├── build-gallery.py            # Photo pipeline → writes into private-src/art/index.html
 ├── build-i18n.py               # Generates de/ from the EN pages + i18n.js
 ├── appendix-og-image.py        # Regenerates assets/og-image.jpg
 ├── validate.js                 # Site checks — CI runs this on every push
-├── sitemap.xml                 # 2 pages × 2 languages; the stub is excluded
+├── sitemap.xml                 # Intro only (EN + DE); Library and the stub excluded
 └── robots.txt                  # Allow all + Sitemap: pointer
 ```
 
@@ -213,10 +213,42 @@ attribute, so they do **not** follow — hand-edit them in the same pass.
 
 ### Updating structure (HTML / CSS)
 
-Edit the **English** page (`index.html`, `art/index.html`), then run
+Edit the **English** page (`index.html`, or `private-src/art/index.html` for
+the Library — never `art/index.html`, which is ciphertext), then run
 `build-i18n.py` to mirror it into `de/`. Never hand-edit `de/`.
 
 ### Working on the Library page (`/art/`)
+
+⚠ **The Library is password-protected with StatiCrypt (Oct 2026).** The repo
+is public, so the plaintext must never be committed:
+
+| File | What |
+|---|---|
+| `private-src/art/index.html` | **the real source** — gitignored, edit this |
+| `private-src/.staticrypt-password` | the password, one line — gitignored. **Never write it into this file, a commit message or any tracked file** |
+| `art/index.html`, `de/art/index.html` | StatiCrypt output, committed. Never hand-edit |
+
+`build-i18n.py` does the whole job: `PRIVATE = {'art/index.html'}` makes it
+read the source from `private-src/`, write the refreshed English plaintext
+back there, and encrypt both languages (pinned `staticrypt@3.5.4` via npx,
+English/German prompt text in `PROMPT`, a fixed non-secret `SALT` so
+"Remember me" survives rebuilds, 30-day remember). It aborts **before**
+deleting `de/` if the source or the password file is missing.
+
+⚠ **`private-src/` exists only on Jimeno's machine** — not in git, not on
+GitHub. Losing it loses the editable Library; recovering means decrypting
+the committed page with `npx staticrypt --decrypt` and the password. Copy it
+by hand when switching machines, like `_originals/`.
+
+⚠ **Only the HTML is protected.** Photos, stills and other files under
+`assets/` are public at their URLs, and every earlier plaintext version of
+`art/index.html` stays readable in git history. To change the password, edit
+the password file and re-run `build-i18n.py`.
+
+`validate.js` skips any page containing `staticrypt-html`, and `/art/` is
+out of `sitemap.xml` because crawlers would only index the prompt. Before
+committing, check `grep -c Ledgerline art/index.html` is `0`.
+
 
 `/art/` is **one page, four parts, in this order: 01 Code, 02 Text, 03 RGB
 (the photographs), 04 Video** — each a plain `<section class="art-part">`: a
@@ -531,18 +563,20 @@ Talk titles are not keyed, for the same reason paper titles are not.
 open assets/photography/_originals/
 
 # 2. Generate web-size fulls + 600x600 thumbs AND rewrite the <figure> blocks
-#    between the GALLERY-START / GALLERY-END markers in art/index.html:
+#    between the GALLERY-START / GALLERY-END markers in private-src/art/index.html,
+#    then re-encrypt with: python3 build-i18n.py
 python3 build-gallery.py
 
 # 3. Commit
-git add assets/photography/ art/ && git commit -m "Update photo gallery" && git push origin main
+git add assets/photography/ art/ de/ && git commit -m "Update photo gallery" && git push origin main
 ```
 
 Uses macOS native `sips`, no ImageMagick. `_originals/` is gitignored.
 
-⚠ **`build-gallery.py` writes into `art/index.html`.** Its target moved when
-the gallery did. If you ever restore `/photography/`, move the target back,
-or the generator silently updates a page nobody serves.
+⚠ **`build-gallery.py` writes into `private-src/art/index.html`** (the
+Library's plaintext source), so run `build-i18n.py` after it to re-encrypt.
+If you ever restore `/photography/`, move the target back, or the generator
+silently updates a page nobody serves.
 
 ### Adding a new page
 
@@ -606,7 +640,8 @@ rewording sometimes needs no German change. Do not "fix" those.
 
 ### What the tooling enforces, and what it does not
 
-✅ `node validate.js` checks **4 pages** — 2 English, 2 German — each
+✅ `node validate.js` checks **2 pages** — the Intro in English and German
+(the encrypted Library is skipped) — each
 against its *own* language block, plus: EN/DE key parity; every `data-i18n`
 key exists; exactly one `Person` JSON-LD per home page with a `url` matching
 its canonical; a self-referential canonical and a reciprocal `hreflang` set

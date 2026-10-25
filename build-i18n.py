@@ -24,10 +24,24 @@ What it does, per page:
 Run it after ANY edit to i18n.js. `node validate.js` fails if you forget.
 """
 
-import json, os, re, shutil, subprocess, sys
+import json, os, re, shutil, subprocess, sys, tempfile
 
 ROOT   = os.path.dirname(os.path.abspath(__file__))
 ORIGIN = 'https://jimenofonseca.com'
+
+# Password-protected pages. The repo is public, so their plaintext source lives
+# in gitignored private-src/<path> and only StatiCrypt output is committed.
+PRIVATE   = {'art/index.html'}
+PASS_FILE = os.path.join(ROOT, 'private-src', '.staticrypt-password')
+SALT      = 'e97ae74c719916e02eb616b16b20e7ea'  # not secret; fixed so "Remember me" survives rebuilds
+PROMPT = {
+    'en': {'title': 'Library — Jimeno Fonseca', 'instructions': 'This page is private.',
+           'button': 'Open', 'placeholder': 'Password', 'remember': 'Remember me',
+           'error': 'Wrong password'},
+    'de': {'title': 'Bibliothek — Jimeno Fonseca', 'instructions': 'Diese Seite ist privat.',
+           'button': 'Öffnen', 'placeholder': 'Passwort', 'remember': 'Angemeldet bleiben',
+           'error': 'Falsches Passwort'},
+}
 
 # i18n.js ends in an IIFE that touches document/localStorage, so read it
 # through node with those stubbed — the same trick validate.js uses.
@@ -59,8 +73,34 @@ def source_pages():
             continue
         if os.path.isdir(os.path.join(ROOT, d)) and os.path.exists(os.path.join(ROOT, p)):
             pages.append(p)
-    return [p for p in pages
-            if '<meta http-equiv="refresh"' not in read(p)]
+    pages = [p for p in pages if p not in PRIVATE]
+    return sorted([p for p in pages if '<meta http-equiv="refresh"' not in read(p)]
+                  + sorted(PRIVATE))
+
+
+def source_path(rel):
+    return os.path.join('private-src', rel) if rel in PRIVATE else rel
+
+
+def encrypt(html, lang):
+    with open(PASS_FILE, encoding='utf-8') as f:
+        password = f.read().strip()
+    p = PROMPT[lang]
+    with tempfile.TemporaryDirectory() as tmp:
+        src = os.path.join(tmp, 'index.html')
+        with open(src, 'w', encoding='utf-8') as f:
+            f.write(html)
+        subprocess.run(
+            ['npx', '-y', 'staticrypt@3.5.4', src, '-d', os.path.join(tmp, 'out'),
+             '--config', 'false', '--salt', SALT, '--short', '--remember', '30',
+             '--template-title', p['title'], '--template-instructions', p['instructions'],
+             '--template-button', p['button'], '--template-placeholder', p['placeholder'],
+             '--template-remember', p['remember'], '--template-error', p['error'],
+             '--template-color-primary', '#0b4fa8', '--template-color-secondary', '#0c0c0c'],
+            env={**os.environ, 'STATICRYPT_PASSWORD': password},
+            check=True, capture_output=True, text=True)
+        with open(os.path.join(tmp, 'out', 'index.html'), encoding='utf-8') as f:
+            return f.read()
 
 
 def read(rel):
@@ -198,22 +238,35 @@ def main():
     en, de = T['en'], T['de']
     pages = source_pages()
 
+    # Fail before deleting de/, so a missing source or password cannot leave
+    # the German tree half-built.
+    for p in PRIVATE:
+        if not os.path.exists(os.path.join(ROOT, source_path(p))):
+            sys.exit(f'missing plaintext source {source_path(p)} (gitignored; restore it from a backup)')
+    if PRIVATE and not os.path.exists(PASS_FILE):
+        sys.exit(f'missing {os.path.relpath(PASS_FILE, ROOT)} — put the Library password in it')
+
     de_dir = os.path.join(ROOT, 'de')
     if os.path.isdir(de_dir):
         shutil.rmtree(de_dir)
 
     for p in pages:
-        src = read(p)
+        src = read(source_path(p))
 
         # English page: refresh fallbacks from en:, add hreflang
         out_en = add_hreflang(apply_lang(src, en), p)
-        write(p, out_en)
 
         # German page: de: values, then all the URL/locale rewrites
         out_de = to_german(add_hreflang(apply_lang(src, de), p), p, en, de)
+
+        if p in PRIVATE:
+            write(source_path(p), out_en)
+            out_en, out_de = encrypt(out_en, 'en'), encrypt(out_de, 'de')
+
+        write(p, out_en)
         write(os.path.join('de', p), out_de)
 
-        print(f'  {p:<34} -> de/{p}')
+        print(f'  {p:<34} -> de/{p}' + ('   (encrypted)' if p in PRIVATE else ''))
 
     print(f'\n{len(pages)} pages x 2 languages. Now run: node validate.js')
 

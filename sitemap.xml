@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Two content pages in two languages. Each <url> carries xhtml:link
+  One public content page in two languages. Each <url> carries xhtml:link
   alternates naming every language version of that page, including itself —
   Google requires the set to be reciprocal and self-referential.
 
@@ -9,7 +9,10 @@
   pages are in _old/retired-pages/ and deliberately serve 404 — see
   CLAUDE.md, "The 2026 reduction".
 
-  Deliberately excluded: /projects/ is a redirect stub carrying
+  Deliberately excluded: /art/ (Library) is password-protected with
+  StatiCrypt, so crawlers would only see the password prompt.
+
+  Also excluded: /projects/ is a redirect stub carrying
   <meta name="robots" content="noindex, follow">, so listing it would ask
   Google to index a page that asks not to be indexed.
 
@@ -30,14 +33,5 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/"/></url>
-
-  <url><loc>https://jimenofonseca.com/art/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/art/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/art/"/></url>
-  <url><loc>https://jimenofonseca.com/de/art/</loc><priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jimenofonseca.com/art/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://jimenofonseca.com/de/art/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jimenofonseca.com/art/"/></url>
 
 </urlset>
