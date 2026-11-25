@@ -237,8 +237,10 @@ deleting `de/` if the source or the password file is missing.
 
 ⚠ **`private-src/` exists only on Jimeno's machine** — not in git, not on
 GitHub. Losing it loses the editable Library; recovering means decrypting
-the committed page with `npx staticrypt --decrypt` and the password. Copy it
-by hand when switching machines, like `_originals/`.
+the committed page with `npx staticrypt@3.5.4 <file> --decrypt --config
+false --salt <SALT from build-i18n.py>` and the password (without `--salt`
+it fails with "could not decrypt"). Copy it by hand when switching
+machines, like `_originals/`.
 
 ⚠ **Only the HTML is protected.** Photos, stills and other files under
 `assets/` are public at their URLs, and every earlier plaintext version of
@@ -300,7 +302,7 @@ line). Everything below still describes the card itself.
 ⚠ **The music video used to be an inline YouTube iframe, and the embed is
 gone on purpose.** It was a full-width 16/9 block — the most prominent thing
 on a page where it is the least prominent part. It is now a single
-`.app-card.clip-card` linking to `youtu.be/m8g75C5WbgU`, which cut `/art/`
+`.app-card.clip-card` linking to `youtu.be/CjSOICJPt3E`, which cut `/art/`
 from 2772px to 2498px at 1440x900 and made Music look like the three rows
 under it. **Do not restore the embed without being asked.** `.video-wrap` is
 still in `style.css`, unused, so restoring one does not mean rewriting it.
@@ -512,7 +514,7 @@ lecture parts stay together, then the concert:
 |---|---|---|---|
 | *From Code to Company — What have we built?* | Lecture | ETH `DTLiuDe91xF` | 2025 |
 | *From Code to Company — What is next?* | Lecture | ETH `LHD7ZDvZ9DI` | 2025 |
-| *Concert X-Band Zürich* | Concert | YouTube `m8g75C5WbgU` | 2025 |
+| *Concert X-Band Zürich* | Concert | YouTube `CjSOICJPt3E` | 2025 |
 | *Integrating BIM and digital twins at Axpo* | Promotion | YouTube `S84aLW_PXXY` | 2024 |
 | *City Energy Analyst executive course* | Promotion | YouTube `5uJvzQDoz30` | 2022 |
 
